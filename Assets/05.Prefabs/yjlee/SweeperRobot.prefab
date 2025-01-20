@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4649529037260766915}
   - component: {fileID: 7322220825640758126}
   - component: {fileID: 879388663386979879}
-  m_Layer: 6
+  - component: {fileID: 436551702281231400}
+  m_Layer: 8
   m_Name: SweeperRobot
   m_TagString: Robot
   m_Icon: {fileID: 0}
@@ -105,3 +106,16 @@ MonoBehaviour:
   range: 0
   isWalk: 0
   isWalking: 0
+--- !u!114 &436551702281231400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4713393865832739103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e035343064089514b99de4eeb70408bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3989560186818217141}
   - component: {fileID: 3399411694438564798}
   - component: {fileID: 2502723407666798624}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: CollectorRobot
   m_TagString: Robot
   m_Icon: {fileID: 0}
@@ -146,4 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e035343064089514b99de4eeb70408bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 50
+  moveSpeed: 0
