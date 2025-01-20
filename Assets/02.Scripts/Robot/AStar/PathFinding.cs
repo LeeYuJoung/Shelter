@@ -38,7 +38,7 @@ namespace yjlee.Robot
         private void Awake()
         {
             // 격자 생성
-            grid = GameObject.Find("SpaceShip").GetComponent<Grid>();
+            grid = GameObject.Find("Grid").GetComponent<Grid>();
             walkable = true;
         }
 
@@ -46,7 +46,7 @@ namespace yjlee.Robot
         {
             // 초기화
             isWalking = false;
-            moveSpeed = 20.0f;
+            moveSpeed = 10.0f;
             range = 4.0f;
         }
 
@@ -62,7 +62,7 @@ namespace yjlee.Robot
             StartCoroutine(FindPath(startPos, targetPos));
         }
 
-        // 길찾기 로직
+        #region 길찾기 로직
         IEnumerator FindPath(Vector2 startPos, Vector2 targetPos)
         {
             // Start, target의 좌표를 grid로 분할한 좌표로 지정
@@ -166,6 +166,7 @@ namespace yjlee.Robot
                 // 이동 중이라는 변수 Off
             }
         }
+        #endregion
 
         // WayQueue에 새로운 Path를 넣어주기
         private void PushWay(Vector2[] array)

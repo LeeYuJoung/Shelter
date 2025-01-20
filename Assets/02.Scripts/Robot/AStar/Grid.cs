@@ -7,17 +7,15 @@ namespace yjlee.Robot
     // 설정한 x, y 기준으로 범위를 설정 후, 설정된 지름만큼 범위안에 노드들을 생성
     public class Grid : MonoBehaviour
     {
-        public Transform pet;
+        public Transform robot;
         public LayerMask unwalkableMask; // 걸을 수 없는 레이어 
         public Vector2 gridSize;         // 화면의 크기
 
         private Node[,] grid;
-        public float nodeRadius;     // 반지.름
+        public float nodeRadius;     // 반지름
         private float nodeDiameter;  // 격자의 지름 
         private int gridSizeX;
         private int gridSizeY;
-
-        public bool displayGridGizmos;
 
         [SerializeField]
         public List<Node> path;   // A*에서 사용할 Path  
@@ -31,7 +29,7 @@ namespace yjlee.Robot
             CreateGrid();
         }
 
-        // 격자 생성 함수
+        #region 격자 생성 함수
         private void CreateGrid()
         {
             grid = new Node[gridSizeX, gridSizeY];
@@ -53,8 +51,9 @@ namespace yjlee.Robot
                 }
             }
         }
+        #endregion
 
-        // node 상하 좌우 대각 노드를 반환하는 함수
+        #region node 상하 좌우 대각 노드를 반환하는 함수
         public List<Node> GetNeighbours(Node node)
         {
             List<Node> neighbours = new List<Node>();
@@ -83,8 +82,9 @@ namespace yjlee.Robot
 
             return neighbours;
         }
+        #endregion
 
-        // 입력으로 들어온 월드좌표를 node 좌표계로 변환하는 함수
+        #region 입력으로 들어온 월드좌표를 node 좌표계로 변환하는 함수
         public Node NodeFromWorldPoint(Vector2 worldPosition)
         {
             float percentX = (worldPosition.x + gridSize.x / 2) / gridSize.x;
@@ -98,15 +98,16 @@ namespace yjlee.Robot
 
             return grid[x, y];
         }
+        #endregion
 
-        // Scene View 출력용 Gizmos
+        #region Scene View 출력용 Gizmos
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(transform.position, new Vector2(gridSize.x, gridSize.y));
 
             if (grid != null)
             {
-                Node playerNode = NodeFromWorldPoint(pet.position);
+                Node playerNode = NodeFromWorldPoint(robot.position);
 
                 foreach (Node n in grid)
                 {
@@ -132,5 +133,6 @@ namespace yjlee.Robot
                 }
             }
         }
+        #endregion
     }
 }

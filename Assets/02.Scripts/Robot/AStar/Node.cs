@@ -21,12 +21,12 @@ namespace yjlee.Robot
             get { return gCost + hCost; }
         }
 
-        public Node(bool _walkable, Vector2 _WorldPos, int _x, int _y)
+        public Node(bool walkable, Vector2 WorldPos, int x, int y)
         {
-            isWalkable = _walkable;     // 지나갈 수 있는 노드인지
-            worldPosition = _WorldPos;  // 노드의 게임 내 위치값
-            gridX = _x;                 // 노드의 x좌표 값
-            gridY = _y;                 // 노드의 y좌표 값
+            isWalkable = walkable;     // 지나갈 수 있는 노드인지
+            worldPosition = WorldPos;  // 노드의 게임 내 위치값
+            gridX = x;                 // 노드의 x좌표 값
+            gridY = y;                 // 노드의 y좌표 값
         }
     }
 }
