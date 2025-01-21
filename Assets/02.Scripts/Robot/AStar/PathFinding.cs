@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace yjlee.Robot
+namespace yjlee.robot
 {
      /* A* Algorithm 개요
      * OPEN SET : 평가되어야 할 노드 집합
@@ -16,6 +16,8 @@ namespace yjlee.Robot
      */
     public class PathFinding : MonoBehaviour
     {
+        private RobotController robotController;
+
         [Header("Path Finding")]
         public GameObject target;
 
@@ -24,34 +26,41 @@ namespace yjlee.Robot
         // 남은거리를 넣을 Queue 생성
         public Queue<Vector2> wayQueue = new Queue<Vector2>();
 
-        // 상호작용 시 walkable를 false 상태로 변환
-        public static bool walkable = true;
-
         // 플레이어 이동/회전 속도 등을 저장할 변수
         public float moveSpeed;
         // 장애물 판단시 멈출게 할 범위
         public float range;
 
-        public bool isWalk;
         public bool isWalking;
+        // 상호작용 시 walkable를 false 상태로 변환
+        public bool walkable = true;
 
         private void Awake()
         {
             // 격자 생성
             grid = GameObject.Find("Grid").GetComponent<Grid>();
             walkable = true;
+            isWalking = false;
         }
 
         private void Start()
         {
-            // 초기화
-            isWalking = false;
-            moveSpeed = 10.0f;
-            range = 4.0f;
+            Init();
+        }
+
+        // RobotController 변수값 할당 후 초기화
+        private void Init()
+        {
+            robotController = GetComponent<RobotController>();
+            moveSpeed = robotController.moveSpeed;
+            range = robotController.range;
         }
 
         private void FixedUpdate()
         {
+            if (!walkable || target == null)
+                return;
+
             StartFindPaath((Vector2)transform.position, (Vector2)target.transform.position);
         }
 
@@ -162,8 +171,6 @@ namespace yjlee.Robot
 
                     yield return new WaitForSeconds(0.02f);
                 }
-
-                // 이동 중이라는 변수 Off
             }
         }
         #endregion

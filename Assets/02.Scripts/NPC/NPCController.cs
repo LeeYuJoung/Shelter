@@ -1,16 +1,29 @@
 using UnityEngine;
 
-public class NPCController : MonoBehaviour
+namespace yjlee.npc
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class NPCController : MonoBehaviour
     {
-        
-    }
+        public GameObject shopGameobject;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        void Start()
+        {
+
+        }
+
+        void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0.0f);
+
+                if(hit.collider != null && hit.collider.CompareTag("NPC"))
+                {
+                    shopGameobject.SetActive(true);
+                    Debug.Log("::: NOC Click :::");
+                }
+            }
+        }
     }
 }

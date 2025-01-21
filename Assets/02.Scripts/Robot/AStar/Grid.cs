@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace yjlee.Robot
+namespace yjlee.robot
 {    
     // 스크린을 Grid - Node로 분할
     // 설정한 x, y 기준으로 범위를 설정 후, 설정된 지름만큼 범위안에 노드들을 생성
@@ -12,13 +12,13 @@ namespace yjlee.Robot
         public Vector2 gridSize;         // 화면의 크기
 
         private Node[,] grid;
-        public float nodeRadius;     // 반지름
-        private float nodeDiameter;  // 격자의 지름 
+        public float nodeRadius;    // 반지름
+        private float nodeDiameter; // 격자의 지름 
         private int gridSizeX;
         private int gridSizeY;
 
         [SerializeField]
-        public List<Node> path;   // A*에서 사용할 Path  
+        public List<Node> path; // A*에서 사용할 Path  
 
         private void Awake()
         {

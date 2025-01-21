@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace yjlee.Robot
+namespace yjlee.robot
 {
     // Grid 안에 들어갈 Node
     public class Node

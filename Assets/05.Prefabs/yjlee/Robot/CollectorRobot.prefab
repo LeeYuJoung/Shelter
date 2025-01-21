@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6729520225397050799}
   - component: {fileID: 4675107897277258572}
+  - component: {fileID: 7313790543321469085}
   - component: {fileID: 3989560186818217141}
+  - component: {fileID: 1606030404932061652}
   - component: {fileID: 3399411694438564798}
-  - component: {fileID: 2502723407666798624}
+  - component: {fileID: 5622513419040649475}
   m_Layer: 8
   m_Name: CollectorRobot
   m_TagString: Robot
@@ -90,6 +92,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &7313790543321469085
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990558345518137829}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!50 &3989560186818217141
 Rigidbody2D:
   serializedVersion: 5
@@ -117,6 +165,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &1606030404932061652
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990558345518137829}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a4a79b3e4c07a8548b3164e3ff790458, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3399411694438564798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +204,7 @@ MonoBehaviour:
   range: 0
   isWalk: 0
   isWalking: 0
---- !u!114 &2502723407666798624
+--- !u!114 &5622513419040649475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,4 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e035343064089514b99de4eeb70408bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  robot: {fileID: 11400000, guid: 35c0433d00f105547ac459eb84bafd91, type: 2}
   moveSpeed: 0
+  workSpeed: 0
