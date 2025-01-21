@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using EnumTypes;
 
 namespace yjlee.robot
 {
@@ -35,8 +36,16 @@ namespace yjlee.robot
         // 목적지 설정 함수
         public void TargetSetting()
         {
-            // 만약, 수집 로봇이라면 랜덤한 외부 목적지와 쓰레기 소각장을 번갈아 가며 목적지로 할당받고 이동
-            // 만약, 청소 로봇이라면 씬 내에 오물이 있을 경우 목적지로 할당받고 이동
+            if(robot.robotType == RobotType.Collector)
+            {
+                // 만약, 수집 로봇이라면 랜덤한 외부 목적지와 쓰레기 소각장을 번갈아 가며 목적지로 할당받고 이동
+
+            }
+            else
+            {
+                // 만약, 청소 로봇이라면 씬 내에 오물이 있을 경우 목적지로 할당받고 이동
+
+            }
         }
 
         // robot 타입에 따른 행동 함수 
