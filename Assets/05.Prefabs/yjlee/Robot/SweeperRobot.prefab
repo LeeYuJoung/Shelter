@@ -202,8 +202,8 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 0
   range: 0
-  isWalk: 0
   isWalking: 0
+  walkable: 1
 --- !u!114 &2538168257746695531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,5 +217,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   robot: {fileID: 11400000, guid: a3c9ac10d85f9e44abb2c3aad25c3a8d, type: 2}
+  target: {fileID: 0}
+  positons: []
+  robotState: 0
   moveSpeed: 0
-  workSpeed: 0
+  workTime: 0
+  breakTime: 0
+  range: 0
+  currentTime: 0
+  isPickUp: 0

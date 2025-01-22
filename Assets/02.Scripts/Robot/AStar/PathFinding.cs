@@ -17,8 +17,6 @@ namespace yjlee.robot
     public class PathFinding : MonoBehaviour
     {
         private RobotController robotController;
-
-        [Header("Path Finding")]
         public GameObject target;
 
         // Map을 격자로 분할
@@ -59,7 +57,10 @@ namespace yjlee.robot
         private void FixedUpdate()
         {
             if (!walkable || target == null)
+            {
+                StopAllCoroutines();
                 return;
+            }
 
             StartFindPaath((Vector2)transform.position, (Vector2)target.transform.position);
         }

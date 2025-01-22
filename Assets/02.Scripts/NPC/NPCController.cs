@@ -21,7 +21,6 @@ namespace yjlee.npc
                 if(hit.collider != null && hit.collider.CompareTag("NPC"))
                 {
                     shopGameobject.SetActive(true);
-                    Debug.Log("::: NOC Click :::");
                 }
             }
         }

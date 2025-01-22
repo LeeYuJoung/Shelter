@@ -8,6 +8,7 @@ TagManager:
   - NPC
   - Incinerator
   - Soil
+  - Destination
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Incinerator
   - Robot
   - Soil
-  - 
+  - NPC
   - 
   - 
   - 
