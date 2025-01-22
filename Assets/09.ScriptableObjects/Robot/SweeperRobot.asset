@@ -15,6 +15,6 @@ MonoBehaviour:
   robotType: 1
   targetName: Soil
   moveSpeed: 60
-  workTime: 10
+  workTime: 5
   breakTime: 5
   range: 4

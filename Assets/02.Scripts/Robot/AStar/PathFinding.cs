@@ -16,7 +16,7 @@ namespace yjlee.robot
      */
     public class PathFinding : MonoBehaviour
     {
-        private RobotController robotController;
+        private Robotcontroller robotController;
         public GameObject target;
 
         // Map을 격자로 분할
@@ -49,7 +49,7 @@ namespace yjlee.robot
         // RobotController 변수값 할당 후 초기화
         private void Init()
         {
-            robotController = GetComponent<RobotController>();
+            robotController = GetComponent<Robotcontroller>();
             moveSpeed = robotController.moveSpeed;
             range = robotController.range;
         }

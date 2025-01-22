@@ -13,7 +13,8 @@ namespace EnumTypes
         Idel,     // 기본
         Move,     // 이동
         Work,     // 작업
-        breaking  // 휴식
+        Drop,     // 놓다
+        Breaking  // 휴식
     }
 
     // 우주선 기계 종류

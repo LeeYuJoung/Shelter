@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4473989214772941592}
   - component: {fileID: 3382256828615388796}
   - component: {fileID: 8052132784454014951}
-  - component: {fileID: 879388663386979879}
-  - component: {fileID: 2538168257746695531}
+  - component: {fileID: 3008530101009316111}
+  - component: {fileID: 7216494756459005514}
   m_Layer: 8
   m_Name: SweeperRobot
   m_TagString: Robot
@@ -160,7 +160,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -187,7 +187,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &879388663386979879
+--- !u!114 &3008530101009316111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   range: 0
   isWalking: 0
   walkable: 1
---- !u!114 &2538168257746695531
+--- !u!114 &7216494756459005514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

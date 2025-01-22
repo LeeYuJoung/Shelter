@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7313790543321469085}
   - component: {fileID: 3989560186818217141}
   - component: {fileID: 1606030404932061652}
-  - component: {fileID: 3399411694438564798}
-  - component: {fileID: 5622513419040649475}
+  - component: {fileID: 2468998895146560498}
+  - component: {fileID: 4054592861618330469}
   m_Layer: 8
   m_Name: CollectorRobot
   m_TagString: Robot
@@ -160,7 +160,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -187,7 +187,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3399411694438564798
+--- !u!114 &2468998895146560498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   range: 0
   isWalking: 0
   walkable: 1
---- !u!114 &5622513419040649475
+--- !u!114 &4054592861618330469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

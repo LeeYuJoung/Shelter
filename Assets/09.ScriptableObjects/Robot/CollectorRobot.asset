@@ -15,6 +15,6 @@ MonoBehaviour:
   robotType: 0
   targetName: Incinerator
   moveSpeed: 60
-  workTime: 10
+  workTime: 5
   breakTime: 0
   range: 4

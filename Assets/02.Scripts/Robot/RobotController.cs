@@ -1,10 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumTypes;
 
 namespace yjlee.robot
 {
-    public class RobotController : MonoBehaviour
+    public class Robotcontroller : MonoBehaviour
     {
         private Animator robotAnimator;
         private PathFinding pathFinding;
@@ -39,7 +40,10 @@ namespace yjlee.robot
                 case RobotState.Work:
                     Work();
                     break;
-                case RobotState.breaking:
+                case RobotState.Drop:
+                    StartCoroutine(Drop());
+                    break;
+                case RobotState.Breaking:
                     Break();
                     break;
             }
@@ -114,10 +118,10 @@ namespace yjlee.robot
             {
                 if (currentTime >= workTime)
                 {
-                    // 쓰레기 내려 놓는 행동 실행
-                    isPickUp = false;
                     currentTime = 0;
                     robotState = RobotState.Idel;
+
+                    // 쓰레기 들고 있는 모습 구현
                 }
             }
             else if (robot.robotType == RobotType.Sweeper)
@@ -125,14 +129,14 @@ namespace yjlee.robot
                 if (currentTime >= workTime)
                 {
                     currentTime = 0;
-                    robotState = RobotState.breaking;
+                    robotState = RobotState.Breaking;
                     Destroy(target);
                 }
             }
         }
         #endregion
 
-        #region 휴식 실행
+        #region 청소 로봇 휴식 실행
         public void Break()
         {
             currentTime += Time.deltaTime;
@@ -145,21 +149,35 @@ namespace yjlee.robot
         }
         #endregion
 
-        #region 쓰레기 놓기
+        #region 수집 로봇 내려놓기 실행
+        public IEnumerator Drop()
+        {
+            // 쓰레기 내려 놓는 애니메이션 실행 시간 만큼 코루틴 넣기
+
+            yield return new WaitForSeconds(1.5f);
+
+            isPickUp = false;
+            robotState = RobotState.Idel;
+        }
         #endregion
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             // robot이 목적지에 도착하면 이동을 멈춤
-            if (collision.collider.CompareTag(robot.targetName))
+            if (collision.collider.CompareTag("Destination") && robot.robotType == RobotType.Collector)
             {
+                isPickUp = true;
                 robotState = RobotState.Work;
                 pathFinding.walkable = false;
             }
-            else if (collision.collider.CompareTag("Destination") && robot.robotType == RobotType.Collector)
+            else if (collision.collider.CompareTag(robot.targetName) && robot.robotType == RobotType.Collector)
             {
-                isPickUp = true;
-                robotState = RobotState.Idel;
+                robotState = RobotState.Drop;
+                pathFinding.walkable = false;
+            }
+            else if (collision.collider.CompareTag(robot.targetName) && robot.robotType == RobotType.Sweeper)
+            {
+                robotState = RobotState.Work;
                 pathFinding.walkable = false;
             }
         }
