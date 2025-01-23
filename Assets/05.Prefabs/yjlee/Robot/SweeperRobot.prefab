@@ -218,7 +218,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robot: {fileID: 11400000, guid: a3c9ac10d85f9e44abb2c3aad25c3a8d, type: 2}
   target: {fileID: 0}
-  sensor: {fileID: 0}
   trashPrefabs: []
   robotState: 0
   moveSpeed: 0

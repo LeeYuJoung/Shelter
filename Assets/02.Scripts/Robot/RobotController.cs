@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumTypes;
-using UnityEngine.InputSystem;
+using yjlee.store;
 
 namespace yjlee.robot
 {
