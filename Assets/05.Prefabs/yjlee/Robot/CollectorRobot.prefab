@@ -160,7 +160,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -218,7 +218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robot: {fileID: 11400000, guid: 35c0433d00f105547ac459eb84bafd91, type: 2}
   target: {fileID: 0}
-  positons: []
+  sensor: {fileID: 0}
+  trashPrefabs: []
   robotState: 0
   moveSpeed: 0
   workTime: 0

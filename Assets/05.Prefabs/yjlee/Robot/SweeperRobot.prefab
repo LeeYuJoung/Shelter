@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4649529037260766915
 Transform:
   m_ObjectHideFlags: 0
@@ -160,7 +160,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -218,7 +218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robot: {fileID: 11400000, guid: a3c9ac10d85f9e44abb2c3aad25c3a8d, type: 2}
   target: {fileID: 0}
-  positons: []
+  sensor: {fileID: 0}
+  trashPrefabs: []
   robotState: 0
   moveSpeed: 0
   workTime: 0
