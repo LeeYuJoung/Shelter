@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6729520225397050799
 Transform:
   m_ObjectHideFlags: 0
@@ -218,7 +218,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robot: {fileID: 11400000, guid: 35c0433d00f105547ac459eb84bafd91, type: 2}
   target: {fileID: 0}
-  trashPrefabs: []
+  trashPrefabs:
+  - {fileID: 597330840941521963, guid: aa9f73c6646294e4d9482ee8d803fcb7, type: 3}
+  - {fileID: 99639200947888515, guid: b8ac4df6915588e44a6a4c232a85ae68, type: 3}
+  - {fileID: 331313836641503849, guid: f3e5eeb41051a9147a15a139cf04d100, type: 3}
+  - {fileID: 8217020063354793136, guid: af32236a045428a45b570d2928b51e8a, type: 3}
   robotState: 0
   moveSpeed: 0
   workTime: 0
