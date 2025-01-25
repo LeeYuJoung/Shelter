@@ -3,12 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StatusDataSO", menuName = "Scriptable Objects/StatusDataSO")]
 public class StatusDataSO : ScriptableObject
 {
-    public int FuelAmount; //¿¬·á·®
-    public int Corrosion; //ºÎ½Äµµ
-    public int HullRestorationRate; //¼±Ã¼ º¹±¸µµ
-    public int MotorRestorationRate; //µ¿·Â±â º¹±¸µµ
-    public int EngineRestorationRate; //¿£Áø º¹±¸µµ
-    public int RadarRestorationRate; //·¹ÀÌ´õ º¹±¸µµ
-    public int RadarOutputAmount; //·¹ÀÌ´õ Ãâ·Â·®
-    
+    public int FuelAmount; //ì—°ë£ŒëŸ‰
+    public int Corrosion; //ë¶€ì‹ë„
+    public int HullRestorationRate; //ì„ ì²´ ë³µêµ¬ë„
+    public int MotorRestorationRate; //ë™ë ¥ê¸° ë³µêµ¬ë„
+    public int EngineRestorationRate; //ì—”ì§„ ë³µêµ¬ë„
+    public int RadarRestorationRate; //ë ˆì´ë” ë³µêµ¬ë„
+    public int RadarOutputAmount; //ë ˆì´ë” ì¶œë ¥ëŸ‰ 
 }
