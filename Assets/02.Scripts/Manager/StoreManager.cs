@@ -21,15 +21,17 @@ namespace yjlee.manager
         }
 
         // UIManager로 이동할 예정
-        public void RobotBuyAndUpgradeChange(int buttonDir)
+        public void RobotBuyAndUpgradeChange()
         {
-            if(buttonDir == 1)
+            if (buyPhanel.activeSelf)
             {
-
+                buyPhanel.SetActive(false);
+                upgradePhanel.SetActive(true);
             }
             else
             {
-                 
+                buyPhanel.SetActive(true);
+                upgradePhanel.SetActive(false);
             }
         }
 
