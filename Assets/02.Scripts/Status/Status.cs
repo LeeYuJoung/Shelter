@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Status
+public class Status : MonoBehaviour
 {
     [SerializeField] private StatusDataSO statusData;
     [SerializeField] private StatusDataSO statusUpData;
