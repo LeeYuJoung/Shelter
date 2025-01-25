@@ -17,19 +17,19 @@ public class Status
     {
         statusData.HullRestorationRate += statusUpData.HullRestorationRate;
     }
-    public void SetMotorRestorationRate(int value)
+    public void SetMotorRestorationRate()
     {
         statusData.MotorRestorationRate += statusUpData.MotorRestorationRate;
     }
-    public void SetEngineRestorationRate(int value)
+    public void SetEngineRestorationRate()
     {
         statusData.EngineRestorationRate += statusUpData.EngineRestorationRate;
     }
-    public void SetRadarRestorationRate(int value)
+    public void SetRadarRestorationRate()
     {
         statusData.RadarRestorationRate += statusUpData.RadarRestorationRate;
     }
-    public void SetRadarOutputAmount(int value)
+    public void SetRadarOutputAmount()
     {
         statusData.RadarOutputAmount += statusUpData.RadarOutputAmount;
     }
