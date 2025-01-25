@@ -3,33 +3,34 @@ using UnityEngine;
 public class Status
 {
     [SerializeField] private StatusDataSO statusData;
+    [SerializeField] private StatusDataSO statusUpData;
 
-    public void SetFuelAmount(int value)
+    public void SetFuelAmount()
     {
-        statusData.FuelAmount += value;
+        statusData.FuelAmount += statusUpData.FuelAmount;
     }
-    public void SetCorrosion(int value)
+    public void SetCorrosion()
     {
-        statusData.Corrosion += value;
+        statusData.Corrosion += statusUpData.Corrosion;
     }
-    public void SetHullRestorationRate(int value)
+    public void SetHullRestorationRate()
     {
-        statusData.HullRestorationRate += value;
+        statusData.HullRestorationRate += statusUpData.HullRestorationRate;
     }
     public void SetMotorRestorationRate(int value)
     {
-        statusData.MotorRestorationRate += value;
+        statusData.MotorRestorationRate += statusUpData.MotorRestorationRate;
     }
     public void SetEngineRestorationRate(int value)
     {
-        statusData.EngineRestorationRate += value;
+        statusData.EngineRestorationRate += statusUpData.EngineRestorationRate;
     }
     public void SetRadarRestorationRate(int value)
     {
-        statusData.RadarRestorationRate += value;
+        statusData.RadarRestorationRate += statusUpData.RadarRestorationRate;
     }
     public void SetRadarOutputAmount(int value)
     {
-        statusData.RadarOutputAmount += value;
+        statusData.RadarOutputAmount += statusUpData.RadarOutputAmount;
     }
 }
