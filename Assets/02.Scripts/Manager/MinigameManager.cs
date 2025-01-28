@@ -4,16 +4,23 @@ namespace Manager
 {
     public class MinigameManager : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
+        private static MinigameManager instance;
+        public static MinigameManager Instance {  get { return instance; } }
 
+        private void Awake()
+        {
+            if(instance != null)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                instance = this;
+            }
         }
 
-        // Update is called once per frame
-        void Update()
-        {
+        // 랜덤한 시간마다 각 기계에 에러 발생하도록 하기
 
-        }
+        // 게임의 결과를 받아 그에 따른 이익 or 불이익 할당
     }
 }

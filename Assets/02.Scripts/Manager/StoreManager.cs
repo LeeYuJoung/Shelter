@@ -1,53 +1,74 @@
+using EnumTypes;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace yjlee.manager
+namespace Manager
 {
     public class StoreManager : MonoBehaviour
     {
         private static StoreManager instance;
         public static StoreManager Instance { get { return instance; } }
 
-        public GameObject buyPhanel;
-        public GameObject upgradePhanel;
-
-        private int gold = 0;
-
         private void Awake()
         {
             if(instance != null)
             {
-                Destroy(instance);
-            }
-        }
-
-        // UIManager∑Œ ¿Ãµø«“ øπ¡§
-        public void RobotBuyAndUpgradeChange()
-        {
-            if (buyPhanel.activeSelf)
-            {
-                buyPhanel.SetActive(false);
-                upgradePhanel.SetActive(true);
+                Destroy(this);
             }
             else
             {
-                buyPhanel.SetActive(true);
-                upgradePhanel.SetActive(false);
+                instance = this;
             }
         }
 
-        // ∑Œ∫ø ±∏∏≈
-        public void RobotBuy()
+        [SerializeField] private int collectionRobotPrice = 200;
+        [SerializeField] private int sweeperRobotPrice = 200;
+
+        [SerializeField] private int collectionRobotUpgradePrice = 200;
+        [SerializeField] private int sweeperRobotUpgradePrice = 200;
+
+        private int robotMaxPiece = 3;
+
+        // Î°úÎ¥á Íµ¨Îß§
+        public void RobotBuy(string robotType)
+        {
+            if(robotType == "CollectorRobot")
+            {
+                if(GameManager.Instance.GetcollectionRoboyPiece < robotMaxPiece && GameManager.Instance.GetGold >= collectionRobotUpgradePrice)
+                {
+                    collectionRobotUpgradePrice += 100;
+                    GameManager.Instance.RobotPiece(robotType);
+                    GameManager.Instance.UseGold(collectionRobotUpgradePrice);
+                    UIManager.Instance.UpdateRobotPriceText(0, collectionRobotUpgradePrice);
+                }
+                else
+                {
+                    Debug.Log("::: Íµ¨Îß§ Ïã§Ìå® :::");
+                }
+            }
+            else
+            {
+                if (GameManager.Instance.GetsweeperRobotPiece < robotMaxPiece && GameManager.Instance.GetGold >= sweeperRobotUpgradePrice)
+                {
+                    sweeperRobotUpgradePrice += 100;
+                    GameManager.Instance.RobotPiece(robotType);
+                    GameManager.Instance.UseGold(sweeperRobotUpgradePrice);
+                    UIManager.Instance.UpdateRobotPriceText(1, sweeperRobotUpgradePrice);
+                }
+                else
+                {
+                    Debug.Log("::: Íµ¨Îß§ Ïã§Ìå® :::");
+                }
+            }
+        }
+
+        // Î°úÎ¥á ÏóÖÍ∑∏Î†àÏù¥Îìú
+        public void RobotUpgrade(string robotType)
         {
 
         }
 
-        // ∑Œ∫ø æ˜±◊∑π¿ÃµÂ
-        public void RobotUpgrade()
-        {
-
-        }
-
-        // ø¨∑· ∆«∏≈
+        // Ïó∞Î£å ÌåêÎß§
         public void FuelSale()
         {
 

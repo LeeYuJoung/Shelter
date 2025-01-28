@@ -1,29 +1,42 @@
 namespace EnumTypes
 {
-    // ·Îº¿ Á¾·ù
+    // ë¡œë´‡ ì¢…ë¥˜
     public enum RobotType
     {
-        Collector, // ¼öÁı ·Îº¿
-        Sweeper    // Ã»¼Ò ·Îº¿
+        Collector, // ìˆ˜ì§‘ ë¡œë´‡
+        Sweeper    // ì²­ì†Œ ë¡œë´‡
     }
 
-    // ·Îº¿ »óÅÂ
+    // ë¡œë´‡ ìƒíƒœ
     public enum RobotState
     {
-        Idel,     // ±âº»
-        Move,     // ÀÌµ¿
-        Work,     // ÀÛ¾÷
-        Drop,     // ³õ´Ù
-        Breaking  // ÈŞ½Ä
+        Idel,     // ê¸°ë³¸
+        Move,     // ì´ë™
+        Work,     // ì‘ì—…
+        Drop,     // ë†“ë‹¤
+        Breaking  // íœ´ì‹
     }
 
-    // ¿ìÁÖ¼± ±â°è Á¾·ù
+    // ìš°ì£¼ì„  ê¸°ê³„ ì¢…ë¥˜
     public enum MachineType
     {
-        Incinerator,  // ¾²·¹±â ¼Ò°¢Àå
-        GasTank,      // ¿¬·áÅë
-        Motor,        // µ¿·Â±â
-        engine,       // ¿£Áø
-        Radar         // ·¹ÀÌ´õ
+        Incinerator,  // ì“°ë ˆê¸° ì†Œê°ì¥
+        GasTank,      // ì—°ë£Œí†µ
+        Motor,        // ë™ë ¥ê¸°
+        engine,       // ì—”ì§„
+        Radar         // ë ˆì´ë”
+    }
+
+    // ì‚¬ìš´ë“œ ì¢…ë¥˜
+    public enum SoundType
+    {
+        Walk = 0,              // ë¡œë´‡ ê±·ëŠ” ì†Œë¦¬
+        PickUp = 1,            // ë¡œë´‡ì´ ì“°ë ˆê¸° ì¡ëŠ” ì†Œë¦¬
+        Drop = 2,              // ë¡œë´‡ ì“°ë ˆê¸° ë‚´ë ¤ë†“ëŠ” ì†Œë¦¬
+        IncineratorWork = 3,   // ì†Œê°ì¥ì— ì“°ë ˆê¸° ë“¤ì–´ê°€ëŠ” ì†Œë¦¬
+        MachineError = 4,      // ê¸°ê³„ ì—ëŸ¬ ë°œìƒ ì†Œë¦¬
+        UIClick = 5,           // UI í´ë¦­ ì†Œë¦¬
+        UIGaze = 6,            // UI ê²Œì´ì§€ ì†Œë¦¬
+        Upgrade = 7            // ì—…ê·¸ë ˆì´ë“œ ì„±ê³µ
     }
 }

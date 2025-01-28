@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumTypes;
-using yjlee.manager;
+using Manager;
 
 namespace yjlee.robot
 {
@@ -25,7 +25,7 @@ namespace yjlee.robot
         public float range;
 
         public float currentTime;
-        public bool isPickUp = false;  // ¼öÁı ·Îº¿¸¸ »ç¿ë
+        public bool isPickUp = false;  // ìˆ˜ì§‘ ë¡œë´‡ë§Œ ì‚¬ìš©
 
         private void Awake()
         {
@@ -68,12 +68,12 @@ namespace yjlee.robot
             currentTime = 0;
         }
 
-        #region ¸ñÀûÁö ¼³Á¤
+        #region ëª©ì ì§€ ì„¤ì •
         public void TargetSetting()
         {
             if (robot.robotType == RobotType.Collector)
             {
-                // ¼öÁı ·Îº¿ÀÌ¶ó¸é ·£´ıÇÑ ¿ÜºÎ ¸ñÀûÁö¿Í ¾²·¹±â ¼Ò°¢ÀåÀ» ¹ø°¥¾Æ °¡¸ç ¸ñÀûÁö·Î ÇÒ´ç¹Ş°í ÀÌµ¿
+                // ìˆ˜ì§‘ ë¡œë´‡ì´ë¼ë©´ ëœë¤í•œ ì™¸ë¶€ ëª©ì ì§€ì™€ ì“°ë ˆê¸° ì†Œê°ì¥ì„ ë²ˆê°ˆì•„ ê°€ë©° ëª©ì ì§€ë¡œ í• ë‹¹ë°›ê³  ì´ë™
                 if (!isPickUp)
                 {
                     GameObject[] targets = GameObject.FindGameObjectsWithTag("Destination");
@@ -98,7 +98,7 @@ namespace yjlee.robot
             }
             else if(robot.robotType == RobotType.Sweeper)
             {
-                // Ã»¼Ò ·Îº¿ÀÌ¶ó¸é ¾À ³»¿¡ ¿À¹°ÀÌ ÀÖÀ» °æ¿ì¿¡¸¸ ¸ñÀûÁö·Î ÇÒ´ç¹Ş°í ÀÌµ¿
+                // ì²­ì†Œ ë¡œë´‡ì´ë¼ë©´ ì”¬ ë‚´ì— ì˜¤ë¬¼ì´ ìˆì„ ê²½ìš°ì—ë§Œ ëª©ì ì§€ë¡œ í• ë‹¹ë°›ê³  ì´ë™
                 GameObject[] targets = GameObject.FindGameObjectsWithTag(robot.targetName);
 
                 if(targets.Length > 0)
@@ -118,36 +118,36 @@ namespace yjlee.robot
         }
         #endregion
 
-        #region ÀÌµ¿ ½ÇÇà
+        #region ì´ë™ ì‹¤í–‰
         public void Move()
         {
-            // »óÇÏÁÂ¿ì ÀÌµ¿¿¡ µû¶ó ¾Ö´Ï¸ŞÀÌ¼Ç Á¶Àı
+            // ìƒí•˜ì¢Œìš° ì´ë™ì— ë”°ë¼ ì• ë‹ˆë©”ì´ì…˜ ì¡°ì ˆ
             Vector2 dir = (target.transform.position - transform.position).normalized;
 
             if (dir.y > 0)
             {
-                // À§ ÀÌµ¿
+                // ìœ„ ì´ë™
 
             }
             else if (dir.y < 0)
             {
-                // ¾Æ·¡ ÀÌµ¿
+                // ì•„ë˜ ì´ë™
 
             }
             else if (dir.x > 0)
             {
-                // ¿À¸¥ÂÊ ÀÌµ¿
+                // ì˜¤ë¥¸ìª½ ì´ë™
 
             }
             else if (dir.x < 0)
             {
-                // ¿ŞÂÊ ÀÌµ¿
+                // ì™¼ìª½ ì´ë™
 
             }
         }
         #endregion
 
-        #region ÀÛ¾÷ ½ÇÇà
+        #region ì‘ì—… ì‹¤í–‰
         public void Work()
         {
             currentTime += Time.deltaTime;
@@ -159,7 +159,7 @@ namespace yjlee.robot
                     currentTime = 0;
                     robotState = RobotState.Idel;
 
-                    // ¾²·¹±â µé°í ÀÖ´Â ¸ğ½À ±¸Çö
+                    // ì“°ë ˆê¸° ë“¤ê³  ìˆëŠ” ëª¨ìŠµ êµ¬í˜„
                     trash = Instantiate(trashPrefabs[Random.Range(0, trashPrefabs.Length)]);
                     trash.transform.position = transform.position + Vector3.up;
                     trash.transform.parent = transform;
@@ -177,7 +177,7 @@ namespace yjlee.robot
         }
         #endregion
 
-        #region Ã»¼Ò ·Îº¿ ÈŞ½Ä ½ÇÇà
+        #region ì²­ì†Œ ë¡œë´‡ íœ´ì‹ ì‹¤í–‰
         public void Break()
         {
             currentTime += Time.deltaTime;
@@ -190,10 +190,10 @@ namespace yjlee.robot
         }
         #endregion
 
-        #region ¼öÁı ·Îº¿ ³»·Á³õ±â ½ÇÇà
+        #region ìˆ˜ì§‘ ë¡œë´‡ ë‚´ë ¤ë†“ê¸° ì‹¤í–‰
         public IEnumerator Drop()
         {
-            // ¾²·¹±â ³»·Á ³õ´Â ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
+            // ì“°ë ˆê¸° ë‚´ë ¤ ë†“ëŠ” ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
 
             robotState = RobotState.Drop;
             pathFinding.walkable = false;
