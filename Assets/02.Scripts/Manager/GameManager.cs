@@ -69,10 +69,17 @@ namespace Manager
             }
         }
 
-        // 재화 관리
+        // 재화 사용
         public void UseGold(int useGold)
         {
             gold -= useGold;
+            UIManager.Instance.UpdateGoldText(gold);
+        }
+
+        // 재화 획득
+        public void GainGold(int getGold)
+        {
+            gold += getGold;
             UIManager.Instance.UpdateGoldText(gold);
         }
 
