@@ -1,5 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using yjlee.robot;
 
 namespace Manager
 {
@@ -8,19 +11,22 @@ namespace Manager
         private static GameManager instance;
         public static GameManager Instance { get { return instance; } }
 
+        public GameObject collectorRobotPrefab;
+        public GameObject sweeperRobotPrefab;
+
+        public List<GameObject> collectorRobots;
+        public List<GameObject> sweeperRobots;
+
         private int day = 7;
         private float dayTime = 90.0f;              // 하루 시간
         [SerializeField] private float currentTime; // 현재 시간
 
         [SerializeField] private int gold = 0;
-        [SerializeField] private int collectionRoboyPiece = 1;
-        [SerializeField] private int sweeperRobotPiece = 0;
-
         public int GetGold { get { return gold; } }
-        public int GetcollectionRoboyPiece { get { return collectionRoboyPiece; } }
-        public int GetsweeperRobotPiece { get { return sweeperRobotPiece; } }
 
         private bool isGameOver = false;
+
+        public int fuel = 100;
 
         private void Awake()
         {
@@ -53,8 +59,8 @@ namespace Manager
         // 시간 관리
         private void Timmer()
         {
-            // 확인을 위해 20배 빠르게 시간이 흐르도록 함
-            currentTime -= Time.deltaTime * 20;
+            // 확인을 위해 15배 빠르게 시간이 흐르도록 함
+            currentTime -= Time.deltaTime * 15;
 
             if(currentTime <= 0)
             {
@@ -83,16 +89,37 @@ namespace Manager
             UIManager.Instance.UpdateGoldText(gold);
         }
 
-        // 로봇 관리
+        // 로봇 수량 관리
         public void RobotPiece(string robotType)
         {
             if(robotType == "CollectorRobot")
             {
-                collectionRoboyPiece += 1;
+                GameObject robot = Instantiate(collectorRobotPrefab, Vector2.zero, Quaternion.identity);
+                collectorRobots.Add(robot);
             }
             else
             {
-                sweeperRobotPiece += 1;
+                GameObject robot = Instantiate(sweeperRobotPrefab, Vector2.zero, Quaternion.identity);
+                sweeperRobots.Add(robot);
+            }
+        }
+
+        // 로봇 능력치 관리
+        public void RobotStatus(string robotType)
+        {
+            int count = (robotType == "CollectorRobot") ? collectorRobots.Count : sweeperRobots.Count;
+
+            for (int i = 0; i < count; i++)
+            {
+                Robotcontroller robotController = collectorRobots[i].GetComponent<Robotcontroller>();
+
+                if (robotController != null)
+                {
+                    robotController.moveSpeed += 10;
+                    robotController.workTime -= 0.5f;
+                    robotController.breakTime -= 0.5f;
+                    robotController.SpeedInit();
+                }
             }
         }
 

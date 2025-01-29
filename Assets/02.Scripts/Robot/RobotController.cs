@@ -18,7 +18,7 @@ namespace yjlee.robot
         public GameObject[] trashPrefabs;
         private GameObject trash;
 
-        public RobotState robotState;
+        [SerializeField] public RobotState robotState;
         public float moveSpeed;
         public float workTime;
         public float breakTime;
@@ -66,6 +66,11 @@ namespace yjlee.robot
             range = robot.range;
 
             currentTime = 0;
+        }
+
+        public void SpeedInit()
+        {
+            pathFinding.moveSpeed = moveSpeed;
         }
 
         #region 목적지 설정

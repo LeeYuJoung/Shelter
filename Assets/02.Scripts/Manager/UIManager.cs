@@ -10,17 +10,20 @@ namespace Manager
         private static UIManager instance;
         public static UIManager Instance { get { return instance; } }
 
+        public Status status;
+
         public GameObject buyPhanel;
         public GameObject upgradePhanel;
         public GameObject errorPhanel;
-
-        public InputField saleInput;
 
         public Text dayText;
         public Text[] goldTexts;
         public Text[] robotBuyPriceText;
         public Text[] robotUpgradePriceText;
+        public Text fuelText;
         public Text goldOfFuel;
+
+        public InputField saleInput;
 
         private void Awake()
         {
@@ -88,11 +91,12 @@ namespace Manager
                 if(StoreManager.Instance.changeFuelAmount >= 100)
                 {
                     Error("연료는 100이하로만 판매 가능합니다.");
-
-                    saleInput.text = null;
-                    goldOfFuel.text = string.Format("{0} G", 0);
-                    StoreManager.Instance.changeFuelAmount = 0;
-                    StoreManager.Instance.changeGoldAmount = 0;
+                    FuelSaleEnd();
+                }
+                else if (GameManager.Instance.fuel < StoreManager.Instance.changeFuelAmount)
+                {
+                    Error("보유한 연료량이 적어 판매 불가능합니다.");
+                    FuelSaleEnd();
                 }
             }
             catch(Exception e)
@@ -106,6 +110,7 @@ namespace Manager
         {
             saleInput.text = null;
             goldOfFuel.text = string.Format("{0} G", 0);
+            fuelText.text = string.Format("{0:D3}", GameManager.Instance.fuel);
             StoreManager.Instance.changeFuelAmount = 0;
             StoreManager.Instance.changeGoldAmount = 0;
         }
