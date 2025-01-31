@@ -105,7 +105,7 @@ namespace Manager
         }
 
         // 로봇 능력치 관리
-        public void RobotStatus(string robotType)
+        public void RobotStatusUp(string robotType)
         {
             int count = (robotType == "CollectorRobot") ? collectorRobots.Count : sweeperRobots.Count;
 

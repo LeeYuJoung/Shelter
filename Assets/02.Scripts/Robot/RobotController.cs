@@ -23,6 +23,7 @@ namespace yjlee.robot
         public float workTime;
         public float breakTime;
         public float range;
+        public int level;
 
         public float currentTime;
         public bool isPickUp = false;  // 수집 로봇만 사용
@@ -65,12 +66,26 @@ namespace yjlee.robot
             breakTime = robot.breakTime;
             range = robot.range;
 
+            level = 1;
             currentTime = 0;
         }
 
+        // a* 알고리즘 이동 속도 재설정
         public void SpeedInit()
         {
             pathFinding.moveSpeed = moveSpeed;
+        }
+
+        // 레벨업
+        public bool LevelUp()
+        {
+            if(level < 3)
+            {
+                level++;
+                return true;
+            }
+
+            return false;
         }
 
         #region 목적지 설정

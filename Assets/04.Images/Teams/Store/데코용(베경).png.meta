@@ -76,7 +76,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -388,7 +388,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -397,7 +397,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_0": -8195711281906528585
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_1": 6601555845351849327
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_10": -6615843426182402415
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_2": -6069155522197084186
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_3": -2144491875921362923
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_4": -6824223800782968679
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_5": -6029867992894279122
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_6": 1050378057340780477
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_7": -6652578976521522083
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_8": -4246672160580262964
+      "\uB370\uCF54\uC6A9(\uBCA0\uACBD)_9": 975794802602473157
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

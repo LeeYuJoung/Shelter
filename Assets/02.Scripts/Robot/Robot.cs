@@ -6,11 +6,11 @@ namespace yjlee
     [CreateAssetMenu(fileName = "Robot", menuName = "Scriptable Objects/Robot")]
     public class Robot : ScriptableObject
     {
-        public RobotType robotType;  // ·Îº¿ Á¾·ù
-        public string targetName;    // ÃßÀû ´ë»ó
-        public float moveSpeed;      // ÀÌµ¿ ¼Óµµ
-        public float workTime;       // ÀÛ¾÷ ½Ã°£
-        public float breakTime;      // ½¬´Â ½Ã°£
-        public float range;          // Àå¾Ö¹° ÆÇ´Ü½Ã ¸ØÃâ°Ô ÇÒ ¹üÀ§
+        public RobotType robotType;  // ë¡œë´‡ ì¢…ë¥˜
+        public string targetName;    // ì¶”ì  ëŒ€ìƒ
+        public float moveSpeed;      // ì´ë™ ì†ë„
+        public float workTime;       // ì‘ì—… ì‹œê°„
+        public float breakTime;      // ì‰¬ëŠ” ì‹œê°„
+        public float range;          // ì¥ì• ë¬¼ íŒë‹¨ì‹œ ë©ˆì¶œê²Œ í•  ë²”ìœ„
     }
 }

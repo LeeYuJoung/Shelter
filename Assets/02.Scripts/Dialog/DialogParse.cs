@@ -1,16 +1,19 @@
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
-using yjlee.dialog;
 
 namespace yjlee.dialog
 {
     public class DialogParse : MonoBehaviour
     {
         [SerializeField] private TextAsset csvFile = null;
-        private static Dictionary<string, TalkData[]> dialogDictionary = new Dictionary<string, TalkData[]>();
+        private static Dictionary<string, DialogData[]> dialogDictionary = new Dictionary<string, DialogData[]>();
 
-        public static TalkData[] GetDialog(string eventName)
+        private void Awake()
+        {
+            SetTalkDictionary();
+        }
+
+        public DialogData[] GetDialog(string eventName)
         {
             return dialogDictionary[eventName];
         }
@@ -26,20 +29,42 @@ namespace yjlee.dialog
             for(int i = 1; i < rows.Length; i++)
             {
                 // 열을 쪼개서 배열에 담음
-                string[] rowValues = rows[i].Split(new char[] { ' ' });
+                string[] rowValues = rows[i].Split(new char[] { ',' });
 
                 // 유효한 이벤트 이름이 나올때까지 반복
                 if (rowValues[0].Trim() == "" || rowValues[0].Trim() == "end") 
                     continue;
 
-                List<TalkData> talkDataList = new List<TalkData>();
+                List<DialogData> talkDataList = new List<DialogData>();
                 string eventName = rowValues[0];
 
                 // talkDataList 하나를 만드는 반복문
                 while (rowValues[0].Trim() != "end")
                 {
                     List<string> contextList = new List<string>();
+
+                    DialogData talkData;
+                    talkData.name = rowValues[1];
+
+                    do
+                    {
+                        contextList.Add(rowValues[2].ToString());
+
+                        if (++i < rows.Length)
+                        {
+                            rowValues = rows[i].Split(new char[] { ',' });
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    } while (rowValues[1] == "" && rowValues[0] != "end");
+
+                    talkData.contexts = contextList.ToArray();
+                    talkDataList.Add(talkData);
                 }
+
+                dialogDictionary.Add(eventName, talkDataList.ToArray());
             }
         }
     }

@@ -12,8 +12,7 @@ namespace Manager
 
         public Status status;
 
-        public GameObject buyPhanel;
-        public GameObject upgradePhanel;
+        public GameObject[] buyPhanels;
         public GameObject errorPhanel;
 
         public Text dayText;
@@ -24,6 +23,9 @@ namespace Manager
         public Text goldOfFuel;
 
         public InputField saleInput;
+        public Sprite soldOutImage;
+
+        private int buyPhanelIndex = 0;
 
         private void Awake()
         {
@@ -64,19 +66,33 @@ namespace Manager
             robotUpgradePriceText[index].text = string.Format("{0:N0} G", price);
         }
 
-        // 로봇 구매창과 업그레이드창 변환
-        public void ChangeBuyAndUpgrade()
+        public void SoldOut(GameObject btn)
         {
-            if (buyPhanel.activeSelf)
+            Button button = btn.GetComponent<Button>();
+            button.GetComponent<RectTransform>().sizeDelta = new Vector2(213, 129);
+            button.image.sprite = soldOutImage;
+            button.interactable = false;
+        }
+
+        // 상점 구매창 변경
+        public void ChangeBuyPhanel(int arrowDir)
+        {
+            buyPhanels[buyPhanelIndex].SetActive(false);
+
+            if (buyPhanelIndex >= buyPhanels.Length - 1 && arrowDir > 0)
             {
-                buyPhanel.SetActive(false);
-                upgradePhanel.SetActive(true);
+                buyPhanelIndex = 0;
+            }
+            else if(buyPhanelIndex == 0 && arrowDir < 0)
+            {
+                buyPhanelIndex = 2;
             }
             else
             {
-                buyPhanel.SetActive(true);
-                upgradePhanel.SetActive(false);
+                buyPhanelIndex += arrowDir;
             }
+
+            buyPhanels[buyPhanelIndex].SetActive(true);
         }
 
         // 플레이어의 연료 판매량 설정
@@ -84,11 +100,12 @@ namespace Manager
         {
             try
             {
-                StoreManager.Instance.changeFuelAmount = int.Parse(saleInput.text);
+                StoreManager.Instance.changeFuelAmount = int.Parse(saleInput.text.ToString().Replace("L", ""));
                 StoreManager.Instance.changeGoldAmount = StoreManager.Instance.changeFuelAmount * 150;
+                saleInput.text = string.Format("{0} L", StoreManager.Instance.changeFuelAmount);
                 goldOfFuel.text = string.Format("{0:N0} G", StoreManager.Instance.changeGoldAmount);
 
-                if(StoreManager.Instance.changeFuelAmount >= 100)
+                if (StoreManager.Instance.changeFuelAmount > 100)
                 {
                     Error("연료는 100이하로만 판매 가능합니다.");
                     FuelSaleEnd();
@@ -102,15 +119,18 @@ namespace Manager
             catch(Exception e)
             {
                 Debug.Log(e);
+                StoreManager.Instance.changeFuelAmount = 0;
+                StoreManager.Instance.changeGoldAmount = 0;
+                goldOfFuel.text = string.Format("{0:N0} G", 0);
             }
         }
 
-        // 플레이어가 연료 판매 완료
+        // 플레이어의 연료 판매 완료
         public void FuelSaleEnd()
         {
             saleInput.text = null;
-            goldOfFuel.text = string.Format("{0} G", 0);
-            fuelText.text = string.Format("{0:D3}", GameManager.Instance.fuel);
+            goldOfFuel.text = string.Format("{0:N0} G", 0);
+            fuelText.text = string.Format("{0} L", GameManager.Instance.fuel);
             StoreManager.Instance.changeFuelAmount = 0;
             StoreManager.Instance.changeGoldAmount = 0;
         }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Manager
 {
@@ -22,10 +23,11 @@ namespace Manager
         private int collectorRobotPrice = 1000;
         private int sweeperRobotPrice = 1000;
 
-        private int collectorRobotUpgradePrice = 1000;
-        private int sweeperRobotUpgradePrice = 1000;
+        private int collectorRobotUpgradePrice = 1500;
+        private int sweeperRobotUpgradePrice = 1500;
 
         private int robotMaxPiece = 3;
+        private int robotMaxUpgrade = 3;
 
         public int changeFuelAmount;
         public int changeGoldAmount;
@@ -33,6 +35,8 @@ namespace Manager
         // 로봇 구매
         public void RobotBuy(string robotType)
         {
+            GameObject btn = EventSystem.current.currentSelectedGameObject;
+
             if(robotType == "CollectorRobot")
             {
                 if (GameManager.Instance.collectorRobots.Count < robotMaxPiece)
@@ -52,10 +56,10 @@ namespace Manager
                 }
                 else
                 {
-                    UIManager.Instance.Error("보유 할 수 있는 수집 로봇의 수량을 넘었습니다.");
+                    UIManager.Instance.SoldOut(btn);
                 }
             }
-            else if(robotType == "sweeperRobot")
+            else if(robotType == "SweeperRobot")
             {
                 if (GameManager.Instance.sweeperRobots.Count < robotMaxPiece)
                 {
@@ -74,7 +78,7 @@ namespace Manager
                 }
                 else
                 {
-                    UIManager.Instance.Error("보유 할 수 있는 수집 로봇의 수량을 넘었습니다.");
+                    UIManager.Instance.SoldOut(btn);
                 }
             }
         }
@@ -84,9 +88,10 @@ namespace Manager
         {
             if (robotType == "CollectorRobot")
             {
+                
                 if (GameManager.Instance.GetGold >= collectorRobotUpgradePrice)
                 {
-                    GameManager.Instance.RobotStatus(robotType);
+                    GameManager.Instance.RobotStatusUp(robotType);
                     GameManager.Instance.UseGold(collectorRobotUpgradePrice);
 
                     collectorRobotUpgradePrice += 1500;
@@ -97,11 +102,11 @@ namespace Manager
                     UIManager.Instance.Error("보유한 골드의 수량이 부족하여 업그레이드 실패하였습니다.");
                 }
             }
-            else if(robotType == "sweeperRobot")
+            else if(robotType == "SweeperRobot")
             {
                 if (GameManager.Instance.GetGold >= sweeperRobotUpgradePrice)
                 {
-                    GameManager.Instance.RobotStatus(robotType);
+                    GameManager.Instance.RobotStatusUp(robotType);
                     GameManager.Instance.UseGold(sweeperRobotUpgradePrice);
                     
                     sweeperRobotUpgradePrice += 1500;
