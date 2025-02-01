@@ -3,23 +3,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MiniGame02 : MonoBehaviour
+public class MiniGame_2 : MonoBehaviour
 {
-    public Slider timeSlider; // ½Ã°£ ½½¶óÀÌ´õ
-    public Slider powerSlider; // Àü·Â °ÔÀÌÁö ½½¶óÀÌ´õ
-    public TextMeshProUGUI arrowDisplay; // ¹æÇâÅ° Ç¥½Ã
-    public TextMeshProUGUI resultText; // °á°ú ¸Ş½ÃÁö Ç¥½Ã
-    public AudioSource wrongInputSound; // Æ²¸° ÀÔ·Â ½Ã Àç»ıµÇ´Â ¼Ò¸®
-    public Transform arrowParent;
-    public GameObject arrowPrefab;
+    public Slider timeSlider; // ì‹œê°„ ìŠ¬ë¼ì´ë”
+    public Slider powerSlider; // ì „ë ¥ ê²Œì´ì§€ ìŠ¬ë¼ì´ë”
+    public TextMeshProUGUI resultText; // ê²°ê³¼ ë©”ì‹œì§€ í‘œì‹œ
+    public AudioSource wrongInputSound; // í‹€ë¦° ì…ë ¥ ì‹œ ì¬ìƒë˜ëŠ” ì†Œë¦¬
+    public Transform arrowParent; // í™”ì‚´í‘œ ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸
+    public GameObject arrowPrefab; // í™”ì‚´í‘œ í”„ë¦¬íŒ¹
 
-    private float maxTime = 10f; // Á¦ÇÑ ½Ã°£
-    private float currentTime; // ³²Àº ½Ã°£
-    private float maxPower = 100f; // ÃÖ´ë Àü·Â °ÔÀÌÁö
-    private float currentPower; // ÇöÀç Àü·Â °ÔÀÌÁö
-    private bool isGameActive = true; // °ÔÀÓ ÁøÇà ¿©ºÎ
-    private string[] currentArrowKeys = new string[4]; // ÇöÀç Ç¥½ÃµÈ ¹æÇâÅ° ¹è¿­
-    private int currentInputIndex = 0; // ÇÃ·¹ÀÌ¾î°¡ ÀÔ·Â ÁßÀÎ ¹æÇâÅ° ÀÎµ¦½º
+
+    public int plus;
+    public int minus;
+
+    private float maxTime = 10f; // ì œí•œ ì‹œê°„
+    private float currentTime; // ë‚¨ì€ ì‹œê°„
+    private float maxPower = 100f; // ìµœëŒ€ ì „ë ¥ ê²Œì´ì§€
+    private float currentPower = 0; // í˜„ì¬ ì „ë ¥ ê²Œì´ì§€
+    private bool isGameActive = true; // ê²Œì„ ì§„í–‰ ì—¬ë¶€
+    private string[] currentArrowKeys = new string[4]; // í˜„ì¬ í‘œì‹œëœ ë°©í–¥í‚¤ ë°°ì—´
+    private int currentInputIndex = 0; // í”Œë ˆì´ì–´ê°€ ì…ë ¥ ì¤‘ì¸ ë°©í–¥í‚¤ ì¸ë±ìŠ¤
 
     void Start()
     {
@@ -30,114 +33,119 @@ public class MiniGame02 : MonoBehaviour
     {
         if (!isGameActive) return;
 
-        // ½Ã°£ ¹× °ÔÀÌÁö °¨¼Ò
+        // ì‹œê°„ ê°ì†Œ
         currentTime -= Time.deltaTime;
-        currentPower -= Time.deltaTime * 1f; // Àü·Â °ÔÀÌÁöµµ ÃµÃµÈ÷ °¨¼Ò
         timeSlider.value = currentTime / maxTime;
         powerSlider.value = currentPower / maxPower;
 
-        // ½Ã°£ ÃÊ°ú ¶Ç´Â °ÔÀÌÁö°¡ 0ÀÌ µÇ¸é ½ÇÆĞ Ã³¸®
-        if (currentTime <= 0 || currentPower <= 0)
+        // 10ì´ˆ ì•ˆì— ê²Œì´ì§€ë¥¼ ì±„ìš°ì§€ ëª»í•˜ë©´ ì‹¤íŒ¨
+        if (currentTime <= 0)
         {
             FailGame();
         }
 
-        // ¹æÇâÅ° ÀÔ·Â Ã¼Å©
+        // ì „ë ¥ ê²Œì´ì§€ê°€ 100%ì— ë„ë‹¬í•˜ë©´ í´ë¦¬ì–´ ì²˜ë¦¬
+        if (currentPower >= maxPower)
+        {
+            ClearGame();
+        }
+
+        // ë°©í–¥í‚¤ ì…ë ¥ ì²´í¬
         CheckInput();
     }
 
     void StartGame()
     {
-        // ÃÊ±âÈ­
+        // ì´ˆê¸°í™”
         isGameActive = true;
         currentTime = maxTime;
-        currentPower = maxPower;
+        currentPower = 0;
         resultText.gameObject.SetActive(false);
-        GenerateRandomArrowKeys(); // ·£´ı ¹æÇâÅ° »ı¼º
+        GenerateRandomArrowKeys(); // ëœë¤ ë°©í–¥í‚¤ ìƒì„±
     }
 
     void CheckInput()
     {
         if (!isGameActive) return;
 
-        // ¹æÇâÅ° ÀÔ·Â Ã³¸®
-        if (Input.GetKeyDown(KeyCode.UpArrow) && currentArrowKeys[currentInputIndex] == "¡è" ||
-            Input.GetKeyDown(KeyCode.DownArrow) && currentArrowKeys[currentInputIndex] == "¡é" ||
-            Input.GetKeyDown(KeyCode.LeftArrow) && currentArrowKeys[currentInputIndex] == "¡ç" ||
-            Input.GetKeyDown(KeyCode.RightArrow) && currentArrowKeys[currentInputIndex] == "¡æ")
+        // ë°©í–¥í‚¤ ì…ë ¥ ì²˜ë¦¬
+        if (Input.GetKeyDown(KeyCode.UpArrow) && currentArrowKeys[currentInputIndex] == "â†‘" ||
+            Input.GetKeyDown(KeyCode.DownArrow) && currentArrowKeys[currentInputIndex] == "â†“" ||
+            Input.GetKeyDown(KeyCode.LeftArrow) && currentArrowKeys[currentInputIndex] == "â†" ||
+            Input.GetKeyDown(KeyCode.RightArrow) && currentArrowKeys[currentInputIndex] == "â†’")
         {
-            // ÇöÀç ¹æÇâÅ°°¡ ¿Ã¹Ù¸¥ °æ¿ì
-            Transform currentArrow = arrowParent.GetChild(currentInputIndex); // ÇöÀç È­»ìÇ¥ °¡Á®¿À±â
-            currentArrow.GetComponentInChildren<TextMeshProUGUI>().color = Color.green; // ÃÊ·Ï»öÀ¸·Î º¯°æ
-            currentInputIndex++; // ´ÙÀ½ ¹æÇâÅ°·Î ÀÌµ¿
+            // í˜„ì¬ ë°©í–¥í‚¤ê°€ ì˜¬ë°”ë¥¸ ê²½ìš°
+            Transform currentArrow = arrowParent.GetChild(currentInputIndex);
+            currentArrow.GetComponentInChildren<TextMeshProUGUI>().color = Color.green; // ì´ˆë¡ìƒ‰ìœ¼ë¡œ ë³€ê²½
+            currentInputIndex++; // ë‹¤ìŒ ë°©í–¥í‚¤ë¡œ ì´ë™
 
-
-            // ¸ğµç ¹æÇâÅ°¸¦ Á¤È®È÷ ÀÔ·ÂÇÑ °æ¿ì
+            // ëª¨ë“  ë°©í–¥í‚¤ë¥¼ ì •í™•íˆ ì…ë ¥í•œ ê²½ìš°
             if (currentInputIndex >= currentArrowKeys.Length)
             {
                 currentInputIndex = 0;
-                GenerateRandomArrowKeys(); // »õ·Î¿î ·£´ı ¹æÇâÅ° »ı¼º
-                powerSlider.value += 20f; // Àü·Â °ÔÀÌÁö È¸º¹
-                if (currentPower > maxPower) currentPower = maxPower; // ÃÖ´ë Àü·Â °ÔÀÌÁö Á¦ÇÑ
-                //if (powerSlider.value > 1) powerSlider.value = 1; // °ÔÀÌÁö ÃÖ´ë°ª Á¦ÇÑ
+                GenerateRandomArrowKeys(); // ìƒˆë¡œìš´ ëœë¤ ë°©í–¥í‚¤ ìƒì„±
+                currentPower = Mathf.Min(currentPower + plus, maxPower); // ì „ë ¥ ê²Œì´ì§€ ì¦ê°€
             }
         }
-        else if (Input.anyKeyDown) // Àß¸øµÈ Å° ÀÔ·Â ½Ã
+        else if (Input.anyKeyDown) // ì˜ëª»ëœ í‚¤ ì…ë ¥ ì‹œ
         {
-            PlayWrongInputSound(); // Æ²¸° ÀÔ·Â ¼Ò¸® Àç»ı
-            StartCoroutine(WrongInputFeedback()); // Àß¸øµÈ ÀÔ·Â ½Ã ÇÇµå¹é ¿¬Ãâ
-            //currentInputIndex = 0; // ÀÔ·Â ÃÊ±âÈ­
-            //GenerateRandomArrowKeys(); // »õ·Î¿î ·£´ı ¹æÇâÅ° »ı¼º
+            PlayWrongInputSound(); // í‹€ë¦° ì…ë ¥ ì†Œë¦¬ ì¬ìƒ
+            StartCoroutine(WrongInputFeedback()); // ì˜ëª»ëœ ì…ë ¥ ì‹œ í”¼ë“œë°± ì—°ì¶œ
+            currentPower = Mathf.Max(currentPower - minus, 0); // ì „ë ¥ ê²Œì´ì§€ ê°ì†Œ
         }
     }
 
     void GenerateRandomArrowKeys()
     {
-        // ±âÁ¸ È­»ìÇ¥ »èÁ¦
+        // ê¸°ì¡´ í™”ì‚´í‘œ ì‚­ì œ
         foreach (Transform child in arrowParent)
         {
             Destroy(child.gameObject);
         }
 
-        // ·£´ı ¹æÇâÅ° 4°³ »ı¼º
-        string[] arrowKeys = { "¡è", "¡é", "¡ç", "¡æ" };
+        // ëœë¤ ë°©í–¥í‚¤ 4ê°œ ìƒì„±
+        string[] arrowKeys = { "â†‘", "â†“", "â†", "â†’" };
         for (int i = 0; i < currentArrowKeys.Length; i++)
         {
             currentArrowKeys[i] = arrowKeys[Random.Range(0, arrowKeys.Length)];
 
-            // È­»ìÇ¥ UI »ı¼º
+            // í™”ì‚´í‘œ UI ìƒì„±
             GameObject arrow = Instantiate(arrowPrefab, arrowParent);
             TextMeshProUGUI arrowText = arrow.GetComponentInChildren<TextMeshProUGUI>();
             arrowText.text = currentArrowKeys[i];
-            arrowText.color = Color.white; // ±âº» »ö»óÀº Èò»ö
+            arrowText.color = Color.white; // ê¸°ë³¸ ìƒ‰ìƒ í°ìƒ‰
         }
-
-        currentInputIndex = 0; // ÀÔ·Â ÀÎµ¦½º ÃÊ±âÈ­
-        // ¹æÇâÅ°¸¦ È­¸é¿¡ Ç¥½Ã
-        //arrowDisplay.text = string.Join(" ", currentArrowKeys);
     }
 
     IEnumerator WrongInputFeedback()
     {
-        // ¸ğµç È­»ìÇ¥¸¦ »¡°£»öÀ¸·Î ±ôºıÀÌ±â
+        // ëª¨ë“  í™”ì‚´í‘œë¥¼ ë¹¨ê°„ìƒ‰ìœ¼ë¡œ ê¹œë¹¡ì´ê¸°
         foreach (Transform child in arrowParent)
         {
             TextMeshProUGUI arrowText = child.GetComponentInChildren<TextMeshProUGUI>();
             arrowText.color = Color.red;
         }
 
-        yield return new WaitForSeconds(0.5f); // 0.5ÃÊ ´ë±â
+        yield return new WaitForSeconds(0.5f); // 0.5ì´ˆ ëŒ€ê¸°
 
-        // ´Ù½Ã ·£´ı ¹æÇâÅ° »ı¼º
-        GenerateRandomArrowKeys();
+        // ë‹¤ì‹œ ëœë¤ ë°©í–¥í‚¤ ìƒì„±
+        currentInputIndex = 0; // ğŸ¯ ì¸ë±ìŠ¤ ì´ˆê¸°í™” (ì´ê²Œ ë¹ ì ¸ìˆì–´ì„œ ì˜¤ë¥˜ ë°œìƒ ê°€ëŠ¥)
+        GenerateRandomArrowKeys(); // ğŸ¯ ìƒˆë¡œìš´ ë°©í–¥í‚¤ ìƒì„±
+   
     }
-
 
     void FailGame()
     {
-        isGameActive = false; // °ÔÀÓ ÁßÁö
+        isGameActive = false; // ê²Œì„ ì¤‘ì§€
         resultText.gameObject.SetActive(true);
-        resultText.text = "Game over!"; // ½ÇÆĞ ¸Ş½ÃÁö Ç¥½Ã
+        resultText.text = "Game over!"; // ì‹¤íŒ¨ ë©”ì‹œì§€ í‘œì‹œ
+    }
+
+    void ClearGame()
+    {
+        isGameActive = false; // ê²Œì„ ì¤‘ì§€
+        resultText.gameObject.SetActive(true);
+        resultText.text = "Game Clear!"; // ì„±ê³µ ë©”ì‹œì§€ í‘œì‹œ
     }
 
     void PlayWrongInputSound()
