@@ -599,14 +599,15 @@ MonoBehaviour:
   miniGamePanel: {fileID: 207633347}
   leftWireGroup: {fileID: 1832439293}
   rightWireGroup: {fileID: 287647936}
-  wire:
-  - {fileID: 2562284107234904353, guid: 47bc75765ff4d0843a3515e4f96596a8, type: 3}
-  - {fileID: 5981775360957621367, guid: eeb5c2c7d1888a64ab6e3b89e990acaa, type: 3}
+  wires:
   - {fileID: 1479145793984720872, guid: 92b9c7ec0fa8f834587497c1b13464fc, type: 3}
+  - {fileID: 5981775360957621367, guid: eeb5c2c7d1888a64ab6e3b89e990acaa, type: 3}
+  - {fileID: 2562284107234904353, guid: 47bc75765ff4d0843a3515e4f96596a8, type: 3}
   - {fileID: 4875140446922392184, guid: 8202cd03ad666e34985dee7aa51e48ac, type: 3}
   - {fileID: 7497167484893556258, guid: e1db56d4c7df9a84b87577643d47b0e2, type: 3}
   Timer: {fileID: 436983990}
-  maxTime: 3
+  maxTime: 5
+  maxWireValue: 10
   miniGameUIInfo:
     rectTransform: {fileID: 207633348}
     start: {x: 0, y: 0}
