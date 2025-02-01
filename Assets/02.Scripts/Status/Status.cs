@@ -24,7 +24,7 @@ public class Status : MonoBehaviour
         }
         else
         {
-            statusData.Corrosion += statusUpData.Corrosion;
+            statusData.Corrosion -= statusUpData.Corrosion;
         }
     }
     public void SetHullRestorationRate(bool IsIncrese)
@@ -35,7 +35,7 @@ public class Status : MonoBehaviour
         }
         else
         {
-            statusData.HullRestorationRate += statusUpData.HullRestorationRate;
+            statusData.HullRestorationRate -= statusUpData.HullRestorationRate;
         }
     }
     public void SetMotorRestorationRate(bool IsIncrese)
@@ -46,7 +46,7 @@ public class Status : MonoBehaviour
         }
         else
         {
-            statusData.MotorRestorationRate += statusUpData.MotorRestorationRate;
+            statusData.MotorRestorationRate -= statusUpData.MotorRestorationRate;
         }
     }
     public void SetEngineRestorationRate(bool IsIncrese)
@@ -57,7 +57,7 @@ public class Status : MonoBehaviour
         }
         else
         {
-            statusData.EngineRestorationRate += statusUpData.EngineRestorationRate;
+            statusData.EngineRestorationRate -= statusUpData.EngineRestorationRate;
         }
     }
     public void SetRadarRestorationRate(bool IsIncrese)
@@ -68,7 +68,7 @@ public class Status : MonoBehaviour
         }
         else
         {
-            statusData.RadarRestorationRate += statusUpData.RadarRestorationRate;
+            statusData.RadarRestorationRate -= statusUpData.RadarRestorationRate;
         }
     }
     public void SetRadarOutputAmount(bool IsIncrese)
@@ -79,7 +79,7 @@ public class Status : MonoBehaviour
         }
         else
         {
-            statusData.RadarOutputAmount += statusUpData.RadarOutputAmount;
+            statusData.RadarOutputAmount -= statusUpData.RadarOutputAmount;
         }
     }
 }
