@@ -5,32 +5,81 @@ public class Status
     [SerializeField] private StatusDataSO statusData;
     [SerializeField] private StatusDataSO statusUpData;
 
-    public void SetFuelAmount()
+    public void SetFuelAmount(bool IsIncrese)
     {
-        statusData.FuelAmount += statusUpData.FuelAmount;
+        if(IsIncrese)
+        {
+            statusData.FuelAmount += statusUpData.FuelAmount;
+        }
+        else
+        {
+            statusData.FuelAmount -= statusUpData.FuelAmount;
+        }
     }
-    public void SetCorrosion()
+    public void SetCorrosion(bool IsIncrese)
     {
-        statusData.Corrosion += statusUpData.Corrosion;
+        if (IsIncrese)
+        {
+            statusData.Corrosion += statusUpData.Corrosion;
+        }
+        else
+        {
+            statusData.Corrosion += statusUpData.Corrosion;
+        }
     }
-    public void SetHullRestorationRate()
+    public void SetHullRestorationRate(bool IsIncrese)
     {
-        statusData.HullRestorationRate += statusUpData.HullRestorationRate;
+        if (IsIncrese)
+        {
+            statusData.HullRestorationRate += statusUpData.HullRestorationRate;
+        }
+        else
+        {
+            statusData.HullRestorationRate += statusUpData.HullRestorationRate;
+        }
     }
-    public void SetMotorRestorationRate(int value)
+    public void SetMotorRestorationRate(bool IsIncrese)
     {
-        statusData.MotorRestorationRate += statusUpData.MotorRestorationRate;
+        if (IsIncrese)
+        {
+            statusData.MotorRestorationRate += statusUpData.MotorRestorationRate;
+        }
+        else
+        {
+            statusData.MotorRestorationRate += statusUpData.MotorRestorationRate;
+        }
     }
-    public void SetEngineRestorationRate(int value)
+    public void SetEngineRestorationRate(bool IsIncrese)
     {
-        statusData.EngineRestorationRate += statusUpData.EngineRestorationRate;
+        if (IsIncrese)
+        {
+            statusData.EngineRestorationRate += statusUpData.EngineRestorationRate;
+        }
+        else
+        {
+            statusData.EngineRestorationRate += statusUpData.EngineRestorationRate;
+        }
     }
-    public void SetRadarRestorationRate(int value)
+    public void SetRadarRestorationRate(bool IsIncrese)
     {
-        statusData.RadarRestorationRate += statusUpData.RadarRestorationRate;
+        if (IsIncrese)
+        {
+            statusData.RadarRestorationRate += statusUpData.RadarRestorationRate;
+        }
+        else
+        {
+            statusData.RadarRestorationRate += statusUpData.RadarRestorationRate;
+        }
     }
-    public void SetRadarOutputAmount(int value)
+    public void SetRadarOutputAmount(bool IsIncrese)
     {
-        statusData.RadarOutputAmount += statusUpData.RadarOutputAmount;
+        if (IsIncrese)
+        {
+            statusData.RadarOutputAmount += statusUpData.RadarOutputAmount;
+        }
+        else
+        {
+            statusData.RadarOutputAmount += statusUpData.RadarOutputAmount;
+        }
     }
 }
