@@ -16,6 +16,8 @@ namespace Manager
 
         public List<GameObject> collectorRobots;
         public List<GameObject> sweeperRobots;
+        public int collectorRobotLevel;
+        public int sweeperRobotLevel;
 
         private int day = 7;
         private float dayTime = 90.0f;              // 하루 시간
@@ -54,6 +56,8 @@ namespace Manager
         private void Init()
         {
             currentTime = dayTime;
+            collectorRobotLevel = 1;
+            sweeperRobotLevel = 1;
         }
 
         // 시간 관리
@@ -102,23 +106,41 @@ namespace Manager
                 GameObject robot = Instantiate(sweeperRobotPrefab, Vector2.zero, Quaternion.identity);
                 sweeperRobots.Add(robot);
             }
+
+            UIManager.Instance.UpdateRobotPieceText(collectorRobots.Count, sweeperRobots.Count);
         }
 
         // 로봇 능력치 관리
         public void RobotStatusUp(string robotType)
         {
-            int count = (robotType == "CollectorRobot") ? collectorRobots.Count : sweeperRobots.Count;
-
-            for (int i = 0; i < count; i++)
+            if(robotType == "CollectorRobot")
             {
-                Robotcontroller robotController = collectorRobots[i].GetComponent<Robotcontroller>();
-
-                if (robotController != null)
+                for (int i = 0; i < collectorRobots.Count; i++)
                 {
-                    robotController.moveSpeed += 10;
-                    robotController.workTime -= 0.5f;
-                    robotController.breakTime -= 0.5f;
-                    robotController.SpeedInit();
+                    Robotcontroller robotController = collectorRobots[i].GetComponent<Robotcontroller>();
+
+                    if (robotController != null)
+                    {
+                        robotController.moveSpeed += 10;
+                        robotController.workTime -= 0.5f;
+                        robotController.breakTime -= 0.5f;
+                        robotController.SpeedInit();
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < sweeperRobots.Count; i++)
+                {
+                    Robotcontroller robotController = sweeperRobots[i].GetComponent<Robotcontroller>();
+
+                    if (robotController != null)
+                    {
+                        robotController.moveSpeed += 10;
+                        robotController.workTime -= 0.5f;
+                        robotController.breakTime -= 0.5f;
+                        robotController.SpeedInit();
+                    }
                 }
             }
         }

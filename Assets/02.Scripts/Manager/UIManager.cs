@@ -17,8 +17,9 @@ namespace Manager
 
         public Text dayText;
         public Text[] goldTexts;
-        public Text[] robotBuyPriceText;
-        public Text[] robotUpgradePriceText;
+        public Text[] robotBuyPriceTexts;
+        public Text[] robotUpgradePriceTexts;
+        public Text robotPieceText;
         public Text fuelText;
         public Text goldOfFuel;
 
@@ -57,21 +58,41 @@ namespace Manager
         // 로봇 구매 가격 텍스트 변경
         public void UpdateRobotBuyPriceText(int index, int price)
         {
-            robotBuyPriceText[index].text = string.Format("{0:N0} G", price);
+            robotBuyPriceTexts[index].text = string.Format("{0:N0} G", price);
         }
 
         // 로봇 업그레이드 가격 텍스트 변경
         public void UpdateRoboUpgradetPriceText(int index, int price)
         {
-            robotUpgradePriceText[index].text = string.Format("{0:N0} G", price);
+            robotUpgradePriceTexts[index].text = string.Format("{0:N0} G", price);
+        }
+
+        // 로봇 수량 텍스트 변경
+        public void UpdateRobotPieceText(int collectorRobotPiece, int sweeperRobotPiece)
+        {
+            robotPieceText.text = string.Format("수집로봇 X {0}   청소로봇 X {1}", collectorRobotPiece, sweeperRobotPiece);
         }
 
         public void SoldOut(GameObject btn)
         {
             Button button = btn.GetComponent<Button>();
-            button.GetComponent<RectTransform>().sizeDelta = new Vector2(213, 129);
+            button.GetComponent<RectTransform>().sizeDelta = new Vector2(319, 193);
             button.image.sprite = soldOutImage;
             button.interactable = false;
+        }
+
+        // 상점 구매창 초기화
+        public void BuyPhanelInit()
+        {
+            buyPhanelIndex = 0;
+
+            for (int i = 0; i < buyPhanels.Length; i++)
+            {
+                if(i == 0)
+                    buyPhanels[i].SetActive(true);
+                else
+                    buyPhanels[i].SetActive(false);
+            }
         }
 
         // 상점 구매창 변경
@@ -135,6 +156,7 @@ namespace Manager
             StoreManager.Instance.changeGoldAmount = 0;
         }
 
+        #region 연출 효과
         public void Error(string message)
         {
             errorPhanel.GetComponentInChildren<Text>().text = message;
@@ -147,5 +169,6 @@ namespace Manager
             yield return new WaitForSeconds(1.5f);
             errorPhanel.SetActive(false);
         }
+        #endregion
     }
 }
