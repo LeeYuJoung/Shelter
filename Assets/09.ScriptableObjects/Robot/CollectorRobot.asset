@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robotType: 0
   targetName: Incinerator
-  moveSpeed: 100
+  moveSpeed: 40
   workTime: 5
   breakTime: 0
   range: 4
