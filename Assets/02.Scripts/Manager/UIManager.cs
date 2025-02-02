@@ -15,7 +15,6 @@ namespace Manager
         public GameObject[] buyPhanels;
         public GameObject errorPhanel;
 
-        public Text dayText;
         public Text[] goldTexts;
         public Text[] robotBuyPriceTexts;
         public Text[] robotUpgradePriceTexts;
@@ -26,7 +25,7 @@ namespace Manager
         public InputField saleInput;
         public Sprite soldOutImage;
 
-        private int buyPhanelIndex = 0;
+        private int buyPhanelIndex;
 
         private void Awake()
         {
@@ -38,12 +37,27 @@ namespace Manager
             {
                 instance = this;
             }
+
+            Init();
         }
 
-        // 디데이 텍스트 변경
-        public void UpdateDayText(int day)
+        private void Init()
         {
-            dayText.text = string.Format("{0:D3}", day);
+            buyPhanelIndex = 0;
+            status = GameObject.Find("Status").GetComponent<Status>();
+            fuelText.text = string.Format("{0} L", status.statusData.FuelAmount);
+        }
+
+        // 디데이 변경
+        public void UpdateDayImage(int day)
+        {
+
+        }
+
+        // 하루 시간 변경
+        public void UpdateTimeImage()
+        {
+
         }
 
         // 골드 텍스트 변경
@@ -126,12 +140,7 @@ namespace Manager
                 saleInput.text = string.Format("{0} L", StoreManager.Instance.changeFuelAmount);
                 goldOfFuel.text = string.Format("{0:N0} G", StoreManager.Instance.changeGoldAmount);
 
-                if (StoreManager.Instance.changeFuelAmount > 100)
-                {
-                    Error("연료는 100이하로만 판매 가능합니다.");
-                    FuelSaleEnd();
-                }
-                else if (GameManager.Instance.fuel < StoreManager.Instance.changeFuelAmount)
+                if (status.statusData.FuelAmount < StoreManager.Instance.changeFuelAmount)
                 {
                     Error("보유한 연료량이 적어 판매 불가능합니다.");
                     FuelSaleEnd();
@@ -151,12 +160,11 @@ namespace Manager
         {
             saleInput.text = null;
             goldOfFuel.text = string.Format("{0:N0} G", 0);
-            fuelText.text = string.Format("{0} L", GameManager.Instance.fuel);
+            fuelText.text = string.Format("{0} L", status.statusData.FuelAmount);
             StoreManager.Instance.changeFuelAmount = 0;
             StoreManager.Instance.changeGoldAmount = 0;
         }
 
-        #region 연출 효과
         public void Error(string message)
         {
             errorPhanel.GetComponentInChildren<Text>().text = message;
@@ -169,6 +177,5 @@ namespace Manager
             yield return new WaitForSeconds(1.5f);
             errorPhanel.SetActive(false);
         }
-        #endregion
     }
 }

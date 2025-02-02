@@ -7,6 +7,8 @@ namespace Manager
         private static MinigameManager instance;
         public static MinigameManager Instance {  get { return instance; } }
 
+        public GameObject[] machines;
+
         private void Awake()
         {
             if(instance != null)

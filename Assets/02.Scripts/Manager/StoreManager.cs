@@ -8,17 +8,7 @@ namespace Manager
         private static StoreManager instance;
         public static StoreManager Instance { get { return instance; } }
 
-        private void Awake()
-        {
-            if(instance != null)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                instance = this;
-            }
-        }
+        private Status status;
 
         private int collectorRobotPrice = 1000;
         private int sweeperRobotPrice = 1000;
@@ -29,8 +19,29 @@ namespace Manager
         private int robotMaxPiece = 3;
         private int robotMaxUpgrade = 3;
 
+        private int raderRoomUnLockPrice = 5000;
+
         public int changeFuelAmount;
         public int changeGoldAmount;
+
+        private void Awake()
+        {
+            if (instance != null)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                instance = this;
+            }
+
+            Init();
+        }
+
+        private void Init()
+        {
+            status = GameObject.Find("Status").GetComponent<Status>();
+        }
 
         // 로봇 구매
         public void RobotBuy(string robotType)
@@ -118,10 +129,24 @@ namespace Manager
             }
         }
 
+        // 레이더실 해금
+        public void RaderRoomUnLock()
+        {
+            if(GameManager.Instance.GetGold >= raderRoomUnLockPrice)
+            {
+                GameManager.Instance.isRadeRoomUnLock = true;
+                GameManager.Instance.UseGold(raderRoomUnLockPrice);
+            }
+            else
+            {
+                UIManager.Instance.Error("보유한 골드의 수량이 부족하여 레이더실 해금에 실패하였습니다.");
+            }
+        }
+
         // 연료 판매
         public void FuelSale()
         {
-            GameManager.Instance.fuel -= changeFuelAmount;
+            status.statusData.FuelAmount -= changeFuelAmount;
             GameManager.Instance.GainGold(changeGoldAmount);
             UIManager.Instance.FuelSaleEnd();
         }

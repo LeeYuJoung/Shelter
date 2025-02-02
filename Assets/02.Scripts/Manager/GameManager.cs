@@ -26,9 +26,8 @@ namespace Manager
         [SerializeField] private int gold = 0;
         public int GetGold { get { return gold; } }
 
+        public bool isRadeRoomUnLock = false;
         private bool isGameOver = false;
-
-        public int fuel = 100;
 
         private void Awake()
         {
@@ -70,12 +69,16 @@ namespace Manager
             {
                 day--;
                 currentTime = dayTime;
-                UIManager.Instance.UpdateDayText(day);
+                UIManager.Instance.UpdateDayImage(day);
 
                 if(day <= 0)
                 {
                     GameOver();
                 }
+            }
+            else
+            {
+
             }
         }
 
@@ -150,7 +153,6 @@ namespace Manager
         {
             Debug.Log("::: Game Over :::");
             isGameOver = true;
-            SceneChange(2);
         }
 
         // 씬 관리

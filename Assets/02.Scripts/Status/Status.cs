@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    [SerializeField] private StatusDataSO statusData;
-    [SerializeField] private StatusDataSO statusUpData;
+    public StatusDataSO statusData;
+    public StatusDataSO statusUpData;
 
     public void SetFuelAmount(bool IsIncrese)
     {
