@@ -191,9 +191,9 @@ TextureImporter:
       name: "5\uC77C\uCC28_3"
       rect:
         serializedVersion: 2
-        x: 165
+        x: 162
         y: 797
-        width: 99
+        width: 102
         height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
