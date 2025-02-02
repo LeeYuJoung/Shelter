@@ -9,6 +9,11 @@ namespace Manager
 
         public GameObject[] machines;
 
+        private float currentTime;
+        private float errorTime;
+        const float errorMinTime = 15.0f;
+        const float errorMaxTime = 30.0f;
+
         private void Awake()
         {
             if(instance != null)
@@ -19,8 +24,28 @@ namespace Manager
             {
                 instance = this;
             }
+
+            Init();
         }
 
+        private void Update()
+        {
+            currentTime += Time.deltaTime;
+
+            if( currentTime >= errorTime )
+            {
+                currentTime = 0;
+                errorTime = Random.Range(errorMinTime, errorMaxTime);
+
+                OnError();
+            }
+        }
+
+        private void Init()
+        {
+            currentTime = 0;
+            errorTime = Random.Range(errorMinTime, errorMaxTime);
+        }
         // 랜덤한 시간마다 각 기계에 에러 발생하도록 하기
         public void OnError()
         {

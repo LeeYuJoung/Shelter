@@ -63,7 +63,7 @@ namespace Manager
         private void Timmer()
         {
             // 확인을 위해 15배 빠르게 시간이 흐르도록 함
-            currentTime -= Time.deltaTime * 15;
+            currentTime -= Time.deltaTime;
 
             if(currentTime <= 0)
             {

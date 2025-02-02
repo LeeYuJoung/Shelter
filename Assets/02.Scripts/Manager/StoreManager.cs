@@ -16,10 +16,10 @@ namespace Manager
         private int collectorRobotUpgradePrice = 1500;
         private int sweeperRobotUpgradePrice = 1500;
 
-        private int robotMaxPiece = 3;
-        private int robotMaxUpgrade = 3;
+        const int robotMaxPiece = 3;
+        const int robotMaxUpgrade = 3;
 
-        private int raderRoomUnLockPrice = 5000;
+        const int raderRoomUnLockPrice = 5000;
 
         public int changeFuelAmount;
         public int changeGoldAmount;
