@@ -9,6 +9,7 @@ TagManager:
   - Incinerator
   - Soil
   - Destination
+  - Error
   layers:
   - Default
   - TransparentFX
