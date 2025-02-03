@@ -15,6 +15,11 @@ namespace Manager
         public GameObject[] buyPhanels;
         public GameObject errorPhanel;
 
+        public InputField saleInput;
+
+        public Image dayImage;
+        public Image timeImage;
+
         public Text[] goldTexts;
         public Text[] robotBuyPriceTexts;
         public Text[] robotUpgradePriceTexts;
@@ -22,7 +27,8 @@ namespace Manager
         public Text fuelText;
         public Text goldOfFuel;
 
-        public InputField saleInput;
+        public Sprite[] daySprites;
+        public Sprite[] timeSptites;
         public Sprite soldOutImage;
 
         private int buyPhanelIndex;
@@ -51,13 +57,13 @@ namespace Manager
         // 디데이 변경
         public void UpdateDayImage(int day)
         {
-
+            dayImage.sprite = daySprites[day];
         }
 
         // 하루 시간 변경
-        public void UpdateTimeImage()
+        public void UpdateTimeImage(int time)
         {
-
+            timeImage.sprite = timeSptites[time];
         }
 
         // 골드 텍스트 변경

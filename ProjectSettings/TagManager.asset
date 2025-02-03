@@ -49,6 +49,9 @@ TagManager:
   - name: BG
     uniqueID: 1853861049
     locked: 0
+  - name: SpaceShip
+    uniqueID: 466430617
+    locked: 0
   - name: Robot
     uniqueID: 895978583
     locked: 0
