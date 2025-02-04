@@ -8,8 +8,6 @@ namespace Manager
         private static StoreManager instance;
         public static StoreManager Instance { get { return instance; } }
 
-        private Status status;
-
         private int collectorRobotPrice = 1000;
         private int sweeperRobotPrice = 1000;
 
@@ -40,7 +38,7 @@ namespace Manager
 
         private void Init()
         {
-            status = GameObject.Find("Status").GetComponent<Status>();
+
         }
 
         // 로봇 구매
@@ -146,7 +144,7 @@ namespace Manager
         // 연료 판매
         public void FuelSale()
         {
-            status.statusData.FuelAmount -= changeFuelAmount;
+            StatusManager.Instance.status.statusData.FuelAmount -= changeFuelAmount;
             GameManager.Instance.GainGold(changeGoldAmount);
             UIManager.Instance.FuelSaleEnd();
         }

@@ -11,7 +11,7 @@ namespace MiniGame
         [SerializeField] private float currentTime = 0;
         [SerializeField] private float errorTime = 0;
         [SerializeField] private float beepTime = 10.0f;
-        const float errorMinTime = 15.0f;
+        const float errorMinTime = 10.0f;
         const float errorMaxTime = 20.0f;
 
         private float playTime = 20.0f;
@@ -92,6 +92,7 @@ namespace MiniGame
             isError = false;
             isPlaying = true;
             currentTime = 0;
+            errorGameObject.SetActive(false);
             Debug.Log(":: MiniGameStart ::");
         }
 

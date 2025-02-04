@@ -10,8 +10,6 @@ namespace Manager
         private static UIManager instance;
         public static UIManager Instance { get { return instance; } }
 
-        public Status status;
-
         public GameObject[] buyPhanels;
         public GameObject errorPhanel;
 
@@ -43,15 +41,17 @@ namespace Manager
             {
                 instance = this;
             }
+        }
 
+        private void Start()
+        {
             Init();
         }
 
         private void Init()
         {
             buyPhanelIndex = 0;
-            status = GameObject.Find("Status").GetComponent<Status>();
-            fuelText.text = string.Format("{0} L", status.statusData.FuelAmount);
+            fuelText.text = string.Format("{0} L", StatusManager.Instance.status.statusData.FuelAmount);
         }
 
         // 디데이 변경
@@ -146,7 +146,7 @@ namespace Manager
                 saleInput.text = string.Format("{0} L", StoreManager.Instance.changeFuelAmount);
                 goldOfFuel.text = string.Format("{0:N0} G", StoreManager.Instance.changeGoldAmount);
 
-                if (status.statusData.FuelAmount < StoreManager.Instance.changeFuelAmount)
+                if (StatusManager.Instance.status.statusData.FuelAmount < StoreManager.Instance.changeFuelAmount)
                 {
                     Error("보유한 연료량이 적어 판매 불가능합니다.");
                     FuelSaleEnd();
@@ -166,7 +166,7 @@ namespace Manager
         {
             saleInput.text = null;
             goldOfFuel.text = string.Format("{0:N0} G", 0);
-            fuelText.text = string.Format("{0} L", status.statusData.FuelAmount);
+            fuelText.text = string.Format("{0} L", StatusManager.Instance.status.statusData.FuelAmount);
             StoreManager.Instance.changeFuelAmount = 0;
             StoreManager.Instance.changeGoldAmount = 0;
         }
