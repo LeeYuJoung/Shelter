@@ -14,9 +14,9 @@ namespace MiniGame
         const float errorMinTime = 15.0f;
         const float errorMaxTime = 20.0f;
 
-        private float playTime = 15.0f;
-        private int plusPoint = 10;
-        private int minusPoint = 10;
+        private float playTime = 20.0f;
+        private int plusPoint = 35;
+        private int minusPoint = 5;
         private int reward = 10;
         private int penalty = 10;
 
@@ -113,15 +113,13 @@ namespace MiniGame
         // 미니 게임 난이도 상승
         public void DifficultyLevelUp()
         {
-
+            playTime -= 2.0f;
         }
 
-        // 에러 효과
-        private IEnumerator Error()
+        // 초기화
+        public void Init()
         {
-            errorGameObject.SetActive(true);
-            yield return new WaitForSeconds(1.25f);
-            errorGameObject.SetActive(false);
+
         }
     }
 }
