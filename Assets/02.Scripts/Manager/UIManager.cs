@@ -22,7 +22,7 @@ namespace Manager
         public Text[] robotBuyPriceTexts;
         public Text[] robotUpgradePriceTexts;
         public Text robotPieceText;
-        public Text fuelText;
+        public Text[] fuelText;
         public Text goldOfFuel;
 
         public Sprite[] daySprites;
@@ -51,7 +51,7 @@ namespace Manager
         private void Init()
         {
             buyPhanelIndex = 0;
-            fuelText.text = string.Format("{0} L", StatusManager.Instance.status.statusData.FuelAmount);
+            UpdateFuelText();
         }
 
         // 디데이 변경
@@ -72,6 +72,15 @@ namespace Manager
             for(int i = 0; i < goldTexts.Length; i++)
             {
                 goldTexts[i].text = string.Format("{0:N0} G", gold);
+            }
+        }
+
+        // 연료 텍스트 변경
+        public void UpdateFuelText()
+        {
+            for (int i = 0; i < fuelText.Length; i++)
+            {
+                fuelText[i].text = string.Format("{0} L", StatusManager.Instance.status.statusData.FuelAmount);
             }
         }
 
@@ -166,7 +175,7 @@ namespace Manager
         {
             saleInput.text = null;
             goldOfFuel.text = string.Format("{0:N0} G", 0);
-            fuelText.text = string.Format("{0} L", StatusManager.Instance.status.statusData.FuelAmount);
+            UpdateFuelText();
             StoreManager.Instance.changeFuelAmount = 0;
             StoreManager.Instance.changeGoldAmount = 0;
         }
