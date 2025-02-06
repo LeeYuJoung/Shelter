@@ -111,7 +111,22 @@ namespace Manager
         // Status UI에서 수리 버튼 클릭 시 실행
         public void Reapir()
         {
+            switch(currentPartIndex)
+            {
+                case 0:
 
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+            }
         }
 
         // 수리 가능 or 불가능 확인
