@@ -10,20 +10,21 @@ namespace Manager
 
         public Status status;
 
-        public Text partNameText;          // 부품 이름
-        public Image partImage;            // 부품 이미지
-        public Text partDescriptionText;   // 부품 설명
-        public Text partRepairPriceText;   // 부품 수리 비용
-        public Slider partStatusGauge;     // 부품 스테이터스 게이지
-        public Button partRepairButton;    // 부품 수리 버튼
+        public Text partNameText;
+        public Image partImage;
+        public Text partDescriptionText;
+        public Text partRepairPriceText;
+        public Slider partStatusGauge;
+        public Button partRepairButton;   
         public Sprite[] partRepairButtonSprites;
 
         private int currentPartIndex;
 
-        private string[] partNames;
-        public Sprite[] partSprites;
-        private string[] descriptions;
-        private int[] partPrices;
+        private string[] partNames;      // 부품 이름
+        public Sprite[] partSprites;     // 부품 이미지
+        private string[] descriptions;   // 부품 설명
+        private int[] partPrices;        // 부품 수리 비용
+        private bool[] isRepairClear;    // 부품 수리 완료 상태
 
         private void Awake()
         {
@@ -44,7 +45,7 @@ namespace Manager
         {
             status = GetComponent<Status>();
 
-            partNames = new string[] { "오염도", "선체", "모터", "엔진", "레이더", "레이더 출력량" };
+            partNames = new string[] { "오염도", "연료통", "모터", "엔진", "레이더", "레이더 출력량" };
             descriptions = new string[] {
                 "오염도는 저어닐 밎ㄷㅂ잳 가나나 ㅁㄷㅇㅂㅈㄷ",
                 "선체 복구도를 높이면 어쩌구 저저꺼주거 ㅇㅁㅇㅁㄴㅇ",
@@ -53,6 +54,7 @@ namespace Manager
                 "레이더 복구도 쏘라라라 ㅏ지ㅏ민ㅇ 어쩌구 저저ㅉ거 ㅁㅇ ㅁㄴㅇ",
                 "레이더 출력랴으으ㅜㅁㄴ얌젿뱌더밎뎔기ㅓㅇㄹ ㅁㄴㅇㅁㄴㅇ  ㅁㄴㅇ "};
             partPrices = new int[] { 0, 1000, 1000, 1000, 1000, 0 };
+            isRepairClear = new bool[] { false, false, false, false, false, false };
         }
 
         // 수리할 부품 선택
@@ -75,61 +77,79 @@ namespace Manager
         // Status 게이지 조절
         public void StatusGaugeControl(int partIndex)
         {
-            float gauge = 0;
-
             switch (partIndex)
             {
                 case 0:
-                    gauge = status.statusData.Corrosion;
+                    partStatusGauge.value = status.statusData.Corrosion / 100.0f;
                     RepairImpossible(false);
                     break;
                 case 1:
-                    gauge = status.statusData.HullRestorationRate;
+                    partStatusGauge.value = status.statusData.HullRestorationRate / 100.0f;
                     RepairImpossible(true);
                     break;
                 case 2:
-                    gauge = status.statusData.MotorRestorationRate;
+                    partStatusGauge.value = status.statusData.MotorRestorationRate / 100.0f;
                     RepairImpossible(true);
                     break;
                 case 3:
-                    gauge = status.statusData.EngineRestorationRate;
+                    partStatusGauge.value = status.statusData.EngineRestorationRate / 100.0f;
                     RepairImpossible(true);
                     break;
                 case 4:
-                    gauge = status.statusData.RadarRestorationRate;
+                    partStatusGauge.value = status.statusData.RadarRestorationRate / 100.0f;
                     RepairImpossible(true);
                     break;
                 case 5:
-                    gauge = status.statusData.RadarOutputAmount;
+                    partStatusGauge.value = status.statusData.RadarOutputAmount / 100.0f;
                     RepairImpossible(false);
                     break;
             }
-
-            partStatusGauge.value = gauge;
         }
 
         // Status UI에서 수리 버튼 클릭 시 실행
         public void Reapir()
         {
-            switch(currentPartIndex)
+            if(GameManager.Instance.GetGold >= partPrices[currentPartIndex])
             {
-                case 0:
+                if (!isRepairClear[currentPartIndex])
+                {
+                    GameManager.Instance.UseGold(partPrices[currentPartIndex]);
+                    partPrices[currentPartIndex] += 100;
 
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
+                    switch (currentPartIndex)
+                    {
+                        case 1:
+                            status.SetHullRestorationRate(true);
+                            PartSelect(currentPartIndex);
+                            break;
+                        case 2:
+                            status.SetMotorRestorationRate(true);
+                            PartSelect(currentPartIndex);
+                            break;
+                        case 3:
+                            status.SetEngineRestorationRate(true);
+                            PartSelect(currentPartIndex);
+                            break;
+                        case 4:
+                            status.SetRadarRestorationRate(true);
+                            PartSelect(currentPartIndex);
+                            break;
+                    }
+                }
+                else
+                {
+                    // 수리 완료
+
+                }
+            }
+            else
+            {
+                // 구매 불가
+
             }
         }
 
-        // 수리 가능 or 불가능 확인
+        // 수리 가능 여부 확인
         public void RepairImpossible(bool isRepair)
         {
             partRepairButton.interactable = isRepair;
@@ -139,7 +159,7 @@ namespace Manager
         // 수리 완료
         public void RepairClear()
         {
-            
+
         }
     }
 }

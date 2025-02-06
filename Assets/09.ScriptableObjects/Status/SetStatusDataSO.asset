@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SetStatusDataSO
   m_EditorClassIdentifier: 
   FuelAmount: 0
-  Corrosion: 0
-  HullRestorationRate: 0
-  MotorRestorationRate: 0
-  EngineRestorationRate: 0
-  RadarRestorationRate: 0
-  RadarOutputAmount: 0
+  Corrosion: 5
+  HullRestorationRate: 5
+  MotorRestorationRate: 5
+  EngineRestorationRate: 5
+  RadarRestorationRate: 5
+  RadarOutputAmount: 10

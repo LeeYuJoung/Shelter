@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FuelAmount: 100
   Corrosion: 100
-  HullRestorationRate: 0
+  HullRestorationRate: 10
   MotorRestorationRate: 0
   EngineRestorationRate: 0
-  RadarRestorationRate: 0
+  RadarRestorationRate: 10
   RadarOutputAmount: 0
