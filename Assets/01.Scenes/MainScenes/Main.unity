@@ -3465,8 +3465,8 @@ Transform:
   m_GameObject: {fileID: 295926425}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.6, y: 1, z: 0}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2090521690}
@@ -4402,6 +4402,7 @@ MonoBehaviour:
   partRepairButtonSprites:
   - {fileID: -4442015559210075504, guid: 86df5d6bc1caf994fbf47103ce6836e8, type: 3}
   - {fileID: -4741355156760193074, guid: 99c9eca504bfee14e8afac901383d0ac, type: 3}
+  repairStateSprites: []
   partSprites:
   - {fileID: -2435288235239659979, guid: 3342b39dbd8939542bf198090e90a387, type: 3}
   - {fileID: 6563066755110389082, guid: 769795166e76f734999b293ad98238d0, type: 3}

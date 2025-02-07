@@ -17,6 +17,7 @@ namespace Manager
         public Slider partStatusGauge;
         public Button partRepairButton;   
         public Sprite[] partRepairButtonSprites;
+        public Sprite[] repairStateSprites;
 
         private int currentPartIndex;
 
@@ -121,18 +122,34 @@ namespace Manager
                         case 1:
                             status.SetHullRestorationRate(true);
                             PartSelect(currentPartIndex);
+
+                            if (status.statusData.HullRestorationRate >= 100)
+                                RepairClear();
+
                             break;
                         case 2:
                             status.SetMotorRestorationRate(true);
                             PartSelect(currentPartIndex);
+
+                            if (status.statusData.MotorRestorationRate >= 100)
+                                RepairClear();
+
                             break;
                         case 3:
                             status.SetEngineRestorationRate(true);
                             PartSelect(currentPartIndex);
+
+                            if (status.statusData.EngineRestorationRate >= 100)
+                                RepairClear();
+
                             break;
                         case 4:
                             status.SetRadarRestorationRate(true);
                             PartSelect(currentPartIndex);
+
+                            if (status.statusData.RadarRestorationRate >= 100)
+                                RepairClear();
+
                             break;
                     }
                 }
@@ -149,17 +166,17 @@ namespace Manager
             }
         }
 
-        // 수리 가능 여부 확인
+        // 수리 완료
+        public void RepairClear()
+        {
+            isRepairClear[currentPartIndex] = true;
+        }
+
+        // 수리 버튼 관리
         public void RepairImpossible(bool isRepair)
         {
             partRepairButton.interactable = isRepair;
             partRepairButton.image.sprite = partRepairButtonSprites[isRepair ? 0 : 1];
-        }
-
-        // 수리 완료
-        public void RepairClear()
-        {
-
         }
     }
 }
