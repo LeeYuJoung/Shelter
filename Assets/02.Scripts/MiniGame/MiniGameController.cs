@@ -11,8 +11,8 @@ namespace MiniGame
         [SerializeField] private float currentTime = 0;
         [SerializeField] private float errorTime = 0;
         [SerializeField] private float beepTime = 10.0f;
-        const float errorMinTime = 10.0f;
-        const float errorMaxTime = 20.0f;
+        const float errorMinTime = 5.0f;
+        const float errorMaxTime = 10.0f;
 
         public static float playTime = 20.0f;
         public static int plusPoint = 35;
@@ -87,18 +87,25 @@ namespace MiniGame
         }
 
         // 게임 시작
-        public virtual void GameStart()
+        protected virtual void GameStart()
         {
+            Debug.Log("GameStart");
             isError = false;
             isPlaying = true;
             currentTime = 0;
             errorGameObject.SetActive(false);
         }
 
-        // 게임 결과
-        public virtual void ClearGame()
+        // 게임 종료
+        protected virtual void ClearGame()
         {
             isPlaying = false;
+        }
+
+        // 게임 수치 상승
+        protected virtual void GameLevelUp()
+        {
+            playTime -= 2.0f;
         }
 
         // 초기화
