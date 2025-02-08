@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c47a6f836c950c40824bc303aa6c5d0, type: 3}
   m_Name: StatusDataSO
   m_EditorClassIdentifier: 
-  FuelAmount: 0
-  Corrosion: 0
+  FuelAmount: 100
+  Corrosion: 100
   HullRestorationRate: 0
   MotorRestorationRate: 0
   EngineRestorationRate: 0

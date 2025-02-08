@@ -862,7 +862,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1223,10 +1223,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e53335813e64145b4cf4a590c45df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgrounds: []
+  bgRenderer: {fileID: 0}
+  collectorRobotPrefab: {fileID: 0}
+  sweeperRobotPrefab: {fileID: 0}
+  collectorRobots: []
+  sweeperRobots: []
+  collectorRobotLevel: 0
+  sweeperRobotLevel: 0
   currentTime: 0
   gold: 0
-  collectionRoboyPiece: 1
-  sweeperRobotPiece: 0
+  isRadeRoomUnLock: 0
 --- !u!4 &1578169031
 Transform:
   m_ObjectHideFlags: 0
@@ -1668,15 +1675,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dc583bff6aa794fbed1b09886d6da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buyPhanel: {fileID: 0}
-  upgradePhanel: {fileID: 0}
+  status: {fileID: 0}
+  buyPhanels: []
   errorPhanel: {fileID: 0}
   saleInput: {fileID: 0}
-  dayText: {fileID: 0}
+  dayImage: {fileID: 0}
+  timeImage: {fileID: 0}
   goldTexts: []
-  robotBuyPriceText: []
-  robotUpgradePriceText: []
+  robotBuyPriceTexts: []
+  robotUpgradePriceTexts: []
+  robotPieceText: {fileID: 0}
+  fuelText: {fileID: 0}
   goldOfFuel: {fileID: 0}
+  daySprites: []
+  timeSptites: []
+  soldOutImage: {fileID: 0}
 --- !u!4 &1914674788
 Transform:
   m_ObjectHideFlags: 0

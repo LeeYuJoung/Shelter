@@ -8,9 +8,24 @@ namespace Manager
         private static StoreManager instance;
         public static StoreManager Instance { get { return instance; } }
 
+        private int collectorRobotPrice = 1000;
+        private int sweeperRobotPrice = 1000;
+
+        private int collectorRobotUpgradePrice = 1500;
+        private int sweeperRobotUpgradePrice = 1500;
+
+        const int collectorRobotMaxPiece = 3;
+        const int sweeperRobotMaxPiece = 2;
+        const int robotMaxUpgrade = 3;
+
+        const int raderRoomUnLockPrice = 5000;
+
+        public int changeFuelAmount;
+        public int changeGoldAmount;
+
         private void Awake()
         {
-            if(instance != null)
+            if (instance != null)
             {
                 Destroy(this);
             }
@@ -18,19 +33,14 @@ namespace Manager
             {
                 instance = this;
             }
+
+            Init();
         }
 
-        private int collectorRobotPrice = 1000;
-        private int sweeperRobotPrice = 1000;
+        private void Init()
+        {
 
-        private int collectorRobotUpgradePrice = 1500;
-        private int sweeperRobotUpgradePrice = 1500;
-
-        private int robotMaxPiece = 3;
-        private int robotMaxUpgrade = 3;
-
-        public int changeFuelAmount;
-        public int changeGoldAmount;
+        }
 
         // 로봇 구매
         public void RobotBuy(string robotType)
@@ -39,7 +49,7 @@ namespace Manager
 
             if(robotType == "CollectorRobot")
             {
-                if (GameManager.Instance.GetGold >= collectorRobotPrice && GameManager.Instance.collectorRobots.Count < robotMaxPiece)
+                if (GameManager.Instance.GetGold >= collectorRobotPrice && GameManager.Instance.collectorRobots.Count < collectorRobotMaxPiece)
                 {
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(collectorRobotPrice);
@@ -47,7 +57,7 @@ namespace Manager
                     collectorRobotPrice += 1000;
                     UIManager.Instance.UpdateRobotBuyPriceText(0, collectorRobotPrice);
 
-                    if (GameManager.Instance.collectorRobots.Count == robotMaxPiece)
+                    if (GameManager.Instance.collectorRobots.Count == collectorRobotMaxPiece)
                         UIManager.Instance.SoldOut(btn);
                 }
                 else
@@ -57,7 +67,7 @@ namespace Manager
             }
             else if(robotType == "SweeperRobot")
             {
-                if (GameManager.Instance.GetGold >= sweeperRobotPrice && GameManager.Instance.sweeperRobots.Count < robotMaxPiece)
+                if (GameManager.Instance.GetGold >= sweeperRobotPrice && GameManager.Instance.sweeperRobots.Count < sweeperRobotMaxPiece)
                 {
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(sweeperRobotPrice);
@@ -65,7 +75,7 @@ namespace Manager
                     sweeperRobotPrice += 1000;
                     UIManager.Instance.UpdateRobotBuyPriceText(1, sweeperRobotPrice);
 
-                    if (GameManager.Instance.sweeperRobots.Count == robotMaxPiece)
+                    if (GameManager.Instance.sweeperRobots.Count == sweeperRobotMaxPiece)
                         UIManager.Instance.SoldOut(btn);
                 }
                 else
@@ -118,10 +128,25 @@ namespace Manager
             }
         }
 
+        // 레이더실 해금
+        public void RaderRoomUnLock()
+        {
+            if(GameManager.Instance.GetGold >= raderRoomUnLockPrice)
+            {
+                GameManager.Instance.isRadeRoomUnLock = true;
+                GameManager.Instance.UseGold(raderRoomUnLockPrice);
+            }
+            else
+            {
+                UIManager.Instance.Error("보유한 골드의 수량이 부족하여 레이더실 해금에 실패하였습니다.");
+            }
+        }
+
         // 연료 판매
         public void FuelSale()
         {
-            GameManager.Instance.fuel -= changeFuelAmount;
+            StatusManager.Instance.status.statusData.FuelAmount -= changeFuelAmount;
+            StatusManager.Instance.FuelGaugeChange();
             GameManager.Instance.GainGold(changeGoldAmount);
             UIManager.Instance.FuelSaleEnd();
         }
