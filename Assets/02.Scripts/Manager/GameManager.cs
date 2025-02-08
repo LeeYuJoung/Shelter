@@ -66,7 +66,7 @@ namespace Manager
         // 시간 관리
         private void Timmer()
         {
-            currentTime += Time.deltaTime * 15.0f;
+            currentTime += Time.deltaTime * 30.0f;
 
             if(currentTime >= dayTime)
             {

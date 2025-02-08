@@ -9411,7 +9411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1086647606
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10240,68 +10240,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192493383}
   m_CullTransparentMesh: 1
---- !u!1001 &1193620435
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -7.26
-      objectReference: {fileID: 0}
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7990558345518137829, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-      propertyPath: m_Name
-      value: CollectorRobot
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
---- !u!4 &1193620436 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6729520225397050799, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-  m_PrefabInstance: {fileID: 1193620435}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1201705811
 GameObject:
   m_ObjectHideFlags: 0
@@ -12772,7 +12710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1564510466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12785,7 +12723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a532722c54b38144383e7ba4bf76f8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robot: {fileID: 1193620436}
+  robot: {fileID: 0}
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 0
@@ -14731,7 +14669,7 @@ MonoBehaviour:
   collectorRobotPrefab: {fileID: 7990558345518137829, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
   sweeperRobotPrefab: {fileID: 4713393865832739103, guid: 6f82d7ef09eaa8347b57dddb893cd42f, type: 3}
   collectorRobots:
-  - {fileID: 1977070024}
+  - {fileID: 0}
   sweeperRobots: []
   collectorRobotLevel: 1
   sweeperRobotLevel: 1
@@ -15412,11 +15350,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942668510}
   m_CullTransparentMesh: 1
---- !u!1 &1977070024 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7990558345518137829, guid: cee444937ece3e44e8c2dc76c7c7f713, type: 3}
-  m_PrefabInstance: {fileID: 1193620435}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1998700759
 GameObject:
   m_ObjectHideFlags: 0
@@ -17196,4 +17129,3 @@ SceneRoots:
   - {fileID: 273711552}
   - {fileID: 295926426}
   - {fileID: 285535353}
-  - {fileID: 1193620435}

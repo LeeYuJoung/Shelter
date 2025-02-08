@@ -18,4 +18,4 @@ MonoBehaviour:
   MotorRestorationRate: 5
   EngineRestorationRate: 5
   RadarRestorationRate: 5
-  RadarOutputAmount: 10
+  RadarOutputAmount: 5

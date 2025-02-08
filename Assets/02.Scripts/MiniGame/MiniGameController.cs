@@ -14,11 +14,11 @@ namespace MiniGame
         const float errorMinTime = 10.0f;
         const float errorMaxTime = 20.0f;
 
-        private float playTime = 20.0f;
-        private int plusPoint = 35;
-        private int minusPoint = 5;
-        private int reward = 10;
-        private int penalty = 10;
+        public static float playTime = 20.0f;
+        public static int plusPoint = 35;
+        public static int minusPoint = 5;
+        public static int reward = 5;
+        public static int penalty = 5;
 
         private bool isError = false;
         private bool isPlaying = false;
@@ -81,40 +81,24 @@ namespace MiniGame
 
                 if(hit.collider != null && hit.collider.CompareTag("Error"))
                 {
-                    MiniGameStart();
+                    GameStart();
                 }
             }
         }
 
-        // 게임 시작 : 각 miniGame Scripts에서 override해서 사용
-        public void MiniGameStart()
+        // 게임 시작
+        public virtual void GameStart()
         {
             isError = false;
             isPlaying = true;
             currentTime = 0;
             errorGameObject.SetActive(false);
-            Debug.Log(":: MiniGameStart ::");
         }
 
         // 게임 결과
-        public void MiniGameOver(bool isClear)
+        public virtual void ClearGame()
         {
             isPlaying = false;
-
-            if(isClear)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
-
-        // 미니 게임 난이도 상승
-        public void DifficultyLevelUp()
-        {
-            playTime -= 2.0f;
         }
 
         // 초기화

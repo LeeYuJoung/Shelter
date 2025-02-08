@@ -14,7 +14,8 @@ namespace Manager
         private int collectorRobotUpgradePrice = 1500;
         private int sweeperRobotUpgradePrice = 1500;
 
-        const int robotMaxPiece = 3;
+        const int collectorRobotMaxPiece = 3;
+        const int sweeperRobotMaxPiece = 2;
         const int robotMaxUpgrade = 3;
 
         const int raderRoomUnLockPrice = 5000;
@@ -48,7 +49,7 @@ namespace Manager
 
             if(robotType == "CollectorRobot")
             {
-                if (GameManager.Instance.GetGold >= collectorRobotPrice && GameManager.Instance.collectorRobots.Count < robotMaxPiece)
+                if (GameManager.Instance.GetGold >= collectorRobotPrice && GameManager.Instance.collectorRobots.Count < collectorRobotMaxPiece)
                 {
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(collectorRobotPrice);
@@ -56,7 +57,7 @@ namespace Manager
                     collectorRobotPrice += 1000;
                     UIManager.Instance.UpdateRobotBuyPriceText(0, collectorRobotPrice);
 
-                    if (GameManager.Instance.collectorRobots.Count == robotMaxPiece)
+                    if (GameManager.Instance.collectorRobots.Count == collectorRobotMaxPiece)
                         UIManager.Instance.SoldOut(btn);
                 }
                 else
@@ -66,7 +67,7 @@ namespace Manager
             }
             else if(robotType == "SweeperRobot")
             {
-                if (GameManager.Instance.GetGold >= sweeperRobotPrice && GameManager.Instance.sweeperRobots.Count < robotMaxPiece)
+                if (GameManager.Instance.GetGold >= sweeperRobotPrice && GameManager.Instance.sweeperRobots.Count < sweeperRobotMaxPiece)
                 {
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(sweeperRobotPrice);
@@ -74,7 +75,7 @@ namespace Manager
                     sweeperRobotPrice += 1000;
                     UIManager.Instance.UpdateRobotBuyPriceText(1, sweeperRobotPrice);
 
-                    if (GameManager.Instance.sweeperRobots.Count == robotMaxPiece)
+                    if (GameManager.Instance.sweeperRobots.Count == sweeperRobotMaxPiece)
                         UIManager.Instance.SoldOut(btn);
                 }
                 else
@@ -145,6 +146,7 @@ namespace Manager
         public void FuelSale()
         {
             StatusManager.Instance.status.statusData.FuelAmount -= changeFuelAmount;
+            StatusManager.Instance.FuelGaugeChange();
             GameManager.Instance.GainGold(changeGoldAmount);
             UIManager.Instance.FuelSaleEnd();
         }
