@@ -10,23 +10,26 @@ namespace Manager
         private static UIManager instance;
         public static UIManager Instance { get { return instance; } }
 
-        public Status status;
-
         public GameObject[] buyPhanels;
         public GameObject errorPhanel;
 
-        public Text dayText;
+        public InputField saleInput;
+
+        public Image dayImage;
+        public Image timeImage;
+
         public Text[] goldTexts;
         public Text[] robotBuyPriceTexts;
         public Text[] robotUpgradePriceTexts;
         public Text robotPieceText;
-        public Text fuelText;
+        public Text[] fuelText;
         public Text goldOfFuel;
 
-        public InputField saleInput;
+        public Sprite[] daySprites;
+        public Sprite[] timeSptites;
         public Sprite soldOutImage;
 
-        private int buyPhanelIndex = 0;
+        private int buyPhanelIndex;
 
         private void Awake()
         {
@@ -40,10 +43,27 @@ namespace Manager
             }
         }
 
-        // 디데이 텍스트 변경
-        public void UpdateDayText(int day)
+        private void Start()
         {
-            dayText.text = string.Format("{0:D3}", day);
+            Init();
+        }
+
+        private void Init()
+        {
+            buyPhanelIndex = 0;
+            UpdateFuelText();
+        }
+
+        // 디데이 변경
+        public void UpdateDayImage(int day)
+        {
+            dayImage.sprite = daySprites[day];
+        }
+
+        // 하루 시간 변경
+        public void UpdateTimeImage(int time)
+        {
+            timeImage.sprite = timeSptites[time];
         }
 
         // 골드 텍스트 변경
@@ -52,6 +72,15 @@ namespace Manager
             for(int i = 0; i < goldTexts.Length; i++)
             {
                 goldTexts[i].text = string.Format("{0:N0} G", gold);
+            }
+        }
+
+        // 연료 텍스트 변경
+        public void UpdateFuelText()
+        {
+            for (int i = 0; i < fuelText.Length; i++)
+            {
+                fuelText[i].text = string.Format("{0} L", StatusManager.Instance.status.statusData.FuelAmount);
             }
         }
 
@@ -126,12 +155,7 @@ namespace Manager
                 saleInput.text = string.Format("{0} L", StoreManager.Instance.changeFuelAmount);
                 goldOfFuel.text = string.Format("{0:N0} G", StoreManager.Instance.changeGoldAmount);
 
-                if (StoreManager.Instance.changeFuelAmount > 100)
-                {
-                    Error("연료는 100이하로만 판매 가능합니다.");
-                    FuelSaleEnd();
-                }
-                else if (GameManager.Instance.fuel < StoreManager.Instance.changeFuelAmount)
+                if (StatusManager.Instance.status.statusData.FuelAmount < StoreManager.Instance.changeFuelAmount)
                 {
                     Error("보유한 연료량이 적어 판매 불가능합니다.");
                     FuelSaleEnd();
@@ -151,12 +175,11 @@ namespace Manager
         {
             saleInput.text = null;
             goldOfFuel.text = string.Format("{0:N0} G", 0);
-            fuelText.text = string.Format("{0} L", GameManager.Instance.fuel);
+            UpdateFuelText();
             StoreManager.Instance.changeFuelAmount = 0;
             StoreManager.Instance.changeGoldAmount = 0;
         }
 
-        #region 연출 효과
         public void Error(string message)
         {
             errorPhanel.GetComponentInChildren<Text>().text = message;
@@ -169,6 +192,5 @@ namespace Manager
             yield return new WaitForSeconds(1.5f);
             errorPhanel.SetActive(false);
         }
-        #endregion
     }
 }

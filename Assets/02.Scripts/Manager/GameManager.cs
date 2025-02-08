@@ -11,6 +11,9 @@ namespace Manager
         private static GameManager instance;
         public static GameManager Instance { get { return instance; } }
 
+        public Sprite[] backgrounds;
+        public SpriteRenderer bgRenderer;
+
         public GameObject collectorRobotPrefab;
         public GameObject sweeperRobotPrefab;
 
@@ -19,16 +22,16 @@ namespace Manager
         public int collectorRobotLevel;
         public int sweeperRobotLevel;
 
-        private int day = 7;
+        private int day = 0;
+        private int dayRange = 1;
         private float dayTime = 90.0f;              // 하루 시간
         [SerializeField] private float currentTime; // 현재 시간
 
         [SerializeField] private int gold = 0;
         public int GetGold { get { return gold; } }
 
+        public bool isRadeRoomUnLock = false;
         private bool isGameOver = false;
-
-        public int fuel = 100;
 
         private void Awake()
         {
@@ -55,7 +58,7 @@ namespace Manager
         // 초기화
         private void Init()
         {
-            currentTime = dayTime;
+            currentTime = 0;
             collectorRobotLevel = 1;
             sweeperRobotLevel = 1;
         }
@@ -63,19 +66,39 @@ namespace Manager
         // 시간 관리
         private void Timmer()
         {
-            // 확인을 위해 15배 빠르게 시간이 흐르도록 함
-            currentTime -= Time.deltaTime * 15;
+            currentTime += Time.deltaTime * 30.0f;
 
-            if(currentTime <= 0)
+            if(currentTime >= dayTime)
             {
-                day--;
-                currentTime = dayTime;
-                UIManager.Instance.UpdateDayText(day);
+                day++;
+                dayRange = 1;
+                currentTime = 0;
 
-                if(day <= 0)
+                ChangeBackground();
+                UIManager.Instance.UpdateDayImage(day);
+                UIManager.Instance.UpdateTimeImage(0);
+
+                if (day >= 7)
                 {
                     GameOver();
                 }
+            }
+            else
+            {
+                if(currentTime >= 18.0f * dayRange)
+                {
+                    UIManager.Instance.UpdateTimeImage(dayRange);
+                    dayRange++;
+                }
+            }
+        }
+
+        // 배경 관리
+        public void ChangeBackground()
+        {
+            if((day + 1) % 2 != 0)
+            {
+                bgRenderer.sprite = backgrounds[(day == 2) ? (1) : (day == 4) ? (2) : 3];
             }
         }
 
@@ -145,12 +168,23 @@ namespace Manager
             }
         }
 
+        // 해상도 관리
+        public void Resolution()
+        {
+
+        }
+
+        // 게임 정지
+        public void GameStop(bool isStop)
+        {
+            Time.timeScale = (isStop) ? 0 : 1;
+        }
+
         // 게임 종료
         private void GameOver()
         {
             Debug.Log("::: Game Over :::");
             isGameOver = true;
-            SceneChange(2);
         }
 
         // 씬 관리
