@@ -12,7 +12,6 @@ public class MiniGame_2 : MonoBehaviour
     public Transform arrowParent; // 화살표 부모 오브젝트
     public GameObject arrowPrefab; // 화살표 프리팹
 
-
     public int plus;
     public int minus;
 
@@ -20,13 +19,38 @@ public class MiniGame_2 : MonoBehaviour
     private float currentTime; // 남은 시간
     private float maxPower = 100f; // 최대 전력 게이지
     private float currentPower = 0; // 현재 전력 게이지
-    private bool isGameActive = true; // 게임 진행 여부
+    private bool isGameActive = false; // 게임 진행 여부 (초기값: false)
     private string[] currentArrowKeys = new string[4]; // 현재 표시된 방향키 배열
     private int currentInputIndex = 0; // 플레이어가 입력 중인 방향키 인덱스
 
-    void Start()
+    public void GameStart()
     {
-        StartGame();
+        isGameActive = true; // ✅ 게임 활성화
+        currentTime = maxTime; // ✅ 제한 시간 초기화
+        currentPower = 0; // ✅ 전력 게이지 초기화
+        currentInputIndex = 0; // ✅ 입력 인덱스 초기화
+
+        // ✅ 결과 메시지 숨기기
+        if (resultText != null)
+        {
+            resultText.gameObject.SetActive(false);
+        }
+
+        // ✅ UI 슬라이더 초기화
+        if (timeSlider != null)
+        {
+            timeSlider.maxValue = maxTime;
+            timeSlider.value = maxTime;
+        }
+        if (powerSlider != null)
+        {
+            powerSlider.maxValue = maxPower;
+            powerSlider.value = 0;
+        }
+
+        GenerateRandomArrowKeys(); // ✅ 랜덤 방향키 생성
+
+        Debug.Log("🎮 미니게임 시작!");
     }
 
     void Update()
@@ -38,30 +62,23 @@ public class MiniGame_2 : MonoBehaviour
         timeSlider.value = currentTime / maxTime;
         powerSlider.value = currentPower / maxPower;
 
-        // 10초 안에 게이지를 채우지 못하면 실패
-        if (currentTime <= 0)
-        {
-            FailGame();
-        }
-
-        // 전력 게이지가 100%에 도달하면 클리어 처리
-        if (currentPower >= maxPower)
-        {
-            ClearGame();
-        }
+        // 게임 상태 체크 (성공 또는 실패)
+        ClearGame();
 
         // 방향키 입력 체크
         CheckInput();
     }
 
-    void StartGame()
+    void ClearGame()
     {
-        // 초기화
-        isGameActive = true;
-        currentTime = maxTime;
-        currentPower = 0;
-        resultText.gameObject.SetActive(false);
-        GenerateRandomArrowKeys(); // 랜덤 방향키 생성
+        if (currentTime <= 0)
+        {
+            FailGame();
+        }
+        else if (currentPower >= maxPower)
+        {
+            SuccessGame();
+        }
     }
 
     void CheckInput()
@@ -131,21 +148,22 @@ public class MiniGame_2 : MonoBehaviour
         // 다시 랜덤 방향키 생성
         currentInputIndex = 0; // 🎯 인덱스 초기화 (이게 빠져있어서 오류 발생 가능)
         GenerateRandomArrowKeys(); // 🎯 새로운 방향키 생성
-   
     }
 
     void FailGame()
     {
         isGameActive = false; // 게임 중지
         resultText.gameObject.SetActive(true);
-        resultText.text = "Game over!"; // 실패 메시지 표시
+        resultText.text = "Game Over!"; // 실패 메시지 표시
+        Debug.Log("❌ 게임 실패!");
     }
 
-    void ClearGame()
+    void SuccessGame()
     {
         isGameActive = false; // 게임 중지
         resultText.gameObject.SetActive(true);
         resultText.text = "Game Clear!"; // 성공 메시지 표시
+        Debug.Log("🎉 게임 성공!");
     }
 
     void PlayWrongInputSound()
