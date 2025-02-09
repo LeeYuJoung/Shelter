@@ -1,3 +1,4 @@
+using MiniGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace Manager
 
         public Sprite[] backgrounds;
         public SpriteRenderer bgRenderer;
+
+        public GameObject[] machines;
 
         public GameObject collectorRobotPrefab;
         public GameObject sweeperRobotPrefab;
@@ -77,6 +80,13 @@ namespace Manager
                 ChangeBackground();
                 UIManager.Instance.UpdateDayImage(day);
                 UIManager.Instance.UpdateTimeImage(0);
+
+                // 미니게임 난이도 상승
+                for(int i = 0; i < machines.Length; i++)
+                {
+                    Debug.Log(machines[i].name + "Level UP");
+                    machines[i].GetComponent<MiniGameController>().GameLevelUp();
+                }
 
                 if (day >= 7)
                 {

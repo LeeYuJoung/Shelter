@@ -2,10 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using MiniGame;
+using Manager;
 
 public class MiniGame_3 : MiniGameController
 {
     public GameObject miniGame3GameObject;
+    public GameObject errorGameObject;
 
     public Image spaceGauge;   // ✅ SpaceGauge 내부에서만 이동해야 함
     public Image greenZone;
@@ -15,7 +17,7 @@ public class MiniGame_3 : MiniGameController
     public Text gameOverText;  // ✅ 게임 종료 메시지
     public Slider timeSlider;  // ✅ 10초 타이머 (슬라이드바)
 
-    private float indicatorSpeed = 300; // ✅ 이동 속도
+    private float indicatorSpeed = 250; // ✅ 이동 속도
     private int direction = 1;          // ✅ 이동 방향 (1: 위로, -1: 아래로)
     private bool isGameOver = false;    // ✅ 게임 종료 여부
 
@@ -29,24 +31,48 @@ public class MiniGame_3 : MiniGameController
 
     void Start()
     {
-        isGameOver = false; // ✅ 게임 진행 가능하도록
+        isGameOver = true;
         maxTime = playTime;
         miniGame3_currentTime = playTime; // ✅ 제한 시간 초기화
     }
 
-    protected override void GameLevelUp()
+    public override void GetReward()
+    {
+        base.GetReward();
+        StatusManager.Instance.status.SetRadarRestorationRate(true);
+    }
+
+    public override void GetPenalty()
+    {
+        base.GetPenalty();
+        StatusManager.Instance.status.SetRadarRestorationRate(false);
+    }
+
+    public override void OnBeep()
+    {
+        base.OnBeep();
+
+        Debug.Log(":: MiniGame3 Beep ::");
+        isError = false;
+        errorGameObject.SetActive(false);
+        StatusManager.Instance.status.SetRadarRestorationRate(false);
+    }
+
+    public override void GameLevelUp()
     {
         base.GameLevelUp();
         indicatorSpeed += 50.0f;
     }
 
-    protected override void GameStart()
+    public override void GameStart()
     {
         base.GameStart();
         miniGame3GameObject.SetActive(true);
-        Debug.Log("MiniGameStart");
 
-        indicatorSpeed = 500f; // ✅ 기본 이동 속도 설정
+        //indicatorSpeed = 200f; // ✅ 기본 이동 속도 설정
+        isGameOver = false; // ✅ 게임 진행 가능하도록
+        maxTime = playTime;
+        miniGame3_currentTime = playTime; // ✅ 제한 시간 초기화
         totalScore = 0; // ✅ 점수 초기화
         direction = 1; // ✅ 위쪽 이동 방향 설정
         indicator.rectTransform.anchoredPosition = new Vector2(0, 0); // ✅ Indicator 위치 초기화
@@ -71,6 +97,24 @@ public class MiniGame_3 : MiniGameController
 
     void Update()
     {
+        if (!isError)
+        {
+            currentTime = 0;
+            return;
+        }
+
+        currentTime += Time.deltaTime;
+
+        if (currentTime >= beepTime)
+        {
+            currentTime = 0;
+
+            if (!isPlaying)
+            {
+                OnBeep();
+            }
+        }
+
         if (!isGameOver)
         {
             MoveIndicator(); // ✅ `Indicator` 이동
@@ -190,11 +234,10 @@ public class MiniGame_3 : MiniGameController
         }
     }
 
-    protected override void ClearGame()
+    public override void ClearGame()
     {
         base.ClearGame();
         isGameOver = true;
-        indicatorSpeed = 0;
         Debug.Log("🎮 게임 종료! 점수 100 도달 또는 시간 종료!");
 
         if (gameOverText != null)
@@ -202,14 +245,37 @@ public class MiniGame_3 : MiniGameController
             gameOverText.gameObject.SetActive(true);
             if (totalScore >= 100)
             {
+                GetReward();
                 gameOverText.text = "🎉 Clear!";
                 gameOverText.color = Color.green;
             }
             else
             {
+                GetPenalty();
                 gameOverText.text = "❌ Game Over!";
                 gameOverText.color = Color.red;
             }
+        }
+
+        errorGameObject.SetActive(false);
+    }
+
+    // 게임 강제 종료 시 실행
+    public void ForcingGameOver()
+    {
+        if(!isGameOver)
+        {
+            Debug.Log(":: MiniGame3 강제 종료 ::");
+
+            isGameOver = true;
+            gameOverText.gameObject.SetActive(true);
+
+            gameOverText.text = "❌ Game Over!";
+            gameOverText.color = Color.red;
+
+            isPlaying = false;
+            errorGameObject.SetActive(false);
+            StatusManager.Instance.status.SetRadarRestorationRate(false);
         }
     }
 }

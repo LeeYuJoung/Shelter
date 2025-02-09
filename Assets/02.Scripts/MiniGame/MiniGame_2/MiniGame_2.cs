@@ -3,10 +3,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using MiniGame;
+using Manager;
 
 public class MiniGame_2 : MiniGameController
 {
     public GameObject miniGame2GameObject;
+    public GameObject errorGameObject;
 
     public Slider timeSlider; // 시간 슬라이더
     public Slider powerSlider; // 전력 게이지 슬라이더
@@ -23,16 +25,38 @@ public class MiniGame_2 : MiniGameController
     private string[] currentArrowKeys = new string[4]; // 현재 표시된 방향키 배열
     private int currentInputIndex = 0; // 플레이어가 입력 중인 방향키 인덱스
 
-    protected override void GameLevelUp()
+    public override void GetReward()
+    {
+        base.GetReward();
+        StatusManager.Instance.status.SetMotorRestorationRate(true);
+    }
+
+    public override void GetPenalty()
+    {
+        base.GetPenalty();
+        StatusManager.Instance.status.SetMotorRestorationRate(false);
+    }
+
+    public override void OnBeep()
+    {
+        base.OnBeep();
+
+        Debug.Log(":: MiniGame2 Beep ::");
+        isError = false;
+        errorGameObject.SetActive(false);
+        StatusManager.Instance.status.SetMotorRestorationRate(false);
+    }
+
+    public override void GameLevelUp()
     {
         base.GameLevelUp();
     }
 
-    protected override void GameStart()
+    public override void GameStart()
     {
         base.GameStart();
-
         miniGame2GameObject.SetActive(true);
+
         isGameActive = true; // ✅ 게임 활성화
         maxTime = playTime;
         miniGame2_currentTime = playTime; // ✅ 제한 시간 초기화
@@ -64,37 +88,61 @@ public class MiniGame_2 : MiniGameController
 
     void Update()
     {
-        if (!isGameActive) return;
+        if (!isError)
+        {
+            currentTime = 0;
+            return;
+        }
 
-        // 시간 감소
-        miniGame2_currentTime -= Time.deltaTime;
-        timeSlider.value = miniGame2_currentTime / maxTime;
-        powerSlider.value = currentPower / maxPower;
+        currentTime += Time.deltaTime;
 
-        // 게임 상태 체크 (성공 또는 실패)
-        ClearGame();
+        if (currentTime >= beepTime)
+        {
+            currentTime = 0;
 
-        // 방향키 입력 체크
-        CheckInput();
+            if (!isPlaying)
+            {
+                OnBeep();
+            }
+        }
+
+        if(isGameActive)
+        {
+            // 시간 감소
+            miniGame2_currentTime -= Time.deltaTime;
+            timeSlider.value = miniGame2_currentTime / maxTime;
+            powerSlider.value = currentPower / maxPower;
+
+            // 게임 상태 체크 (성공 또는 실패)
+            ClearGame();
+
+            // 방향키 입력 체크
+            CheckInput();
+        }
     }
 
-    protected override void ClearGame()
+    public override void ClearGame()
     {
-        base.ClearGame();
-
         if (miniGame2_currentTime <= 0)
         {
             FailGame();
+            GetPenalty();
+            base.ClearGame();
+            errorGameObject.SetActive(false);
         }
         else if (currentPower >= maxPower)
         {
             SuccessGame();
+            GetReward();
+            base.ClearGame();
+            errorGameObject.SetActive(false);
         }
     }
 
     void CheckInput()
     {
-        if (!isGameActive) return;
+        if (!isGameActive) 
+            return;
 
         // 방향키 입력 처리
         if (Input.GetKeyDown(KeyCode.UpArrow) && currentArrowKeys[currentInputIndex] == "↑" ||
@@ -182,6 +230,23 @@ public class MiniGame_2 : MiniGameController
         if (wrongInputSound != null)
         {
             wrongInputSound.Play();
+        }
+    }
+
+    public void ForcingGameOver()
+    {
+        if(isGameActive)
+        {
+            Debug.Log(":: MiniGame2 강제 종료 ::");
+
+            isGameActive = false; // 게임 중지
+            resultText.gameObject.SetActive(true);
+            resultText.text = "Game Over!"; // 실패 메시지 표시
+            Debug.Log("❌ 게임 실패!");
+
+            isPlaying = false;
+            errorGameObject.SetActive(false);
+            StatusManager.Instance.status.SetMotorRestorationRate(false);
         }
     }
 }

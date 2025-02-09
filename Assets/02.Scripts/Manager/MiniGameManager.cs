@@ -1,16 +1,98 @@
+using MiniGame;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class MiniGameManager : MonoBehaviour
+namespace Manager
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class MiniGameManager : MonoBehaviour
     {
-        
-    }
+        private static MiniGameManager instance;
+        public static MiniGameManager Instance { get { return instance; } }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public GameObject[] errorGameObjects;
+
+        [SerializeField] private float currentTime = 0;
+        [SerializeField] private float errorTime = 0;
+        const float errorMinTime = 5.0f;
+        const float errorMaxTime = 10.0f;
+
+        private void Awake()
+        {
+            if(instance != null)
+            {
+                Destroy(instance);
+            }
+            else
+            {
+                instance = this;
+            }
+
+            Init();
+        }
+
+        private void Update()
+        {
+            OnError();
+            OnClick();
+        }
+
+        private void Init()
+        {
+            errorTime = Random.Range(errorMinTime, errorMaxTime);
+        }
+
+        // 에러 발생
+        public void OnError()
+        {
+            currentTime += Time.deltaTime;
+
+            if (currentTime >= errorTime)
+            {
+                int i = 0;
+                currentTime = 0;
+                errorTime = Random.Range(errorMinTime, errorMaxTime);
+
+                while (i <= 100)
+                {
+                    i++;
+                    int errorIndex = Random.Range(0, errorGameObjects.Length);
+                    MiniGameController miniGame = errorGameObjects[errorIndex].GetComponentInParent<MiniGameController>();
+
+                    if (miniGame == null)
+                        return;
+
+                    if (!miniGame.isError && !miniGame.isPlaying)
+                    {
+                        miniGame.isError = true;
+                        errorGameObjects[errorIndex].SetActive(true);
+                        return;
+                    }
+                }
+            }
+        }
+
+        // 에러 클릭
+        public void OnClick()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0.0f);
+
+                    if (hit.collider != null && hit.collider.CompareTag("Error"))
+                    {
+                        MiniGameController miniGame = hit.collider.GetComponentInParent<MiniGameController>();
+
+                        if (miniGame != null)
+                        {
+                            miniGame.GameStart();
+                        }
+                    }
+                }
+            }
+        }
     }
 }
