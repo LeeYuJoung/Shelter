@@ -77,7 +77,7 @@ namespace Manager
                 dayRange = 1;
                 currentTime = 0;
 
-                ChangeBackground();
+                //ChangeBackground();
                 UIManager.Instance.UpdateDayImage(day);
                 UIManager.Instance.UpdateTimeImage(0);
 

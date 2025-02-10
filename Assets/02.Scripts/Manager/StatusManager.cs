@@ -72,7 +72,7 @@ namespace Manager
         {
             status = GetComponent<Status>();
 
-            partPrices = new int[] { 1000, 1000, 1000, 1000};
+            partPrices = new int[] { 5, 5, 5, 5};
             isRepairClear = new bool[] { false, false, false, false};
 
             CorrosionGaugeChange();
@@ -91,7 +91,7 @@ namespace Manager
         public void StatusPhanelSetting(Sprite partSprite, int partPrice)
         {
             partImage.sprite = partSprite;
-            partRepairPriceText.text = partPrice.ToString();
+            partRepairPriceText.text = string.Format("x {0}", partPrice.ToString());
         }
 
         // Status 게이지 조절
@@ -125,7 +125,7 @@ namespace Manager
             if(GameManager.Instance.GetGold >= partPrices[currentPartIndex] && !isRepairClear[currentPartIndex])
             {
                 GameManager.Instance.UseGold(partPrices[currentPartIndex]);
-                partPrices[currentPartIndex] += 100;
+                partPrices[currentPartIndex] += 1;
 
                 switch (currentPartIndex)
                 {

@@ -21,7 +21,8 @@ namespace Manager
         public Text[] goldTexts;
         public Text[] robotBuyPriceTexts;
         public Text[] robotUpgradePriceTexts;
-        public Text robotPieceText;
+        public Text[] collectorRobotPieceTexts;
+        public Text[] sweeperRobotPieceTexts;
         public Text[] fuelText;
         public Text goldOfFuel;
 
@@ -48,10 +49,20 @@ namespace Manager
             Init();
         }
 
-        private void Init()
+        public void Init()
         {
             buyPhanelIndex = 0;
-            UpdateFuelText();
+
+            for(int i = 0; i < goldTexts.Length; i++)
+            {
+                goldTexts[i].text = string.Format("x {0:N0}", GameManager.Instance.GetGold);
+            }
+
+            for(int i = 0; i < collectorRobotPieceTexts.Length; i++)
+            {
+                collectorRobotPieceTexts[i].text = string.Format("x {0}", GameManager.Instance.collectorRobots.Count);
+                sweeperRobotPieceTexts[i].text = string.Format("x {0}", GameManager.Instance.sweeperRobots.Count);
+            }
         }
 
         // 디데이 변경
@@ -71,7 +82,7 @@ namespace Manager
         {
             for(int i = 0; i < goldTexts.Length; i++)
             {
-                goldTexts[i].text = string.Format("{0:N0} G", gold);
+                goldTexts[i].text = string.Format("x {0:N0}", gold);
             }
         }
 
@@ -87,19 +98,23 @@ namespace Manager
         // 로봇 구매 가격 텍스트 변경
         public void UpdateRobotBuyPriceText(int index, int price)
         {
-            robotBuyPriceTexts[index].text = string.Format("{0:N0} G", price);
+            robotBuyPriceTexts[index].text = string.Format("x {0:N0}", price);
         }
 
         // 로봇 업그레이드 가격 텍스트 변경
         public void UpdateRoboUpgradetPriceText(int index, int price)
         {
-            robotUpgradePriceTexts[index].text = string.Format("{0:N0} G", price);
+            robotUpgradePriceTexts[index].text = string.Format("x {0:N0}", price);
         }
 
         // 로봇 수량 텍스트 변경
         public void UpdateRobotPieceText(int collectorRobotPiece, int sweeperRobotPiece)
         {
-            robotPieceText.text = string.Format("수집로봇 X {0}   청소로봇 X {1}", collectorRobotPiece, sweeperRobotPiece);
+            for(int i = 0; i < collectorRobotPieceTexts.Length; i++)
+            {
+                collectorRobotPieceTexts[i].text = string.Format("x {0}", collectorRobotPiece);
+                sweeperRobotPieceTexts[i].text = string.Format("x {0}", sweeperRobotPiece);
+            }
         }
 
         public void SoldOut(GameObject btn)
@@ -175,7 +190,6 @@ namespace Manager
         {
             saleInput.text = null;
             goldOfFuel.text = string.Format("{0:N0} G", 0);
-            UpdateFuelText();
             StoreManager.Instance.changeFuelAmount = 0;
             StoreManager.Instance.changeGoldAmount = 0;
         }

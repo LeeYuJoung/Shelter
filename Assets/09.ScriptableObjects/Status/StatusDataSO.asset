@@ -17,5 +17,5 @@ MonoBehaviour:
   HullRestorationRate: 0
   MotorRestorationRate: 0
   EngineRestorationRate: 0
-  RadarRestorationRate: 10
+  RadarRestorationRate: 0
   RadarOutputAmount: 0
