@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumTypes;
+using UnityEngine.AI;
 
 namespace yjlee.robot
 {
@@ -163,11 +164,6 @@ namespace yjlee.robot
                 {
                     currentTime = 0;
                     robotState = RobotState.Idel;
-
-                    // 쓰레기 들고 있는 모습 구현
-                    trash = Instantiate(trashPrefabs[Random.Range(0, trashPrefabs.Length)]);
-                    trash.transform.position = transform.position + Vector3.up;
-                    trash.transform.parent = transform;
                 }
             }
             else if (robot.robotType == RobotType.Sweeper)

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8586079785189403092}
   - component: {fileID: 5610079651263514515}
   - component: {fileID: 6272240553614836962}
-  - component: {fileID: 6887136521488590364}
-  - component: {fileID: 4677280685940464618}
+  - component: {fileID: 366458301542323447}
+  - component: {fileID: 6396117885981005624}
   m_Layer: 8
   m_Name: CollectionRobot
   m_TagString: Robot
@@ -109,7 +109,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6887136521488590364
+--- !u!195 &366458301542323447
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333873117548663048}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &6396117885981005624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,36 +140,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2333873117548663048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17e32ffb006252e44bc5c2af0f41181c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c72a85d796dde146b59bbd681e7dbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  moveSpeed: 0
-  range: 0
-  isWalking: 0
-  walkable: 1
---- !u!114 &4677280685940464618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2333873117548663048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e035343064089514b99de4eeb70408bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  robot: {fileID: 11400000, guid: 35c0433d00f105547ac459eb84bafd91, type: 2}
-  target: {fileID: 0}
-  trashPrefabs: []
-  robotState: 0
-  moveSpeed: 0
-  workTime: 0
-  breakTime: 0
-  range: 0
-  currentTime: 0
-  isPickUp: 0
 --- !u!1 &2499083303111183033
 GameObject:
   m_ObjectHideFlags: 0
