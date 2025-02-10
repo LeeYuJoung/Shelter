@@ -88,7 +88,7 @@ namespace Manager
                     machines[i].GetComponent<MiniGameController>().GameLevelUp();
                 }
 
-                if (day >= 7)
+                if (day >= 5)
                 {
                     GameOver();
                 }
