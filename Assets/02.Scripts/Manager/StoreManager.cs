@@ -11,14 +11,14 @@ namespace Manager
         private int collectorRobotPrice = 1000;
         private int sweeperRobotPrice = 1000;
 
-        private int collectorRobotUpgradePrice = 1500;
-        private int sweeperRobotUpgradePrice = 1500;
+        private int collectorRobotUpgradePrice = 10;
+        private int sweeperRobotUpgradePrice = 10;
 
         const int collectorRobotMaxPiece = 3;
         const int sweeperRobotMaxPiece = 2;
         const int robotMaxUpgrade = 3;
 
-        const int raderRoomUnLockPrice = 5000;
+        const int raderRoomUnLockPrice = 20;
 
         public int changeFuelAmount;
         public int changeGoldAmount;
@@ -54,7 +54,7 @@ namespace Manager
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(collectorRobotPrice);
 
-                    collectorRobotPrice += 1000;
+                    collectorRobotPrice += 5;
                     UIManager.Instance.UpdateRobotBuyPriceText(0, collectorRobotPrice);
 
                     if (GameManager.Instance.collectorRobots.Count == collectorRobotMaxPiece)
@@ -72,7 +72,7 @@ namespace Manager
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(sweeperRobotPrice);
 
-                    sweeperRobotPrice += 1000;
+                    sweeperRobotPrice += 5;
                     UIManager.Instance.UpdateRobotBuyPriceText(1, sweeperRobotPrice);
 
                     if (GameManager.Instance.sweeperRobots.Count == sweeperRobotMaxPiece)
@@ -96,7 +96,7 @@ namespace Manager
                     GameManager.Instance.RobotStatusUp(robotType);
                     GameManager.Instance.UseGold(collectorRobotUpgradePrice);
 
-                    collectorRobotUpgradePrice += 1500;
+                    collectorRobotUpgradePrice += 5;
                     UIManager.Instance.UpdateRoboUpgradetPriceText(0, collectorRobotUpgradePrice);
 
                     if (GameManager.Instance.collectorRobotLevel >= robotMaxUpgrade)
@@ -115,7 +115,7 @@ namespace Manager
                     GameManager.Instance.RobotStatusUp(robotType);
                     GameManager.Instance.UseGold(sweeperRobotUpgradePrice);
 
-                    sweeperRobotUpgradePrice += 1500;
+                    sweeperRobotUpgradePrice += 5;
                     UIManager.Instance.UpdateRoboUpgradetPriceText(1, sweeperRobotUpgradePrice);
 
                     if (GameManager.Instance.sweeperRobotLevel >= robotMaxUpgrade)

@@ -10,11 +10,12 @@ namespace EnumTypes
     // 로봇 상태
     public enum RobotState
     {
-        Idel,     // 기본
-        Move,     // 이동
-        Work,     // 작업
-        Drop,     // 놓다
-        Breaking  // 휴식
+        Idel,       // 기본
+        Move,       // 이동
+        PickUpMove, // 들고 이동
+        Work,       // 작업
+        Drop,       // 놓다
+        Breaking    // 휴식
     }
 
     // 우주선 기계 종류
