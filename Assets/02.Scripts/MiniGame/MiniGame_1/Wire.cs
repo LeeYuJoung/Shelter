@@ -12,5 +12,7 @@ public class Wire : MonoBehaviour
 {
     [SerializeField] private WireType wireType;
 
+    public bool IsAnswer;
+
     public WireType WireType => wireType;
 }
