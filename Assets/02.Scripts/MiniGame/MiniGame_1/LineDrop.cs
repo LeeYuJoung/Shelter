@@ -4,13 +4,26 @@ using UnityEngine.EventSystems;
 public class LineDrop : Wire
     ,IDropHandler
 {
+    [SerializeField] private RectTransform endPoint;
+
     public void OnDrop(PointerEventData eventData)
     {
-        if(!(eventData.pointerDrag.GetComponent<Wire>().WireType == WireType))
+        //Wire를 받아온다
+        LineStretch wire = eventData.pointerDrag.GetComponent<LineStretch>();
+
+        //null검사
+        if(!Object.ReferenceEquals(wire, null))
         {
-            return;
+            //정답 아닐때
+            if (!(wire.WireType == WireType))
+            {
+                return;
+            }
+
+            //정답일때
+            wire.IsAnswer = true;
+            wire.DefaultPosition = endPoint.position;
         }
-        eventData.pointerDrag.GetComponent<Wire>().IsAnswer = true;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
