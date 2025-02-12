@@ -127,7 +127,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -813,7 +813,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -822,7 +822,35 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      radar_0: -2027595699768001626
+      radar_1: -2157069993494863645
+      radar_10: -1181876117023539479
+      radar_11: 1315819942860205473
+      radar_12: 625815846228211546
+      radar_13: 4046058331549494326
+      radar_14: -4403261997669191118
+      radar_15: 9128216377510739213
+      radar_16: 7600188550719801033
+      radar_17: -460312899196278591
+      radar_18: -7907558704976374370
+      radar_19: -2613441008777673271
+      radar_2: 4668995004699860487
+      radar_20: -331211707647150257
+      radar_21: 4769713512515189012
+      radar_22: 1068152795554069827
+      radar_23: -8293316285821491825
+      radar_24: 9095826351696645832
+      radar_25: 1767039188526626508
+      radar_26: 5381012754387675130
+      radar_27: 8767690360836659495
+      radar_3: 6337911195082783346
+      radar_4: -1840582627391917660
+      radar_5: -2373199707067787012
+      radar_6: -3377972375591553650
+      radar_7: 2865566353082504580
+      radar_8: 1629078710665078299
+      radar_9: -4452381526165224615
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -142,7 +142,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -938,7 +938,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -947,7 +947,40 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      collectrobot_off_0: -8194319416942333266
+      collectrobot_off_1: -3820385726038892849
+      collectrobot_off_10: 270419552550325544
+      collectrobot_off_11: 2714181833969954149
+      collectrobot_off_12: 7436152563275522093
+      collectrobot_off_13: -6731404923708384484
+      collectrobot_off_14: -1552743138497458262
+      collectrobot_off_15: -1405880054078652434
+      collectrobot_off_16: 7993301584293603621
+      collectrobot_off_17: -1698167768252743824
+      collectrobot_off_18: -2285101864407906383
+      collectrobot_off_19: 2245872762228028886
+      collectrobot_off_2: -8195154818002780119
+      collectrobot_off_20: 6626243278142543767
+      collectrobot_off_21: -2014295791841254072
+      collectrobot_off_22: 8091531440385271939
+      collectrobot_off_23: 5526205481818358878
+      collectrobot_off_24: -9182707097425504926
+      collectrobot_off_25: -3525342154653524447
+      collectrobot_off_26: -5347770626392801367
+      collectrobot_off_27: -5384605538114085663
+      collectrobot_off_28: 9158455675616512746
+      collectrobot_off_29: -6356159683794322462
+      collectrobot_off_3: 6182668549988201331
+      collectrobot_off_30: 3698930840889609791
+      collectrobot_off_31: -7581198141677888290
+      collectrobot_off_32: 602898852823971932
+      collectrobot_off_4: -3678214745959298580
+      collectrobot_off_5: -1653991688833950601
+      collectrobot_off_6: -6415599110166095282
+      collectrobot_off_7: 7760938234666106717
+      collectrobot_off_8: 901536994386689176
+      collectrobot_off_9: -5831376873137961344
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

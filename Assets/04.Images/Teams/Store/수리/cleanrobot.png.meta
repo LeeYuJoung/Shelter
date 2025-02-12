@@ -127,7 +127,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -813,7 +813,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -822,7 +822,35 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cleanrobot_0: -2255103321925144188
+      cleanrobot_1: -6753190148294186468
+      cleanrobot_10: 8740121922525063704
+      cleanrobot_11: 2395346463840425246
+      cleanrobot_12: 1472918034754058361
+      cleanrobot_13: 6011710024782590990
+      cleanrobot_14: 9152829839430857340
+      cleanrobot_15: 8864460520828943340
+      cleanrobot_16: -7497924486888819535
+      cleanrobot_17: -4636875337780207597
+      cleanrobot_18: 9192653638536198522
+      cleanrobot_19: 868018570333959150
+      cleanrobot_2: -2751559334148736994
+      cleanrobot_20: -5069868449077337843
+      cleanrobot_21: 8857213435022884707
+      cleanrobot_22: -4138351569795964893
+      cleanrobot_23: 9172622681857902518
+      cleanrobot_24: 4286656425667730540
+      cleanrobot_25: 9169808328418645630
+      cleanrobot_26: 7786103827799179052
+      cleanrobot_27: -8255584998668404211
+      cleanrobot_3: -6772532019874741876
+      cleanrobot_4: 1431349600528748146
+      cleanrobot_5: -5301606085052732075
+      cleanrobot_6: 7911983225744399436
+      cleanrobot_7: 8936414978117882967
+      cleanrobot_8: 4572802582786827924
+      cleanrobot_9: -4860115528597573667
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

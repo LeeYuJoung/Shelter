@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Manager
@@ -25,10 +26,11 @@ namespace Manager
         public Image engineImage;
         public Image radarImage;
 
-        public Sprite[] repairGaugeSprites;
-        public Sprite[] corrosionGaugeSprites;           // 오염도 게이지 이미지    
-        public Sprite[] fuelAmountGaugeSprites;          // 연료량 게이지 이미지
-        public Sprite[] radarOutputAmountGaugeSprites;   // 레이더 출력량 게이지 이미지
+        public Sprite[] repairButtonSprites;
+
+        public Sprite[] repairGaugeSprites;            // 수리 게이지 이미지
+        public Sprite[] fuelAmountGaugeSprites;        // 연료량 게이지 이미지
+        public Sprite[] radarOutputAmountGaugeSprites; // 레이더 출력량 게이지 이미지
 
         public Sprite[] partSprites;   // 부품 이미지
         private int[] partPrices;      // 부품 수리 비용
@@ -75,7 +77,6 @@ namespace Manager
             partPrices = new int[] { 5, 5, 5, 5};
             isRepairClear = new bool[] { false, false, false, false};
 
-            CorrosionGaugeChange();
             FuelGaugeChange();
         }
 
@@ -99,7 +100,6 @@ namespace Manager
         {
             switch (partIndex)
             {
-
                 case 0:
                     repairGaugeText.text = string.Format("{0}%", status.statusData.HullRestorationRate);
                     repairGauge.sprite = repairGaugeSprites[Mathf.FloorToInt(status.statusData.HullRestorationRate / 10)];
@@ -166,20 +166,25 @@ namespace Manager
             }
         }
 
-        public void CorrosionGaugeChange()
-        {
-            corrosionGauge.sprite = corrosionGaugeSprites[Mathf.FloorToInt(status.statusData.Corrosion / 10)];
-        }
-
+        // 연료 스테이터스 변경
         public void FuelGaugeChange()
         {
             fuelAmountGauge.sprite = fuelAmountGaugeSprites[Mathf.FloorToInt(status.statusData.FuelAmount / 10)];
         }
 
+        // 레이더출력량 스테이터스 변경
         public void RadarOutputAmountGaugeChange()
         {
             status.SetRadarOutputAmount(true);
             radarOutputAmountGauge.sprite = radarOutputAmountGaugeSprites[Mathf.FloorToInt(status.statusData.RadarOutputAmount / 10)];
+        }
+
+        // 수리 불가
+        public void RepairImpossible()
+        {
+            GameObject btn = EventSystem.current.currentSelectedGameObject;
+            btn.GetComponent<Image>().sprite = repairButtonSprites[1];
+            btn.GetComponent<Button>().interactable = false;
         }
 
         // 수리 완료

@@ -142,7 +142,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -938,7 +938,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -947,7 +947,40 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      collectrobot_0: 961404866730217024
+      collectrobot_1: 232348596486526098
+      collectrobot_10: -1375767571606574816
+      collectrobot_11: -8667811035912657282
+      collectrobot_12: -5465363571872380402
+      collectrobot_13: 1995789427245947804
+      collectrobot_14: 8509296207262538762
+      collectrobot_15: -3207396072329040193
+      collectrobot_16: 9219120525589225281
+      collectrobot_17: -2378731342972348889
+      collectrobot_18: -9221720595361766578
+      collectrobot_19: -5063506389653253325
+      collectrobot_2: 8050707306488408748
+      collectrobot_20: -4625684881902912760
+      collectrobot_21: 2427294200041094420
+      collectrobot_22: 2069005329245301196
+      collectrobot_23: -6554226326962960287
+      collectrobot_24: 4491074768344586
+      collectrobot_25: 233009501381086582
+      collectrobot_26: 5833441207008610948
+      collectrobot_27: -5761848773561420422
+      collectrobot_28: -7595729054244519189
+      collectrobot_29: 3325972298102952477
+      collectrobot_3: 8352451086553878848
+      collectrobot_30: 7203454757600809514
+      collectrobot_31: 6724457797611164337
+      collectrobot_32: 6564053119331185936
+      collectrobot_4: -5835451110945991865
+      collectrobot_5: 5870166478894029590
+      collectrobot_6: 1601719816147061243
+      collectrobot_7: 2216244430143177626
+      collectrobot_8: -8679287812178577286
+      collectrobot_9: -3285274225226529814
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

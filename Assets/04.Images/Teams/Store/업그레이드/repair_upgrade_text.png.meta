@@ -136,7 +136,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -888,7 +888,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -897,7 +897,38 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      repair_upgrade_text_0: 9123808635874434812
+      repair_upgrade_text_1: -7126611707456526418
+      repair_upgrade_text_10: -3963562323145580031
+      repair_upgrade_text_11: 5631085816355311941
+      repair_upgrade_text_12: -4944521666698576030
+      repair_upgrade_text_13: 9184958849969602574
+      repair_upgrade_text_14: 29473490818087289
+      repair_upgrade_text_15: 1406520462236054109
+      repair_upgrade_text_16: 3878813662386511064
+      repair_upgrade_text_17: -6908913691212533027
+      repair_upgrade_text_18: 7601176392246423396
+      repair_upgrade_text_19: -721455431274116897
+      repair_upgrade_text_2: 3817150123449133276
+      repair_upgrade_text_20: 4803247405878699715
+      repair_upgrade_text_21: 667262464792463484
+      repair_upgrade_text_22: 6463056350447445303
+      repair_upgrade_text_23: 2010521747318819996
+      repair_upgrade_text_24: 680558446593607963
+      repair_upgrade_text_25: 5548786962521531372
+      repair_upgrade_text_26: 652320188465294258
+      repair_upgrade_text_27: -8441756904449066255
+      repair_upgrade_text_28: -3877179595593242641
+      repair_upgrade_text_29: 3916286313759765344
+      repair_upgrade_text_3: -7472289703144792934
+      repair_upgrade_text_30: -5069280996246986913
+      repair_upgrade_text_4: 2793816434765494868
+      repair_upgrade_text_5: 7432500582562172836
+      repair_upgrade_text_6: 8888989169792736951
+      repair_upgrade_text_7: -4798488488374977553
+      repair_upgrade_text_8: 6708357056623242607
+      repair_upgrade_text_9: 6091453089615178061
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

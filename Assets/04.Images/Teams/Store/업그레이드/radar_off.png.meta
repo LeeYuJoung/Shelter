@@ -127,7 +127,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -813,7 +813,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -822,7 +822,35 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      radar_off_0: -1486449183194984049
+      radar_off_1: 2241488136772129018
+      radar_off_10: -8296877278461558834
+      radar_off_11: 54023390309713326
+      radar_off_12: 4558291204973918111
+      radar_off_13: 724089075358800384
+      radar_off_14: -5512963188758677080
+      radar_off_15: 7159226187693083386
+      radar_off_16: 4076975251273708677
+      radar_off_17: -6956030821929343015
+      radar_off_18: -7025112484153686436
+      radar_off_19: 5143297484054616579
+      radar_off_2: 5305137223550399821
+      radar_off_20: -9043874989264726235
+      radar_off_21: -5039599315137200437
+      radar_off_22: 76663182514395401
+      radar_off_23: 4032734954297939759
+      radar_off_24: 2222514272696931847
+      radar_off_25: -8066656272728655880
+      radar_off_26: -5735163531347471899
+      radar_off_27: -4776067089286843068
+      radar_off_3: 6552170406355027748
+      radar_off_4: 459269411673117851
+      radar_off_5: -7253876762306313793
+      radar_off_6: -6796691583553903024
+      radar_off_7: 1194809359857382003
+      radar_off_8: 9121387521602391097
+      radar_off_9: 4944815974580352207
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

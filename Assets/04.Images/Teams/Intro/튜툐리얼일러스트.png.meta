@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ffc4762211966fa43804591fb9ec8156
+guid: 107c93228a591d142bdb8962c7e036d3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4138872896375533386
-    second: repair_upgrade_01_0
+      213: 6955084354188285166
+    second: "\uD29C\uD210\uB9AC\uC5BC\uC77C\uB7EC\uC2A4\uD2B8_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: repair_upgrade_01_0
+      name: "\uD29C\uD210\uB9AC\uC5BC\uC77C\uB7EC\uC2A4\uD2B8_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 96
-        height: 156
+        x: 268
+        y: 222
+        width: 1350
+        height: 782
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a4fa4f678fa307930800000000000000
-      internalID: 4138872896375533386
+      spriteID: ee4154ade5c658060800000000000000
+      internalID: 6955084354188285166
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      repair_upgrade_01_0: 4138872896375533386
+      "\uD29C\uD210\uB9AC\uC5BC\uC77C\uB7EC\uC2A4\uD2B8_0": 6955084354188285166
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -115,7 +115,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -713,7 +713,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -722,7 +722,31 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      clean_upgrade_text_0: -4734182603491305169
+      clean_upgrade_text_1: -4370214350445881941
+      clean_upgrade_text_10: 4920722393316918619
+      clean_upgrade_text_11: 5037551847634751998
+      clean_upgrade_text_12: -7361489268325894680
+      clean_upgrade_text_13: -756513929839054183
+      clean_upgrade_text_14: 1922910068028413960
+      clean_upgrade_text_15: -8267331888742586019
+      clean_upgrade_text_16: 8398523187858481103
+      clean_upgrade_text_17: 750617924364377334
+      clean_upgrade_text_18: 3570695769141959693
+      clean_upgrade_text_19: 73949693811397658
+      clean_upgrade_text_2: 6893645100190769930
+      clean_upgrade_text_20: 2921290449857552903
+      clean_upgrade_text_21: -1066348364187176540
+      clean_upgrade_text_22: -2491198096536909670
+      clean_upgrade_text_23: -5671039559508713207
+      clean_upgrade_text_3: 4281379014345429931
+      clean_upgrade_text_4: -4987147184337570878
+      clean_upgrade_text_5: 1286815995361573586
+      clean_upgrade_text_6: 1426601451693089534
+      clean_upgrade_text_7: -5000430793280622082
+      clean_upgrade_text_8: -1380934250508086901
+      clean_upgrade_text_9: -7860428254402987367
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
