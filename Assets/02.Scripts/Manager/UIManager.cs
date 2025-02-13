@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 namespace Manager
 {
@@ -33,6 +34,8 @@ namespace Manager
 
         public GameObject raderRoom;
         public Sprite raderRoomSprites;
+
+        public Sprite[] repairButtonSprites;
 
         private void Awake()
         {
@@ -146,6 +149,21 @@ namespace Manager
             raderRoom.transform.GetChild(0).gameObject.SetActive(true);
 
             btn.GetComponent<Button>().interactable = false;
+        }
+
+        // 수리 가능 여부 확인
+        public void RepairPossible(GameObject btn, bool isPossible)
+        {
+            if(isPossible)
+            {
+                btn.GetComponent<Image>().sprite = repairButtonSprites[0];
+                btn.GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                btn.GetComponent<Image>().sprite = repairButtonSprites[1];
+                btn.GetComponent<Button>().interactable = false;
+            }
         }
     }
 }

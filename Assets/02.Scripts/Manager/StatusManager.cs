@@ -20,13 +20,13 @@ namespace Manager
         public Image radarOutputAmountGauge;
         public Sprite[] repairClearSprites;
 
+        public GameObject repairButton;
+
         public GameObject radarOutputAmountGameObject;
         public Image hullRestorationRateImage;
         public Image motorImage;
         public Image engineImage;
         public Image radarImage;
-
-        public Sprite[] repairButtonSprites;
 
         public Sprite[] repairGaugeSprites;            // 수리 게이지 이미지
         public Sprite[] fuelAmountGaugeSprites;        // 연료량 게이지 이미지
@@ -36,7 +36,7 @@ namespace Manager
         private int[] partPrices;      // 부품 수리 비용
         private bool[] isRepairClear;  // 부품 수리 완료 상태
 
-        private int currentPartIndex;
+        private int currentPartIndex = 0;
         private float currentTime = 0;
         private float radarOutputAmountGaugeUpTime = 35.0f;
 
@@ -56,27 +56,26 @@ namespace Manager
 
         private void Update()
         {
-            if (status.statusData.RadarRestorationRate < 40 || status.statusData.RadarOutputAmount >= 100)
-                return;
-
-            currentTime += Time.deltaTime;
-            radarOutputAmountGameObject.SetActive(true);
-
-            if (currentTime >= radarOutputAmountGaugeUpTime)
+            if (status.statusData.RadarRestorationRate >= 40 || status.statusData.RadarOutputAmount < 100)
             {
-                currentTime = 0;
-                RadarOutputAmountGaugeChange();
+                currentTime += Time.deltaTime;
+                radarOutputAmountGameObject.SetActive(true);
+
+                if (currentTime >= radarOutputAmountGaugeUpTime)
+                {
+                    currentTime = 0;
+                    RadarOutputAmountGaugeChange();
+                }
             }
         }
 
         // 초기화
         private void Init()
         {
-            status = GetComponent<Status>();
-
             partPrices = new int[] { 5, 5, 5, 5};
             isRepairClear = new bool[] { false, false, false, false};
 
+            status = GetComponent<Status>();
             FuelGaugeChange();
         }
 
@@ -98,6 +97,11 @@ namespace Manager
         // Status 게이지 조절
         public void StatusGaugeControl(int partIndex)
         {
+            if (partIndex == 3 && !GameManager.Instance.isRadeRoomUnLock)
+                UIManager.Instance.RepairPossible(repairButton, false);
+            else
+                UIManager.Instance.RepairPossible(repairButton, (GameManager.Instance.GetGold >= partPrices[partIndex] && !isRepairClear[partIndex]));
+
             switch (partIndex)
             {
                 case 0:
@@ -177,14 +181,6 @@ namespace Manager
         {
             status.SetRadarOutputAmount(true);
             radarOutputAmountGauge.sprite = radarOutputAmountGaugeSprites[Mathf.FloorToInt(status.statusData.RadarOutputAmount / 10)];
-        }
-
-        // 수리 불가
-        public void RepairImpossible()
-        {
-            GameObject btn = EventSystem.current.currentSelectedGameObject;
-            btn.GetComponent<Image>().sprite = repairButtonSprites[1];
-            btn.GetComponent<Button>().interactable = false;
         }
 
         // 수리 완료

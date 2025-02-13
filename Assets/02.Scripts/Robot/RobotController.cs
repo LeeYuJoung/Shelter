@@ -139,11 +139,11 @@ namespace yjlee.robot
 
             if (!isPickUp)
             {
-                AnimatorSet("MoveX", "MoveY", dir);
+                SetAnimator("MoveX", "MoveY", dir);
             }
             else
             {
-                AnimatorSet("PickUpX", "PickUpY", dir);
+                SetAnimator("PickUpX", "PickUpY", dir);
             }
         }
         #endregion
@@ -187,14 +187,12 @@ namespace yjlee.robot
         #endregion
 
         #region 수집 로봇 내려놓기 실행
-        public IEnumerator Drop()
+        public void Drop()
         {
             // 쓰레기 내려 놓는 애니메이션 실행
             robotState = RobotState.Drop;
             pathFinding.walkable = false;
             robotAnimator.SetTrigger("Drop");
-
-            yield return new WaitForSeconds(0.25f);
 
             isPickUp = false;
             robotState = RobotState.Idel;
@@ -203,7 +201,7 @@ namespace yjlee.robot
         #endregion
 
         // 애니메이션 조절
-        public void AnimatorSet(string name1, string name2, Vector2 dir)
+        public void SetAnimator(string name1, string name2, Vector2 dir)
         {
             dir.x = (dir.x == 0) ? 0 : (dir.x > 0.7) ? 1 : (dir.x < -0.7) ? -1 : 0;
             dir.y = (dir.y == 0) ? 0 : (dir.y > 0.7) ? 1 : (dir.y < -0.7) ? -1 : 0;
@@ -223,7 +221,7 @@ namespace yjlee.robot
             }
             else if (collision.collider.CompareTag(robot.targetName) && robot.robotType == RobotType.Collector)
             {
-                StartCoroutine(Drop());
+                Drop();
             }
             else if (collision.collider.CompareTag(robot.targetName) && robot.robotType == RobotType.Sweeper)
             {

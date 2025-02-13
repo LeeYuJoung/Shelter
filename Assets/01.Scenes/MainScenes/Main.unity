@@ -2165,7 +2165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 285535353}
   m_Layer: 0
-  m_Name: ----------Objects-----------
+  m_Name: -----------Objects-------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2677,6 +2677,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 186581f979dd27045b398fa90f38af6c, type: 3}
   raderRoom: {fileID: 1710024083}
   raderRoomSprites: {fileID: 21300000, guid: b7eb43e1d99e0a54c8a9e4a0de977b12, type: 3}
+  repairButtonSprites:
+  - {fileID: 21300000, guid: 5b782f2a8ced6b943b9d467a236dd60f, type: 3}
+  - {fileID: 21300000, guid: 5b782f2a8ced6b943b9d467a236dd60f, type: 3}
 --- !u!4 &337478397
 Transform:
   m_ObjectHideFlags: 0
@@ -2723,9 +2726,10 @@ Transform:
   m_Children:
   - {fileID: 1866456746}
   - {fileID: 337478397}
-  - {fileID: 550245838}
-  - {fileID: 443996635}
   - {fileID: 190679022}
+  - {fileID: 550245838}
+  - {fileID: 411741547}
+  - {fileID: 443996635}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &349321575
@@ -3107,7 +3111,7 @@ GameObject:
   - component: {fileID: 411741548}
   - component: {fileID: 411741546}
   m_Layer: 0
-  m_Name: Status
+  m_Name: StatusManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3135,12 +3139,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411741545}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 338021997}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &411741548
 MonoBehaviour:
@@ -3167,14 +3171,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f5a11d8c53f899349ac8d41acacc58fa, type: 3}
   - {fileID: 21300000, guid: 86b1e59550ffa1948a678458b2db72db, type: 3}
   - {fileID: 21300000, guid: 4984f122b2c35764f86e35a62c652a53, type: 3}
+  repairButton: {fileID: 1651639919}
   radarOutputAmountGameObject: {fileID: 108786975}
   hullRestorationRateImage: {fileID: 953418083}
   motorImage: {fileID: 1867385469}
   engineImage: {fileID: 922996279}
   radarImage: {fileID: 1516901676}
-  repairButtonSprites:
-  - {fileID: 21300000, guid: bf1b768ce03ae694986422133e135989, type: 3}
-  - {fileID: 21300000, guid: bf1b768ce03ae694986422133e135989, type: 3}
   repairGaugeSprites:
   - {fileID: 21300000, guid: 5c07f8a355352134d8dfe2f487049861, type: 3}
   - {fileID: 21300000, guid: c19ce09f113c7544682257e4b7db1640, type: 3}
@@ -3672,11 +3674,11 @@ MonoBehaviour:
       - m_Target: {fileID: 550245837}
         m_TargetAssemblyTypeName: Manager.StoreManager, Assembly-CSharp
         m_MethodName: RobotBuy
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: CollectorRobot
           m_BoolArgument: 0
@@ -4512,8 +4514,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4986a7c979c476546b8d379226df115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeFuelAmount: 0
-  changeGoldAmount: 0
+  repairButtons:
+  - {fileID: 2045917802}
+  - {fileID: 486522983}
+  upgradeButtons:
+  - {fileID: 2052047697}
+  - {fileID: 1788693581}
+  raderRoomButton: {fileID: 1425946055}
+  tipText: {fileID: 0}
 --- !u!4 &550245838
 Transform:
   m_ObjectHideFlags: 0
@@ -6544,11 +6552,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1123878678}
   - {fileID: 368248335}
   - {fileID: 431755477}
   - {fileID: 297591023}
   - {fileID: 1111373675}
+  - {fileID: 1123878678}
   m_Father: {fileID: 579510296}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9126,7 +9134,7 @@ GameObject:
   - component: {fileID: 1123878680}
   - component: {fileID: 1123878679}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9171,7 +9179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6593fb2731169604793202f119282011, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fc969966169d8b44ab936fef7524399f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13902,7 +13910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -270, y: 180}
+  m_AnchoredPosition: {x: -245, y: 160}
   m_SizeDelta: {x: 367, y: 194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760103147
@@ -13961,33 +13969,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 337478396}
         m_TargetAssemblyTypeName: Manager.UIManager, Assembly-CSharp
-        m_MethodName: BuyPhanelInit
+        m_MethodName: Init
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13997,9 +13981,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 337478396}
-        m_TargetAssemblyTypeName: Manager.UIManager, Assembly-CSharp
-        m_MethodName: Init
+      - m_Target: {fileID: 550245837}
+        m_TargetAssemblyTypeName: Manager.StoreManager, Assembly-CSharp
+        m_MethodName: SetRepairButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14729,11 +14713,11 @@ MonoBehaviour:
       - m_Target: {fileID: 550245837}
         m_TargetAssemblyTypeName: Manager.StoreManager, Assembly-CSharp
         m_MethodName: RobotUpgrade
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: CollectorRobot
           m_BoolArgument: 0
@@ -15784,7 +15768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1926497321}
   m_Layer: 0
-  m_Name: ------------etc-------------
+  m_Name: ------------Dialog------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15982,7 +15966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2028766259}
   m_Layer: 0
-  m_Name: ------------BG-------------
+  m_Name: --------------BG--------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16302,7 +16286,7 @@ MonoBehaviour:
       - m_Target: {fileID: 550245837}
         m_TargetAssemblyTypeName: Manager.StoreManager, Assembly-CSharp
         m_MethodName: RobotBuy
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16434,7 +16418,7 @@ MonoBehaviour:
       - m_Target: {fileID: 550245837}
         m_TargetAssemblyTypeName: Manager.StoreManager, Assembly-CSharp
         m_MethodName: RobotUpgrade
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16974,7 +16958,6 @@ SceneRoots:
   - {fileID: 1878214986}
   - {fileID: 338021997}
   - {fileID: 1926497321}
-  - {fileID: 411741547}
   - {fileID: 45103526}
   - {fileID: 2028766259}
   - {fileID: 959788689}

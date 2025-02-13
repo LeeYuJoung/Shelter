@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using yjlee.robot;
 
 namespace Manager
@@ -25,9 +26,12 @@ namespace Manager
         public int collectorRobotLevel;
         public int sweeperRobotLevel;
 
+        private List<Resolution> resolutions = new List<Resolution>();
+        private int optimalResolutionIndex = 0;
+
         private int day = 0;
         private int dayRange = 1;
-        private float dayTime = 90.0f;              // 하루 시간
+        private float dayTime = 120.0f;              // 하루 시간
         [SerializeField] private float currentTime; // 현재 시간
 
         [SerializeField] private int gold = 0;
@@ -127,9 +131,9 @@ namespace Manager
         }
 
         // 로봇 수량 관리
-        public void RobotPiece(string robotType)
+        public void RobotPiece(int robotType)
         {
-            if(robotType == "CollectorRobot")
+            if(robotType == 1)
             {
                 GameObject robot = Instantiate(collectorRobotPrefab, Vector2.zero, Quaternion.identity);
                 collectorRobots.Add(robot);
@@ -144,9 +148,9 @@ namespace Manager
         }
 
         // 로봇 능력치 관리
-        public void RobotStatusUp(string robotType)
+        public void RobotStatusUp(int robotType)
         {
-            if(robotType == "CollectorRobot")
+            if(robotType == 1)
             {
                 for (int i = 0; i < collectorRobots.Count; i++)
                 {
@@ -178,12 +182,6 @@ namespace Manager
             }
         }
 
-        // 해상도 관리
-        public void Resolution()
-        {
-
-        }
-
         // 게임 정지
         public void GameStop(bool isStop)
         {
@@ -195,6 +193,16 @@ namespace Manager
         {
             Debug.Log("::: Game Over :::");
             isGameOver = true;
+        }
+
+        // 해상도 관리
+        public void SetResolution(int resolutionIndex)
+        {
+            // 2560 X 1440
+            // 1920 X 1080
+            // 1280 X 720
+            Resolution resolution = resolutions[resolutionIndex];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
 
         // 씬 관리
