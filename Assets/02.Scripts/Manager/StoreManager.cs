@@ -47,7 +47,7 @@ namespace Manager
                 UIManager.Instance.RepairPossible(upgradeButtons[i], GameManager.Instance.GetGold >= robotUpgradePrices[i]);
             }
 
-            UIManager.Instance.RepairPossible(raderRoomButton, true);
+            UIManager.Instance.RepairPossible(raderRoomButton, GameManager.Instance.GetGold >= raderRoomUnLockPrice);
         }
 
         // 로봇 구매
@@ -138,6 +138,7 @@ namespace Manager
                 UIManager.Instance.RaderRoomUnLock(btn);
                 GameManager.Instance.isRadeRoomUnLock = true;
                 GameManager.Instance.UseGold(raderRoomUnLockPrice);
+                MiniGameManager.Instance.possibleIndex = 3;
                 SetRepairButton();
             }
         }

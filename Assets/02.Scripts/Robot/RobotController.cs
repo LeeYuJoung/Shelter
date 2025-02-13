@@ -93,7 +93,7 @@ namespace yjlee.robot
 
                     if(targets.Length > 0)
                     {
-                        target = targets[Random.Range(0, targets.Length)].gameObject;
+                        target = targets[Random.Range(0, targets.Length)];
                         pathFinding.target = target;
 
                         robotState = RobotState.Move;
@@ -112,7 +112,7 @@ namespace yjlee.robot
             else if(robot.robotType == RobotType.Sweeper)
             {
                 // 청소 로봇이라면 씬 내에 오물이 있을 경우에만 목적지로 할당받고 이동
-                GameObject[] targets = GameObject.FindGameObjectsWithTag(robot.targetName);
+                GameObject[] targets = GameObject.FindGameObjectsWithTag("Part");
 
                 if(targets.Length > 0)
                 {
@@ -223,7 +223,7 @@ namespace yjlee.robot
             {
                 Drop();
             }
-            else if (collision.collider.CompareTag(robot.targetName) && robot.robotType == RobotType.Sweeper)
+            else if (collision.collider.CompareTag("Part") && robot.robotType == RobotType.Sweeper)
             {
                 robotState = RobotState.Work;
                 pathFinding.walkable = false;

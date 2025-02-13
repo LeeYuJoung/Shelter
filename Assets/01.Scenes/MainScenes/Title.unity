@@ -1225,6 +1225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgrounds: []
   bgRenderer: {fileID: 0}
+  machines: []
   collectorRobotPrefab: {fileID: 0}
   sweeperRobotPrefab: {fileID: 0}
   collectorRobots: []
@@ -1234,6 +1235,7 @@ MonoBehaviour:
   currentTime: 0
   gold: 0
   isRadeRoomUnLock: 0
+  isGameOver: 1
 --- !u!4 &1578169031
 Transform:
   m_ObjectHideFlags: 0
@@ -1265,7 +1267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1629808028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1675,21 +1677,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dc583bff6aa794fbed1b09886d6da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: {fileID: 0}
-  buyPhanels: []
-  errorPhanel: {fileID: 0}
-  saleInput: {fileID: 0}
   dayImage: {fileID: 0}
   timeImage: {fileID: 0}
+  daySprites: []
+  timeSptites: []
   goldTexts: []
   robotBuyPriceTexts: []
   robotUpgradePriceTexts: []
-  robotPieceText: {fileID: 0}
-  fuelText: {fileID: 0}
-  goldOfFuel: {fileID: 0}
-  daySprites: []
-  timeSptites: []
-  soldOutImage: {fileID: 0}
+  collectorRobotPieceTexts: []
+  sweeperRobotPieceTexts: []
+  robotRepairs: []
+  robotRepairSprites: []
+  robotUpgrades: []
+  robotUpgradeSptites: []
+  sweeperRobotSprites: []
+  collectorRobotSprites: []
+  raderRoom: {fileID: 0}
+  raderRoomSprites: {fileID: 0}
+  repairButtonSprites: []
 --- !u!4 &1914674788
 Transform:
   m_ObjectHideFlags: 0

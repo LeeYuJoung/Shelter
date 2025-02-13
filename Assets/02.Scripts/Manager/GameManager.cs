@@ -38,7 +38,7 @@ namespace Manager
         public int GetGold { get { return gold; } }
 
         public bool isRadeRoomUnLock = false;
-        private bool isGameOver = false;
+        public bool isGameOver = false;
 
         private void Awake()
         {
@@ -135,12 +135,12 @@ namespace Manager
         {
             if(robotType == 1)
             {
-                GameObject robot = Instantiate(collectorRobotPrefab, Vector2.zero, Quaternion.identity);
+                GameObject robot = Instantiate(collectorRobotPrefab, new Vector2(5.0f, -1.25f), Quaternion.identity);
                 collectorRobots.Add(robot);
             }
             else
             {
-                GameObject robot = Instantiate(sweeperRobotPrefab, Vector2.zero, Quaternion.identity);
+                GameObject robot = Instantiate(sweeperRobotPrefab, new Vector2(5.0f, -1.25f), Quaternion.identity);
                 sweeperRobots.Add(robot);
             }
 
@@ -193,6 +193,7 @@ namespace Manager
         {
             Debug.Log("::: Game Over :::");
             isGameOver = true;
+            SceneChange(3);
         }
 
         // 해상도 관리

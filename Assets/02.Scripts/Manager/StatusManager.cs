@@ -56,7 +56,7 @@ namespace Manager
 
         private void Update()
         {
-            if (status.statusData.RadarRestorationRate >= 40 || status.statusData.RadarOutputAmount < 100)
+            if (status.statusData.RadarRestorationRate >= 40 && status.statusData.RadarOutputAmount < 100)
             {
                 currentTime += Time.deltaTime;
                 radarOutputAmountGameObject.SetActive(true);

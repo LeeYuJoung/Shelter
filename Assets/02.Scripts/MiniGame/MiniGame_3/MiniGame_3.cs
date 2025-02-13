@@ -39,13 +39,19 @@ public class MiniGame_3 : MiniGameController
     public override void GetReward()
     {
         base.GetReward();
-        StatusManager.Instance.status.SetRadarRestorationRate(true);
+        if (StatusManager.Instance.status.statusData.RadarRestorationRate + reward <= 100)
+            StatusManager.Instance.status.SetRadarRestorationRate(true);
+        else
+            StatusManager.Instance.status.statusData.RadarRestorationRate = 100;
     }
 
     public override void GetPenalty()
     {
         base.GetPenalty();
-        StatusManager.Instance.status.SetRadarRestorationRate(false);
+        if (StatusManager.Instance.status.statusData.RadarRestorationRate - penalty >= 0)
+            StatusManager.Instance.status.SetRadarRestorationRate(false);
+        else
+            StatusManager.Instance.status.statusData.RadarRestorationRate = 0;
     }
 
     public override void OnBeep()
@@ -55,7 +61,7 @@ public class MiniGame_3 : MiniGameController
         Debug.Log(":: MiniGame3 Beep ::");
         isError = false;
         errorGameObject.SetActive(false);
-        StatusManager.Instance.status.SetRadarRestorationRate(false);
+        GetPenalty();
     }
 
     public override void GameLevelUp()
@@ -275,7 +281,7 @@ public class MiniGame_3 : MiniGameController
 
             isPlaying = false;
             errorGameObject.SetActive(false);
-            StatusManager.Instance.status.SetRadarRestorationRate(false);
+            GetPenalty();
         }
     }
 }

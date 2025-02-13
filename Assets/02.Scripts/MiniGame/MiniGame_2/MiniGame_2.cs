@@ -28,13 +28,19 @@ public class MiniGame_2 : MiniGameController
     public override void GetReward()
     {
         base.GetReward();
-        StatusManager.Instance.status.SetMotorRestorationRate(true);
+        if (StatusManager.Instance.status.statusData.MotorRestorationRate + reward <= 100)
+            StatusManager.Instance.status.SetMotorRestorationRate(true);
+        else
+            StatusManager.Instance.status.statusData.MotorRestorationRate = 100;
     }
 
     public override void GetPenalty()
     {
         base.GetPenalty();
-        StatusManager.Instance.status.SetMotorRestorationRate(false);
+        if (StatusManager.Instance.status.statusData.MotorRestorationRate - penalty >= 0)
+            StatusManager.Instance.status.SetMotorRestorationRate(false);
+        else
+            StatusManager.Instance.status.statusData.MotorRestorationRate = 0;
     }
 
     public override void OnBeep()
@@ -44,7 +50,7 @@ public class MiniGame_2 : MiniGameController
         Debug.Log(":: MiniGame2 Beep ::");
         isError = false;
         errorGameObject.SetActive(false);
-        StatusManager.Instance.status.SetMotorRestorationRate(false);
+        GetPenalty();
     }
 
     public override void GameLevelUp()
@@ -246,7 +252,7 @@ public class MiniGame_2 : MiniGameController
 
             isPlaying = false;
             errorGameObject.SetActive(false);
-            StatusManager.Instance.status.SetMotorRestorationRate(false);
+            GetPenalty();
         }
     }
 }

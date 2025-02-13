@@ -11,6 +11,7 @@ namespace Manager
         public static MiniGameManager Instance { get { return instance; } }
 
         public GameObject[] errorGameObjects;
+        public int possibleIndex = 2;
 
         [SerializeField] private float currentTime = 0;
         [SerializeField] private float errorTime = 0;
@@ -56,7 +57,7 @@ namespace Manager
                 while (i <= 100)
                 {
                     i++;
-                    int errorIndex = Random.Range(0, errorGameObjects.Length);
+                    int errorIndex = Random.Range(0, possibleIndex);
                     MiniGameController miniGame = errorGameObjects[errorIndex].GetComponentInParent<MiniGameController>();
 
                     if (miniGame == null)

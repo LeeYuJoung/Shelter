@@ -10,6 +10,7 @@ TagManager:
   - Soil
   - Destination
   - Error
+  - Part
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Machine
   - Error
   - Part
-  - 
-  - 
+  - Collector
+  - Sweeper
   - 
   - 
   - 
