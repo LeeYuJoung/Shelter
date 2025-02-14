@@ -56,6 +56,7 @@ namespace Manager
 
         private void Update()
         {
+            // 레이더 출력량 증가
             if (status.statusData.RadarRestorationRate >= 40 && status.statusData.RadarOutputAmount < 100)
             {
                 currentTime += Time.deltaTime;

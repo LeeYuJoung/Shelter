@@ -22,7 +22,7 @@ namespace yjlee.robot
         public GameObject target;
 
         // Map을 격자로 분할
-        Grid grid;
+        private Grid grid;
         // 남은거리를 넣을 Queue 생성
         public Queue<Vector2> wayQueue = new Queue<Vector2>();
 
@@ -31,14 +31,14 @@ namespace yjlee.robot
         // 장애물 판단시 멈출게 할 범위
         public float range;
 
+        public Vector2 dir;
+
         public bool isWalking;
         // 상호작용 시 walkable를 false 상태로 변환
         public bool walkable = true;
 
         private void Awake()
         {
-            // 격자 생성
-            grid = GameObject.Find("Grid").GetComponent<Grid>();
             walkable = true;
             isWalking = false;
         }
@@ -51,6 +51,7 @@ namespace yjlee.robot
         // RobotController 변수값 할당 후 초기화
         private void Init()
         {
+            grid = (transform.CompareTag("Collector")) ? GameObject.Find("Grid_1").GetComponent<Grid>() : GameObject.Find("Grid_2").GetComponent<Grid>();
             robotController = GetComponent<Robotcontroller>();
             moveSpeed = robotController.moveSpeed;
             range = robotController.range;
@@ -163,12 +164,11 @@ namespace yjlee.robot
                 // wayQueue를 따라 이동
                 while (wayQueue.Count > 0)
                 {
-                    var dir = wayQueue.First() - (Vector2)transform.position;
+                    dir = wayQueue.First() - (Vector2)transform.position;
                     gameObject.GetComponent<Rigidbody2D>().linearVelocity = dir.normalized * moveSpeed * 5 * Time.deltaTime;
 
                     if ((Vector2)transform.position == wayQueue.First())
                     {
-                        Debug.Log("Dequeue");
                         wayQueue.Dequeue();
                     }
 

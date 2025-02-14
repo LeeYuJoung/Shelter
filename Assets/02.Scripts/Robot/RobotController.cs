@@ -16,9 +16,6 @@ namespace yjlee.robot
         public Robot robot;
         public GameObject target;
 
-        public GameObject[] trashPrefabs;
-        private GameObject trash;
-
         [SerializeField] public RobotState robotState;
         public float moveSpeed;
         public float workTime;
@@ -112,7 +109,7 @@ namespace yjlee.robot
             else if(robot.robotType == RobotType.Sweeper)
             {
                 // 청소 로봇이라면 씬 내에 오물이 있을 경우에만 목적지로 할당받고 이동
-                GameObject[] targets = GameObject.FindGameObjectsWithTag("Part");
+                GameObject[] targets = GameObject.FindGameObjectsWithTag("PartDestination");
 
                 if(targets.Length > 0)
                 {
@@ -134,16 +131,15 @@ namespace yjlee.robot
         #region 이동 실행
         public void Move(bool isPickUp)
         {
-            // 상하좌우 이동에 따라 애니메이션 조절
-            Vector2 dir = (target.transform.position - transform.position).normalized;
+            Debug.Log("dir : " + pathFinding.dir.normalized);
 
             if (!isPickUp)
             {
-                SetAnimator("MoveX", "MoveY", dir);
+                SetAnimator("MoveX", "MoveY", pathFinding.dir);
             }
             else
             {
-                SetAnimator("PickUpX", "PickUpY", dir);
+                SetAnimator("PickUpX", "PickUpY", pathFinding.dir);
             }
         }
         #endregion
@@ -203,11 +199,8 @@ namespace yjlee.robot
         // 애니메이션 조절
         public void SetAnimator(string name1, string name2, Vector2 dir)
         {
-            dir.x = (dir.x == 0) ? 0 : (dir.x > 0.7) ? 1 : (dir.x < -0.7) ? -1 : 0;
-            dir.y = (dir.y == 0) ? 0 : (dir.y > 0.7) ? 1 : (dir.y < -0.7) ? -1 : 0;
-
-            robotAnimator.SetFloat(name1, dir.x);
-            robotAnimator.SetFloat(name2, dir.y);
+            robotAnimator.SetFloat(name1, dir.normalized.x);
+            robotAnimator.SetFloat(name2, dir.normalized.y);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -223,7 +216,7 @@ namespace yjlee.robot
             {
                 Drop();
             }
-            else if (collision.collider.CompareTag("Part") && robot.robotType == RobotType.Sweeper)
+            else if (collision.collider.CompareTag("PartDestination") && robot.robotType == RobotType.Sweeper)
             {
                 robotState = RobotState.Work;
                 pathFinding.walkable = false;

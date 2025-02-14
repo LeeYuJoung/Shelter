@@ -23,6 +23,8 @@ namespace Manager
 
         const int raderRoomUnLockPrice = 30;
 
+        private bool[] isClear = new bool[5] { false, false, false, false, false };
+
         private void Awake()
         {
             if (instance != null)
@@ -35,19 +37,21 @@ namespace Manager
             }
         }
 
+        // 구매 or 불가 버튼 변경
         public void SetRepairButton()
         {
+            // 구매 버튼
             for (int i = 0; i < repairButtons.Length; i++)
             {
-                UIManager.Instance.RepairPossible(repairButtons[i], GameManager.Instance.GetGold >= robotPrices[i]);
+                UIManager.Instance.RepairPossible(repairButtons[i], (GameManager.Instance.GetGold >= robotPrices[i]) && !isClear[i]);
             }
-
+            // 업그레이드 버튼
             for (int i = 0; i < upgradeButtons.Length; i++)
             {
-                UIManager.Instance.RepairPossible(upgradeButtons[i], GameManager.Instance.GetGold >= robotUpgradePrices[i]);
+                UIManager.Instance.RepairPossible(upgradeButtons[i], (GameManager.Instance.GetGold >= robotUpgradePrices[i] && !isClear[2 + i]));
             }
-
-            UIManager.Instance.RepairPossible(raderRoomButton, GameManager.Instance.GetGold >= raderRoomUnLockPrice);
+            // 레이더실 해금 버튼
+            UIManager.Instance.RepairPossible(raderRoomButton, (GameManager.Instance.GetGold >= raderRoomUnLockPrice && !isClear[4]));
         }
 
         // 로봇 구매
@@ -66,7 +70,10 @@ namespace Manager
                     UIManager.Instance.UpdateRobotBuyPriceText(1, robotPrices[1]);
 
                     if (GameManager.Instance.collectorRobots.Count == robotMxPieces[1])
+                    {
+                        isClear[1] = true;
                         UIManager.Instance.SoldOut(1, btn);
+                    }
                 }
             }
             else if (robotType == 0)
@@ -80,7 +87,10 @@ namespace Manager
                     UIManager.Instance.UpdateRobotBuyPriceText(0, robotPrices[0]);
 
                     if (GameManager.Instance.sweeperRobots.Count == robotMxPieces[0])
+                    {
+                        isClear[0] = true;
                         UIManager.Instance.SoldOut(0, btn);
+                    }
                 }
             }
 
@@ -105,7 +115,10 @@ namespace Manager
                     UIManager.Instance.UpdateRoboUpgradetPriceText(1, robotUpgradePrices[1]);
 
                     if (GameManager.Instance.collectorRobotLevel > robotMaxUpgrade)
-                        UIManager.Instance.UpgradeClear(1, btn);               
+                    {
+                        isClear[3] = true;
+                        UIManager.Instance.UpgradeClear(1, btn);
+                    }
                 }
             }
             else if(robotType == 0)
@@ -121,7 +134,10 @@ namespace Manager
                     UIManager.Instance.UpdateRoboUpgradetPriceText(0, robotUpgradePrices[0]);
 
                     if (GameManager.Instance.sweeperRobotLevel > robotMaxUpgrade)
+                    {
+                        isClear[2] = true;
                         UIManager.Instance.UpgradeClear(0, btn);
+                    }
                 }
             }
 
@@ -140,10 +156,11 @@ namespace Manager
                 GameManager.Instance.UseGold(raderRoomUnLockPrice);
                 MiniGameManager.Instance.possibleIndex = 3;
                 SetRepairButton();
+                isClear[4] = true;
             }
         }
 
-        // 랜덤 tip 
+        // 랜덤 tip
         public void RandomTip()
         {
 
