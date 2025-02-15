@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumTypes;
-using UnityEngine.AI;
-using Unity.VisualScripting;
+using Manager;
 
 namespace yjlee.robot
 {
@@ -16,7 +15,7 @@ namespace yjlee.robot
         public Robot robot;
         public GameObject target;
 
-        [SerializeField] public RobotState robotState;
+        public RobotState robotState;
         public float moveSpeed;
         public float workTime;
         public float breakTime;
@@ -25,7 +24,7 @@ namespace yjlee.robot
         public float currentTime;
         public bool isPickUp = false;  // 수집 로봇만 사용
 
-        private void Awake()
+        private void Start()
         {
             Init();
         }
@@ -35,6 +34,10 @@ namespace yjlee.robot
             switch (robotState)
             {
                 case RobotState.Idel:
+                    robotAnimator.SetFloat("MoveX", 0);
+                    robotAnimator.SetFloat("MoveY", 0);
+                    break;
+                case RobotState.Search:
                     TargetSetting();
                     break;
                 case RobotState.Move:
@@ -60,7 +63,7 @@ namespace yjlee.robot
             robotAnimator = GetComponentInChildren<Animator>();
             pathFinding = GetComponent<PathFinding>();
 
-            robotState = RobotState.Idel;
+            robotState = (GameManager.Instance.isGameOver) ? RobotState.Idel : RobotState.Search;
             moveSpeed = robot.moveSpeed;
             workTime = robot.workTime;
             breakTime = robot.breakTime;
@@ -121,7 +124,7 @@ namespace yjlee.robot
                 }
                 else
                 {
-                    robotState = RobotState.Idel;
+                    robotState = RobotState.Search;
                     pathFinding.walkable = false;
                 }
             }
@@ -154,7 +157,7 @@ namespace yjlee.robot
                 if (currentTime >= workTime)
                 {
                     currentTime = 0;
-                    robotState = RobotState.Idel;
+                    robotState = RobotState.Search;
                 }
             }
             else if (robot.robotType == RobotType.Sweeper)
@@ -177,7 +180,7 @@ namespace yjlee.robot
             if (currentTime >= breakTime)
             {
                 currentTime = 0;
-                robotState = RobotState.Idel;
+                robotState = RobotState.Search;
             }
         }
         #endregion
@@ -191,7 +194,7 @@ namespace yjlee.robot
             robotAnimator.SetTrigger("Drop");
 
             isPickUp = false;
-            robotState = RobotState.Idel;
+            robotState = RobotState.Search;
             robotAnimator.SetBool("isPickUp", isPickUp);
         }
         #endregion

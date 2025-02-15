@@ -1,17 +1,15 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using Manager;
+using UnityEngine.SceneManagement;
+using yjlee.dialog;
 
-namespace yjlee.dialog
+namespace yjlee.intro
 {
-    public class TutorialInteraction : MonoBehaviour
+    public class Intro : MonoBehaviour
     {
         public DialogParse dialog;
         private DialogData[] talkDatas;
-
-        public GameObject dialogObject;
         public Text contextText;
 
         public string eventName;
@@ -21,7 +19,7 @@ namespace yjlee.dialog
         {
             dialog = GetComponent<DialogParse>();
 
-            dialogObject.SetActive(true);
+            // 대화 정보 가져오기
             talkDatas = dialog.GetDialog(eventName);
             NextButton();
         }
@@ -36,8 +34,7 @@ namespace yjlee.dialog
             {
                 if (index >= talkDatas.Length)
                 {
-                    dialogObject.SetActive(false);
-                    GameManager.Instance.GameStart();
+                    SceneManager.LoadScene(2);
                     return;
                 }
 
@@ -51,7 +48,7 @@ namespace yjlee.dialog
         {
             foreach (string context in talkData[index].contexts)
             {
-                contextText.DOText(context, 2.5f);
+                contextText.DOText(context, 2.0f);
             }
         }
     }

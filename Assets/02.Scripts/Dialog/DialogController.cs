@@ -1,17 +1,12 @@
-using System;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using Manager;
 
 namespace yjlee.dialog
 {
-    public class TutorialInteraction : MonoBehaviour
+    public class DialogController : MonoBehaviour
     {
         public DialogParse dialog;
         private DialogData[] talkDatas;
-
-        public GameObject dialogObject;
         public Text contextText;
 
         public string eventName;
@@ -20,29 +15,19 @@ namespace yjlee.dialog
         private void Start()
         {
             dialog = GetComponent<DialogParse>();
-
-            dialogObject.SetActive(true);
             talkDatas = dialog.GetDialog(eventName);
-            NextButton();
         }
 
         public virtual void NextButton()
         {
-            contextText.DOKill();
-            contextText.text = "";
-
             // 대사가 null이 아니면 대사 출력
             if (talkDatas != null)
             {
-                if (index >= talkDatas.Length)
-                {
-                    dialogObject.SetActive(false);
-                    GameManager.Instance.GameStart();
-                    return;
-                }
-
                 PrintDialog(talkDatas);
                 index++;
+
+                if(index >= talkDatas.Length)
+                    index = 0;
             }
         }
 
@@ -51,7 +36,7 @@ namespace yjlee.dialog
         {
             foreach (string context in talkData[index].contexts)
             {
-                contextText.DOText(context, 2.5f);
+                contextText.text = context;
             }
         }
     }

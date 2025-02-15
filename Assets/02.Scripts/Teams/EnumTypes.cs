@@ -11,6 +11,7 @@ namespace EnumTypes
     public enum RobotState
     {
         Idel,       // 기본
+        Search,     // 타겟 찾기
         Move,       // 이동
         PickUpMove, // 들고 이동
         Work,       // 작업

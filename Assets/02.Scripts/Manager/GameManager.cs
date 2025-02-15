@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using yjlee.robot;
 
 namespace Manager
@@ -12,6 +11,9 @@ namespace Manager
     {
         private static GameManager instance;
         public static GameManager Instance { get { return instance; } }
+
+        public List<Resolution> resolutions = new List<Resolution>();
+        public int optimalResolutionIndex = 0;
 
         public Sprite[] backgrounds;
         public SpriteRenderer bgRenderer;
@@ -26,9 +28,6 @@ namespace Manager
         public int collectorRobotLevel;
         public int sweeperRobotLevel;
 
-        private List<Resolution> resolutions = new List<Resolution>();
-        private int optimalResolutionIndex = 0;
-
         private int day = 0;
         private int dayRange = 1;
         private float dayTime = 120.0f;              // 하루 시간
@@ -38,7 +37,7 @@ namespace Manager
         public int GetGold { get { return gold; } }
 
         public bool isRadeRoomUnLock = false;
-        public bool isGameOver = false;
+        public bool isGameOver = true;
 
         private void Awake()
         {
@@ -68,6 +67,10 @@ namespace Manager
             currentTime = 0;
             collectorRobotLevel = 1;
             sweeperRobotLevel = 1;
+
+            resolutions.Add(new Resolution { width = 2560, height = 1440 });
+            resolutions.Add(new Resolution { width = 1920, height = 1080 });
+            resolutions.Add(new Resolution { width = 1280, height = 720 });
         }
 
         // 시간 관리
@@ -182,6 +185,13 @@ namespace Manager
             }
         }
 
+        // 게임 시작
+        public void GameStart()
+        {
+            isGameOver = false;
+            collectorRobots[0].GetComponent<Robotcontroller>().robotState = EnumTypes.RobotState.Search;
+        }
+
         // 게임 정지
         public void GameStop(bool isStop)
         {
@@ -194,16 +204,6 @@ namespace Manager
             Debug.Log("::: Game Over :::");
             isGameOver = true;
             SceneChange(3);
-        }
-
-        // 해상도 관리
-        public void SetResolution(int resolutionIndex)
-        {
-            // 2560 X 1440
-            // 1920 X 1080
-            // 1280 X 720
-            Resolution resolution = resolutions[resolutionIndex];
-            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
 
         // 씬 관리

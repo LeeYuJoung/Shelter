@@ -52,7 +52,7 @@ namespace Donhyun.UI.Animation
 
         private static void SlideAnimation(Action callBack, bool reverse, UIInformation UIInfo)
         {
-            if(!reverse)
+            if (!reverse)
             {
                 Debug.Log("슬라이드 애니메이션 실행 - 열기");
                 callBack();

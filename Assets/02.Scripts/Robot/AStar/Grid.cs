@@ -3,39 +3,39 @@ using UnityEngine;
 
 namespace yjlee.robot
 {    
-    // ½ºÅ©¸°À» Grid - Node·Î ºĞÇÒ
-    // ¼³Á¤ÇÑ x, y ±âÁØÀ¸·Î ¹üÀ§¸¦ ¼³Á¤ ÈÄ, ¼³Á¤µÈ Áö¸§¸¸Å­ ¹üÀ§¾È¿¡ ³ëµåµéÀ» »ı¼º
+    // ìŠ¤í¬ë¦°ì„ Grid - Nodeë¡œ ë¶„í• 
+    // ì„¤ì •í•œ x, y ê¸°ì¤€ìœ¼ë¡œ ë²”ìœ„ë¥¼ ì„¤ì • í›„, ì„¤ì •ëœ ì§€ë¦„ë§Œí¼ ë²”ìœ„ì•ˆì— ë…¸ë“œë“¤ì„ ìƒì„±
     public class Grid : MonoBehaviour
     {
         public Transform robot;
-        public LayerMask unwalkableMask; // °ÉÀ» ¼ö ¾ø´Â ·¹ÀÌ¾î 
-        public Vector2 gridSize;         // È­¸éÀÇ Å©±â
+        public LayerMask unwalkableMask; // ê±¸ì„ ìˆ˜ ì—†ëŠ” ë ˆì´ì–´ 
+        public Vector2 gridSize;         // í™”ë©´ì˜ í¬ê¸°
 
         private Node[,] grid;
-        public float nodeRadius;    // ¹İÁö¸§
-        private float nodeDiameter; // °İÀÚÀÇ Áö¸§ 
+        public float nodeRadius;    // ë°˜ì§€ë¦„
+        private float nodeDiameter; // ê²©ìì˜ ì§€ë¦„ 
         private int gridSizeX;
         private int gridSizeY;
 
         [SerializeField]
-        public List<Node> path; // A*¿¡¼­ »ç¿ëÇÒ Path  
+        public List<Node> path; // A*ì—ì„œ ì‚¬ìš©í•  Path  
 
         private void Awake()
         {
-            nodeDiameter = nodeRadius * 2;  // ¼³Á¤ÇÑ ¹İÁö¸§À¸·Î Áö¸§ ±¸ÇÔ
-            gridSizeX = Mathf.RoundToInt(gridSize.x / nodeDiameter);   // ±×¸®µåÀÇ °¡·Î Å©±â
-            gridSizeY = Mathf.RoundToInt(gridSize.y / nodeDiameter);   // ±×¸®µåÀÇ ¼¼·Î Å©±â
+            nodeDiameter = nodeRadius * 2;  // ì„¤ì •í•œ ë°˜ì§€ë¦„ìœ¼ë¡œ ì§€ë¦„ êµ¬í•¨
+            gridSizeX = Mathf.RoundToInt(gridSize.x / nodeDiameter);   // ê·¸ë¦¬ë“œì˜ ê°€ë¡œ í¬ê¸°
+            gridSizeY = Mathf.RoundToInt(gridSize.y / nodeDiameter);   // ê·¸ë¦¬ë“œì˜ ì„¸ë¡œ í¬ê¸°
 
             CreateGrid();
         }
 
-        #region °İÀÚ »ı¼º ÇÔ¼ö
+        #region ê²©ì ìƒì„± í•¨ìˆ˜
         private void CreateGrid()
         {
             grid = new Node[gridSizeX, gridSizeY];
 
-            // °İÀÚ »ı¼ºÀº ÁÂÃø ÃÖÇÏ´ÜºÎÅÍ ½ÃÀÛ (transformÀº ¿ùµå Áß¾Ó¿¡ À§Ä¡)
-            // ÀÌ¿¡ x¿Í yÁÂÇ¥¸¦ ¹İ¹İ ¾¿ ¿ŞÂÊ, ¾Æ·¡ÂÊÀ¸·Î ¿Å±è
+            // ê²©ì ìƒì„±ì€ ì¢Œì¸¡ ìµœí•˜ë‹¨ë¶€í„° ì‹œì‘ (transformì€ ì›”ë“œ ì¤‘ì•™ì— ìœ„ì¹˜)
+            // ì´ì— xì™€ yì¢Œí‘œë¥¼ ë°˜ë°˜ ì”© ì™¼ìª½, ì•„ë˜ìª½ìœ¼ë¡œ ì˜®ê¹€
             Vector2 worldBottomLeft = (Vector2)transform.position - Vector2.right * gridSize.x / 2 - Vector2.up * gridSize.y / 2;
 
             for (int x = 0; x < gridSizeX; x++)
@@ -44,16 +44,16 @@ namespace yjlee.robot
                 {
                     Vector2 worldPoint = worldBottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) + Vector2.up * (y * nodeDiameter + nodeRadius);
 
-                    // ÇØ´ç °İÀÚ°¡ walkableÇÑÁö ¾Æ´ÑÁö ÆÇ´Ü
+                    // í•´ë‹¹ ê²©ìê°€ walkableí•œì§€ ì•„ë‹Œì§€ íŒë‹¨
                     bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask));
-                    // ³ëµå ÇÒ´ç
+                    // ë…¸ë“œ í• ë‹¹
                     grid[x, y] = new Node(walkable, worldPoint, x, y);
                 }
             }
         }
         #endregion
 
-        #region node »óÇÏ ÁÂ¿ì ´ë°¢ ³ëµå¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+        #region node ìƒí•˜ ì¢Œìš° ëŒ€ê° ë…¸ë“œë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
         public List<Node> GetNeighbours(Node node)
         {
             List<Node> neighbours = new List<Node>();
@@ -84,7 +84,7 @@ namespace yjlee.robot
         }
         #endregion
 
-        #region ÀÔ·ÂÀ¸·Î µé¾î¿Â ¿ùµåÁÂÇ¥¸¦ node ÁÂÇ¥°è·Î º¯È¯ÇÏ´Â ÇÔ¼ö
+        #region ì…ë ¥ìœ¼ë¡œ ë“¤ì–´ì˜¨ ì›”ë“œì¢Œí‘œë¥¼ node ì¢Œí‘œê³„ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
         public Node NodeFromWorldPoint(Vector2 worldPosition)
         {
             float percentX = (worldPosition.x + gridSize.x / 2) / gridSize.x;
@@ -100,13 +100,16 @@ namespace yjlee.robot
         }
         #endregion
 
-        #region Scene View Ãâ·Â¿ë Gizmos
+        #region Scene View ì¶œë ¥ìš© Gizmos
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(transform.position, new Vector2(gridSize.x, gridSize.y));
 
-            if (grid != null)
+            if (grid != null && robot != null)
             {
+                if (robot.GetComponent<Robotcontroller>().robotState == EnumTypes.RobotState.Idel)
+                    return;
+
                 Node playerNode = NodeFromWorldPoint(robot.position);
 
                 foreach (Node n in grid)

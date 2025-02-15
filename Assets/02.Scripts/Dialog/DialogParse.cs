@@ -6,7 +6,7 @@ namespace yjlee.dialog
     public class DialogParse : MonoBehaviour
     {
         [SerializeField] private TextAsset csvFile = null;
-        private static Dictionary<string, DialogData[]> dialogDictionary = new Dictionary<string, DialogData[]>();
+        private Dictionary<string, DialogData[]> dialogDictionary = new Dictionary<string, DialogData[]>();
 
         private void Awake()
         {

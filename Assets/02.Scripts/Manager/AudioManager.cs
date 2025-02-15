@@ -12,8 +12,8 @@ namespace Manager
         [SerializeField] AudioClip[] bgms;
         [SerializeField] AudioClip[] sfxs;
 
-        public AudioSource bgmPlayer = null;
-        public AudioSource[] sfxPlayer = null;
+        public AudioSource bgmPlayer;
+        public AudioSource[] sfxPlayer;
 
         public Slider bgmSlider;
         public Slider sfxSlider;
@@ -32,28 +32,14 @@ namespace Manager
                 instance = this;
             }
 
-            DontDestroyOnLoad(this);
             bgmPlayer.volume = PlayerPrefs.GetFloat("bgm_Volume");
         }
 
         // bgm 재생
         public void PlayBGM(int _sceneNumber)
         {
-            switch (_sceneNumber)
-            {
-                case 0:
-                    bgmPlayer.clip = bgms[0];
-                    bgmPlayer.Play();
-                    break;
-                case 1:
-                    bgmPlayer.clip = bgms[1];
-                    bgmPlayer.Play();
-                    break;
-                case 2:
-                    bgmPlayer.clip = bgms[1];
-                    bgmPlayer.Play();
-                    break;
-            }
+            bgmPlayer.clip = bgms[_sceneNumber];
+            bgmPlayer.Play();
         }
 
         // bgm 재생 정지

@@ -34,6 +34,9 @@ namespace Manager
 
         private void Update()
         {
+            if (GameManager.Instance.isGameOver)
+                return;
+
             OnError();
             OnClick();
         }

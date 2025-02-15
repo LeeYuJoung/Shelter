@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using UnityEngine.EventSystems;
 
 namespace Manager
 {
@@ -36,6 +35,10 @@ namespace Manager
         public Sprite raderRoomSprites;
 
         public Sprite[] repairButtonSprites;
+
+        public Button[] resolutionButtons;
+        public Sprite[] selectResolutions;
+        public Sprite[] deselectResolutions;
 
         private void Awake()
         {
@@ -164,6 +167,19 @@ namespace Manager
                 btn.GetComponent<Image>().sprite = repairButtonSprites[1];
                 btn.GetComponent<Button>().interactable = false;
             }
+        }
+
+        // 해상도 관리
+        public void SetResolution(int resolutionIndex)
+        {
+            for(int i = 0; i < resolutionButtons.Length; i++)
+            {
+                resolutionButtons[i].image.sprite = deselectResolutions[i];
+            }
+            resolutionButtons[resolutionIndex].image.sprite = selectResolutions[resolutionIndex];
+
+            Resolution resolution = GameManager.Instance.resolutions[resolutionIndex];
+            Screen.SetResolution(resolution.width, resolution.height, false);
         }
     }
 }
