@@ -24,7 +24,7 @@ namespace yjlee.robot
         public float currentTime;
         public bool isPickUp = false;  // 수집 로봇만 사용
 
-        private void Start()
+        private void Awake()
         {
             Init();
         }
@@ -34,11 +34,10 @@ namespace yjlee.robot
             switch (robotState)
             {
                 case RobotState.Idel:
-                    robotAnimator.SetFloat("MoveX", 0);
-                    robotAnimator.SetFloat("MoveY", 0);
+                    robotState = (GameManager.Instance.isGameOver) ? RobotState.Idel : RobotState.Search;
                     break;
                 case RobotState.Search:
-                    TargetSetting();
+                    TargetSearch();
                     break;
                 case RobotState.Move:
                     Move(false);
@@ -63,7 +62,7 @@ namespace yjlee.robot
             robotAnimator = GetComponentInChildren<Animator>();
             pathFinding = GetComponent<PathFinding>();
 
-            robotState = (GameManager.Instance.isGameOver) ? RobotState.Idel : RobotState.Search;
+            robotState = RobotState.Idel;
             moveSpeed = robot.moveSpeed;
             workTime = robot.workTime;
             breakTime = robot.breakTime;
@@ -79,11 +78,8 @@ namespace yjlee.robot
         }
 
         #region 목적지 설정
-        public void TargetSetting()
+        public void TargetSearch()
         {
-            robotAnimator.SetFloat("MoveX", 0);
-            robotAnimator.SetFloat("MoveY", 0);
-
             if (robot.robotType == RobotType.Collector)
             {
                 // 수집 로봇이라면 랜덤한 외부 목적지와 쓰레기 소각장을 번갈아 가며 목적지로 할당받고 이동
@@ -134,10 +130,9 @@ namespace yjlee.robot
         #region 이동 실행
         public void Move(bool isPickUp)
         {
-            Debug.Log("dir : " + pathFinding.dir.normalized);
-
             if (!isPickUp)
             {
+                robotAnimator.SetBool("Move", true);
                 SetAnimator("MoveX", "MoveY", pathFinding.dir);
             }
             else
@@ -166,7 +161,7 @@ namespace yjlee.robot
                 {
                     currentTime = 0;
                     robotState = RobotState.Breaking;
-                    Destroy(target);
+                    GameManager.Instance.GainGold(5);
                 }
             }
         }
@@ -186,24 +181,28 @@ namespace yjlee.robot
         #endregion
 
         #region 수집 로봇 내려놓기 실행
-        public void Drop()
+        public IEnumerator Drop()
         {
-            // 쓰레기 내려 놓는 애니메이션 실행
-            robotState = RobotState.Drop;
-            pathFinding.walkable = false;
+            StatusManager.Instance.FuelGaugeChange();
+            robotAnimator.SetBool("isPickUp", isPickUp);
             robotAnimator.SetTrigger("Drop");
 
-            isPickUp = false;
+            yield return new WaitForSeconds(1.0f);
+
             robotState = RobotState.Search;
-            robotAnimator.SetBool("isPickUp", isPickUp);
         }
         #endregion
 
         // 애니메이션 조절
         public void SetAnimator(string name1, string name2, Vector2 dir)
         {
-            robotAnimator.SetFloat(name1, dir.normalized.x);
-            robotAnimator.SetFloat(name2, dir.normalized.y);
+            Vector2 setDir = dir.normalized;
+
+            setDir.x = (setDir.x >= 0.5) ? 1 : (setDir.x <= -0.5) ? -1 : 0;
+            setDir.y = (setDir.y >= 0.5) ? 1 : (setDir.y <= -0.5) ? -1 : 0;
+
+            robotAnimator.SetFloat(name1, setDir.x);
+            robotAnimator.SetFloat(name2, setDir.y);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -217,7 +216,13 @@ namespace yjlee.robot
             }
             else if (collision.collider.CompareTag(robot.targetName) && robot.robotType == RobotType.Collector)
             {
-                Drop();
+                if (robotState != RobotState.PickUpMove)
+                    return;
+
+                isPickUp = false;
+                pathFinding.walkable = false;
+                robotState = RobotState.Drop;
+                StartCoroutine(Drop());
             }
             else if (collision.collider.CompareTag("PartDestination") && robot.robotType == RobotType.Sweeper)
             {

@@ -102,7 +102,7 @@ namespace Manager
             }
             else
             {
-                if(currentTime >= 18.0f * dayRange)
+                if(currentTime >= 24.0f * dayRange)
                 {
                     UIManager.Instance.UpdateTimeImage(dayRange);
                     dayRange++;

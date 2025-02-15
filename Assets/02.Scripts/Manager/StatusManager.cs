@@ -77,7 +77,6 @@ namespace Manager
             isRepairClear = new bool[] { false, false, false, false};
 
             status = GetComponent<Status>();
-            FuelGaugeChange();
         }
 
         // 수리할 부품 선택
@@ -174,12 +173,19 @@ namespace Manager
         // 연료 스테이터스 변경
         public void FuelGaugeChange()
         {
+            if (status.statusData.FuelAmount + 5 > 100)
+                return;
+
+            status.SetFuelAmount(true);
             fuelAmountGauge.sprite = fuelAmountGaugeSprites[Mathf.FloorToInt(status.statusData.FuelAmount / 10)];
         }
 
         // 레이더출력량 스테이터스 변경
         public void RadarOutputAmountGaugeChange()
         {
+            if (status.statusData.RadarOutputAmount + 5 > 100)
+                return;
+
             status.SetRadarOutputAmount(true);
             radarOutputAmountGauge.sprite = radarOutputAmountGaugeSprites[Mathf.FloorToInt(status.statusData.RadarOutputAmount / 10)];
         }

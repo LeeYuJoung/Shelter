@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c47a6f836c950c40824bc303aa6c5d0, type: 3}
   m_Name: SetStatusDataSO
   m_EditorClassIdentifier: 
-  FuelAmount: 0
+  FuelAmount: 5
   Corrosion: 5
   HullRestorationRate: 5
   MotorRestorationRate: 5
