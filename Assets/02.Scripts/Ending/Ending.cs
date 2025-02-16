@@ -74,9 +74,9 @@ public class Ending : MonoBehaviour
         {
             type = EndingType.FuelExhaustion;
         }
-        else if(statusData.FuelAmount >= 40 && statusData.Corrosion >= 40 && statusData.HullRestorationRate >= 40
-            && statusData.MotorRestorationRate >= 40 && statusData.EngineRestorationRate >= 40 && statusData.RadarRestorationRate >= 40
-            && statusData.RadarOutputAmount >= 40)
+        else if(statusData.FuelAmount <= 40 && statusData.Corrosion <= 40 && statusData.HullRestorationRate <= 40
+            && statusData.MotorRestorationRate <= 40 && statusData.EngineRestorationRate <= 40 && statusData.RadarRestorationRate <= 40
+            && statusData.RadarOutputAmount <= 40)
         {
             type = EndingType.Dead;
         }
