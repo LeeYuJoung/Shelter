@@ -195,7 +195,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &3017790478276607265
 MonoBehaviour:
@@ -256,7 +256,7 @@ MonoBehaviour:
   wirePrefab: {fileID: 2562284107234904353, guid: 47bc75765ff4d0843a3515e4f96596a8, type: 3}
   wireTargetPrefab: {fileID: 2562284107234904353, guid: f60076e75147eab4d9dc1fb31147c489, type: 3}
   Timer: {fileID: 2137729493689828858}
-  maxTime: 5
+  maxTime: 100
   maxWireValue: 10
   miniGameUIInfo:
     rectTransform: {fileID: 6053206754353202536}
