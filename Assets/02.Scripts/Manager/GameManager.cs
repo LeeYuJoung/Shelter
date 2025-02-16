@@ -12,6 +12,8 @@ namespace Manager
         private static GameManager instance;
         public static GameManager Instance { get { return instance; } }
 
+        public Ending ending;
+
         public List<Resolution> resolutions = new List<Resolution>();
         public int optimalResolutionIndex = 0;
 
@@ -84,7 +86,7 @@ namespace Manager
                 dayRange = 1;
                 currentTime = 0;
 
-                //ChangeBackground();
+                ChangeBackground();
                 UIManager.Instance.UpdateDayImage(day);
                 UIManager.Instance.UpdateTimeImage(0);
 
@@ -113,10 +115,7 @@ namespace Manager
         // 배경 관리
         public void ChangeBackground()
         {
-            if((day + 1) % 2 != 0)
-            {
-                bgRenderer.sprite = backgrounds[(day == 2) ? (1) : (day == 4) ? (2) : 3];
-            }
+            bgRenderer.sprite = backgrounds[day - 1];
         }
 
         // 재화 사용
@@ -203,7 +202,7 @@ namespace Manager
         {
             Debug.Log("::: Game Over :::");
             isGameOver = true;
-            SceneChange(3);
+            ending.ExcuteEnding(StatusManager.Instance.status.statusData);
         }
 
         // 씬 관리

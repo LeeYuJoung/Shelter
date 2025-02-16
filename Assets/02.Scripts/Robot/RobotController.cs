@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using EnumTypes;
 using Manager;
@@ -163,6 +162,7 @@ namespace yjlee.robot
                     robotState = RobotState.Breaking;
                     GameManager.Instance.GainGold(5);
                 }
+                robotAnimator.SetBool("Clean", true);
             }
         }
         #endregion
@@ -171,6 +171,7 @@ namespace yjlee.robot
         public void Break()
         {
             currentTime += Time.deltaTime;
+            robotAnimator.SetBool("Clean", false);
 
             if (currentTime >= breakTime)
             {

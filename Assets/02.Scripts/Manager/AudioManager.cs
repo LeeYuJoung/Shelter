@@ -32,7 +32,7 @@ namespace Manager
                 instance = this;
             }
 
-            bgmPlayer.volume = PlayerPrefs.GetFloat("bgm_Volume");
+            //bgmPlayer.volume = PlayerPrefs.GetFloat("bgm_Volume");
         }
 
         // bgm 재생
