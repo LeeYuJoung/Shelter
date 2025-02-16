@@ -1,10 +1,6 @@
 using System;
 using DG.Tweening;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.EventSystems.EventTrigger;
-
 namespace Donhyun.UI.Animation
 {
     [Serializable]
