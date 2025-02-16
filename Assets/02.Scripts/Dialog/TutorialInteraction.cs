@@ -12,6 +12,7 @@ namespace yjlee.dialog
         private DialogData[] talkDatas;
 
         public GameObject dialogObject;
+        public GameObject[] news;
         public Text contextText;
 
         public string eventName;
@@ -37,6 +38,12 @@ namespace yjlee.dialog
                 if (index >= talkDatas.Length)
                 {
                     dialogObject.SetActive(false);
+
+                    for(int i = 0; i < news.Length; i++)
+                    {
+                        news[i].SetActive(true);
+                    }
+
                     GameManager.Instance.GameStart();
                     return;
                 }
