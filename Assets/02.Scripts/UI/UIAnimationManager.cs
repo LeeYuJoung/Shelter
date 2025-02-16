@@ -1,13 +1,17 @@
 using System;
 using DG.Tweening;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.EventSystems.EventTrigger;
+
 namespace Donhyun.UI.Animation
 {
     [Serializable]
     public struct UIInformation
     {
         public RectTransform rectTransform;
-        public Vector3 start, end;
+        public Vector2 start, end;
         public float tweenDuration;
     }
 
@@ -93,10 +97,10 @@ namespace Donhyun.UI.Animation
             switch (type)
             {
                 case AnimationType.Slide:
-                    UIInfo.rectTransform.localPosition = UIInfo.start;
+                    UIInfo.rectTransform.localPosition = new Vector3(UIInfo.start.x, UIInfo.start.y, UIInfo.rectTransform.localPosition.z);
                     break;
                 case AnimationType.PopUp:
-                    UIInfo.rectTransform.localScale = UIInfo.start;
+                    UIInfo.rectTransform.localScale = new Vector3(UIInfo.start.x, UIInfo.start.y, UIInfo.rectTransform.localScale.z);
                     break;
             }
         }

@@ -9,5 +9,5 @@ public class StatusDataSO : ScriptableObject
     public int MotorRestorationRate; //동력기 복구도
     public int EngineRestorationRate; //엔진 복구도
     public int RadarRestorationRate; //레이더 복구도
-    public int RadarOutputAmount; //레이더 출력량
+    public int RadarOutputAmount; //레이더 출력량 
 }

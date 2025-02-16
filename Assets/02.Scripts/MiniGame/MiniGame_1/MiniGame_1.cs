@@ -10,9 +10,7 @@ public class MiniGame_1 : MonoBehaviour
     [SerializeField] private GameObject miniGamePanel;
     [SerializeField] private GameObject leftWireGroup;
     [SerializeField] private GameObject rightWireGroup;
-    [SerializeField] private List<WireType> wireTypes;
-    [SerializeField] private GameObject wirePrefab;
-    [SerializeField] private GameObject wireTargetPrefab;
+    [SerializeField] private List<GameObject> wires;
 
     [Header("----- MiniGameTimer -----")]
     [SerializeField] private Image Timer;
@@ -31,9 +29,6 @@ public class MiniGame_1 : MonoBehaviour
     private bool beginGame;
     private int correctAnswerValue;
     private int currentAnswerValue;
-    private List<WireType> types;
-
-
 
     //프로퍼티
     public float MaxTime
@@ -48,13 +43,12 @@ public class MiniGame_1 : MonoBehaviour
         }
     }
 
-
     private void Awake()
     {
         correctAnswerValue = 0;
         currentAnswerValue = 0;
         beginGame = false;
-        wireLength = wireTypes.Count;
+        wireLength = wires.Count;
         maxWireValue = Mathf.Min(maxWireValue, wireLength);
         leftWireObjects = new List<GameObject>();
         rightWireObjects = new List<GameObject>();
@@ -80,6 +74,8 @@ public class MiniGame_1 : MonoBehaviour
         correctAnswerValue += leftWireObjects.Count;
 
         Debug.Log("정답 개수 : " + correctAnswerValue);
+
+
     }
 
     //게임 종료시 실행
@@ -111,7 +107,6 @@ public class MiniGame_1 : MonoBehaviour
     {
         if(currentAnswerValue == correctAnswerValue)
         {
-            beginGame = false;
             ClearGame(true);
             return;
         }
@@ -130,8 +125,8 @@ public class MiniGame_1 : MonoBehaviour
         Timer.fillAmount = currentTIme / maxTime;
     }
 
-    //셔플(제네릭)
-    private List<T> Shuffle<T>(List<T> values)
+    //셔플
+    private List<GameObject> Shuffle(List<GameObject> values)
     {
         System.Random rand = new System.Random();
         var shuffled = values.OrderBy(_ => rand.Next()).ToList();
@@ -144,14 +139,12 @@ public class MiniGame_1 : MonoBehaviour
     {
         int maxWireLength = UnityEngine.Random.Range(wireLength - 2, wireLength);
 
-        types = Shuffle(wireTypes);
+        List<GameObject> list = Shuffle(wires);
 
         for (int i = 0; i < maxWireLength; i++)
         {
-            GameObject wire = Instantiate(wirePrefab, wireGroup.transform);
-            ChangeWireColor(types[i], wire);
-            wire.GetComponent<LineStretch>().SetMiniGame(this);
-            wireObjects.Add(wire);
+            GameObject go = Instantiate(list[i], wireGroup.transform);
+            wireObjects.Add(go);
         }
     }
 
@@ -161,24 +154,17 @@ public class MiniGame_1 : MonoBehaviour
         int maxWireLength = UnityEngine.Random.Range(0, 3);
 
         List<GameObject> list = new List<GameObject>();
-
         //정답 추가
-        foreach (WireType type in types)
+        foreach(GameObject go in AnswerWireObjectsList)
         {
-            GameObject wire = Instantiate(wireTargetPrefab, wireGroup.transform);
-            ChangeWireColor(type, wire);
-            list.Add(wire);
+            list.Add(go);
         }
-
         //오답 추가
         for (int i = 0; i < maxWireLength; i++)
         {
-            GameObject wire = Instantiate(wireTargetPrefab, wireGroup.transform);
-
             //전선 프리팹 중 랜덤
-            int random = UnityEngine.Random.Range(0, wireLength);
-            ChangeWireColor((WireType)random, wire);
-            list.Add(wire);
+            int random = UnityEngine.Random.Range(0, wires.Count);
+            list.Add(wires[random]);
         }
 
         list = Shuffle(list);
@@ -186,53 +172,9 @@ public class MiniGame_1 : MonoBehaviour
         foreach (GameObject go in list)
         {
             wireObjects.Add(Instantiate(go, wireGroup.transform));
-            Destroy(go); //기존 전선을 삭제
         }
     }
 
-    //정답 개수 상승
-    public void AnswerCorrectly()
-    {
-        currentAnswerValue++;
-        Debug.Log("정답 개수 증가 : " + currentAnswerValue);
-    }
-
-
-    //선 색 변경 및 타입 지정
-    private void ChangeWireColor(WireType type, GameObject wire)
-    {
-        Image[] wireImages = wire.GetComponentsInChildren<Image>();
-
-        Color color;
-        wire.GetComponent<Wire>().WireType = type;
-
-        switch (type)
-        {
-            case WireType.Red:
-                color = Color.red;
-                break;
-            case WireType.Blue:
-                color = Color.blue;
-                break;
-            case WireType.White:
-                color = Color.white;
-                break;
-            case WireType.Green:
-                color = Color.green;
-                break;
-            case WireType.Yellow:
-                color = Color.yellow;
-                break;
-            default:
-                color = Color.red;
-                break;
-        }
-
-        foreach(Image image in wireImages)
-        {
-            image.color = color;
-        }
-    }
 
     //모든 전선 삭제
     private void ClearList(List<GameObject> wireObjects)
