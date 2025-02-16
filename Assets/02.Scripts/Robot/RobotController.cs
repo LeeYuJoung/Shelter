@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumTypes;
+using Manager;
 
 namespace yjlee.robot
 {
@@ -14,10 +15,7 @@ namespace yjlee.robot
         public Robot robot;
         public GameObject target;
 
-        public GameObject[] trashPrefabs;
-        private GameObject trash;
-
-        [SerializeField] public RobotState robotState;
+        public RobotState robotState;
         public float moveSpeed;
         public float workTime;
         public float breakTime;
@@ -36,10 +34,16 @@ namespace yjlee.robot
             switch (robotState)
             {
                 case RobotState.Idel:
-                    TargetSetting();
+                    robotState = (GameManager.Instance.isGameOver) ? RobotState.Idel : RobotState.Search;
+                    break;
+                case RobotState.Search:
+                    TargetSearch();
                     break;
                 case RobotState.Move:
-                    Move();
+                    Move(false);
+                    break;
+                case RobotState.PickUpMove:
+                    Move(true);
                     break;
                 case RobotState.Work:
                     Work();
@@ -55,7 +59,7 @@ namespace yjlee.robot
         private void Init()
         {
             robotRigidbody = GetComponent<Rigidbody2D>();
-            robotAnimator = GetComponent<Animator>();
+            robotAnimator = GetComponentInChildren<Animator>();
             pathFinding = GetComponent<PathFinding>();
 
             robotState = RobotState.Idel;
@@ -74,7 +78,7 @@ namespace yjlee.robot
         }
 
         #region 목적지 설정
-        public void TargetSetting()
+        public void TargetSearch()
         {
             if (robot.robotType == RobotType.Collector)
             {
@@ -85,7 +89,7 @@ namespace yjlee.robot
 
                     if(targets.Length > 0)
                     {
-                        target = targets[Random.Range(0, targets.Length)].gameObject;
+                        target = targets[Random.Range(0, targets.Length)];
                         pathFinding.target = target;
 
                         robotState = RobotState.Move;
@@ -97,14 +101,14 @@ namespace yjlee.robot
                     target = GameObject.FindGameObjectWithTag(robot.targetName);
                     pathFinding.target = target;
 
-                    robotState = RobotState.Move;
+                    robotState = RobotState.PickUpMove;
                     pathFinding.walkable = true;
                 }
             }
             else if(robot.robotType == RobotType.Sweeper)
             {
                 // 청소 로봇이라면 씬 내에 오물이 있을 경우에만 목적지로 할당받고 이동
-                GameObject[] targets = GameObject.FindGameObjectsWithTag(robot.targetName);
+                GameObject[] targets = GameObject.FindGameObjectsWithTag("PartDestination");
 
                 if(targets.Length > 0)
                 {
@@ -116,7 +120,7 @@ namespace yjlee.robot
                 }
                 else
                 {
-                    robotState = RobotState.Idel;
+                    robotState = RobotState.Search;
                     pathFinding.walkable = false;
                 }
             }
@@ -124,30 +128,16 @@ namespace yjlee.robot
         #endregion
 
         #region 이동 실행
-        public void Move()
+        public void Move(bool isPickUp)
         {
-            // 상하좌우 이동에 따라 애니메이션 조절
-            Vector2 dir = (target.transform.position - transform.position).normalized;
-
-            if (dir.y > 0)
+            if (!isPickUp)
             {
-                // 위 이동
-
+                robotAnimator.SetBool("Move", true);
+                SetAnimator("MoveX", "MoveY", pathFinding.dir);
             }
-            else if (dir.y < 0)
+            else
             {
-                // 아래 이동
-
-            }
-            else if (dir.x > 0)
-            {
-                // 오른쪽 이동
-
-            }
-            else if (dir.x < 0)
-            {
-                // 왼쪽 이동
-
+                SetAnimator("PickUpX", "PickUpY", pathFinding.dir);
             }
         }
         #endregion
@@ -162,12 +152,7 @@ namespace yjlee.robot
                 if (currentTime >= workTime)
                 {
                     currentTime = 0;
-                    robotState = RobotState.Idel;
-
-                    // 쓰레기 들고 있는 모습 구현
-                    trash = Instantiate(trashPrefabs[Random.Range(0, trashPrefabs.Length)]);
-                    trash.transform.position = transform.position + Vector3.up;
-                    trash.transform.parent = transform;
+                    robotState = RobotState.Search;
                 }
             }
             else if (robot.robotType == RobotType.Sweeper)
@@ -176,7 +161,7 @@ namespace yjlee.robot
                 {
                     currentTime = 0;
                     robotState = RobotState.Breaking;
-                    Destroy(target);
+                    GameManager.Instance.GainGold(5);
                 }
             }
         }
@@ -190,7 +175,7 @@ namespace yjlee.robot
             if (currentTime >= breakTime)
             {
                 currentTime = 0;
-                robotState = RobotState.Idel;
+                robotState = RobotState.Search;
             }
         }
         #endregion
@@ -198,19 +183,27 @@ namespace yjlee.robot
         #region 수집 로봇 내려놓기 실행
         public IEnumerator Drop()
         {
-            // 쓰레기 내려 놓는 애니메이션 실행
+            StatusManager.Instance.FuelGaugeChange();
+            robotAnimator.SetBool("isPickUp", isPickUp);
+            robotAnimator.SetTrigger("Drop");
 
-            robotState = RobotState.Drop;
-            pathFinding.walkable = false;
+            yield return new WaitForSeconds(1.0f);
 
-            yield return new WaitForSeconds(1.5f);
-
-            isPickUp = false;
-            robotState = RobotState.Idel;
-
-            Destroy(trash);
+            robotState = RobotState.Search;
         }
         #endregion
+
+        // 애니메이션 조절
+        public void SetAnimator(string name1, string name2, Vector2 dir)
+        {
+            Vector2 setDir = dir.normalized;
+
+            setDir.x = (setDir.x >= 0.5) ? 1 : (setDir.x <= -0.5) ? -1 : 0;
+            setDir.y = (setDir.y >= 0.5) ? 1 : (setDir.y <= -0.5) ? -1 : 0;
+
+            robotAnimator.SetFloat(name1, setDir.x);
+            robotAnimator.SetFloat(name2, setDir.y);
+        }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -219,12 +212,19 @@ namespace yjlee.robot
                 isPickUp = true;
                 robotState = RobotState.Work;
                 pathFinding.walkable = false;
+                robotAnimator.SetBool("isPickUp", isPickUp);
             }
             else if (collision.collider.CompareTag(robot.targetName) && robot.robotType == RobotType.Collector)
             {
+                if (robotState != RobotState.PickUpMove)
+                    return;
+
+                isPickUp = false;
+                pathFinding.walkable = false;
+                robotState = RobotState.Drop;
                 StartCoroutine(Drop());
             }
-            else if (collision.collider.CompareTag(robot.targetName) && robot.robotType == RobotType.Sweeper)
+            else if (collision.collider.CompareTag("PartDestination") && robot.robotType == RobotType.Sweeper)
             {
                 robotState = RobotState.Work;
                 pathFinding.walkable = false;

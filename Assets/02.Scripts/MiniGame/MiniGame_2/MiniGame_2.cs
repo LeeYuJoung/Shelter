@@ -2,9 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using MiniGame;
+using Manager;
 
-public class MiniGame_2 : MonoBehaviour
+public class MiniGame_2 : MiniGameController
 {
+    public GameObject miniGame2GameObject;
+    public GameObject errorGameObject;
+
     public Slider timeSlider; // 시간 슬라이더
     public Slider powerSlider; // 전력 게이지 슬라이더
     public TextMeshProUGUI resultText; // 결과 메시지 표시
@@ -12,21 +17,55 @@ public class MiniGame_2 : MonoBehaviour
     public Transform arrowParent; // 화살표 부모 오브젝트
     public GameObject arrowPrefab; // 화살표 프리팹
 
-    public int plus;
-    public int minus;
-
-    private float maxTime = 10f; // 제한 시간
-    private float currentTime; // 남은 시간
+    private float maxTime;
+    private float miniGame2_currentTime; // 남은 시간
     private float maxPower = 100f; // 최대 전력 게이지
     private float currentPower = 0; // 현재 전력 게이지
     private bool isGameActive = false; // 게임 진행 여부 (초기값: false)
     private string[] currentArrowKeys = new string[4]; // 현재 표시된 방향키 배열
     private int currentInputIndex = 0; // 플레이어가 입력 중인 방향키 인덱스
 
-    public void GameStart()
+    public override void GetReward()
     {
+        base.GetReward();
+        if (StatusManager.Instance.status.statusData.MotorRestorationRate + reward <= 100)
+            StatusManager.Instance.status.SetMotorRestorationRate(true);
+        else
+            StatusManager.Instance.status.statusData.MotorRestorationRate = 100;
+    }
+
+    public override void GetPenalty()
+    {
+        base.GetPenalty();
+        if (StatusManager.Instance.status.statusData.MotorRestorationRate - penalty >= 0)
+            StatusManager.Instance.status.SetMotorRestorationRate(false);
+        else
+            StatusManager.Instance.status.statusData.MotorRestorationRate = 0;
+    }
+
+    public override void OnBeep()
+    {
+        base.OnBeep();
+
+        Debug.Log(":: MiniGame2 Beep ::");
+        isError = false;
+        errorGameObject.SetActive(false);
+        GetPenalty();
+    }
+
+    public override void GameLevelUp()
+    {
+        base.GameLevelUp();
+    }
+
+    public override void GameStart()
+    {
+        base.GameStart();
+        miniGame2GameObject.SetActive(true);
+
         isGameActive = true; // ✅ 게임 활성화
-        currentTime = maxTime; // ✅ 제한 시간 초기화
+        maxTime = playTime;
+        miniGame2_currentTime = playTime; // ✅ 제한 시간 초기화
         currentPower = 0; // ✅ 전력 게이지 초기화
         currentInputIndex = 0; // ✅ 입력 인덱스 초기화
 
@@ -39,12 +78,12 @@ public class MiniGame_2 : MonoBehaviour
         // ✅ UI 슬라이더 초기화
         if (timeSlider != null)
         {
-            timeSlider.maxValue = maxTime;
-            timeSlider.value = maxTime;
+            timeSlider.maxValue = 1;
+            timeSlider.value = 1;
         }
         if (powerSlider != null)
         {
-            powerSlider.maxValue = maxPower;
+            powerSlider.maxValue = 1;
             powerSlider.value = 0;
         }
 
@@ -55,35 +94,61 @@ public class MiniGame_2 : MonoBehaviour
 
     void Update()
     {
-        if (!isGameActive) return;
+        if (!isError)
+        {
+            currentTime = 0;
+            return;
+        }
 
-        // 시간 감소
-        currentTime -= Time.deltaTime;
-        timeSlider.value = currentTime / maxTime;
-        powerSlider.value = currentPower / maxPower;
+        currentTime += Time.deltaTime;
 
-        // 게임 상태 체크 (성공 또는 실패)
-        ClearGame();
+        if (currentTime >= beepTime)
+        {
+            currentTime = 0;
 
-        // 방향키 입력 체크
-        CheckInput();
+            if (!isPlaying)
+            {
+                OnBeep();
+            }
+        }
+
+        if(isGameActive)
+        {
+            // 시간 감소
+            miniGame2_currentTime -= Time.deltaTime;
+            timeSlider.value = miniGame2_currentTime / maxTime;
+            powerSlider.value = currentPower / maxPower;
+
+            // 게임 상태 체크 (성공 또는 실패)
+            ClearGame();
+
+            // 방향키 입력 체크
+            CheckInput();
+        }
     }
 
-    void ClearGame()
+    public override void ClearGame()
     {
-        if (currentTime <= 0)
+        if (miniGame2_currentTime <= 0)
         {
             FailGame();
+            GetPenalty();
+            base.ClearGame();
+            errorGameObject.SetActive(false);
         }
         else if (currentPower >= maxPower)
         {
             SuccessGame();
+            GetReward();
+            base.ClearGame();
+            errorGameObject.SetActive(false);
         }
     }
 
     void CheckInput()
     {
-        if (!isGameActive) return;
+        if (!isGameActive) 
+            return;
 
         // 방향키 입력 처리
         if (Input.GetKeyDown(KeyCode.UpArrow) && currentArrowKeys[currentInputIndex] == "↑" ||
@@ -101,14 +166,14 @@ public class MiniGame_2 : MonoBehaviour
             {
                 currentInputIndex = 0;
                 GenerateRandomArrowKeys(); // 새로운 랜덤 방향키 생성
-                currentPower = Mathf.Min(currentPower + plus, maxPower); // 전력 게이지 증가
+                currentPower = Mathf.Min(currentPower + plusPoint, maxPower); // 전력 게이지 증가
             }
         }
         else if (Input.anyKeyDown) // 잘못된 키 입력 시
         {
             PlayWrongInputSound(); // 틀린 입력 소리 재생
             StartCoroutine(WrongInputFeedback()); // 잘못된 입력 시 피드백 연출
-            currentPower = Mathf.Max(currentPower - minus, 0); // 전력 게이지 감소
+            currentPower = Mathf.Max(currentPower - minusPoint, 0); // 전력 게이지 감소
         }
     }
 
@@ -171,6 +236,23 @@ public class MiniGame_2 : MonoBehaviour
         if (wrongInputSound != null)
         {
             wrongInputSound.Play();
+        }
+    }
+
+    public void ForcingGameOver()
+    {
+        if(isGameActive)
+        {
+            Debug.Log(":: MiniGame2 강제 종료 ::");
+
+            isGameActive = false; // 게임 중지
+            resultText.gameObject.SetActive(true);
+            resultText.text = "Game Over!"; // 실패 메시지 표시
+            Debug.Log("❌ 게임 실패!");
+
+            isPlaying = false;
+            errorGameObject.SetActive(false);
+            GetPenalty();
         }
     }
 }

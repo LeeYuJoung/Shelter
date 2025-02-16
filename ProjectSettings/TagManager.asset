@@ -10,6 +10,9 @@ TagManager:
   - Soil
   - Destination
   - Error
+  - Collector
+  - Sweeper
+  - PartDestination
   layers:
   - Default
   - TransparentFX
@@ -20,11 +23,11 @@ TagManager:
   - Spaceship
   - Incinerator
   - Robot
-  - Soil
+  - Machine
   - Error
-  - 
-  - 
-  - 
+  - Part
+  - Collector
+  - Sweeper
   - 
   - 
   - 

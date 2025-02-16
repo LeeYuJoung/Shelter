@@ -10,26 +10,35 @@ namespace Manager
         private static UIManager instance;
         public static UIManager Instance { get { return instance; } }
 
-        public GameObject[] buyPhanels;
-        public GameObject errorPhanel;
-
-        public InputField saleInput;
-
         public Image dayImage;
         public Image timeImage;
+
+        public Sprite[] daySprites;
+        public Sprite[] timeSptites;
 
         public Text[] goldTexts;
         public Text[] robotBuyPriceTexts;
         public Text[] robotUpgradePriceTexts;
-        public Text robotPieceText;
-        public Text[] fuelText;
-        public Text goldOfFuel;
+        public Text[] collectorRobotPieceTexts;
+        public Text[] sweeperRobotPieceTexts;
 
-        public Sprite[] daySprites;
-        public Sprite[] timeSptites;
-        public Sprite soldOutImage;
+        public GameObject[] robotRepairs;
+        public Sprite[] robotRepairSprites;
 
-        private int buyPhanelIndex;
+        public GameObject[] robotUpgrades;
+        public Sprite[] robotUpgradeSptites;
+
+        public Sprite[] sweeperRobotSprites;
+        public Sprite[] collectorRobotSprites;
+
+        public GameObject raderRoom;
+        public Sprite raderRoomSprites;
+
+        public Sprite[] repairButtonSprites;
+
+        public Button[] resolutionButtons;
+        public Sprite[] selectResolutions;
+        public Sprite[] deselectResolutions;
 
         private void Awake()
         {
@@ -48,10 +57,18 @@ namespace Manager
             Init();
         }
 
-        private void Init()
+        public void Init()
         {
-            buyPhanelIndex = 0;
-            UpdateFuelText();
+            for(int i = 0; i < goldTexts.Length; i++)
+            {
+                goldTexts[i].text = string.Format("x {0:D3}", GameManager.Instance.GetGold);
+            }
+
+            for(int i = 0; i < collectorRobotPieceTexts.Length; i++)
+            {
+                collectorRobotPieceTexts[i].text = string.Format("x {0}", GameManager.Instance.collectorRobots.Count);
+                sweeperRobotPieceTexts[i].text = string.Format("x {0}", GameManager.Instance.sweeperRobots.Count);
+            }
         }
 
         // 디데이 변경
@@ -71,126 +88,98 @@ namespace Manager
         {
             for(int i = 0; i < goldTexts.Length; i++)
             {
-                goldTexts[i].text = string.Format("{0:N0} G", gold);
-            }
-        }
-
-        // 연료 텍스트 변경
-        public void UpdateFuelText()
-        {
-            for (int i = 0; i < fuelText.Length; i++)
-            {
-                fuelText[i].text = string.Format("{0} L", StatusManager.Instance.status.statusData.FuelAmount);
+                goldTexts[i].text = string.Format("x {0:D3}", gold);
             }
         }
 
         // 로봇 구매 가격 텍스트 변경
         public void UpdateRobotBuyPriceText(int index, int price)
         {
-            robotBuyPriceTexts[index].text = string.Format("{0:N0} G", price);
+            robotBuyPriceTexts[index].text = string.Format("x {0}", price);
         }
 
         // 로봇 업그레이드 가격 텍스트 변경
         public void UpdateRoboUpgradetPriceText(int index, int price)
         {
-            robotUpgradePriceTexts[index].text = string.Format("{0:N0} G", price);
+            robotUpgradePriceTexts[index].text = string.Format("x {0}", price);
         }
 
         // 로봇 수량 텍스트 변경
         public void UpdateRobotPieceText(int collectorRobotPiece, int sweeperRobotPiece)
         {
-            robotPieceText.text = string.Format("수집로봇 X {0}   청소로봇 X {1}", collectorRobotPiece, sweeperRobotPiece);
-        }
-
-        public void SoldOut(GameObject btn)
-        {
-            Button button = btn.GetComponent<Button>();
-            button.GetComponent<RectTransform>().sizeDelta = new Vector2(319, 193);
-            button.image.sprite = soldOutImage;
-            button.interactable = false;
-        }
-
-        // 상점 구매창 초기화
-        public void BuyPhanelInit()
-        {
-            buyPhanelIndex = 0;
-
-            for (int i = 0; i < buyPhanels.Length; i++)
+            for(int i = 0; i < collectorRobotPieceTexts.Length; i++)
             {
-                if(i == 0)
-                    buyPhanels[i].SetActive(true);
-                else
-                    buyPhanels[i].SetActive(false);
+                collectorRobotPieceTexts[i].text = string.Format("x {0}", collectorRobotPiece);
+                sweeperRobotPieceTexts[i].text = string.Format("x {0}", sweeperRobotPiece);
             }
         }
 
-        // 상점 구매창 변경
-        public void ChangeBuyPhanel(int arrowDir)
+        // 업그레이드 상태 이미지 변경
+        public void UpgradeState(int typeIndex)
         {
-            buyPhanels[buyPhanelIndex].SetActive(false);
-
-            if (buyPhanelIndex >= buyPhanels.Length - 1 && arrowDir > 0)
+            if(typeIndex == 0)
             {
-                buyPhanelIndex = 0;
-            }
-            else if(buyPhanelIndex == 0 && arrowDir < 0)
-            {
-                buyPhanelIndex = 2;
+                robotUpgrades[typeIndex].transform.GetChild(1).GetComponent<Image>().sprite = sweeperRobotSprites[GameManager.Instance.sweeperRobotLevel];
             }
             else
             {
-                buyPhanelIndex += arrowDir;
+                robotUpgrades[typeIndex].transform.GetChild(1).GetComponent<Image>().sprite = collectorRobotSprites[GameManager.Instance.collectorRobotLevel];
             }
-
-            buyPhanels[buyPhanelIndex].SetActive(true);
         }
 
-        // 플레이어의 연료 판매량 설정
-        public void ChangeFuelAmount()
+        // 구매 완료
+        public void SoldOut(int typeIndex, GameObject btn)
         {
-            try
+            robotRepairs[typeIndex].GetComponent<Image>().sprite = robotRepairSprites[typeIndex];
+            robotRepairs[typeIndex].transform.GetChild(0).gameObject.SetActive(true);
+
+            btn.GetComponent<Button>().interactable = false;
+        }
+
+        // 업그레이드 완료
+        public void UpgradeClear(int typeIndex, GameObject btn)
+        {
+            robotUpgrades[typeIndex].GetComponent<Image>().sprite = robotUpgradeSptites[typeIndex];
+            robotUpgrades[typeIndex].transform.GetChild (0).gameObject.SetActive(true);
+
+            btn.GetComponent <Button>().interactable = false;
+        }
+
+        // 레이더실 해금 완료
+        public void RaderRoomUnLock(GameObject btn)
+        {
+            raderRoom.GetComponent<Image>().sprite = raderRoomSprites;
+            raderRoom.transform.GetChild(0).gameObject.SetActive(true);
+
+            btn.GetComponent<Button>().interactable = false;
+        }
+
+        // 수리 가능 여부 확인
+        public void RepairPossible(GameObject btn, bool isPossible)
+        {
+            if(isPossible)
             {
-                StoreManager.Instance.changeFuelAmount = int.Parse(saleInput.text.ToString().Replace("L", ""));
-                StoreManager.Instance.changeGoldAmount = StoreManager.Instance.changeFuelAmount * 150;
-                saleInput.text = string.Format("{0} L", StoreManager.Instance.changeFuelAmount);
-                goldOfFuel.text = string.Format("{0:N0} G", StoreManager.Instance.changeGoldAmount);
-
-                if (StatusManager.Instance.status.statusData.FuelAmount < StoreManager.Instance.changeFuelAmount)
-                {
-                    Error("보유한 연료량이 적어 판매 불가능합니다.");
-                    FuelSaleEnd();
-                }
+                btn.GetComponent<Image>().sprite = repairButtonSprites[0];
+                btn.GetComponent<Button>().interactable = true;
             }
-            catch(Exception e)
+            else
             {
-                Debug.Log(e);
-                StoreManager.Instance.changeFuelAmount = 0;
-                StoreManager.Instance.changeGoldAmount = 0;
-                goldOfFuel.text = string.Format("{0:N0} G", 0);
+                btn.GetComponent<Image>().sprite = repairButtonSprites[1];
+                btn.GetComponent<Button>().interactable = false;
             }
         }
 
-        // 플레이어의 연료 판매 완료
-        public void FuelSaleEnd()
+        // 해상도 관리
+        public void SetResolution(int resolutionIndex)
         {
-            saleInput.text = null;
-            goldOfFuel.text = string.Format("{0:N0} G", 0);
-            UpdateFuelText();
-            StoreManager.Instance.changeFuelAmount = 0;
-            StoreManager.Instance.changeGoldAmount = 0;
-        }
+            for(int i = 0; i < resolutionButtons.Length; i++)
+            {
+                resolutionButtons[i].image.sprite = deselectResolutions[i];
+            }
+            resolutionButtons[resolutionIndex].image.sprite = selectResolutions[resolutionIndex];
 
-        public void Error(string message)
-        {
-            errorPhanel.GetComponentInChildren<Text>().text = message;
-            StartCoroutine(OnError());
-        }
-
-        public IEnumerator OnError()
-        {
-            errorPhanel.SetActive(true);
-            yield return new WaitForSeconds(1.5f);
-            errorPhanel.SetActive(false);
+            Resolution resolution = GameManager.Instance.resolutions[resolutionIndex];
+            Screen.SetResolution(resolution.width, resolution.height, false);
         }
     }
 }

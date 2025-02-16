@@ -1,3 +1,4 @@
+using MiniGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,13 @@ namespace Manager
         private static GameManager instance;
         public static GameManager Instance { get { return instance; } }
 
+        public List<Resolution> resolutions = new List<Resolution>();
+        public int optimalResolutionIndex = 0;
+
         public Sprite[] backgrounds;
         public SpriteRenderer bgRenderer;
+
+        public GameObject[] machines;
 
         public GameObject collectorRobotPrefab;
         public GameObject sweeperRobotPrefab;
@@ -24,14 +30,14 @@ namespace Manager
 
         private int day = 0;
         private int dayRange = 1;
-        private float dayTime = 90.0f;              // 하루 시간
+        private float dayTime = 120.0f;              // 하루 시간
         [SerializeField] private float currentTime; // 현재 시간
 
         [SerializeField] private int gold = 0;
         public int GetGold { get { return gold; } }
 
         public bool isRadeRoomUnLock = false;
-        private bool isGameOver = false;
+        public bool isGameOver = true;
 
         private void Awake()
         {
@@ -61,12 +67,16 @@ namespace Manager
             currentTime = 0;
             collectorRobotLevel = 1;
             sweeperRobotLevel = 1;
+
+            resolutions.Add(new Resolution { width = 2560, height = 1440 });
+            resolutions.Add(new Resolution { width = 1920, height = 1080 });
+            resolutions.Add(new Resolution { width = 1280, height = 720 });
         }
 
         // 시간 관리
         private void Timmer()
         {
-            currentTime += Time.deltaTime * 30.0f;
+            currentTime += Time.deltaTime;
 
             if(currentTime >= dayTime)
             {
@@ -74,18 +84,25 @@ namespace Manager
                 dayRange = 1;
                 currentTime = 0;
 
-                ChangeBackground();
+                //ChangeBackground();
                 UIManager.Instance.UpdateDayImage(day);
                 UIManager.Instance.UpdateTimeImage(0);
 
-                if (day >= 7)
+                // 미니게임 난이도 상승
+                for(int i = 0; i < machines.Length; i++)
+                {
+                    Debug.Log(machines[i].name + "Level UP");
+                    machines[i].GetComponent<MiniGameController>().GameLevelUp();
+                }
+
+                if (day >= 5)
                 {
                     GameOver();
                 }
             }
             else
             {
-                if(currentTime >= 18.0f * dayRange)
+                if(currentTime >= 24.0f * dayRange)
                 {
                     UIManager.Instance.UpdateTimeImage(dayRange);
                     dayRange++;
@@ -117,16 +134,16 @@ namespace Manager
         }
 
         // 로봇 수량 관리
-        public void RobotPiece(string robotType)
+        public void RobotPiece(int robotType)
         {
-            if(robotType == "CollectorRobot")
+            if(robotType == 1)
             {
-                GameObject robot = Instantiate(collectorRobotPrefab, Vector2.zero, Quaternion.identity);
+                GameObject robot = Instantiate(collectorRobotPrefab, new Vector2(5.0f, -1.25f), Quaternion.identity);
                 collectorRobots.Add(robot);
             }
             else
             {
-                GameObject robot = Instantiate(sweeperRobotPrefab, Vector2.zero, Quaternion.identity);
+                GameObject robot = Instantiate(sweeperRobotPrefab, new Vector2(5.0f, -1.25f), Quaternion.identity);
                 sweeperRobots.Add(robot);
             }
 
@@ -134,9 +151,9 @@ namespace Manager
         }
 
         // 로봇 능력치 관리
-        public void RobotStatusUp(string robotType)
+        public void RobotStatusUp(int robotType)
         {
-            if(robotType == "CollectorRobot")
+            if(robotType == 1)
             {
                 for (int i = 0; i < collectorRobots.Count; i++)
                 {
@@ -168,10 +185,11 @@ namespace Manager
             }
         }
 
-        // 해상도 관리
-        public void Resolution()
+        // 게임 시작
+        public void GameStart()
         {
-
+            isGameOver = false;
+            collectorRobots[0].GetComponent<Robotcontroller>().robotState = EnumTypes.RobotState.Search;
         }
 
         // 게임 정지
@@ -185,6 +203,7 @@ namespace Manager
         {
             Debug.Log("::: Game Over :::");
             isGameOver = true;
+            SceneChange(3);
         }
 
         // 씬 관리

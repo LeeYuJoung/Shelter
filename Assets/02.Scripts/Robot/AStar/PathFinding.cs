@@ -5,38 +5,38 @@ using System.Linq;
 
 namespace yjlee.robot
 {
-     /* A* Algorithm °³¿ä
-     * OPEN SET : Æò°¡µÇ¾î¾ß ÇÒ ³ëµå ÁıÇÕ
-     * CLOSED SET : ÀÌ¹Ì Æò°¡µÈ ³ëµå ÁıÇÕ
+     /* A* Algorithm ê°œìš”
+     * OPEN SET : í‰ê°€ë˜ì–´ì•¼ í•  ë…¸ë“œ ì§‘í•©
+     * CLOSED SET : ì´ë¯¸ í‰ê°€ëœ ë…¸ë“œ ì§‘í•©
      * 
-     * 1. OPEN SET¿¡¼­ °¡Àå ³·Àº fCost¸¦ °¡Áø ³ëµå È¹µæ ÈÄ CLOSED SET »ğÀÔ
-     * 2. ÀÌ ³ëµå°¡ ¸ñÀûÁö¶ó¸é ¹İº¹¹® Å»Ãâ
-     * 3. ÀÌ ³ëµåÀÇ ÁÖº¯ ³ëµåµéÀ» CLOSED SET¿¡ ³Ö°í, ÁÖº¯ ³ëµåÀÇ f°ª °è»ê (ÁÖº¯ ³ëµåÀÇ g°ª º¸´Ù ÀÛ´Ù¸é f°ªÀ¸·Î g°ª ÃÖ½ÅÈ­)
-     * 4. 1¹ø ¹İº¹
+     * 1. OPEN SETì—ì„œ ê°€ì¥ ë‚®ì€ fCostë¥¼ ê°€ì§„ ë…¸ë“œ íšë“ í›„ CLOSED SET ì‚½ì…
+     * 2. ì´ ë…¸ë“œê°€ ëª©ì ì§€ë¼ë©´ ë°˜ë³µë¬¸ íƒˆì¶œ
+     * 3. ì´ ë…¸ë“œì˜ ì£¼ë³€ ë…¸ë“œë“¤ì„ CLOSED SETì— ë„£ê³ , ì£¼ë³€ ë…¸ë“œì˜ fê°’ ê³„ì‚° (ì£¼ë³€ ë…¸ë“œì˜ gê°’ ë³´ë‹¤ ì‘ë‹¤ë©´ fê°’ìœ¼ë¡œ gê°’ ìµœì‹ í™”)
+     * 4. 1ë²ˆ ë°˜ë³µ
      */
     public class PathFinding : MonoBehaviour
     {
         private Robotcontroller robotController;
         public GameObject target;
 
-        // MapÀ» °İÀÚ·Î ºĞÇÒ
-        Grid grid;
-        // ³²Àº°Å¸®¸¦ ³ÖÀ» Queue »ı¼º
+        // Mapì„ ê²©ìë¡œ ë¶„í• 
+        private Grid grid;
+        // ë‚¨ì€ê±°ë¦¬ë¥¼ ë„£ì„ Queue ìƒì„±
         public Queue<Vector2> wayQueue = new Queue<Vector2>();
 
-        // ÇÃ·¹ÀÌ¾î ÀÌµ¿/È¸Àü ¼Óµµ µîÀ» ÀúÀåÇÒ º¯¼ö
+        // í”Œë ˆì´ì–´ ì´ë™/íšŒì „ ì†ë„ ë“±ì„ ì €ì¥í•  ë³€ìˆ˜
         public float moveSpeed;
-        // Àå¾Ö¹° ÆÇ´Ü½Ã ¸ØÃâ°Ô ÇÒ ¹üÀ§
+        // ì¥ì• ë¬¼ íŒë‹¨ì‹œ ë©ˆì¶œê²Œ í•  ë²”ìœ„
         public float range;
 
+        public Vector2 dir;
+
         public bool isWalking;
-        // »óÈ£ÀÛ¿ë ½Ã walkable¸¦ false »óÅÂ·Î º¯È¯
+        // ìƒí˜¸ì‘ìš© ì‹œ walkableë¥¼ false ìƒíƒœë¡œ ë³€í™˜
         public bool walkable = true;
 
         private void Awake()
         {
-            // °İÀÚ »ı¼º
-            grid = GameObject.Find("Grid").GetComponent<Grid>();
             walkable = true;
             isWalking = false;
         }
@@ -46,9 +46,10 @@ namespace yjlee.robot
             Init();
         }
 
-        // RobotController º¯¼ö°ª ÇÒ´ç ÈÄ ÃÊ±âÈ­
+        // RobotController ë³€ìˆ˜ê°’ í• ë‹¹ í›„ ì´ˆê¸°í™”
         private void Init()
         {
+            grid = (transform.CompareTag("Collector")) ? GameObject.Find("Grid_1").GetComponent<Grid>() : GameObject.Find("Grid_2").GetComponent<Grid>();
             robotController = GetComponent<Robotcontroller>();
             moveSpeed = robotController.moveSpeed;
             range = robotController.range;
@@ -65,17 +66,17 @@ namespace yjlee.robot
             StartFindPaath((Vector2)transform.position, (Vector2)target.transform.position);
         }
 
-        // Start to target ÀÌµ¿
+        // Start to target ì´ë™
         public void StartFindPaath(Vector2 startPos, Vector2 targetPos)
         {
             StopAllCoroutines();
             StartCoroutine(FindPath(startPos, targetPos));
         }
 
-        #region ±æÃ£±â ·ÎÁ÷
+        #region ê¸¸ì°¾ê¸° ë¡œì§
         IEnumerator FindPath(Vector2 startPos, Vector2 targetPos)
         {
-            // Start, targetÀÇ ÁÂÇ¥¸¦ grid·Î ºĞÇÒÇÑ ÁÂÇ¥·Î ÁöÁ¤
+            // Start, targetì˜ ì¢Œí‘œë¥¼ gridë¡œ ë¶„í• í•œ ì¢Œí‘œë¡œ ì§€ì •
             Node startNode = grid.NodeFromWorldPoint(startPos);
             Node targetNode = grid.NodeFromWorldPoint(targetPos);
 
@@ -84,24 +85,24 @@ namespace yjlee.robot
             if (!targetNode.isWalkable)
                 Debug.Log(":: UnWalkable StartNode ::");
 
-            // walkableÇÑ targetNodeÀÎ °æ¿ì ±æÃ£±â ½ÃÀÛ
+            // walkableí•œ targetNodeì¸ ê²½ìš° ê¸¸ì°¾ê¸° ì‹œì‘
             if (targetNode.isWalkable)
             {
-                // openSet, closedSet »ı¼º
-                // closedSetÀº ÀÌ¹Ì °è»ê °í·ÁÇÑ ³ëµåµé
-                // openSetÀº °è»êÇÒ °¡Ä¡°¡ ÀÖ´Â ³ëµåµé
+                // openSet, closedSet ìƒì„±
+                // closedSetì€ ì´ë¯¸ ê³„ì‚° ê³ ë ¤í•œ ë…¸ë“œë“¤
+                // openSetì€ ê³„ì‚°í•  ê°€ì¹˜ê°€ ìˆëŠ” ë…¸ë“œë“¤
                 List<Node> openSet = new List<Node>();
                 HashSet<Node> closedSet = new HashSet<Node>();
 
                 openSet.Add(startNode);
 
-                // closedSet¿¡¼­ °¡Àå ÃÖÀúÀÇ f¸¦ °¡Áö´Â ³ëµå¸¦ »­
+                // closedSetì—ì„œ ê°€ì¥ ìµœì €ì˜ fë¥¼ ê°€ì§€ëŠ” ë…¸ë“œë¥¼ ëºŒ
                 while (openSet.Count > 0)
                 {
-                    // currentNode¸¦ °è»ê ÈÄ openSet¿¡¼­ »©¾ß ÇÔ
+                    // currentNodeë¥¼ ê³„ì‚° í›„ openSetì—ì„œ ë¹¼ì•¼ í•¨
                     Node currentNode = openSet[0];
 
-                    // ¸ğµç openSet¿¡ ´ëÇØ, currentº¸´Ù f°ªÀÌ ÀÛ°Å³ª, h(ÈŞ¸®½ºÆ½)°ªÀÌ ÀÛÀ¸¸é ±×°ÍÀ» current·Î ÁöÁ¤
+                    // ëª¨ë“  openSetì— ëŒ€í•´, currentë³´ë‹¤ fê°’ì´ ì‘ê±°ë‚˜, h(íœ´ë¦¬ìŠ¤í‹±)ê°’ì´ ì‘ìœ¼ë©´ ê·¸ê²ƒì„ currentë¡œ ì§€ì •
                     for (int i = 1; i < openSet.Count; i++)
                     {
                         if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
@@ -110,14 +111,14 @@ namespace yjlee.robot
                         }
                     }
 
-                    // openSet¿¡¼­ current¸¦ »« ÈÄ, closed¿¡ Ãß°¡
+                    // openSetì—ì„œ currentë¥¼ ëº€ í›„, closedì— ì¶”ê°€
                     openSet.Remove(currentNode);
                     closedSet.Add(currentNode);
 
-                    // ¹æ±İ µé¾î¿Â ³ëµå°¡ ¸ñÀûÁöÀÎ °æ¿ì
+                    // ë°©ê¸ˆ ë“¤ì–´ì˜¨ ë…¸ë“œê°€ ëª©ì ì§€ì¸ ê²½ìš°
                     if (currentNode == targetNode)
                     {
-                        // seeker°¡ À§Ä¡ÇÑ ÁöÁ¡ÀÌ targetÀÌ ¾Æ´Ñ °æ¿ì
+                        // seekerê°€ ìœ„ì¹˜í•œ ì§€ì ì´ targetì´ ì•„ë‹Œ ê²½ìš°
                         if (!pathSuccess)
                         {
                             PushWay(RetracePath(startNode, targetNode));
@@ -127,16 +128,16 @@ namespace yjlee.robot
                         break;
                     }
 
-                    // currentÀÇ »óÇÏÁÂ¿ì ³ëµåµé¿¡ ´ëÇØ g, hCost¸¦ °í·Á
+                    // currentì˜ ìƒí•˜ì¢Œìš° ë…¸ë“œë“¤ì— ëŒ€í•´ g, hCostë¥¼ ê³ ë ¤
                     foreach (Node neighbour in grid.GetNeighbours(currentNode))
                     {
                         if (!neighbour.isWalkable || closedSet.Contains(neighbour))
                             continue;
 
-                        // fCost »ı¼º
+                        // fCost ìƒì„±
                         int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
 
-                        // ÀÌ¿ôÀ¸·Î °¡´Â fCost°¡ ÀÌ¿ôÀÇ gº¸´Ù Âª°Å³ª, ¹æ¹®ÇØº¼ openSet¿¡ ±× °ªÀÌ ¾ø´Ù¸é
+                        // ì´ì›ƒìœ¼ë¡œ ê°€ëŠ” fCostê°€ ì´ì›ƒì˜ gë³´ë‹¤ ì§§ê±°ë‚˜, ë°©ë¬¸í•´ë³¼ openSetì— ê·¸ ê°’ì´ ì—†ë‹¤ë©´
                         if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                         {
                             neighbour.gCost = newMovementCostToNeighbour;
@@ -152,21 +153,20 @@ namespace yjlee.robot
 
             yield return null;
 
-            // ±æÀ» Ã£¾ÒÀ» °æ¿ì(°è»êÀÌ ´Ù ³¡³­ °æ¿ì) ÀÌµ¿
+            // ê¸¸ì„ ì°¾ì•˜ì„ ê²½ìš°(ê³„ì‚°ì´ ë‹¤ ëë‚œ ê²½ìš°) ì´ë™
             if (pathSuccess)
             {
-                // ÀÌµ¿ÇÏ·Á´Â º¯¼ö On
+                // ì´ë™í•˜ë ¤ëŠ” ë³€ìˆ˜ On
                 isWalking = true;
 
-                // wayQueue¸¦ µû¶ó ÀÌµ¿
+                // wayQueueë¥¼ ë”°ë¼ ì´ë™
                 while (wayQueue.Count > 0)
                 {
-                    var dir = wayQueue.First() - (Vector2)transform.position;
+                    dir = wayQueue.First() - (Vector2)transform.position;
                     gameObject.GetComponent<Rigidbody2D>().linearVelocity = dir.normalized * moveSpeed * 5 * Time.deltaTime;
 
                     if ((Vector2)transform.position == wayQueue.First())
                     {
-                        Debug.Log("Dequeue");
                         wayQueue.Dequeue();
                     }
 
@@ -176,7 +176,7 @@ namespace yjlee.robot
         }
         #endregion
 
-        // WayQueue¿¡ »õ·Î¿î Path¸¦ ³Ö¾îÁÖ±â
+        // WayQueueì— ìƒˆë¡œìš´ Pathë¥¼ ë„£ì–´ì£¼ê¸°
         private void PushWay(Vector2[] array)
         {
             wayQueue.Clear();
@@ -186,7 +186,7 @@ namespace yjlee.robot
             }
         }
 
-        // ÇöÀç Queue¿¡ °Å²Ù·Î ÀúÀåµÇ¾îÀÖÀ¸¹Ç·Î, ¿ª¼øÀ¸·Î wayQueue¸¦ µÚÁı¾îÁÜ
+        // í˜„ì¬ Queueì— ê±°ê¾¸ë¡œ ì €ì¥ë˜ì–´ìˆìœ¼ë¯€ë¡œ, ì—­ìˆœìœ¼ë¡œ wayQueueë¥¼ ë’¤ì§‘ì–´ì¤Œ
         private Vector2[] RetracePath(Node startNode, Node endNode)
         {
             List<Node> path = new List<Node>();
@@ -205,7 +205,7 @@ namespace yjlee.robot
             return wayPointns;
         }
 
-        // Node¿¡¼­ Vector Á¤º¸¸¸ ÃßÃâ
+        // Nodeì—ì„œ Vector ì •ë³´ë§Œ ì¶”ì¶œ
         private Vector2[] SimplifyPath(List<Node> path)
         {
             List<Vector2> wayPoints = new List<Vector2>();
@@ -218,8 +218,8 @@ namespace yjlee.robot
             return wayPoints.ToArray();
         }
 
-        // custom gCost ¶Ç´Â ÈŞ¸®½ºÆ½ ÃßÁ¤Ä¡¸¦ °è»êÇÏ´Â ÇÔ¼ö
-        // ¸Å°³º¯¼ö·Î µé¾î¿À´Â °ª¿¡ µû¶ó ±â´ÉÀÌ º¯ÇÔ
+        // custom gCost ë˜ëŠ” íœ´ë¦¬ìŠ¤í‹± ì¶”ì •ì¹˜ë¥¼ ê³„ì‚°í•˜ëŠ” í•¨ìˆ˜
+        // ë§¤ê°œë³€ìˆ˜ë¡œ ë“¤ì–´ì˜¤ëŠ” ê°’ì— ë”°ë¼ ê¸°ëŠ¥ì´ ë³€í•¨
         private int GetDistance(Node nodeA, Node nodeB)
         {
             int distX = Mathf.Abs(nodeA.gridX - nodeB.gridX);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Manager
 {
@@ -8,20 +9,21 @@ namespace Manager
         private static StoreManager instance;
         public static StoreManager Instance { get { return instance; } }
 
-        private int collectorRobotPrice = 1000;
-        private int sweeperRobotPrice = 1000;
+        public GameObject[] repairButtons;
+        public GameObject[] upgradeButtons;
+        public GameObject raderRoomButton;
 
-        private int collectorRobotUpgradePrice = 1500;
-        private int sweeperRobotUpgradePrice = 1500;
+        public Text tipText;
 
-        const int collectorRobotMaxPiece = 3;
-        const int sweeperRobotMaxPiece = 2;
-        const int robotMaxUpgrade = 3;
+        private int[] robotPrices = new int[2] { 10, 10 };
+        private int[] robotUpgradePrices = new int[2] { 15, 15 };
 
-        const int raderRoomUnLockPrice = 5000;
+        private int[] robotMxPieces = new int[2] { 2, 3 };
+        private int robotMaxUpgrade = 3;
 
-        public int changeFuelAmount;
-        public int changeGoldAmount;
+        const int raderRoomUnLockPrice = 30;
+
+        private bool[] isClear = new bool[5] { false, false, false, false, false };
 
         private void Awake()
         {
@@ -33,122 +35,135 @@ namespace Manager
             {
                 instance = this;
             }
-
-            Init();
         }
 
-        private void Init()
+        // 구매 or 불가 버튼 변경
+        public void SetRepairButton()
         {
-
+            // 구매 버튼
+            for (int i = 0; i < repairButtons.Length; i++)
+            {
+                UIManager.Instance.RepairPossible(repairButtons[i], (GameManager.Instance.GetGold >= robotPrices[i]) && !isClear[i]);
+            }
+            // 업그레이드 버튼
+            for (int i = 0; i < upgradeButtons.Length; i++)
+            {
+                UIManager.Instance.RepairPossible(upgradeButtons[i], (GameManager.Instance.GetGold >= robotUpgradePrices[i] && !isClear[2 + i]));
+            }
+            // 레이더실 해금 버튼
+            UIManager.Instance.RepairPossible(raderRoomButton, (GameManager.Instance.GetGold >= raderRoomUnLockPrice && !isClear[4]));
         }
 
         // 로봇 구매
-        public void RobotBuy(string robotType)
+        public void RobotBuy(int robotType)
         {
             GameObject btn = EventSystem.current.currentSelectedGameObject;
 
-            if(robotType == "CollectorRobot")
+            if (robotType == 1)
             {
-                if (GameManager.Instance.GetGold >= collectorRobotPrice && GameManager.Instance.collectorRobots.Count < collectorRobotMaxPiece)
+                if (GameManager.Instance.GetGold >= robotPrices[1] && GameManager.Instance.collectorRobots.Count < robotMxPieces[1])
                 {
                     GameManager.Instance.RobotPiece(robotType);
-                    GameManager.Instance.UseGold(collectorRobotPrice);
+                    GameManager.Instance.UseGold(robotPrices[1]);
 
-                    collectorRobotPrice += 1000;
-                    UIManager.Instance.UpdateRobotBuyPriceText(0, collectorRobotPrice);
+                    robotPrices[1] += 5;
+                    UIManager.Instance.UpdateRobotBuyPriceText(1, robotPrices[1]);
 
-                    if (GameManager.Instance.collectorRobots.Count == collectorRobotMaxPiece)
-                        UIManager.Instance.SoldOut(btn);
-                }
-                else
-                {
-                    UIManager.Instance.Error("보유한 골드의 수량이 부족하여 구매 실패하였습니다.");
+                    if (GameManager.Instance.collectorRobots.Count == robotMxPieces[1])
+                    {
+                        isClear[1] = true;
+                        UIManager.Instance.SoldOut(1, btn);
+                    }
                 }
             }
-            else if(robotType == "SweeperRobot")
+            else if (robotType == 0)
             {
-                if (GameManager.Instance.GetGold >= sweeperRobotPrice && GameManager.Instance.sweeperRobots.Count < sweeperRobotMaxPiece)
+                if (GameManager.Instance.GetGold >= robotPrices[0] && GameManager.Instance.sweeperRobots.Count < robotMxPieces[0])
                 {
                     GameManager.Instance.RobotPiece(robotType);
-                    GameManager.Instance.UseGold(sweeperRobotPrice);
+                    GameManager.Instance.UseGold(robotPrices[0]);
 
-                    sweeperRobotPrice += 1000;
-                    UIManager.Instance.UpdateRobotBuyPriceText(1, sweeperRobotPrice);
+                    robotPrices[0] += 5;
+                    UIManager.Instance.UpdateRobotBuyPriceText(0, robotPrices[0]);
 
-                    if (GameManager.Instance.sweeperRobots.Count == sweeperRobotMaxPiece)
-                        UIManager.Instance.SoldOut(btn);
-                }
-                else
-                {
-                    UIManager.Instance.Error("보유한 골드의 수량이 부족하여 구매 실패하였습니다.");
+                    if (GameManager.Instance.sweeperRobots.Count == robotMxPieces[0])
+                    {
+                        isClear[0] = true;
+                        UIManager.Instance.SoldOut(0, btn);
+                    }
                 }
             }
+
+            SetRepairButton();
         }
 
         // 로봇 업그레이드
-        public void RobotUpgrade(string robotType)
+        public void RobotUpgrade(int robotType)
         {
-            if (robotType == "CollectorRobot")
+            GameObject btn = EventSystem.current.currentSelectedGameObject;
+
+            if (robotType == 1)
             {
-                if (GameManager.Instance.GetGold >= collectorRobotUpgradePrice && GameManager.Instance.collectorRobotLevel < robotMaxUpgrade)
+                if (GameManager.Instance.GetGold >= robotUpgradePrices[1] && GameManager.Instance.collectorRobotLevel <= robotMaxUpgrade)
                 {
+                    UIManager.Instance.UpgradeState(1);
                     GameManager.Instance.collectorRobotLevel += 1;
                     GameManager.Instance.RobotStatusUp(robotType);
-                    GameManager.Instance.UseGold(collectorRobotUpgradePrice);
+                    GameManager.Instance.UseGold(robotUpgradePrices[1]);
 
-                    collectorRobotUpgradePrice += 1500;
-                    UIManager.Instance.UpdateRoboUpgradetPriceText(0, collectorRobotUpgradePrice);
+                    robotUpgradePrices[1] += 5;
+                    UIManager.Instance.UpdateRoboUpgradetPriceText(1, robotUpgradePrices[1]);
 
-                    if (GameManager.Instance.collectorRobotLevel >= robotMaxUpgrade)
-                        UIManager.Instance.Error("업그레이드가 완료되어 불가능합니다.");
-                }
-                else
-                {
-                    UIManager.Instance.Error("보유한 골드의 수량이 부족하여 업그레이드 실패하였습니다.");
+                    if (GameManager.Instance.collectorRobotLevel > robotMaxUpgrade)
+                    {
+                        isClear[3] = true;
+                        UIManager.Instance.UpgradeClear(1, btn);
+                    }
                 }
             }
-            else if(robotType == "SweeperRobot")
+            else if(robotType == 0)
             {
-                if (GameManager.Instance.GetGold >= sweeperRobotUpgradePrice && GameManager.Instance.sweeperRobotLevel < robotMaxUpgrade)
+                if (GameManager.Instance.GetGold >= robotUpgradePrices[0] && GameManager.Instance.sweeperRobotLevel <= robotMaxUpgrade)
                 {
+                    UIManager.Instance.UpgradeState(0);
                     GameManager.Instance.sweeperRobotLevel += 1;
                     GameManager.Instance.RobotStatusUp(robotType);
-                    GameManager.Instance.UseGold(sweeperRobotUpgradePrice);
+                    GameManager.Instance.UseGold(robotUpgradePrices[0]);
 
-                    sweeperRobotUpgradePrice += 1500;
-                    UIManager.Instance.UpdateRoboUpgradetPriceText(1, sweeperRobotUpgradePrice);
+                    robotUpgradePrices[0] += 5;
+                    UIManager.Instance.UpdateRoboUpgradetPriceText(0, robotUpgradePrices[0]);
 
-                    if (GameManager.Instance.sweeperRobotLevel >= robotMaxUpgrade)
-                        UIManager.Instance.Error("보유한 골드의 수량이 부족하여 업그레이드 실패하였습니다.");
-                }
-                else
-                {
-                    UIManager.Instance.Error("보유한 골드의 수량이 부족하여 업그레이드 실패하였습니다.");
+                    if (GameManager.Instance.sweeperRobotLevel > robotMaxUpgrade)
+                    {
+                        isClear[2] = true;
+                        UIManager.Instance.UpgradeClear(0, btn);
+                    }
                 }
             }
+
+            SetRepairButton();
         }
 
         // 레이더실 해금
         public void RaderRoomUnLock()
         {
-            if(GameManager.Instance.GetGold >= raderRoomUnLockPrice)
+            GameObject btn = EventSystem.current.currentSelectedGameObject;
+
+            if (GameManager.Instance.GetGold >= raderRoomUnLockPrice)
             {
+                UIManager.Instance.RaderRoomUnLock(btn);
                 GameManager.Instance.isRadeRoomUnLock = true;
                 GameManager.Instance.UseGold(raderRoomUnLockPrice);
-            }
-            else
-            {
-                UIManager.Instance.Error("보유한 골드의 수량이 부족하여 레이더실 해금에 실패하였습니다.");
+                MiniGameManager.Instance.possibleIndex = 3;
+                SetRepairButton();
+                isClear[4] = true;
             }
         }
 
-        // 연료 판매
-        public void FuelSale()
+        // 랜덤 tip
+        public void RandomTip()
         {
-            StatusManager.Instance.status.statusData.FuelAmount -= changeFuelAmount;
-            StatusManager.Instance.FuelGaugeChange();
-            GameManager.Instance.GainGold(changeGoldAmount);
-            UIManager.Instance.FuelSaleEnd();
+
         }
     }
 }
