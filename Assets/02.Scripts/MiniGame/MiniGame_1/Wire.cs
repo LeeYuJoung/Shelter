@@ -10,7 +10,5 @@ public enum WireType
 }
 public class Wire : MonoBehaviour
 {
-    [SerializeField] private WireType wireType;
-
-    public WireType WireType => wireType;
+    public WireType WireType;
 }
