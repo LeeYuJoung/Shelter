@@ -86,8 +86,8 @@ namespace Manager
                 day++;
                 dayRange = 1;
                 currentTime = 0;
+                isGameOver = true;
 
-                GameDayStop();
                 ChangeBackground();
                 TutorialController.Instance.Init();
                 UIManager.Instance.UpdateDayImage(day);
@@ -191,22 +191,6 @@ namespace Manager
         public void GameStart()
         {
             isGameOver = false;
-        }
-
-        // 게임 하루 지남
-        public void GameDayStop()
-        {
-            isGameOver = true;
-
-            for(int i = 0; i < collectorRobots.Count; i++)
-            {
-                collectorRobots[i].GetComponent<Robotcontroller>().robotState = EnumTypes.RobotState.Idel;
-            }
-
-            for (int i = 0; i < sweeperRobots.Count; i++)
-            {
-                sweeperRobots[i].GetComponent<Robotcontroller>().robotState = EnumTypes.RobotState.Idel;
-            }
         }
 
         // 게임 정지

@@ -14,6 +14,9 @@ namespace yjlee.robot
         public Robot robot;
         public GameObject target;
 
+        public GameObject[] sweeperPos;
+        public int index = 0;
+
         public RobotState robotState;
         public float moveSpeed;
         public float workTime;
@@ -30,6 +33,14 @@ namespace yjlee.robot
 
         private void Update()
         {
+            if (GameManager.Instance.isGameOver)
+            {
+                pathFinding.moveSpeed = 0.0f;
+                return;
+            }
+            else
+                pathFinding.moveSpeed = moveSpeed;
+
             switch (robotState)
             {
                 case RobotState.Idel:
@@ -57,6 +68,8 @@ namespace yjlee.robot
 
         private void Init()
         {
+            sweeperPos = GameObject.FindGameObjectsWithTag("PartDestination");
+
             robotRigidbody = GetComponent<Rigidbody2D>();
             robotAnimator = GetComponentInChildren<Animator>();
             pathFinding = GetComponent<PathFinding>();
@@ -107,11 +120,28 @@ namespace yjlee.robot
             else if(robot.robotType == RobotType.Sweeper)
             {
                 // 청소 로봇이라면 씬 내에 오물이 있을 경우에만 목적지로 할당받고 이동
-                GameObject[] targets = GameObject.FindGameObjectsWithTag("PartDestination");
+                //GameObject[] targets = GameObject.FindGameObjectsWithTag("PartDestination");
 
-                if(targets.Length > 0)
+                //if(targets.Length > 0)
+                //{
+                //    target = targets[Random.Range(0, targets.Length)];
+                //    pathFinding.target = target;
+
+                //    robotState = RobotState.Move;
+                //    pathFinding.walkable = true;
+                //}
+                //else
+                //{
+                //    robotState = RobotState.Search;
+                //    pathFinding.walkable = false;
+                //}
+
+                int _index = Random.Range(0, sweeperPos.Length);
+
+                if(_index != index)
                 {
-                    target = targets[Random.Range(0, targets.Length)];
+                    index = _index;
+                    target = sweeperPos[_index];
                     pathFinding.target = target;
 
                     robotState = RobotState.Move;
@@ -162,7 +192,6 @@ namespace yjlee.robot
                     robotState = RobotState.Breaking;
                     GameManager.Instance.GainGold(5);
                 }
-                robotAnimator.SetBool("Clean", true);
             }
         }
         #endregion
@@ -172,6 +201,7 @@ namespace yjlee.robot
         {
             currentTime += Time.deltaTime;
             robotAnimator.SetBool("Clean", false);
+            robotAnimator.SetBool("Move", false);
 
             if (currentTime >= breakTime)
             {
@@ -229,6 +259,7 @@ namespace yjlee.robot
             {
                 robotState = RobotState.Work;
                 pathFinding.walkable = false;
+                robotAnimator.SetBool("Clean", true);
             }
         }
 

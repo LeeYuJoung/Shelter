@@ -44,7 +44,7 @@ namespace yjlee.dialog
         {
             for (int i = 0; i < news.Length; i++)
             {
-                news[i].SetActive(true);
+                news[i].SetActive(false);
             }
 
             eventName = "D" + dday;
@@ -64,14 +64,15 @@ namespace yjlee.dialog
                 if (index >= talkDatas.Length)
                 {
                     dday--;
+                    index = 0;
                     dialogObject.SetActive(false);
 
-                    for(int i = 0; i < news.Length; i++)
+                    for (int i = 0; i < news.Length; i++)
                     {
                         news[i].SetActive(true);
                     }
 
-                    if(dday != 0)
+                    if(dday != -1)
                     {
                         GameManager.Instance.GameStart();
                         return;

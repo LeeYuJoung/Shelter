@@ -9,7 +9,7 @@ namespace yjlee.ui
         public RectTransform ins_traTitle = null;
         [Header("이동 속도")]
         [SerializeField]
-        private int ins_nMoveSpeed = 150;
+        private int ins_nMoveSpeed = 125;
         [Header("이동 방향")]
         [SerializeField]
         private bool ins_bRight = true;
@@ -41,6 +41,12 @@ namespace yjlee.ui
 
             StartCoroutine(CorMoveText());
         }
+
+        private void OnEnable()
+        {
+            StartCoroutine(CorMoveText());
+        }
+
         private IEnumerator CorMoveText()
         {
             while (true)
