@@ -6,8 +6,11 @@ using Manager;
 
 namespace yjlee.dialog
 {
-    public class TutorialInteraction : MonoBehaviour
+    public class TutorialController : MonoBehaviour
     {
+        private static TutorialController instance;
+        public static TutorialController Instance {  get { return instance; } }
+
         public DialogParse dialog;
         private DialogData[] talkDatas;
 
@@ -17,11 +20,34 @@ namespace yjlee.dialog
 
         public string eventName;
         public int index = 0;
+        public int dday = 5;
+
+        private void Awake()
+        {
+            if(instance != null )
+            {
+                Destroy(instance);
+            }
+            else
+            {
+                instance = this;
+            }
+        }
 
         private void Start()
         {
             dialog = GetComponent<DialogParse>();
+            Init();
+        }
 
+        public void Init()
+        {
+            for (int i = 0; i < news.Length; i++)
+            {
+                news[i].SetActive(true);
+            }
+
+            eventName = "D" + dday;
             dialogObject.SetActive(true);
             talkDatas = dialog.GetDialog(eventName);
             NextButton();
@@ -37,6 +63,7 @@ namespace yjlee.dialog
             {
                 if (index >= talkDatas.Length)
                 {
+                    dday--;
                     dialogObject.SetActive(false);
 
                     for(int i = 0; i < news.Length; i++)
@@ -44,8 +71,15 @@ namespace yjlee.dialog
                         news[i].SetActive(true);
                     }
 
-                    GameManager.Instance.GameStart();
-                    return;
+                    if(dday != 0)
+                    {
+                        GameManager.Instance.GameStart();
+                        return;
+                    }
+                    else
+                    {
+
+                    }
                 }
 
                 PrintDialog(talkDatas);

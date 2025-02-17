@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using yjlee.dialog;
 using yjlee.robot;
 
 namespace Manager
@@ -32,7 +33,7 @@ namespace Manager
 
         private int day = 0;
         private int dayRange = 1;
-        private float dayTime = 120.0f;              // 하루 시간
+        private float dayTime = 100.0f;              // 하루 시간
         [SerializeField] private float currentTime; // 현재 시간
 
         [SerializeField] private int gold = 0;
@@ -86,7 +87,9 @@ namespace Manager
                 dayRange = 1;
                 currentTime = 0;
 
+                GameDayStop();
                 ChangeBackground();
+                TutorialController.Instance.Init();
                 UIManager.Instance.UpdateDayImage(day);
                 UIManager.Instance.UpdateTimeImage(0);
 
@@ -104,7 +107,7 @@ namespace Manager
             }
             else
             {
-                if(currentTime >= 24.0f * dayRange)
+                if(currentTime >= 20.0f * dayRange)
                 {
                     UIManager.Instance.UpdateTimeImage(dayRange);
                     dayRange++;
@@ -188,7 +191,22 @@ namespace Manager
         public void GameStart()
         {
             isGameOver = false;
-            collectorRobots[0].GetComponent<Robotcontroller>().robotState = EnumTypes.RobotState.Search;
+        }
+
+        // 게임 하루 지남
+        public void GameDayStop()
+        {
+            isGameOver = true;
+
+            for(int i = 0; i < collectorRobots.Count; i++)
+            {
+                collectorRobots[i].GetComponent<Robotcontroller>().robotState = EnumTypes.RobotState.Idel;
+            }
+
+            for (int i = 0; i < sweeperRobots.Count; i++)
+            {
+                sweeperRobots[i].GetComponent<Robotcontroller>().robotState = EnumTypes.RobotState.Idel;
+            }
         }
 
         // 게임 정지
