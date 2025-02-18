@@ -3,8 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Donhyun.UI.Animation;
 using System.Linq;
+using MiniGame;
+using Manager;
 
-public class MiniGame_1 : MonoBehaviour
+public class MiniGame_1 : MiniGameController
 {
     [Header("----- MiniGameObjects -----")]
     [SerializeField] private GameObject miniGamePanel;
@@ -33,7 +35,8 @@ public class MiniGame_1 : MonoBehaviour
     private int currentAnswerValue;
     private List<WireType> types;
 
-
+    public GameObject errorGameObject;
+    private bool isClear = false;
 
     //프로퍼티
     public float MaxTime
@@ -47,7 +50,6 @@ public class MiniGame_1 : MonoBehaviour
             maxTime = value;
         }
     }
-
 
     private void Awake()
     {
@@ -68,9 +70,70 @@ public class MiniGame_1 : MonoBehaviour
         }
     }
 
-    //게임 실행
-    public void GameStart()
+    public override void GetReward()
     {
+        base.GetReward();
+        if (StatusManager.Instance.status.statusData.EngineRestorationRate + reward <= 100)
+            StatusManager.Instance.status.SetEngineRestorationRate(true);
+        else
+            StatusManager.Instance.status.statusData.EngineRestorationRate = 100;
+    }
+
+    public override void GetPenalty()
+    {
+        base.GetPenalty();
+        if (StatusManager.Instance.status.statusData.EngineRestorationRate - penalty >= 0)
+            StatusManager.Instance.status.SetEngineRestorationRate(false);
+        else
+            StatusManager.Instance.status.statusData.EngineRestorationRate = 0;
+    }
+
+    public override void OnBeep()
+    {
+        base.OnBeep();
+
+        Debug.Log(":: MiniGame1 Beep ::");
+        isError = false;
+        errorGameObject.SetActive(false);
+        GetPenalty();
+    }
+
+    public override void GameLevelUp()
+    {
+        base.GameLevelUp();
+    }
+
+    public void ForcingGameOver()
+    {
+        if (isPlaying)
+        {
+            Debug.Log("::: MiniGame1 강제 종료 :::");
+
+            isError = false;
+            isPlaying = false;
+            errorGameObject.SetActive(false);
+            GetPenalty();
+
+            ClearList(leftWireObjects);
+            ClearList(rightWireObjects);
+            correctAnswerValue = 0;
+            currentAnswerValue = 0;
+        }
+        else
+        {
+            Debug.Log("::: MiniGame1 게임 종료 :::");
+            errorGameObject.SetActive(false);
+            ClearList(leftWireObjects);
+            ClearList(rightWireObjects);
+            correctAnswerValue = 0;
+            currentAnswerValue = 0;
+        }
+    }
+
+    //게임 실행
+    public override void GameStart()
+    {
+        base.GameStart();
         UIAnimationManager.OpenUI(() => { miniGamePanel.SetActive(true); }, miniGameUIInfo, AnimationType.PopUp);
 
         beginGame = true;
@@ -80,6 +143,25 @@ public class MiniGame_1 : MonoBehaviour
         correctAnswerValue += leftWireObjects.Count;
 
         Debug.Log("정답 개수 : " + correctAnswerValue);
+    }
+
+    //게임 종료시 실행
+    public override void ClearGame()
+    {
+        base.ClearGame();
+
+        //게임 성공
+        if (isClear)
+        {
+            Debug.Log("::: 게임 성공 :::");
+            GetReward();
+        }
+        //게임 실패
+        else
+        {
+            Debug.Log("::: 게임 실패 :::");
+            GetPenalty();
+        }
     }
 
     //게임 종료시 실행
@@ -112,7 +194,9 @@ public class MiniGame_1 : MonoBehaviour
         if(currentAnswerValue == correctAnswerValue)
         {
             beginGame = false;
-            ClearGame(true);
+            isClear = true;
+            //ClearGame(true);
+            ClearGame();
             return;
         }
 
@@ -124,7 +208,9 @@ public class MiniGame_1 : MonoBehaviour
         {
             currentTIme = 0.0f;
             beginGame = false;
-            ClearGame(false);
+            isClear = false;
+            //ClearGame(false);
+            ClearGame();
             return;
         }
         Timer.fillAmount = currentTIme / maxTime;
@@ -194,7 +280,7 @@ public class MiniGame_1 : MonoBehaviour
     public void AnswerCorrectly()
     {
         currentAnswerValue++;
-        Debug.Log("정답 개수 증가 : " + currentAnswerValue);
+        //Debug.Log("정답 개수 증가 : " + currentAnswerValue);
     }
 
 

@@ -255,18 +255,25 @@ namespace yjlee.robot
                 robotState = RobotState.Drop;
                 StartCoroutine(Drop());
             }
-            else if (collision.collider.CompareTag("PartDestination") && robot.robotType == RobotType.Sweeper)
-            {
-                robotState = RobotState.Work;
-                pathFinding.walkable = false;
-                robotAnimator.SetBool("Clean", true);
-            }
         }
 
         private void OnCollisionStay2D(Collision2D collision)
         {
             robotRigidbody.linearVelocity = Vector3.zero;
             robotRigidbody.angularVelocity = 0.0f;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("PartDestination") && robot.robotType == RobotType.Sweeper)
+            {
+                robotRigidbody.linearVelocity = Vector3.zero;
+                robotRigidbody.angularVelocity = 0.0f;
+
+                robotState = RobotState.Work;
+                pathFinding.walkable = false;
+                robotAnimator.SetBool("Clean", true);
+            }
         }
     }
 }
