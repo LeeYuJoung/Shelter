@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using yjlee.dialog;
+using Manager;
 
 namespace yjlee.intro
 {

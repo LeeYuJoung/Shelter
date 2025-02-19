@@ -5,7 +5,7 @@ namespace MiniGame
 {
     public class MiniGameController : MonoBehaviour
     {
-        public float playTime = 20.0f;
+        public float playTime = 15.0f;
         public int plusPoint = 20;
         public int minusPoint = 10;
         public int reward = 5;

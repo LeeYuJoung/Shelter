@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using yjlee.dialog;
 
 namespace yjlee.ui
 {
     public class ScrollText : MonoBehaviour
     {
+        private News news;
+
         public RectTransform ins_traTitle = null;
         [Header("이동 속도")]
         [SerializeField]
@@ -21,6 +24,8 @@ namespace yjlee.ui
 
         private void Start()
         {
+            news = GameObject.Find("Dialog").GetComponent<News>();
+
             _rtaBg = transform.GetComponent<RectTransform>();
             LayoutRebuilder.ForceRebuildLayoutImmediate(ins_traTitle);
             float _fTexthalf = ins_traTitle.rect.width / 2 + (_rtaBg.rect.width / 2);
@@ -55,6 +60,7 @@ namespace yjlee.ui
                 if (IsEndPos())
                 {
                     ins_traTitle.anchoredPosition = _vStartPos;
+                    news.NextButton();
                 }
                 yield return null;
             }
@@ -66,6 +72,7 @@ namespace yjlee.ui
                 return _fEndPosX < ins_traTitle.anchoredPosition.x;
             else
                 return _fEndPosX > ins_traTitle.anchoredPosition.x;
+
         }
     }
 }

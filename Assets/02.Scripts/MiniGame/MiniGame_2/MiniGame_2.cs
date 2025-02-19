@@ -162,6 +162,7 @@ public class MiniGame_2 : MiniGameController
         {
             // 현재 방향키가 올바른 경우
             Transform currentArrow = arrowParent.GetChild(currentInputIndex);
+            currentArrow.GetComponentInChildren<Image>().sprite = arrowClearSprites[currentArrowIntKeys[currentInputIndex]];
 
             //currentArrow.GetComponentInChildren<TextMeshProUGUI>().color = Color.green; // 초록색으로 변경
             currentInputIndex++; // 다음 방향키로 이동

@@ -60,6 +60,8 @@ public class MiniGame_1 : MiniGameController
         maxWireValue = Mathf.Min(maxWireValue, wireLength);
         leftWireObjects = new List<GameObject>();
         rightWireObjects = new List<GameObject>();
+
+        maxTime = playTime;
     }
 
     private void Update()
