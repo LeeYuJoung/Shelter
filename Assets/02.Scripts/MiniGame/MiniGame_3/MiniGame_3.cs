@@ -8,13 +8,14 @@ public class MiniGame_3 : MiniGameController
 {
     public GameObject miniGame3GameObject;
     public GameObject errorGameObject;
+    public Image resultImage; 
+    public Sprite[] resultSprites;
 
     public Image spaceGauge;   // ✅ SpaceGauge 내부에서만 이동해야 함
     public Image greenZone;
     public Image yellowZone;
     public Image indicator;
     public Image donutGauge;   // ✅ 도넛 게이지 (시각적 점수 표시)
-    public Text gameOverText;  // ✅ 게임 종료 메시지
     public Slider timeSlider;  // ✅ 10초 타이머 (슬라이드바)
 
     private float indicatorSpeed = 250; // ✅ 이동 속도
@@ -93,12 +94,10 @@ public class MiniGame_3 : MiniGameController
         UpdateGauge(); // ✅ 도넛 게이지 초기화
 
         // ✅ 게임 종료 메시지 숨기기
-        if (gameOverText != null)
+        if (resultImage != null)
         {
-            gameOverText.gameObject.SetActive(false);
+            resultImage.gameObject.SetActive(false);
         }
-
-        Debug.Log("🎮 게임 시작!");
     }
 
     void Update()
@@ -244,22 +243,19 @@ public class MiniGame_3 : MiniGameController
     {
         base.ClearGame();
         isGameOver = true;
-        Debug.Log("🎮 게임 종료! 점수 100 도달 또는 시간 종료!");
 
-        if (gameOverText != null)
+        if (resultImage != null)
         {
-            gameOverText.gameObject.SetActive(true);
+            resultImage.gameObject.SetActive(true);
             if (totalScore >= 100)
             {
                 GetReward();
-                gameOverText.text = "🎉 Clear!";
-                gameOverText.color = Color.green;
+                resultImage.sprite = resultSprites[0];
             }
             else
             {
                 GetPenalty();
-                gameOverText.text = "❌ Game Over!";
-                gameOverText.color = Color.red;
+                resultImage.sprite = resultSprites[1];
             }
         }
 
@@ -274,10 +270,8 @@ public class MiniGame_3 : MiniGameController
             Debug.Log(":: MiniGame3 강제 종료 ::");
 
             isGameOver = true;
-            gameOverText.gameObject.SetActive(true);
-
-            gameOverText.text = "❌ Game Over!";
-            gameOverText.color = Color.red;
+            resultImage.gameObject.SetActive(true);
+            resultImage.sprite = resultSprites[0];
 
             isPlaying = false;
             errorGameObject.SetActive(false);

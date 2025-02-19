@@ -5,15 +5,6 @@ TextureImporter:
   - first:
       213: 2456112691805801583
     second: "5\uC77C\uCC28_0"
-  - first:
-      213: -7285918078329550177
-    second: "5\uC77C\uCC28_1"
-  - first:
-      213: 3400873496505204267
-    second: "5\uC77C\uCC28_2"
-  - first:
-      213: -9210739882392139225
-    second: "5\uC77C\uCC28_3"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,9 +117,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 815
-        width: 180
-        height: 265
+        y: 791
+        width: 336
+        height: 289
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,72 +130,6 @@ TextureImporter:
       bones: []
       spriteID: f6cc96bea7dd51220800000000000000
       internalID: 2456112691805801583
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "5\uC77C\uCC28_1"
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 905
-        width: 163
-        height: 163
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f9a02963c1833ea90800000000000000
-      internalID: -7285918078329550177
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "5\uC77C\uCC28_2"
-      rect:
-        serializedVersion: 2
-        x: 234
-        y: 849
-        width: 97
-        height: 231
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b2ebb3d2d64523f20800000000000000
-      internalID: 3400873496505204267
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "5\uC77C\uCC28_3"
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 797
-        width: 102
-        height: 79
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 72a4e77a0e0ec2080800000000000000
-      internalID: -9210739882392139225
       vertices: []
       indices: 
       edges: []
@@ -224,9 +149,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       "5\uC77C\uCC28_0": 2456112691805801583
-      "5\uC77C\uCC28_1": -7285918078329550177
-      "5\uC77C\uCC28_2": 3400873496505204267
-      "5\uC77C\uCC28_3": -9210739882392139225
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
