@@ -68,6 +68,7 @@ public class MiniGame_2 : MiniGameController
     {
         base.GameStart();
         miniGame2GameObject.SetActive(true);
+        GenerateRandomArrowKeys(); // ✅ 랜덤 방향키 생성
 
         isGameActive = true; // ✅ 게임 활성화
         maxTime = playTime;
@@ -92,8 +93,6 @@ public class MiniGame_2 : MiniGameController
             powerSlider.maxValue = 1;
             powerSlider.value = 0;
         }
-
-        GenerateRandomArrowKeys(); // ✅ 랜덤 방향키 생성
     }
 
     void Update()
@@ -175,7 +174,10 @@ public class MiniGame_2 : MiniGameController
                 currentPower = Mathf.Min(currentPower + plusPoint, maxPower); // 전력 게이지 증가
             }
         }
-        else if (Input.anyKeyDown) // 잘못된 키 입력 시
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && currentArrowKeys[currentInputIndex] != "↑" ||
+            Input.GetKeyDown(KeyCode.DownArrow) && currentArrowKeys[currentInputIndex] != "↓" ||
+            Input.GetKeyDown(KeyCode.LeftArrow) && currentArrowKeys[currentInputIndex] != "←" ||
+            Input.GetKeyDown(KeyCode.RightArrow) && currentArrowKeys[currentInputIndex] != "→") // 잘못된 키 입력 시
         {
             PlayWrongInputSound(); // 틀린 입력 소리 재생
             StartCoroutine(WrongInputFeedback()); // 잘못된 입력 시 피드백 연출
@@ -221,10 +223,8 @@ public class MiniGame_2 : MiniGameController
             //arrowText.color = Color.red;
         }
 
-        yield return new WaitForSeconds(0.5f); // 0.5초 대기
-
-        // 다시 랜덤 방향키 생성
         currentInputIndex = 0;     // 🎯 인덱스 초기화 (이게 빠져있어서 오류 발생 가능)
+        yield return new WaitForSeconds(0.5f); // 0.5초 대기
         GenerateRandomArrowKeys(); // 🎯 새로운 방향키 생성
     }
 
