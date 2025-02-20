@@ -9,11 +9,11 @@ namespace Manager
         private static StoreManager instance;
         public static StoreManager Instance { get { return instance; } }
 
+        public GameObject raderRoomLock;
+
         public GameObject[] repairButtons;
         public GameObject[] upgradeButtons;
         public GameObject raderRoomButton;
-
-        public Text tipText;
 
         private int[] robotPrices = new int[2] { 10, 10 };
         private int[] robotUpgradePrices = new int[2] { 15, 15 };
@@ -151,6 +151,7 @@ namespace Manager
 
             if (GameManager.Instance.GetGold >= raderRoomUnLockPrice)
             {
+                raderRoomLock.SetActive(false);
                 UIManager.Instance.RaderRoomUnLock(btn);
                 GameManager.Instance.isRadeRoomUnLock = true;
                 GameManager.Instance.UseGold(raderRoomUnLockPrice);
@@ -158,12 +159,6 @@ namespace Manager
                 SetRepairButton();
                 isClear[4] = true;
             }
-        }
-
-        // 랜덤 tip
-        public void RandomTip()
-        {
-
         }
     }
 }

@@ -17,7 +17,8 @@ public class MiniGame_1 : MiniGameController
     [SerializeField] private GameObject wireTargetPrefab;
 
     [Header("----- MiniGameTimer -----")]
-    [SerializeField] private Image Timer;
+    //[SerializeField] private Image Timer;
+    [SerializeField] private Slider timerSlider;
     [SerializeField] private float maxTime;
 
     [Header("----- MiniGameMaxWIreValue -----")]
@@ -34,6 +35,9 @@ public class MiniGame_1 : MiniGameController
     private int correctAnswerValue;
     private int currentAnswerValue;
     private List<WireType> types;
+
+    public Image resultImage;
+    public Sprite[] resultSprites;
 
     public GameObject errorGameObject;
     private bool isClear = false;
@@ -114,6 +118,7 @@ public class MiniGame_1 : MiniGameController
             isError = false;
             isPlaying = false;
             errorGameObject.SetActive(false);
+            resultImage.gameObject.SetActive(false);
             GetPenalty();
 
             ClearList(leftWireObjects);
@@ -125,6 +130,7 @@ public class MiniGame_1 : MiniGameController
         {
             Debug.Log("::: MiniGame1 게임 종료 :::");
             errorGameObject.SetActive(false);
+            resultImage.gameObject.SetActive(false);
             ClearList(leftWireObjects);
             ClearList(rightWireObjects);
             correctAnswerValue = 0;
@@ -151,17 +157,18 @@ public class MiniGame_1 : MiniGameController
     public override void ClearGame()
     {
         base.ClearGame();
+        resultImage.gameObject.SetActive(true);
 
         //게임 성공
         if (isClear)
         {
-            Debug.Log("::: 게임 성공 :::");
+            resultImage.sprite = resultSprites[0];
             GetReward();
         }
         //게임 실패
         else
         {
-            Debug.Log("::: 게임 실패 :::");
+            resultImage.sprite = resultSprites[1];
             GetPenalty();
         }
     }
@@ -215,7 +222,8 @@ public class MiniGame_1 : MiniGameController
             ClearGame();
             return;
         }
-        Timer.fillAmount = currentTIme / maxTime;
+        //Timer.fillAmount = currentTIme / maxTime;
+        timerSlider.value = currentTIme / maxTime;
     }
 
     //셔플(제네릭)
@@ -264,7 +272,8 @@ public class MiniGame_1 : MiniGameController
             GameObject wire = Instantiate(wireTargetPrefab, wireGroup.transform);
 
             //전선 프리팹 중 랜덤
-            int random = UnityEngine.Random.Range(0, wireLength);
+            //int random = UnityEngine.Random.Range(0, wireLength);
+            int random = UnityEngine.Random.Range(0, 7 - maxWireLength);
             ChangeWireColor((WireType)random, wire);
             list.Add(wire);
         }
