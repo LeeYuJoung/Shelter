@@ -61,7 +61,8 @@ public class MiniGame_1 : MiniGameController
         currentAnswerValue = 0;
         beginGame = false;
         wireLength = wireTypes.Count;
-        maxWireValue = Mathf.Min(maxWireValue, wireLength);
+        //maxWireValue = Mathf.Min(maxWireValue, wireLength);
+        maxWireValue = 4;
         leftWireObjects = new List<GameObject>();
         rightWireObjects = new List<GameObject>();
 
@@ -254,7 +255,7 @@ public class MiniGame_1 : MiniGameController
     //오답 전선 추가
     private void AddRightWire(List<GameObject> AnswerWireObjectsList, List<GameObject> wireObjects, GameObject wireGroup)
     {
-        int maxWireLength = UnityEngine.Random.Range(0, 3);
+        int maxWireLength = UnityEngine.Random.Range(0, 2);
 
         List<GameObject> list = new List<GameObject>();
 
@@ -273,7 +274,7 @@ public class MiniGame_1 : MiniGameController
 
             //전선 프리팹 중 랜덤
             //int random = UnityEngine.Random.Range(0, wireLength);
-            int random = UnityEngine.Random.Range(0, 7 - maxWireLength);
+            int random = UnityEngine.Random.Range(0, wireLength);
             ChangeWireColor((WireType)random, wire);
             list.Add(wire);
         }
