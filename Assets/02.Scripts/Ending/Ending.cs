@@ -1,9 +1,6 @@
-using Manager;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor.Overlays;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -43,7 +40,7 @@ public class Ending : MonoBehaviour
     {
         Type =  ClassfyEnding(statusData);
         JsonSave();
-        SceneManager.LoadScene("EndingTest"); //씬이동
+        SceneManager.LoadScene(3); //씬이동
     }
 
     public EndingType ClassfyEnding(StatusDataSO statusData)

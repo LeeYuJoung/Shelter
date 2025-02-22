@@ -92,7 +92,7 @@ MonoBehaviour:
     rectTransform: {fileID: 0}
     start: {x: 0, y: 1, z: 1}
     end: {x: 1, y: 1, z: 1}
-    tweenDuration: 0.5
+    tweenDuration: 0.4
     ease: 1
   delay: 3
 --- !u!1 &1781657603294821587
@@ -322,7 +322,7 @@ MonoBehaviour:
     rectTransform: {fileID: 0}
     start: {x: 0, y: 1, z: 1}
     end: {x: 1, y: 1, z: 1}
-    tweenDuration: 0.5
+    tweenDuration: 0.4
     ease: 1
   delay: 3
 --- !u!1 &4927347703297795858
@@ -556,7 +556,7 @@ MonoBehaviour:
     rectTransform: {fileID: 0}
     start: {x: 0, y: 1, z: 1}
     end: {x: 1, y: 1, z: 1}
-    tweenDuration: 0.5
+    tweenDuration: 0.4
     ease: 1
   delay: 3
 --- !u!1 &6341760542074220847
@@ -696,7 +696,7 @@ MonoBehaviour:
     rectTransform: {fileID: 0}
     start: {x: 0, y: 1, z: 1}
     end: {x: 1, y: 1, z: 1}
-    tweenDuration: 0.5
+    tweenDuration: 0.4
     ease: 1
   delay: 3
 --- !u!1 &7171728952445256987
@@ -873,7 +873,7 @@ MonoBehaviour:
     rectTransform: {fileID: 0}
     start: {x: 0, y: 1, z: 1}
     end: {x: 1, y: 1, z: 1}
-    tweenDuration: 0.5
+    tweenDuration: 0.4
     ease: 0
   delay: 3
 --- !u!1 &8400878016954515395
@@ -1013,6 +1013,6 @@ MonoBehaviour:
     rectTransform: {fileID: 0}
     start: {x: 0, y: 1, z: 1}
     end: {x: 1, y: 1, z: 1}
-    tweenDuration: 0.5
+    tweenDuration: 0.4
     ease: 1
   delay: 3

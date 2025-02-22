@@ -16,8 +16,10 @@ public class EndingCardContoller : MonoBehaviour
     [SerializeField] private Button rightButton;
 
     private int currentCard = 0;
-    private Color32 clearColor = new Color32(255, 255, 255, 255);
-    private Color32 lockColor = new Color32(50, 50, 50, 255);
+    public Sprite[] clearSprites;
+    public Sprite lockSprite;
+    //private Color32 clearColor = new Color32(255, 255, 255, 255);
+    //private Color32 lockColor = new Color32(50, 50, 50, 255);
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class EndingCardContoller : MonoBehaviour
 
         for (int i = 0; i < endingCards.Length; i++)
         {
-            endingCards[i].color = lockColor;
+            endingCards[i].sprite = lockSprite;
         }
     }
 
@@ -37,12 +39,11 @@ public class EndingCardContoller : MonoBehaviour
 
         foreach (EndingType type in Ending.SaveData.endingTypes)
         {
-            if(type == EndingType.None) continue;
+            if (type == EndingType.None) continue;
             Debug.Log(type);
-            endingCards[(int)type - 1].color = clearColor;
+            endingCards[(int)type - 1].sprite = clearSprites[(int)type - 1];
         }
     }
-
 
     //왼쪽 버튼 누를 시
     public void ClickLeftButton()

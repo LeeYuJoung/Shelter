@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3610116525394523107}
   - component: {fileID: 8170251218310769671}
   - component: {fileID: 7008193917704058016}
+  - component: {fileID: -6518596921236647071}
   m_Layer: 5
   m_Name: ArrowPrefab
   m_TagString: Untagged
@@ -75,3 +76,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-6518596921236647071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619109959033503199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714ea8e63ca168c4f8846a0e6032a79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button:
+    rectTransform: {fileID: 3610116525394523107}
+    start: {x: 1, y: 1, z: 1}
+    end: {x: 0.8, y: 0.8, z: 1}
+    tweenDuration: 0.05
+    ease: 1
