@@ -1,17 +1,17 @@
 using Donhyun.UI.Animation;
 using UnityEngine;
 
-public class UITest : MonoBehaviour
+public class UIAnimation : MonoBehaviour
 {
     [SerializeField] UIInformation UIInfo;
     [SerializeField] AnimationType type;
-    public void OpenUI()
+    private void OnEnable()
     {
         UIAnimationManager.OpenUI(() => { gameObject.SetActive(true); }, UIInfo, type);
     }
 
-    public void CloseUI()
+    public void Close()
     {
-        UIAnimationManager.CloseUI(() => { gameObject.SetActive(false); }, UIInfo, type);
+        UIAnimationManager.CloseUI(() => { transform.parent.gameObject.SetActive(false); }, UIInfo, type);
     }
 }

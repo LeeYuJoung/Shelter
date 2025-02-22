@@ -21,7 +21,7 @@ public class ScrollAnimation : MonoBehaviour
 
     public void Close()
     {
-        rect.DOSizeDelta(defaultSize, durationTime).SetEase(ease);
-        gameObject.SetActive(false);
+        rect.DOSizeDelta(defaultSize, durationTime).SetEase(ease)
+            .OnComplete(() => { transform.parent.gameObject.SetActive(false); });
     }
 }
