@@ -110,28 +110,35 @@ public class MiniGame_1 : MiniGameController
         base.GameLevelUp();
     }
 
-    public void ForcingGameOver()
+    // 게임 강제 종료
+    public override void ForcingGameOver()
     {
+        base.ForcingGameOver();
+
         if (isPlaying)
         {
             Debug.Log("::: MiniGame1 강제 종료 :::");
 
-            isError = false;
-            isPlaying = false;
             errorGameObject.SetActive(false);
             resultImage.gameObject.SetActive(false);
+            miniGamePanel.SetActive(false);
             GetPenalty();
 
             ClearList(leftWireObjects);
             ClearList(rightWireObjects);
             correctAnswerValue = 0;
             currentAnswerValue = 0;
+
+            isError = false;
+            isPlaying = false;
         }
         else
         {
             Debug.Log("::: MiniGame1 게임 종료 :::");
             errorGameObject.SetActive(false);
             resultImage.gameObject.SetActive(false);
+            miniGamePanel.SetActive(false);
+
             ClearList(leftWireObjects);
             ClearList(rightWireObjects);
             correctAnswerValue = 0;

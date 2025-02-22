@@ -89,14 +89,14 @@ namespace Manager
                 isGameOver = true;
 
                 ChangeBackground();
-                TutorialController.Instance.Init();
+                MiniGameManager.Instance.AllGameStop();
                 UIManager.Instance.UpdateDayImage(day);
                 UIManager.Instance.UpdateTimeImage(0);
+                TutorialController.Instance.Init();
 
                 // 미니게임 난이도 상승
-                for(int i = 0; i < machines.Length; i++)
+                for (int i = 0; i < machines.Length; i++)
                 {
-                    Debug.Log(machines[i].name + "Level UP");
                     machines[i].GetComponent<MiniGameController>().GameLevelUp();
                 }
 

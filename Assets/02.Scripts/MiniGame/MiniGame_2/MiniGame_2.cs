@@ -95,6 +95,26 @@ public class MiniGame_2 : MiniGameController
         }
     }
 
+    // 게임 강제 종료
+    public override void ForcingGameOver()
+    {
+        base.ForcingGameOver();
+
+        if (isGameActive)
+        {
+            Debug.Log(":: MiniGame2 강제 종료 ::");
+
+            isGameActive = false; // 게임 중지
+            resultImage.gameObject.SetActive(true);
+            resultImage.sprite = resultSprites[1];
+
+            isPlaying = false;
+            errorGameObject.SetActive(false);
+            miniGame2GameObject.SetActive(false);
+            GetPenalty();
+        }
+    }
+
     void Update()
     {
         if (!isError)
@@ -247,22 +267,6 @@ public class MiniGame_2 : MiniGameController
         if (wrongInputSound != null)
         {
             wrongInputSound.Play();
-        }
-    }
-
-    public void ForcingGameOver()
-    {
-        if(isGameActive)
-        {
-            Debug.Log(":: MiniGame2 강제 종료 ::");
-
-            isGameActive = false; // 게임 중지
-            resultImage.gameObject.SetActive(true);
-            resultImage.sprite = resultSprites[1];
-
-            isPlaying = false;
-            errorGameObject.SetActive(false);
-            GetPenalty();
         }
     }
 }

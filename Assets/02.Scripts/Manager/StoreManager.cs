@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Manager
 {
@@ -10,6 +9,7 @@ namespace Manager
         public static StoreManager Instance { get { return instance; } }
 
         public GameObject raderRoomLock;
+        public GameObject[] raderRoomSweeperPos;
 
         public GameObject[] repairButtons;
         public GameObject[] upgradeButtons;
@@ -158,6 +158,11 @@ namespace Manager
                 MiniGameManager.Instance.possibleIndex = 3;
                 SetRepairButton();
                 isClear[4] = true;
+
+                for(int i = 0; i < raderRoomSweeperPos.Length; i++)
+                {
+                    raderRoomSweeperPos[i].SetActive(true);
+                }
             }
         }
     }

@@ -20,7 +20,7 @@ namespace yjlee.intro
         {
             dialog = GetComponent<DialogParse>();
 
-            // 대화 정보 가져오기
+            AudioManager.Instance.PlayBGM(1);
             talkDatas = dialog.GetDialog(eventName);
             NextButton();
         }

@@ -47,6 +47,9 @@ namespace yjlee.dialog
                 news[i].SetActive(false);
             }
 
+            if(dday != 5)
+                AudioManager.Instance.PlayBGM(1);
+
             eventName = "D" + dday;
             dialogObject.SetActive(true);
             talkDatas = dialog.GetDialog(eventName);
@@ -75,6 +78,7 @@ namespace yjlee.dialog
                     if(dday != -1)
                     {
                         GameManager.Instance.GameStart();
+                        AudioManager.Instance.PlayBGM(2);
                         return;
                     }
                     else

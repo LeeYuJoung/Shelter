@@ -100,6 +100,26 @@ public class MiniGame_3 : MiniGameController
         }
     }
 
+    // 게임 강제 종료
+    public override void ForcingGameOver()
+    {
+        base.ForcingGameOver();
+
+        if (!isGameOver)
+        {
+            Debug.Log(":: MiniGame3 강제 종료 ::");
+
+            isGameOver = true;
+            resultImage.gameObject.SetActive(true);
+            resultImage.sprite = resultSprites[0];
+
+            isPlaying = false;
+            errorGameObject.SetActive(false);
+            miniGame3GameObject.SetActive(false);
+            GetPenalty();
+        }
+    }
+
     void Update()
     {
         if (!isError)
@@ -263,22 +283,5 @@ public class MiniGame_3 : MiniGameController
         }
 
         errorGameObject.SetActive(false);
-    }
-
-    // 게임 강제 종료 시 실행
-    public void ForcingGameOver()
-    {
-        if(!isGameOver)
-        {
-            Debug.Log(":: MiniGame3 강제 종료 ::");
-
-            isGameOver = true;
-            resultImage.gameObject.SetActive(true);
-            resultImage.sprite = resultSprites[0];
-
-            isPlaying = false;
-            errorGameObject.SetActive(false);
-            GetPenalty();
-        }
     }
 }

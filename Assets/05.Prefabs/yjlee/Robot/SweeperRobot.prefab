@@ -297,6 +297,7 @@ MonoBehaviour:
   robot: {fileID: 11400000, guid: a3c9ac10d85f9e44abb2c3aad25c3a8d, type: 2}
   target: {fileID: 0}
   sweeperPos: []
+  possiblePos: 2
   index: 0
   robotState: 0
   moveSpeed: 0

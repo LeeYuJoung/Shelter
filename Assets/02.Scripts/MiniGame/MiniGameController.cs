@@ -55,5 +55,11 @@ namespace MiniGame
         {
 
         }
+
+        // 게임 강제 종료
+        public virtual void ForcingGameOver()
+        {
+
+        }
     }
 }
