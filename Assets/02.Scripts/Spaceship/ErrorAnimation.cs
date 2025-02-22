@@ -16,15 +16,15 @@ public class ErrorAnimation : MonoBehaviour
         sequence = DOTween.Sequence();
 
         sequence
-            .InsertCallback(0f, () => { spriteRenderer.enabled = true; }) // Tween 시작 전에 실행
-            .Append(transform.DOScale(end, durationTime)  // 크기 확대 애니메이션
-                .SetEase(ease)
-            )
-            .AppendInterval(0.3f) // 0.3초 대기 (애니메이션 끝난 후)
             .AppendCallback(() => {
                 transform.localScale = start;
-                spriteRenderer.enabled = false; // 애니메이션 끝난 후 숨김
+                spriteRenderer.enabled = true;
             })
+            .Append(transform.DOScale(end, durationTime)
+                .SetEase(ease))
+            .AppendInterval(0.3f) // 0.3초 대기 (애니메이션 끝난 후)
+            .AppendCallback(() => { spriteRenderer.enabled = false; })
+            .AppendInterval(0.3f) // 0.3초 대기 (애니메이션 끝난 후)
             .SetLoops(-1, LoopType.Restart);
     }
 
