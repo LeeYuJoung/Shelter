@@ -16,10 +16,7 @@ EditorBuildSettings:
     guid: d204f67d617722e43b62a1eeac9d264a
   - enabled: 1
     path: Assets/01.Scenes/MainScenes/Ending.unity
-    guid: a0581d91fd076e4419676b9ea38ff16a
-  - enabled: 1
-    path: Assets/01.Scenes/TeamScenes/Donhyun/EndingTest.unity
-    guid: 3844718732863d243ab49b0e2e0beeef
+    guid: 1a8c1e688e35a6544b328a951ade43b2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

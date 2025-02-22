@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class EndingScneneManager : MonoBehaviour
 {
     [Header("-----Data-----")]
-    [SerializeField] private Image[] endingImageData;
+    [SerializeField] private Sprite[] endingImageData;
     [SerializeField] private string[] endingTextData;
 
     [Header("-----EndingCard-----")]
@@ -12,7 +12,7 @@ public class EndingScneneManager : MonoBehaviour
     [SerializeField] private Text endingCardText;
     void Start()
     {
-        endingCardImage = endingImageData[(int)Ending.Type - 1];
+        endingCardImage.sprite = endingImageData[(int)Ending.Type - 1];
         endingCardText.text = endingTextData[(int)Ending.Type - 1];
     }
 }

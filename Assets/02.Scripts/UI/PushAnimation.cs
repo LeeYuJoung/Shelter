@@ -14,4 +14,12 @@ public class PushAnimation : MonoBehaviour
         sequence.Append(button.rectTransform.DOScale(button.end, button.tweenDuration).SetEase(button.ease))
                 .Append(button.rectTransform.DOScale(button.start, button.tweenDuration).SetEase(button.ease));
     }
+
+    public void OnSuccess()
+    {
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(button.rectTransform.DOScale(button.end, button.tweenDuration).SetEase(button.ease))
+                .Append(button.rectTransform.DOScale(button.start, button.tweenDuration).SetEase(button.ease));
+    }
 }
