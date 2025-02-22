@@ -22,10 +22,7 @@ public class ErrorAnimation : MonoBehaviour
             })
             .Append(transform.DOScale(end, durationTime)
                 .SetEase(ease))
-            .AppendInterval(0.3f) // 0.3초 대기 (애니메이션 끝난 후)
-            .AppendCallback(() => { spriteRenderer.enabled = false; })
-            .AppendInterval(0.3f) // 0.3초 대기 (애니메이션 끝난 후)
-            .SetLoops(-1, LoopType.Restart);
+            .SetLoops(-1, LoopType.Yoyo);
     }
 
 
