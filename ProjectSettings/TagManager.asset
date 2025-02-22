@@ -28,7 +28,7 @@ TagManager:
   - Part
   - Collector
   - Sweeper
-  - 
+  - PartDestination
   - 
   - 
   - 
@@ -58,6 +58,9 @@ TagManager:
     locked: 0
   - name: Robot
     uniqueID: 895978583
+    locked: 0
+  - name: Wall
+    uniqueID: 325140733
     locked: 0
   m_RenderingLayers:
   - Default

@@ -1,72 +1,96 @@
 using UnityEngine;
 using UnityEngine.UI;
-using EnumTypes;
 
 namespace Manager
 {
+    //BGM 종류들
+    public enum EBgm
+    {
+        Title,
+        Intro,
+        Main,
+        Ending
+    }
+
+    //SFX 종류들
+    public enum ESfx
+    {
+        SFX_BUTTON,
+        SFX_ENDING,
+        SFX_TOKEN,
+        SFX_BOTTLE,
+        SFX_OPENDOOR,
+        SFX_MissionClear
+    }
+
     public class AudioManager : MonoBehaviour
     {
         private static AudioManager instance;
-        public static AudioManager Instnce { get { return instance; } }
+        public static AudioManager Instance { get { return instance; } }
 
+        //audio clip 담을 수 있는 배열
         [SerializeField] AudioClip[] bgms;
         [SerializeField] AudioClip[] sfxs;
 
-        public AudioSource bgmPlayer;
-        public AudioSource[] sfxPlayer;
+        [SerializeField] AudioSource bgmPlayer = null;
+        [SerializeField] AudioSource[] sfxPlayer = null;
 
         public Slider bgmSlider;
         public Slider sfxSlider;
 
-        public float bgmVolume;
-        public float sfxVolume;
+        public float bgmVolume = 1.0f;
+        public float sfxVolume = 1.0f;
 
         private void Awake()
         {
-            if (instance != null)
+            if(instance != null)
             {
                 Destroy(instance);
             }
             else
             {
                 instance = this;
+                DontDestroyOnLoad(gameObject);
             }
 
-            bgmPlayer.volume = PlayerPrefs.GetFloat("bgm_Volume");
+            Init();
+            //PlayerPrefs.SetFloat("bgm", 1.0f);
+            //PlayerPrefs.SetFloat("sfx", 1.0f);
         }
 
-        // bgm 재생
+        private void Init()
+        {
+            sfxPlayer = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+            bgmSlider = GameObject.Find("Settings")?.transform.GetChild(0).transform.GetChild(0).GetComponentInChildren<Slider>();
+            sfxSlider = GameObject.Find("Settings")?.transform.GetChild(0).transform.GetChild(1).GetComponentInChildren<Slider>();
+        }
+
         public void PlayBGM(int _sceneNumber)
         {
             bgmPlayer.clip = bgms[_sceneNumber];
             bgmPlayer.Play();
         }
 
-        // bgm 재생 정지
         public void StopBGM()
         {
             bgmPlayer.Stop();
         }
 
-        // bgm volume 수치 변경
         public void ChangeBGMVolume()
         {
             bgmPlayer.volume = bgmVolume;
         }
 
-        // bgm volume 수치 저장
         public void SaveBGMVolume()
         {
             bgmVolume = bgmSlider.value;
         }
 
-        // sfx 재생
-        public void PlaySFX(AudioSource _audioSource, SoundType _soundType)
+        public void PlaySFX(AudioSource _audioSource, ESfx _soundType)
         {
             if (sfxs[(int)_soundType] != null)
             {
                 _audioSource.clip = sfxs[(int)_soundType];
-
                 if (_audioSource.gameObject.activeSelf)
                 {
                     _audioSource.Play();
@@ -76,34 +100,6 @@ namespace Manager
             {
                 Debug.Log("::: 해당 SFX 없음 :::");
             }
-        }
-
-        // sfx 재생 정지
-        public void StopSFX(AudioSource _audioSource, SoundType _soundType)
-        {
-            if (_audioSource.clip == sfxs[(int)_soundType])
-            {
-                _audioSource.Stop();
-            }
-            else
-            {
-                Debug.Log("::: 해당 SFX 없음 :::");
-            }
-        }
-
-        // sfx volume 수치 변경
-        public void ChangeSFXVolume()
-        {
-            for (int i = 0; i < sfxPlayer.Length; i++)
-            {
-                sfxPlayer[i].volume = sfxVolume;
-            }
-        }
-
-        // sfx volume 수치 저장
-        public void SaveSFXVolume()
-        {
-            sfxVolume = sfxSlider.value;
         }
     }
 }

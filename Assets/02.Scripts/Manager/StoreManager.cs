@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Manager
 {
@@ -9,11 +8,12 @@ namespace Manager
         private static StoreManager instance;
         public static StoreManager Instance { get { return instance; } }
 
+        public GameObject raderRoomLock;
+        public GameObject[] raderRoomSweeperPos;
+
         public GameObject[] repairButtons;
         public GameObject[] upgradeButtons;
         public GameObject raderRoomButton;
-
-        public Text tipText;
 
         private int[] robotPrices = new int[2] { 10, 10 };
         private int[] robotUpgradePrices = new int[2] { 15, 15 };
@@ -151,19 +151,19 @@ namespace Manager
 
             if (GameManager.Instance.GetGold >= raderRoomUnLockPrice)
             {
+                raderRoomLock.SetActive(false);
                 UIManager.Instance.RaderRoomUnLock(btn);
                 GameManager.Instance.isRadeRoomUnLock = true;
                 GameManager.Instance.UseGold(raderRoomUnLockPrice);
                 MiniGameManager.Instance.possibleIndex = 3;
                 SetRepairButton();
                 isClear[4] = true;
+
+                for(int i = 0; i < raderRoomSweeperPos.Length; i++)
+                {
+                    raderRoomSweeperPos[i].SetActive(true);
+                }
             }
-        }
-
-        // 랜덤 tip
-        public void RandomTip()
-        {
-
         }
     }
 }

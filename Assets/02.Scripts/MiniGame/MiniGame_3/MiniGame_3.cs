@@ -8,16 +8,17 @@ public class MiniGame_3 : MiniGameController
 {
     public GameObject miniGame3GameObject;
     public GameObject errorGameObject;
+    public Image resultImage; 
+    public Sprite[] resultSprites;
 
     public Image spaceGauge;   // ✅ SpaceGauge 내부에서만 이동해야 함
     public Image greenZone;
     public Image yellowZone;
     public Image indicator;
     public Image donutGauge;   // ✅ 도넛 게이지 (시각적 점수 표시)
-    public Text gameOverText;  // ✅ 게임 종료 메시지
     public Slider timeSlider;  // ✅ 10초 타이머 (슬라이드바)
 
-    private float indicatorSpeed = 250; // ✅ 이동 속도
+    private float indicatorSpeed = 300; // ✅ 이동 속도
     private int direction = 1;          // ✅ 이동 방향 (1: 위로, -1: 아래로)
     private bool isGameOver = false;    // ✅ 게임 종료 여부
 
@@ -25,7 +26,7 @@ public class MiniGame_3 : MiniGameController
     private float maxTime;
     private float miniGame3_currentTime;  // ✅ 현재 남은 시간
 
-    private int greenBonus = 20;  // ✅ 초록색 영역 점수
+    private int greenBonus = 10;  // ✅ 초록색 영역 점수
     private int yellowBonus = 5;  // ✅ 노란색 영역 점수
     private int redPenalty = -5;  // ✅ 빨간색 영역 점수
 
@@ -93,12 +94,30 @@ public class MiniGame_3 : MiniGameController
         UpdateGauge(); // ✅ 도넛 게이지 초기화
 
         // ✅ 게임 종료 메시지 숨기기
-        if (gameOverText != null)
+        if (resultImage != null)
         {
-            gameOverText.gameObject.SetActive(false);
+            resultImage.gameObject.SetActive(false);
         }
+    }
 
-        Debug.Log("🎮 게임 시작!");
+    // 게임 강제 종료
+    public override void ForcingGameOver()
+    {
+        base.ForcingGameOver();
+
+        if (!isGameOver)
+        {
+            Debug.Log(":: MiniGame3 강제 종료 ::");
+
+            isGameOver = true;
+            resultImage.gameObject.SetActive(true);
+            resultImage.sprite = resultSprites[0];
+
+            isPlaying = false;
+            errorGameObject.SetActive(false);
+            miniGame3GameObject.SetActive(false);
+            GetPenalty();
+        }
     }
 
     void Update()
@@ -133,6 +152,7 @@ public class MiniGame_3 : MiniGameController
         }
     }
 
+    // 화살표 이동
     void MoveIndicator()
     {
         float moveAmount = indicatorSpeed * direction * Time.deltaTime;
@@ -140,6 +160,7 @@ public class MiniGame_3 : MiniGameController
         // ✅ 현재 위치에서 Y축만 이동
         Vector2 newPosition = indicator.rectTransform.anchoredPosition;
         newPosition.y += moveAmount;
+        newPosition.x = 112.0f;
 
         // ✅ SpaceGauge 내부에서만 이동하도록 제한
         float maxY = (spaceGauge.rectTransform.rect.height / 2) - (indicator.rectTransform.rect.height / 2);
@@ -160,6 +181,7 @@ public class MiniGame_3 : MiniGameController
         indicator.rectTransform.anchoredPosition = newPosition;
     }
 
+    // 위치 랜덤 조절
     void RandomizeZones()
     {
         float gaugeHeight = spaceGauge.rectTransform.rect.height;
@@ -244,44 +266,22 @@ public class MiniGame_3 : MiniGameController
     {
         base.ClearGame();
         isGameOver = true;
-        Debug.Log("🎮 게임 종료! 점수 100 도달 또는 시간 종료!");
 
-        if (gameOverText != null)
+        if (resultImage != null)
         {
-            gameOverText.gameObject.SetActive(true);
+            resultImage.gameObject.SetActive(true);
             if (totalScore >= 100)
             {
                 GetReward();
-                gameOverText.text = "🎉 Clear!";
-                gameOverText.color = Color.green;
+                resultImage.sprite = resultSprites[0];
             }
             else
             {
                 GetPenalty();
-                gameOverText.text = "❌ Game Over!";
-                gameOverText.color = Color.red;
+                resultImage.sprite = resultSprites[1];
             }
         }
 
         errorGameObject.SetActive(false);
-    }
-
-    // 게임 강제 종료 시 실행
-    public void ForcingGameOver()
-    {
-        if(!isGameOver)
-        {
-            Debug.Log(":: MiniGame3 강제 종료 ::");
-
-            isGameOver = true;
-            gameOverText.gameObject.SetActive(true);
-
-            gameOverText.text = "❌ Game Over!";
-            gameOverText.color = Color.red;
-
-            isPlaying = false;
-            errorGameObject.SetActive(false);
-            GetPenalty();
-        }
     }
 }

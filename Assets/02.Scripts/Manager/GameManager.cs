@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using yjlee.dialog;
 using yjlee.robot;
 
 namespace Manager
@@ -11,6 +12,8 @@ namespace Manager
     {
         private static GameManager instance;
         public static GameManager Instance { get { return instance; } }
+
+        public Ending ending;
 
         public List<Resolution> resolutions = new List<Resolution>();
         public int optimalResolutionIndex = 0;
@@ -30,7 +33,7 @@ namespace Manager
 
         private int day = 0;
         private int dayRange = 1;
-        private float dayTime = 120.0f;              // 하루 시간
+        private float dayTime = 100.0f;              // 하루 시간
         [SerializeField] private float currentTime; // 현재 시간
 
         [SerializeField] private int gold = 0;
@@ -83,15 +86,17 @@ namespace Manager
                 day++;
                 dayRange = 1;
                 currentTime = 0;
+                isGameOver = true;
 
-                //ChangeBackground();
+                ChangeBackground();
+                MiniGameManager.Instance.AllGameStop();
                 UIManager.Instance.UpdateDayImage(day);
                 UIManager.Instance.UpdateTimeImage(0);
+                TutorialController.Instance.Init();
 
                 // 미니게임 난이도 상승
-                for(int i = 0; i < machines.Length; i++)
+                for (int i = 0; i < machines.Length; i++)
                 {
-                    Debug.Log(machines[i].name + "Level UP");
                     machines[i].GetComponent<MiniGameController>().GameLevelUp();
                 }
 
@@ -102,7 +107,7 @@ namespace Manager
             }
             else
             {
-                if(currentTime >= 24.0f * dayRange)
+                if(currentTime >= 20.0f * dayRange)
                 {
                     UIManager.Instance.UpdateTimeImage(dayRange);
                     dayRange++;
@@ -113,10 +118,7 @@ namespace Manager
         // 배경 관리
         public void ChangeBackground()
         {
-            if((day + 1) % 2 != 0)
-            {
-                bgRenderer.sprite = backgrounds[(day == 2) ? (1) : (day == 4) ? (2) : 3];
-            }
+            bgRenderer.sprite = backgrounds[day - 1];
         }
 
         // 재화 사용
@@ -189,7 +191,6 @@ namespace Manager
         public void GameStart()
         {
             isGameOver = false;
-            collectorRobots[0].GetComponent<Robotcontroller>().robotState = EnumTypes.RobotState.Search;
         }
 
         // 게임 정지
@@ -203,7 +204,7 @@ namespace Manager
         {
             Debug.Log("::: Game Over :::");
             isGameOver = true;
-            SceneChange(3);
+            ending.ExcuteEnding(StatusManager.Instance.status.statusData);
         }
 
         // 씬 관리

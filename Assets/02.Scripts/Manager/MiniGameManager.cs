@@ -98,5 +98,19 @@ namespace Manager
                 }
             }
         }
+
+        // 전체 종료
+        public void AllGameStop()
+        {
+            for(int i = 0; i < possibleIndex; i++)
+            {
+                MiniGameController miniGame = errorGameObjects[i].GetComponentInParent<MiniGameController>();
+
+                if (miniGame != null)
+                {
+                    miniGame.ForcingGameOver();
+                }
+            }
+        }
     }
 }

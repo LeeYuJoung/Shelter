@@ -20,7 +20,7 @@ namespace yjlee.robot
         public GameObject target;
 
         // Map을 격자로 분할
-        private Grid grid;
+        public Grid grid;
         // 남은거리를 넣을 Queue 생성
         public Queue<Vector2> wayQueue = new Queue<Vector2>();
 

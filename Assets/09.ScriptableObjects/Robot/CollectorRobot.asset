@@ -17,4 +17,4 @@ MonoBehaviour:
   moveSpeed: 50
   workTime: 5
   breakTime: 0
-  range: 4
+  range: 6

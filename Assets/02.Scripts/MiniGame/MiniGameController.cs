@@ -5,7 +5,7 @@ namespace MiniGame
 {
     public class MiniGameController : MonoBehaviour
     {
-        public float playTime = 20.0f;
+        public float playTime = 15.0f;
         public int plusPoint = 20;
         public int minusPoint = 10;
         public int reward = 5;
@@ -52,6 +52,12 @@ namespace MiniGame
 
         // 패널티 획득
         public virtual void GetPenalty()
+        {
+
+        }
+
+        // 게임 강제 종료
+        public virtual void ForcingGameOver()
         {
 
         }

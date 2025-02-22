@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using EnumTypes;
 using Manager;
@@ -14,6 +13,9 @@ namespace yjlee.robot
 
         public Robot robot;
         public GameObject target;
+
+        public GameObject[] sweeperPos;
+        public int index = 0;
 
         public RobotState robotState;
         public float moveSpeed;
@@ -31,6 +33,14 @@ namespace yjlee.robot
 
         private void Update()
         {
+            if (GameManager.Instance.isGameOver)
+            {
+                pathFinding.moveSpeed = 0.0f;
+                return;
+            }
+            else
+                pathFinding.moveSpeed = moveSpeed;
+
             switch (robotState)
             {
                 case RobotState.Idel:
@@ -107,12 +117,13 @@ namespace yjlee.robot
             }
             else if(robot.robotType == RobotType.Sweeper)
             {
-                // 청소 로봇이라면 씬 내에 오물이 있을 경우에만 목적지로 할당받고 이동
-                GameObject[] targets = GameObject.FindGameObjectsWithTag("PartDestination");
+                sweeperPos = GameObject.FindGameObjectsWithTag("PartDestination");
+                int _index = Random.Range(0, sweeperPos.Length);
 
-                if(targets.Length > 0)
+                if(_index != index)
                 {
-                    target = targets[Random.Range(0, targets.Length)];
+                    index = _index;
+                    target = sweeperPos[_index];
                     pathFinding.target = target;
 
                     robotState = RobotState.Move;
@@ -171,6 +182,8 @@ namespace yjlee.robot
         public void Break()
         {
             currentTime += Time.deltaTime;
+            robotAnimator.SetBool("Clean", false);
+            robotAnimator.SetBool("Move", false);
 
             if (currentTime >= breakTime)
             {
@@ -226,8 +239,12 @@ namespace yjlee.robot
             }
             else if (collision.collider.CompareTag("PartDestination") && robot.robotType == RobotType.Sweeper)
             {
+                robotRigidbody.linearVelocity = Vector3.zero;
+                robotRigidbody.angularVelocity = 0.0f;
+
                 robotState = RobotState.Work;
                 pathFinding.walkable = false;
+                robotAnimator.SetBool("Clean", true);
             }
         }
 

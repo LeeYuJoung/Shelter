@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  grid: {fileID: 0}
   moveSpeed: 0
   range: 0
   dir: {x: 0, y: 0}
@@ -239,6 +240,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robot: {fileID: 11400000, guid: 35c0433d00f105547ac459eb84bafd91, type: 2}
   target: {fileID: 0}
+  sweeperPos: []
+  possiblePos: 2
+  index: 0
   robotState: 0
   moveSpeed: 0
   workTime: 0
