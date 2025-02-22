@@ -27,21 +27,23 @@ public class EndingInfo
 
 public class Ending : MonoBehaviour
 {
+    public static EndingInfo SaveData = new EndingInfo();
+    public static EndingType Type = EndingType.None;
+
     private string path;
-    private EndingType type;
-    private EndingInfo saveData = new EndingInfo();
-    void Start()
+
+    void Awake()
     {
-        type = EndingType.None;
+        Type = EndingType.None;
         path = Path.Combine(Application.dataPath, "10.Files", "EndingData.json");
         JsonLoad();
     }
 
     public void ExcuteEnding(StatusDataSO statusData)
     {
-        type =  ClassfyEnding(statusData);
+        Type =  ClassfyEnding(statusData);
         JsonSave();
-        //SceneManager.LoadScene(type.ToString()); //씬이동
+        SceneManager.LoadScene("EndingTest"); //씬이동
     }
 
     public EndingType ClassfyEnding(StatusDataSO statusData)
@@ -85,30 +87,40 @@ public class Ending : MonoBehaviour
 
     public void JsonLoad()
     {
-        //파일이 존재하면
+        //파일이 존재하지않으면
         if (!File.Exists(path))
         {
             JsonSave();
         }
-        else
+        else //파일이 존재하면
         {
             //불러오기
             string JsonData = File.ReadAllText(path);
-            saveData = JsonUtility.FromJson<EndingInfo>(JsonData);
+            SaveData = JsonUtility.FromJson<EndingInfo>(JsonData);
 
-            if (saveData != null) //saveData에 뭐가 있으면
+            if (SaveData != null) //saveData에 뭐가 있으면
             {
-                //데이터 어디다 저장할까
+                //해당 내용을 저장할 변수들
+
+
             }
         }
     }
 
     public void JsonSave()
     {
-        saveData.endingTypes.Add(type);
+        foreach(EndingType endingType in SaveData.endingTypes)
+        {
+            if(endingType == Type)
+            {
+                return;
+            }
+        }
+
+        SaveData.endingTypes.Add(Type);
 
         //저장하기
-        string json = JsonUtility.ToJson(saveData, true);
+        string json = JsonUtility.ToJson(SaveData, true);
         File.WriteAllText(path, json);
     }
 }
