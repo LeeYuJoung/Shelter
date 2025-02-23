@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using MiniGame;
 using Manager;
 
@@ -105,6 +104,7 @@ public class MiniGame_2 : MiniGameController
         {
             Debug.Log(":: MiniGame2 강제 종료 ::");
 
+            AudioManager.Instance.PlaySFX(2);
             isGameActive = false; // 게임 중지
             resultImage.gameObject.SetActive(true);
             resultImage.sprite = resultSprites[1];

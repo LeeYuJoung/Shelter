@@ -1,4 +1,4 @@
-using System.Collections;
+using Manager;
 using UnityEngine;
 
 namespace MiniGame
@@ -47,13 +47,13 @@ namespace MiniGame
         // 보상 획득
         public virtual void GetReward()
         {
-
+            AudioManager.Instance.PlaySFX(1);
         }
 
         // 패널티 획득
         public virtual void GetPenalty()
         {
-
+            AudioManager.Instance.PlaySFX(2);
         }
 
         // 게임 강제 종료

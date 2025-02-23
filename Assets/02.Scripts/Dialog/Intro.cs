@@ -11,6 +11,8 @@ namespace yjlee.intro
     {
         public DialogParse dialog;
         private DialogData[] talkDatas;
+
+        public Button nextButton;
         public Text contextText;
 
         public string eventName;
@@ -19,6 +21,7 @@ namespace yjlee.intro
         private void Start()
         {
             dialog = GetComponent<DialogParse>();
+            nextButton.onClick.AddListener(delegate { AudioManager.Instance.PlaySFX(0); });
 
             AudioManager.Instance.Init();
             AudioManager.Instance.PlayBGM(1);

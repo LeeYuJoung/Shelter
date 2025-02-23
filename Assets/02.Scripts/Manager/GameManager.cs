@@ -1,5 +1,4 @@
 using MiniGame;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -52,14 +51,25 @@ namespace Manager
             }
             else
             {
-                instance = this;
+                instance = this;             
             }
 
             Init();
+            Application.targetFrameRate = 65;
+        }
+
+        private void Start()
+        {
+            Screen.SetResolution(resolutions[AudioManager.Instance.resolutionIndex].width, resolutions[AudioManager.Instance.resolutionIndex].height, Screen.fullScreen);
         }
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+
             if (isGameOver)
                 return;
 
@@ -81,7 +91,7 @@ namespace Manager
         // 시간 관리
         private void Timmer()
         {
-            currentTime += Time.deltaTime;
+            currentTime += Time.deltaTime * 20.0f;
 
             if(currentTime >= dayTime)
             {
@@ -182,6 +192,7 @@ namespace Manager
                     if (robotController != null)
                     {
                         robotController.moveSpeed += 10;
+                        robotController.getGold += 5;
                         robotController.workTime -= 0.5f;
                         robotController.breakTime -= 0.5f;
                         robotController.SpeedInit();

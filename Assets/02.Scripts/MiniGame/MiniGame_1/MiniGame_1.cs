@@ -120,6 +120,7 @@ public class MiniGame_1 : MiniGameController
         {
             Debug.Log("::: MiniGame1 강제 종료 :::");
 
+            AudioManager.Instance.PlaySFX(2);
             errorGameObject.SetActive(false);
             resultImage.gameObject.SetActive(true);
             resultImage.sprite = resultSprites[1];

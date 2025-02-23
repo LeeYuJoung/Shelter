@@ -1,7 +1,5 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 namespace Manager
 {
@@ -40,6 +38,8 @@ namespace Manager
         public Sprite[] selectResolutions;
         public Sprite[] deselectResolutions;
 
+        public Button[] buttons;
+
         public ScrollAnimation storeScrollAnimation;
         public ScrollAnimation statusScrollAnimation;
         public UIAnimation uiAnimation;
@@ -59,6 +59,16 @@ namespace Manager
         private void Start()
         {
             Init();
+
+            for(int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].onClick.AddListener(delegate { AudioManager.Instance.PlaySFX(0); });
+            }
+
+            for(int i = 0; i < resolutionButtons.Length; i++)
+            {
+                resolutionButtons[i].onClick.AddListener(delegate { AudioManager.Instance.PlaySFX(0); });
+            }
         }
 
         public void Init()
@@ -182,8 +192,9 @@ namespace Manager
             }
             resolutionButtons[resolutionIndex].image.sprite = selectResolutions[resolutionIndex];
 
+            AudioManager.Instance.resolutionIndex = resolutionIndex;
             Resolution resolution = GameManager.Instance.resolutions[resolutionIndex];
-            Screen.SetResolution(resolution.width, resolution.height, false);
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
 
         // UI창 전부 닫기

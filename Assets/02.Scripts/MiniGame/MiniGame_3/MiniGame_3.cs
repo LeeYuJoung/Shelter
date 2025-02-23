@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using MiniGame;
 using Manager;
 
@@ -110,6 +109,7 @@ public class MiniGame_3 : MiniGameController
         {
             Debug.Log(":: MiniGame3 강제 종료 ::");
 
+            AudioManager.Instance.PlaySFX(2);
             isGameOver = true;
             resultImage.gameObject.SetActive(true);
             resultImage.sprite = resultSprites[1];

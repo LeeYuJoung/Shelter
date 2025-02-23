@@ -80,42 +80,51 @@ public class Ending : MonoBehaviour
         //    type = EndingType.Dead;
         //}
 
-        if (statusData.FuelAmount < 60)
-        {
-            // Ending 02
-            type = EndingType.FuelExhaustion;
-        }
-        else if (statusData.HullRestorationRate < 60)
-        {
-            // Ending 03
-            type = EndingType.SpaceshipExplosion;
-        }
-        else if(statusData.RadarOutputAmount < 60)
-        {
-            // Ending 04
-            type = EndingType.SpaceLost;
-        }
-        else if(statusData.MotorRestorationRate < 60)
-        {
-            // Ending 05
-            type = EndingType.PlanetLanding;
-        }
-        else if(statusData.FuelAmount >= 60 && statusData.Corrosion >= 60 && statusData.HullRestorationRate >= 60
-            && statusData.MotorRestorationRate >= 60 && statusData.EngineRestorationRate >= 60 && statusData.RadarRestorationRate >= 60
-            && statusData.RadarOutputAmount >= 60)
-        {
-            // Ending 06
-            type = EndingType.MarsMigration;
-        }
-        else
+        if (statusData.FuelAmount < 50 && statusData.HullRestorationRate < 50
+    && statusData.MotorRestorationRate < 50 && statusData.EngineRestorationRate < 50 && statusData.RadarRestorationRate < 50
+    && statusData.RadarOutputAmount < 50)
         {
             // Ending 01
             type = EndingType.Dead;
         }
-
+        if (statusData.FuelAmount < 50 && statusData.HullRestorationRate >= 50
+            && statusData.MotorRestorationRate >= 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
+            && statusData.RadarOutputAmount >= 50)
+        {
+            // Ending 02
+            type = EndingType.FuelExhaustion;
+        }
+        if (statusData.FuelAmount >= 50 && statusData.HullRestorationRate < 50
+            && statusData.MotorRestorationRate >= 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
+            && statusData.RadarOutputAmount >= 50)
+        {
+            // Ending 03
+            type = EndingType.SpaceshipExplosion;
+        }
+        if (statusData.FuelAmount >= 50 && statusData.HullRestorationRate >= 50
+            && statusData.MotorRestorationRate >= 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
+            && statusData.RadarOutputAmount < 50)
+        {
+            // Ending 04
+            type = EndingType.SpaceLost;
+        }
+        if (statusData.FuelAmount >= 50 && statusData.HullRestorationRate >= 50
+            && statusData.MotorRestorationRate < 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
+            && statusData.RadarOutputAmount >= 50)
+        {
+            // Ending 05
+            type = EndingType.PlanetLanding;
+        }
+        if(statusData.FuelAmount >= 50 && statusData.HullRestorationRate >= 50
+            && statusData.MotorRestorationRate >= 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
+            && statusData.RadarOutputAmount >= 50)
+        {
+            // Ending 06
+            type = EndingType.MarsMigration;
+        }
         if (statusData.RadarOutputAmount == 100)
         {
-            // Hiddin Ending
+            // Ending 07
             type = EndingType.EncounterWithAnAlien;
         }
 

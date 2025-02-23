@@ -241,12 +241,12 @@ MonoBehaviour:
   robot: {fileID: 11400000, guid: 35c0433d00f105547ac459eb84bafd91, type: 2}
   target: {fileID: 0}
   sweeperPos: []
-  possiblePos: 2
   index: 0
   robotState: 0
-  moveSpeed: 0
+  moveSpeed: 40
   workTime: 0
   breakTime: 0
+  getGold: 0
   range: 0
   currentTime: 0
   isPickUp: 0

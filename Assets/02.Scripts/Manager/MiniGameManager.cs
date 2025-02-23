@@ -1,5 +1,4 @@
 using MiniGame;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

@@ -2,12 +2,14 @@ using System.Collections;
 using UnityEngine;
 using EnumTypes;
 using Manager;
+using UnityEngine.Audio;
 
 namespace yjlee.robot
 {
     public class Robotcontroller : MonoBehaviour
     {
         private Rigidbody2D robotRigidbody;
+        private AudioSource audioSource;
         private Animator robotAnimator;
         private PathFinding pathFinding;
 
@@ -21,6 +23,7 @@ namespace yjlee.robot
         public float moveSpeed;
         public float workTime;
         public float breakTime;
+        public int getGold;
         public float range;
 
         public float currentTime;
@@ -69,11 +72,13 @@ namespace yjlee.robot
         private void Init()
         {
             robotRigidbody = GetComponent<Rigidbody2D>();
+            audioSource = GetComponent<AudioSource>();
             robotAnimator = GetComponentInChildren<Animator>();
             pathFinding = GetComponent<PathFinding>();
 
             robotState = RobotState.Idel;
-            moveSpeed = robot.moveSpeed;
+            //moveSpeed = 60.0f;
+            getGold = 5;
             workTime = robot.workTime;
             breakTime = robot.breakTime;
             range = robot.range;
@@ -172,8 +177,9 @@ namespace yjlee.robot
                 if (currentTime >= workTime)
                 {
                     currentTime = 0;
+                    audioSource.Stop();
                     robotState = RobotState.Breaking;
-                    GameManager.Instance.GainGold(5);
+                    GameManager.Instance.GainGold(getGold);
                 }
             }
         }
@@ -244,6 +250,7 @@ namespace yjlee.robot
                 robotRigidbody.linearVelocity = Vector3.zero;
                 robotRigidbody.angularVelocity = 0.0f;
 
+                audioSource.Play();
                 robotState = RobotState.Work;
                 pathFinding.walkable = false;
                 robotAnimator.SetBool("Clean", true);

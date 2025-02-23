@@ -63,6 +63,7 @@ namespace Manager
             {
                 if (GameManager.Instance.GetGold >= robotPrices[1] && GameManager.Instance.collectorRobots.Count < robotMxPieces[1])
                 {
+                    AudioManager.Instance.PlaySFX(3);
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(robotPrices[1]);
 
@@ -80,6 +81,7 @@ namespace Manager
             {
                 if (GameManager.Instance.GetGold >= robotPrices[0] && GameManager.Instance.sweeperRobots.Count < robotMxPieces[0])
                 {
+                    AudioManager.Instance.PlaySFX(3);
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(robotPrices[0]);
 
@@ -106,6 +108,7 @@ namespace Manager
             {
                 if (GameManager.Instance.GetGold >= robotUpgradePrices[1] && GameManager.Instance.collectorRobotLevel <= robotMaxUpgrade)
                 {
+                    AudioManager.Instance.PlaySFX(3);
                     UIManager.Instance.UpgradeState(1);
                     GameManager.Instance.collectorRobotLevel += 1;
                     GameManager.Instance.RobotStatusUp(robotType);
@@ -125,6 +128,7 @@ namespace Manager
             {
                 if (GameManager.Instance.GetGold >= robotUpgradePrices[0] && GameManager.Instance.sweeperRobotLevel <= robotMaxUpgrade)
                 {
+                    AudioManager.Instance.PlaySFX(3);
                     UIManager.Instance.UpgradeState(0);
                     GameManager.Instance.sweeperRobotLevel += 1;
                     GameManager.Instance.RobotStatusUp(robotType);
@@ -151,6 +155,7 @@ namespace Manager
 
             if (GameManager.Instance.GetGold >= raderRoomUnLockPrice)
             {
+                AudioManager.Instance.PlaySFX(3);
                 raderRoomLock.SetActive(false);
                 UIManager.Instance.RaderRoomUnLock(btn);
                 GameManager.Instance.isRadeRoomUnLock = true;

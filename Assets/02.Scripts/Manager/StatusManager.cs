@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Manager
@@ -128,6 +127,7 @@ namespace Manager
         {
             if(GameManager.Instance.GetGold >= partPrices[currentPartIndex] && !isRepairClear[currentPartIndex])
             {
+                AudioManager.Instance.PlaySFX(4);
                 GameManager.Instance.UseGold(partPrices[currentPartIndex]);
                 partPrices[currentPartIndex] += 1;
 
