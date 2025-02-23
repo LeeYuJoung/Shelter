@@ -14,6 +14,7 @@ namespace Manager
         public static GameManager Instance { get { return instance; } }
 
         public Ending ending;
+        public Status status;
 
         public List<Resolution> resolutions = new List<Resolution>();
         public int optimalResolutionIndex = 0;
@@ -34,11 +35,12 @@ namespace Manager
         private int day = 0;
         private int dayRange = 1;
         private float dayTime = 100.0f;              // 하루 시간
-        [SerializeField] private float currentTime; // 현재 시간
+        [SerializeField] private float currentTime;  // 현재 시간
 
         [SerializeField] private int gold = 0;
         public int GetGold { get { return gold; } }
 
+        public bool[] isCleaning = new bool[4] { false, false, false, false };
         public bool isRadeRoomUnLock = false;
         public bool isGameOver = true;
 
@@ -88,8 +90,9 @@ namespace Manager
                 currentTime = 0;
                 isGameOver = true;
 
+                UIManager.Instance.AllCLose();
                 ChangeBackground();
-                MiniGameManager.Instance.AllGameStop();
+                MiniGameManager.Instance.AllMiniGameStop();
                 UIManager.Instance.UpdateDayImage(day);
                 UIManager.Instance.UpdateTimeImage(0);
                 TutorialController.Instance.Init();
@@ -102,7 +105,7 @@ namespace Manager
 
                 if (day >= 5)
                 {
-                    GameOver();
+                    isGameOver = true;
                 }
             }
             else
@@ -200,17 +203,34 @@ namespace Manager
         }
 
         // 게임 종료
-        private void GameOver()
+        public void GameOver()
         {
-            Debug.Log("::: Game Over :::");
-            isGameOver = true;
             ending.ExcuteEnding(StatusManager.Instance.status.statusData);
         }
 
         // 씬 관리
         public void SceneChange(int sceneIndex)
         {
-            SceneManager.LoadScene(sceneIndex);
+            if(sceneIndex == 0)
+            {
+                AudioManager.Instance.PlayBGM(0);
+                SceneManager.LoadScene(sceneIndex);
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneIndex);
+            }
+        }
+
+        // 스테이터스 데이터 초기화
+        public void StatusClear()
+        {
+            status.statusData.FuelAmount = 0;
+            status.statusData.HullRestorationRate = 0;
+            status.statusData.MotorRestorationRate = 0;
+            status.statusData.EngineRestorationRate = 0;
+            status.statusData.RadarRestorationRate = 0;
+            status.statusData.RadarOutputAmount = 0;
         }
 
         // 게임 나가기

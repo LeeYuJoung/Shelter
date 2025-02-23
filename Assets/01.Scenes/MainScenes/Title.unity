@@ -1187,31 +1187,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1629808028}
-        m_TargetAssemblyTypeName: Manager.AudioManager, Assembly-CSharp
-        m_MethodName: ChangeSFXVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1629808028}
-        m_TargetAssemblyTypeName: Manager.AudioManager, Assembly-CSharp
-        m_MethodName: SaveSFXVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &293841234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,31 +2215,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1629808028}
-        m_TargetAssemblyTypeName: Manager.AudioManager, Assembly-CSharp
-        m_MethodName: ChangeBGMVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1629808028}
-        m_TargetAssemblyTypeName: Manager.AudioManager, Assembly-CSharp
-        m_MethodName: SaveBGMVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &870982579
 GameObject:
   m_ObjectHideFlags: 0
@@ -4120,6 +4072,7 @@ GameObject:
   - component: {fileID: 1578169031}
   - component: {fileID: 1578169030}
   - component: {fileID: 1578169032}
+  - component: {fileID: 1578169033}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4140,6 +4093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ending: {fileID: 1578169032}
+  status: {fileID: 1578169033}
   optimalResolutionIndex: 0
   backgrounds: []
   bgRenderer: {fileID: 0}
@@ -4152,6 +4106,7 @@ MonoBehaviour:
   sweeperRobotLevel: 0
   currentTime: 0
   gold: 0
+  isCleaning: 00000000
   isRadeRoomUnLock: 0
   isGameOver: 1
 --- !u!4 &1578169031
@@ -4181,6 +4136,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb0488117c54b144a0ded1f180b5e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1578169033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578169029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786e1f670e700084abc371ef9b9d494b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusData: {fileID: 11400000, guid: d3484da0c5dbb974fa8bd157b476642e, type: 2}
+  statusUpData: {fileID: 11400000, guid: 43acc19d0c0c85543bb7cdabfb116d29, type: 2}
 --- !u!1 &1583228059
 GameObject:
   m_ObjectHideFlags: 0
@@ -4365,6 +4334,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 47fe6a2bf65509843a40d8239e56d3db, type: 3}
   - {fileID: 8300000, guid: d145cdc001cfdee479024039c1a6890a, type: 3}
   - {fileID: 8300000, guid: e1b77e951ec3e0845aaa7d1effb5ae0b, type: 3}
+  - {fileID: 8300000, guid: 1c230129a74429e4691af4a9b2966949, type: 3}
+  - {fileID: 8300000, guid: 520fcad9ddff1c84d80620714c644c73, type: 3}
+  - {fileID: 8300000, guid: b652a8880344d8046a26d0eec5ad6a8e, type: 3}
+  endingBgms:
+  - {fileID: 8300000, guid: e1b77e951ec3e0845aaa7d1effb5ae0b, type: 3}
+  - {fileID: 8300000, guid: e1b77e951ec3e0845aaa7d1effb5ae0b, type: 3}
+  - {fileID: 8300000, guid: e1b77e951ec3e0845aaa7d1effb5ae0b, type: 3}
+  - {fileID: 8300000, guid: 1c230129a74429e4691af4a9b2966949, type: 3}
   - {fileID: 8300000, guid: 1c230129a74429e4691af4a9b2966949, type: 3}
   - {fileID: 8300000, guid: 520fcad9ddff1c84d80620714c644c73, type: 3}
   - {fileID: 8300000, guid: b652a8880344d8046a26d0eec5ad6a8e, type: 3}
@@ -6087,6 +6064,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1578169030}
+        m_TargetAssemblyTypeName: Manager.GameManager, Assembly-CSharp
+        m_MethodName: StatusClear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1903796284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6200,6 +6189,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d7065dacca20b9b4f8504d0301d7d920, type: 3}
   - {fileID: 21300000, guid: 5b20bffc245445c42817b50004a34252, type: 3}
   - {fileID: 21300000, guid: b04f78a8fc5d6f6448d7710f8437a482, type: 3}
+  storeScrollAnimation: {fileID: 0}
+  statusScrollAnimation: {fileID: 0}
+  uiAnimation: {fileID: 0}
 --- !u!4 &1914674788
 Transform:
   m_ObjectHideFlags: 0
@@ -6341,9 +6333,9 @@ MonoBehaviour:
   rightButton: {fileID: 1753905562}
   clearSprites:
   - {fileID: 21300000, guid: 027401795a8742449952abb28bf0231c, type: 3}
-  - {fileID: 21300000, guid: 027401795a8742449952abb28bf0231c, type: 3}
+  - {fileID: 21300000, guid: 0ecd81105b7e46c428aaeb9c32cb3210, type: 3}
   - {fileID: 21300000, guid: 647ebec1154788a4aba8f52f0310b2eb, type: 3}
-  - {fileID: 21300000, guid: 647ebec1154788a4aba8f52f0310b2eb, type: 3}
+  - {fileID: 21300000, guid: b36fdf9812c53994cb435a73708021ee, type: 3}
   - {fileID: 21300000, guid: 1c0e978caf60bd043ab6a001defad428, type: 3}
   - {fileID: 21300000, guid: f925e15e11d35394cbd20a831c65e55f, type: 3}
   - {fileID: 21300000, guid: 847c7fd78fcdd6344b3392e18804a128, type: 3}

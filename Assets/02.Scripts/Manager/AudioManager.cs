@@ -30,6 +30,7 @@ namespace Manager
 
         //audio clip 담을 수 있는 배열
         [SerializeField] AudioClip[] bgms;
+        [SerializeField] AudioClip[] endingBgms;
         [SerializeField] AudioClip[] sfxs;
 
         [SerializeField] AudioSource bgmPlayer = null;
@@ -43,7 +44,7 @@ namespace Manager
 
         private void Awake()
         {
-            if(instance != null)
+            if(instance != null && instance!= this)
             {
                 Destroy(instance);
             }
@@ -54,20 +55,33 @@ namespace Manager
             }
 
             Init();
-            //PlayerPrefs.SetFloat("bgm", 1.0f);
-            //PlayerPrefs.SetFloat("sfx", 1.0f);
         }
 
-        private void Init()
+        public void Init()
         {
             sfxPlayer = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
             bgmSlider = GameObject.Find("Settings")?.transform.GetChild(0).transform.GetChild(0).GetComponentInChildren<Slider>();
             sfxSlider = GameObject.Find("Settings")?.transform.GetChild(0).transform.GetChild(1).GetComponentInChildren<Slider>();
+
+            if(bgmSlider != null && sfxSlider != null)
+            {
+                bgmSlider.onValueChanged.AddListener(delegate { ChangeBGMVolume(); });
+                bgmSlider.onValueChanged.AddListener(delegate { SaveBGMVolume(); });
+
+                sfxSlider.onValueChanged.AddListener(delegate { ChangeSFXVolume(); });
+                sfxSlider.onValueChanged.AddListener(delegate { SaveSFXVolume(); });
+            }
         }
 
         public void PlayBGM(int _sceneNumber)
         {
             bgmPlayer.clip = bgms[_sceneNumber];
+            bgmPlayer.Play();
+        }
+
+        public void EndingBGM(int _endingNumber)
+        {
+            bgmPlayer.clip = endingBgms[_endingNumber];
             bgmPlayer.Play();
         }
 
@@ -78,12 +92,24 @@ namespace Manager
 
         public void ChangeBGMVolume()
         {
+            Debug.Log("Change BGM");
             bgmPlayer.volume = bgmVolume;
         }
 
         public void SaveBGMVolume()
         {
+            Debug.Log("Save BGM");
             bgmVolume = bgmSlider.value;
+        }
+
+        public void ChangeSFXVolume()
+        {
+
+        }
+
+        public void SaveSFXVolume()
+        {
+            sfxVolume = sfxSlider.value;
         }
 
         public void PlaySFX(AudioSource _audioSource, ESfx _soundType)

@@ -6,6 +6,7 @@ using Manager;
 
 public class MiniGame_3 : MiniGameController
 {
+    public UIAnimation uiAnimation;
     public GameObject miniGame3GameObject;
     public GameObject errorGameObject;
     public Image resultImage; 
@@ -111,12 +112,16 @@ public class MiniGame_3 : MiniGameController
 
             isGameOver = true;
             resultImage.gameObject.SetActive(true);
-            resultImage.sprite = resultSprites[0];
+            resultImage.sprite = resultSprites[1];
 
             isPlaying = false;
             errorGameObject.SetActive(false);
-            miniGame3GameObject.SetActive(false);
+            uiAnimation.Close();
             GetPenalty();
+        }
+        else
+        {
+            uiAnimation.Close();
         }
     }
 

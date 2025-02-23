@@ -20,6 +20,7 @@ namespace yjlee.intro
         {
             dialog = GetComponent<DialogParse>();
 
+            AudioManager.Instance.Init();
             AudioManager.Instance.PlayBGM(1);
             talkDatas = dialog.GetDialog(eventName);
             NextButton();

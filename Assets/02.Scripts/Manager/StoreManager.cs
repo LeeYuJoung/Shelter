@@ -66,7 +66,7 @@ namespace Manager
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(robotPrices[1]);
 
-                    robotPrices[1] += 5;
+                    robotPrices[1] += 10;
                     UIManager.Instance.UpdateRobotBuyPriceText(1, robotPrices[1]);
 
                     if (GameManager.Instance.collectorRobots.Count == robotMxPieces[1])
@@ -83,7 +83,7 @@ namespace Manager
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(robotPrices[0]);
 
-                    robotPrices[0] += 5;
+                    robotPrices[0] += 15;
                     UIManager.Instance.UpdateRobotBuyPriceText(0, robotPrices[0]);
 
                     if (GameManager.Instance.sweeperRobots.Count == robotMxPieces[0])
@@ -111,7 +111,7 @@ namespace Manager
                     GameManager.Instance.RobotStatusUp(robotType);
                     GameManager.Instance.UseGold(robotUpgradePrices[1]);
 
-                    robotUpgradePrices[1] += 5;
+                    robotUpgradePrices[1] += 10;
                     UIManager.Instance.UpdateRoboUpgradetPriceText(1, robotUpgradePrices[1]);
 
                     if (GameManager.Instance.collectorRobotLevel > robotMaxUpgrade)
@@ -130,7 +130,7 @@ namespace Manager
                     GameManager.Instance.RobotStatusUp(robotType);
                     GameManager.Instance.UseGold(robotUpgradePrices[0]);
 
-                    robotUpgradePrices[0] += 5;
+                    robotUpgradePrices[0] += 10;
                     UIManager.Instance.UpdateRoboUpgradetPriceText(0, robotUpgradePrices[0]);
 
                     if (GameManager.Instance.sweeperRobotLevel > robotMaxUpgrade)
@@ -156,10 +156,10 @@ namespace Manager
                 GameManager.Instance.isRadeRoomUnLock = true;
                 GameManager.Instance.UseGold(raderRoomUnLockPrice);
                 MiniGameManager.Instance.possibleIndex = 3;
-                SetRepairButton();
                 isClear[4] = true;
+                SetRepairButton();
 
-                for(int i = 0; i < raderRoomSweeperPos.Length; i++)
+                for (int i = 0; i < raderRoomSweeperPos.Length; i++)
                 {
                     raderRoomSweeperPos[i].SetActive(true);
                 }

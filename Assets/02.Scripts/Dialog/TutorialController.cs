@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +16,8 @@ namespace yjlee.dialog
         public GameObject dialogObject;
         public GameObject[] news;
         public Text contextText;
+
+        public GameObject startButton;
 
         public string eventName;
         public int index = 0;
@@ -37,6 +38,7 @@ namespace yjlee.dialog
         private void Start()
         {
             dialog = GetComponent<DialogParse>();
+            AudioManager.Instance.Init();
             Init();
         }
 
@@ -83,7 +85,8 @@ namespace yjlee.dialog
                     }
                     else
                     {
-
+                        startButton.GetComponent<RectTransform>().DOAnchorPosY(0, 4.0f);
+                        return;
                     }
                 }
 

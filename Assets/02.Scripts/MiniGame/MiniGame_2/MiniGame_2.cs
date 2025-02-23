@@ -9,6 +9,7 @@ public class MiniGame_2 : MiniGameController
 {
     public GameObject miniGame2GameObject;
     public GameObject errorGameObject;
+    public UIAnimation uiAnimation;
 
     public Slider timeSlider;     // 시간 슬라이더
     public Slider powerSlider;    // 전력 게이지 슬라이더
@@ -110,8 +111,12 @@ public class MiniGame_2 : MiniGameController
 
             isPlaying = false;
             errorGameObject.SetActive(false);
-            miniGame2GameObject.SetActive(false);
+            uiAnimation.Close();
             GetPenalty();
+        }
+        else
+        {
+            uiAnimation.Close();
         }
     }
 

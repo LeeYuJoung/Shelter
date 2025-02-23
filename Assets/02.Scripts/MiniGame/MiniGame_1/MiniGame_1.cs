@@ -39,6 +39,7 @@ public class MiniGame_1 : MiniGameController
     public Image resultImage;
     public Sprite[] resultSprites;
 
+    public UIAnimation uiAnimation;
     public GameObject errorGameObject;
     private bool isClear = false;
 
@@ -115,45 +116,46 @@ public class MiniGame_1 : MiniGameController
     {
         base.ForcingGameOver();
 
-        if (isPlaying)
+        if (beginGame)
         {
             Debug.Log("::: MiniGame1 강제 종료 :::");
 
             errorGameObject.SetActive(false);
-            resultImage.gameObject.SetActive(false);
-            miniGamePanel.SetActive(false);
-            GetPenalty();
+            resultImage.gameObject.SetActive(true);
+            resultImage.sprite = resultSprites[1];
+            uiAnimation.Close();
 
-            ClearList(leftWireObjects);
-            ClearList(rightWireObjects);
-            correctAnswerValue = 0;
-            currentAnswerValue = 0;
+            isError = false;
+            isPlaying = false;
+            beginGame = false;
+            GetPenalty();
+        }
+        else
+        {
+            errorGameObject.SetActive(false);
+            resultImage.gameObject.SetActive(true);
+            uiAnimation.Close();
 
             isError = false;
             isPlaying = false;
         }
-        else
-        {
-            Debug.Log("::: MiniGame1 게임 종료 :::");
-            errorGameObject.SetActive(false);
-            resultImage.gameObject.SetActive(false);
-            miniGamePanel.SetActive(false);
 
-            ClearList(leftWireObjects);
-            ClearList(rightWireObjects);
-            correctAnswerValue = 0;
-            currentAnswerValue = 0;
-        }
+        ClearList(leftWireObjects);
+        ClearList(rightWireObjects);
+        correctAnswerValue = 0;
+        currentAnswerValue = 0;
     }
 
     //게임 실행
     public override void GameStart()
     {
         base.GameStart();
-        UIAnimationManager.OpenUI(() => { miniGamePanel.SetActive(true); }, miniGameUIInfo, AnimationType.PopUp);
+        
+        miniGamePanel.SetActive(true);
+        resultImage.gameObject.SetActive(false);
 
         beginGame = true;
-        currentTIme = maxTime;
+        currentTIme = playTime;
         AddLeftWire(leftWireObjects, leftWireGroup);
         AddRightWire(leftWireObjects, rightWireObjects, rightWireGroup);
         correctAnswerValue += leftWireObjects.Count;
@@ -165,44 +167,21 @@ public class MiniGame_1 : MiniGameController
     public override void ClearGame()
     {
         base.ClearGame();
-        resultImage.gameObject.SetActive(true);
 
         //게임 성공
         if (isClear)
         {
+            resultImage.gameObject.SetActive(true);
             resultImage.sprite = resultSprites[0];
             GetReward();
         }
         //게임 실패
         else
         {
+            resultImage.gameObject.SetActive(true);
             resultImage.sprite = resultSprites[1];
             GetPenalty();
         }
-    }
-
-    //게임 종료시 실행
-    public void ClearGame(bool clear)
-    {
-        UIAnimationManager.CloseUI(() => { 
-            miniGamePanel.SetActive(false);
-            ClearList(leftWireObjects);
-            ClearList(rightWireObjects);
-            correctAnswerValue = 0;
-            currentAnswerValue = 0;
-
-            //게임 성공
-            if (clear)
-            {
-
-            }
-            //게임 실패
-            else
-            {
-
-            }
-
-        }, miniGameUIInfo, AnimationType.PopUp);
     }
 
     //타이머 시간 감소
@@ -217,13 +196,13 @@ public class MiniGame_1 : MiniGameController
             return;
         }
 
-        if (currentTIme > Mathf.Epsilon)
+        if (currentTIme > 0)
         {
-            currentTIme -= Time.unscaledDeltaTime;
+            currentTIme -= Time.deltaTime;
         }
         else
         {
-            currentTIme = 0.0f;
+            currentTIme = playTime;
             beginGame = false;
             isClear = false;
             //ClearGame(false);
@@ -231,7 +210,7 @@ public class MiniGame_1 : MiniGameController
             return;
         }
         //Timer.fillAmount = currentTIme / maxTime;
-        timerSlider.value = currentTIme / maxTime;
+        timerSlider.value = currentTIme / playTime;
     }
 
     //셔플(제네릭)
@@ -246,7 +225,7 @@ public class MiniGame_1 : MiniGameController
     //정답 전선 추가
     private void AddLeftWire(List<GameObject> wireObjects, GameObject wireGroup)
     {
-        int maxWireLength = UnityEngine.Random.Range(wireLength - 2, wireLength);
+        int maxWireLength = Random.Range(wireLength - 2, wireLength);
 
         types = Shuffle(wireTypes);
 
@@ -262,7 +241,7 @@ public class MiniGame_1 : MiniGameController
     //오답 전선 추가
     private void AddRightWire(List<GameObject> AnswerWireObjectsList, List<GameObject> wireObjects, GameObject wireGroup)
     {
-        int maxWireLength = UnityEngine.Random.Range(0, 2);
+        int maxWireLength = Random.Range(0, 2);
 
         List<GameObject> list = new List<GameObject>();
 
@@ -281,7 +260,7 @@ public class MiniGame_1 : MiniGameController
 
             //전선 프리팹 중 랜덤
             //int random = UnityEngine.Random.Range(0, wireLength);
-            int random = UnityEngine.Random.Range(0, wireLength);
+            int random = Random.Range(0, wireLength);
             ChangeWireColor((WireType)random, wire);
             list.Add(wire);
         }

@@ -15,8 +15,8 @@ namespace Manager
 
         [SerializeField] private float currentTime = 0;
         [SerializeField] private float errorTime = 0;
-        const float errorMinTime = 5.0f;
-        const float errorMaxTime = 10.0f;
+        const float errorMinTime = 10.0f;
+        const float errorMaxTime = 15.0f;
 
         private void Awake()
         {
@@ -100,7 +100,7 @@ namespace Manager
         }
 
         // 전체 종료
-        public void AllGameStop()
+        public void AllMiniGameStop()
         {
             for(int i = 0; i < possibleIndex; i++)
             {
@@ -110,6 +110,11 @@ namespace Manager
                 {
                     miniGame.ForcingGameOver();
                 }
+            }
+
+            for(int i = 0; i < errorGameObjects.Length; i++)
+            {
+                errorGameObjects[i].SetActive(false);
             }
         }
     }

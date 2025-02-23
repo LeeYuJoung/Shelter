@@ -40,6 +40,10 @@ namespace Manager
         public Sprite[] selectResolutions;
         public Sprite[] deselectResolutions;
 
+        public ScrollAnimation storeScrollAnimation;
+        public ScrollAnimation statusScrollAnimation;
+        public UIAnimation uiAnimation;
+
         private void Awake()
         {
             if (instance != null)
@@ -180,6 +184,14 @@ namespace Manager
 
             Resolution resolution = GameManager.Instance.resolutions[resolutionIndex];
             Screen.SetResolution(resolution.width, resolution.height, false);
+        }
+
+        // UI창 전부 닫기
+        public void AllCLose()
+        {
+            storeScrollAnimation.Close();
+            statusScrollAnimation.Close();
+            uiAnimation.Close();
         }
     }
 }

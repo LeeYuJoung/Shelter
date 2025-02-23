@@ -120,9 +120,10 @@ namespace yjlee.robot
                 sweeperPos = GameObject.FindGameObjectsWithTag("PartDestination");
                 int _index = Random.Range(0, sweeperPos.Length);
 
-                if(_index != index)
+                if(_index != index && !GameManager.Instance.isCleaning[_index])
                 {
                     index = _index;
+                    GameManager.Instance.isCleaning[_index] = true;
                     target = sweeperPos[_index];
                     pathFinding.target = target;
 
@@ -188,6 +189,7 @@ namespace yjlee.robot
             if (currentTime >= breakTime)
             {
                 currentTime = 0;
+                GameManager.Instance.isCleaning[index] = false;
                 robotState = RobotState.Search;
             }
         }
