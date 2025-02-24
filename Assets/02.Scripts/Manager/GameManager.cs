@@ -93,7 +93,12 @@ namespace Manager
         {
             currentTime += Time.deltaTime;
 
-            if(currentTime >= dayTime)
+            if (day >= 5)
+            {
+                isGameOver = true;
+            }
+
+            if (currentTime >= dayTime)
             {
                 day++;
                 dayRange = 1;
@@ -111,11 +116,6 @@ namespace Manager
                 for (int i = 0; i < machines.Length; i++)
                 {
                     machines[i].GetComponent<MiniGameController>().GameLevelUp();
-                }
-
-                if (day >= 5)
-                {
-                    isGameOver = true;
                 }
             }
             else

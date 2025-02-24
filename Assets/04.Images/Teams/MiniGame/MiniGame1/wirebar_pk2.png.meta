@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d0881c985af861b4c872b0f1474b5fef
+guid: 0f06d78d9564ac84c909c4fc4d1e1531
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -314442047184386534
-    second: "\uD0C0\uC774\uD2C0 \uC2DC\uC548 \uCD5C\uC885_0"
+      213: 596735907002642866
+    second: wirebar_pk2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uD0C0\uC774\uD2C0 \uC2DC\uC548 \uCD5C\uC885_0"
+      name: wirebar_pk2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 846
-        height: 473
+        x: 1
+        y: 1
+        width: 705
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a16c023cf90e2abf0800000000000000
-      internalID: -314442047184386534
+      spriteID: 2b1fc915528084800800000000000000
+      internalID: 596735907002642866
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\uD0C0\uC774\uD2C0 \uC2DC\uC548 \uCD5C\uC885_0": -314442047184386534
+      wirebar_pk2_0: 596735907002642866
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

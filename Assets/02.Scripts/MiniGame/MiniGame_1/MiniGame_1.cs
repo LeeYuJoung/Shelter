@@ -39,6 +39,10 @@ public class MiniGame_1 : MiniGameController
     public Image resultImage;
     public Sprite[] resultSprites;
 
+    public Sprite[] wireHeadSprites;
+    public Sprite[] wireBodySprites;
+    public Sprite[] wireTailSprites;
+
     public UIAnimation uiAnimation;
     public GameObject errorGameObject;
     private bool isClear = false;
@@ -233,7 +237,7 @@ public class MiniGame_1 : MiniGameController
         for (int i = 0; i < maxWireLength; i++)
         {
             GameObject wire = Instantiate(wirePrefab, wireGroup.transform);
-            ChangeWireColor(types[i], wire);
+            ChangeWireColor(types[i], wire, true);
             wire.GetComponent<LineStretch>().SetMiniGame(this);
             wireObjects.Add(wire);
         }
@@ -250,7 +254,7 @@ public class MiniGame_1 : MiniGameController
         foreach (WireType type in types)
         {
             GameObject wire = Instantiate(wireTargetPrefab, wireGroup.transform);
-            ChangeWireColor(type, wire);
+            ChangeWireColor(type, wire, false);
             list.Add(wire);
         }
 
@@ -262,7 +266,7 @@ public class MiniGame_1 : MiniGameController
             //전선 프리팹 중 랜덤
             //int random = UnityEngine.Random.Range(0, wireLength);
             int random = Random.Range(0, wireLength);
-            ChangeWireColor((WireType)random, wire);
+            ChangeWireColor((WireType)random, wire, false);
             list.Add(wire);
         }
 
@@ -282,40 +286,64 @@ public class MiniGame_1 : MiniGameController
         //Debug.Log("정답 개수 증가 : " + currentAnswerValue);
     }
 
-
     //선 색 변경 및 타입 지정
-    private void ChangeWireColor(WireType type, GameObject wire)
+    private void ChangeWireColor(WireType type, GameObject wire, bool ishead)
     {
         Image[] wireImages = wire.GetComponentsInChildren<Image>();
 
         Color color;
         wire.GetComponent<Wire>().WireType = type;
+        int index = 0;
 
         switch (type)
         {
             case WireType.Red:
                 color = Color.red;
+                index = 0;
                 break;
             case WireType.Blue:
                 color = Color.blue;
+                index = 1;
                 break;
             case WireType.White:
                 color = Color.white;
+                index = 2;
                 break;
             case WireType.Green:
                 color = Color.green;
+                index = 3;
                 break;
             case WireType.Yellow:
                 color = Color.yellow;
+                index = 4;
                 break;
             default:
                 color = Color.red;
+                index = 0;
                 break;
         }
 
-        foreach(Image image in wireImages)
+        //foreach(Image image in wireImages)
+        //{
+        //    image.color = color;
+        //}
+
+        for(int i = 0; i  < wireImages.Length; i++)
         {
-            image.color = color;
+            if (ishead)
+            {
+                if (i == 0)
+                    wireImages[i].sprite = wireBodySprites[index];
+                else
+                    wireImages[i].sprite = wireHeadSprites[index];
+            }
+            else
+            {
+                if (i == 0)
+                    wireImages[i].sprite = wireTailSprites[index];
+                else
+                    wireImages[i].sprite = wireHeadSprites[index];
+            }
         }
     }
 
