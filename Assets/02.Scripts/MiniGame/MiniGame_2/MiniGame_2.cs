@@ -34,19 +34,33 @@ public class MiniGame_2 : MiniGameController
     public override void GetReward()
     {
         base.GetReward();
+
         if (StatusManager.Instance.status.statusData.MotorRestorationRate + reward <= 100)
+        {
+            StatusManager.Instance.partPrices[1] += 5;
             StatusManager.Instance.status.SetMotorRestorationRate(true);
+        }
         else
             StatusManager.Instance.status.statusData.MotorRestorationRate = 100;
+
+        if (StatusManager.Instance.status.statusData.MotorRestorationRate >= 100)
+            StatusManager.Instance.RepairClear(1, StatusManager.Instance.moterImage, true);
     }
 
     public override void GetPenalty()
     {
         base.GetPenalty();
+
         if (StatusManager.Instance.status.statusData.MotorRestorationRate - penalty >= 0)
+        {
+            StatusManager.Instance.partPrices[1] -= 5;
             StatusManager.Instance.status.SetMotorRestorationRate(false);
+        }
         else
             StatusManager.Instance.status.statusData.MotorRestorationRate = 0;
+
+        if (StatusManager.Instance.status.statusData.MotorRestorationRate < 100)
+            StatusManager.Instance.RepairClear(1, StatusManager.Instance.moterImage, false);
     }
 
     public override void OnBeep()

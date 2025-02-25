@@ -40,19 +40,34 @@ public class MiniGame_3 : MiniGameController
     public override void GetReward()
     {
         base.GetReward();
+
         if (StatusManager.Instance.status.statusData.RadarRestorationRate + reward <= 100)
+        {
+            StatusManager.Instance.partPrices[3] += 5;
             StatusManager.Instance.status.SetRadarRestorationRate(true);
+        }
         else
             StatusManager.Instance.status.statusData.RadarRestorationRate = 100;
+
+        if (StatusManager.Instance.status.statusData.RadarRestorationRate >= 100)
+            StatusManager.Instance.RepairClear(3, StatusManager.Instance.radarImage, true);
     }
 
     public override void GetPenalty()
     {
         base.GetPenalty();
+
         if (StatusManager.Instance.status.statusData.RadarRestorationRate - penalty >= 0)
+        {
+            StatusManager.Instance.partPrices[3] -= 5;
             StatusManager.Instance.status.SetRadarRestorationRate(false);
+            StatusManager.Instance.RadarOutputAmountGaugeChange(false);
+        }
         else
             StatusManager.Instance.status.statusData.RadarRestorationRate = 0;
+
+        if (StatusManager.Instance.status.statusData.RadarRestorationRate < 100)
+            StatusManager.Instance.RepairClear(3, StatusManager.Instance.radarImage, false);
     }
 
     public override void OnBeep()

@@ -80,52 +80,59 @@ public class Ending : MonoBehaviour
         //    type = EndingType.Dead;
         //}
 
-        if (statusData.FuelAmount < 50 && statusData.HullRestorationRate < 50
-    && statusData.MotorRestorationRate < 50 && statusData.EngineRestorationRate < 50 && statusData.RadarRestorationRate < 50
-    && statusData.RadarOutputAmount < 50)
+        if (statusData.FuelAmount <= 30 && statusData.HullRestorationRate <= 30
+    && statusData.MotorRestorationRate <= 30 && statusData.EngineRestorationRate <= 30 && statusData.RadarRestorationRate <= 30
+    && statusData.RadarOutputAmount <= 30)
         {
             // Ending 01
             type = EndingType.Dead;
         }
-        if (statusData.FuelAmount < 50 && statusData.HullRestorationRate >= 50
-            && statusData.MotorRestorationRate >= 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
-            && statusData.RadarOutputAmount >= 50)
-        {
-            // Ending 02
-            type = EndingType.FuelExhaustion;
-        }
-        if (statusData.FuelAmount >= 50 && statusData.HullRestorationRate < 50
-            && statusData.MotorRestorationRate >= 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
-            && statusData.RadarOutputAmount >= 50)
-        {
-            // Ending 03
-            type = EndingType.SpaceshipExplosion;
-        }
-        if (statusData.FuelAmount >= 50 && statusData.HullRestorationRate >= 50
-            && statusData.MotorRestorationRate >= 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
-            && statusData.RadarOutputAmount < 50)
-        {
-            // Ending 04
-            type = EndingType.SpaceLost;
-        }
-        if (statusData.FuelAmount >= 50 && statusData.HullRestorationRate >= 50
-            && statusData.MotorRestorationRate < 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
-            && statusData.RadarOutputAmount >= 50)
-        {
-            // Ending 05
-            type = EndingType.PlanetLanding;
-        }
-        if(statusData.FuelAmount >= 50 && statusData.HullRestorationRate >= 50
-            && statusData.MotorRestorationRate >= 50 && statusData.EngineRestorationRate >= 50 && statusData.RadarRestorationRate >= 50
-            && statusData.RadarOutputAmount >= 50)
+        else if (statusData.FuelAmount >= 70 && statusData.HullRestorationRate >= 70
+    && statusData.MotorRestorationRate >= 70 && statusData.EngineRestorationRate >= 70 && statusData.RadarRestorationRate >= 70
+    && statusData.RadarOutputAmount >= 70)
         {
             // Ending 06
             type = EndingType.MarsMigration;
         }
-        if (statusData.RadarOutputAmount == 100)
+        else if (statusData.RadarOutputAmount == 100)
         {
             // Ending 07
             type = EndingType.EncounterWithAnAlien;
+        }
+        else
+        {
+            int[] statusValue = new int[4] { statusData.FuelAmount, statusData.HullRestorationRate, statusData.RadarOutputAmount, statusData.MotorRestorationRate };
+            int min = statusValue[0];
+            int minIndex = 0;
+
+            for(int i= 0; i < statusValue.Length; i++)
+            {
+                if(statusValue[i] < min)
+                {
+                    min = statusValue[i];
+                    minIndex = i;
+                }
+            }
+
+            switch (minIndex)
+            {
+                case 0:
+                    // Ending 02
+                    type = EndingType.FuelExhaustion;
+                    break;
+                case 1:
+                    // Ending 03
+                    type = EndingType.SpaceshipExplosion;
+                    break;
+                case 2:
+                    // Ending 04
+                    type = EndingType.SpaceLost;
+                    break;
+                case 3:
+                    // Ending 05
+                    type = EndingType.PlanetLanding;
+                    break;
+            }
         }
 
         return type;

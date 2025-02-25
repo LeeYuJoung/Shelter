@@ -86,18 +86,30 @@ public class MiniGame_1 : MiniGameController
     {
         base.GetReward();
         if (StatusManager.Instance.status.statusData.EngineRestorationRate + reward <= 100)
+        {
+            StatusManager.Instance.partPrices[2] += 5;
             StatusManager.Instance.status.SetEngineRestorationRate(true);
+        }
         else
             StatusManager.Instance.status.statusData.EngineRestorationRate = 100;
+
+        if (StatusManager.Instance.status.statusData.EngineRestorationRate >= 100)
+            StatusManager.Instance.RepairClear(2, StatusManager.Instance.engineImage, true);
     }
 
     public override void GetPenalty()
     {
         base.GetPenalty();
         if (StatusManager.Instance.status.statusData.EngineRestorationRate - penalty >= 0)
+        {
+            StatusManager.Instance.partPrices[2] -= 5;
             StatusManager.Instance.status.SetEngineRestorationRate(false);
+        }
         else
             StatusManager.Instance.status.statusData.EngineRestorationRate = 0;
+
+        if (StatusManager.Instance.status.statusData.EngineRestorationRate < 100)
+            StatusManager.Instance.RepairClear(2, StatusManager.Instance.engineImage, false);
     }
 
     public override void OnBeep()

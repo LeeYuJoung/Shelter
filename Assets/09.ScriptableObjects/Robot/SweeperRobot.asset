@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robotType: 1
   targetName: Soil
-  moveSpeed: 70
-  workTime: 5
-  breakTime: 5
+  moveSpeed: 30
+  workTime: 15
+  breakTime: 15
   range: 6

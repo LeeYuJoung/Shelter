@@ -89,7 +89,6 @@ namespace yjlee.robot
             pathFinding = GetComponent<PathFinding>();
 
             robotState = RobotState.Idel;
-            //moveSpeed = 60.0f;
             getGold = 5;
             workTime = robot.workTime;
             breakTime = robot.breakTime;

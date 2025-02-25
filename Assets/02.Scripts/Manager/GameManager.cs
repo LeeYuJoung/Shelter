@@ -176,9 +176,8 @@ namespace Manager
 
                     if (robotController != null)
                     {
-                        robotController.moveSpeed += 10;
-                        robotController.workTime -= 0.5f;
-                        robotController.breakTime -= 0.5f;
+                        robotController.moveSpeed += 5;
+                        robotController.workTime -= 2.0f;
                         robotController.SpeedInit();
                     }
                 }
@@ -191,10 +190,10 @@ namespace Manager
 
                     if (robotController != null)
                     {
-                        robotController.moveSpeed += 10;
+                        robotController.moveSpeed += 5;
                         robotController.getGold += 5;
-                        robotController.workTime -= 0.5f;
-                        robotController.breakTime -= 0.5f;
+                        robotController.workTime -= 2.0f;
+                        robotController.breakTime -= 2.0f;
                         robotController.SpeedInit();
                     }
                 }
