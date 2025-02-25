@@ -40,6 +40,11 @@ namespace Manager
         // 구매 or 불가 버튼 변경
         public void SetRepairButton()
         {
+            if(GameManager.Instance.sweeperRobots.Count <= 0)
+                isClear[2] = true;
+            else
+                isClear[2] = false;
+
             // 구매 버튼
             for (int i = 0; i < repairButtons.Length; i++)
             {

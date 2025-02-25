@@ -1,3 +1,4 @@
+using Manager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -47,12 +48,14 @@ public class LineStretch : Wire
     {
         if (isAnswer) //정답이면 멈춤
         {
+            AudioManager.Instance.PlaySFX(5);
             miniGame_1.AnswerCorrectly();
             StretchBetweenPoints(defaultWorldPosition, defaultPosition);
             this.enabled = false;
         }
         else //정답이 아니면 원상 복구
         {
+            AudioManager.Instance.PlaySFX(6);
             rectTransform.sizeDelta = defaultSize;
             rectTransform.anchoredPosition = defaultPosition;
             rectTransform.rotation = Quaternion.identity;

@@ -68,6 +68,7 @@ namespace Manager
                     if (!miniGame.isError && !miniGame.isPlaying)
                     {
                         miniGame.isError = true;
+                        miniGame.audioSource.Play();
                         errorGameObjects[errorIndex].SetActive(true);
                         return;
                     }

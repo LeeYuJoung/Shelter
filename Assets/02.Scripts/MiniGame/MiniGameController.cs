@@ -5,6 +5,7 @@ namespace MiniGame
 {
     public class MiniGameController : MonoBehaviour
     {
+        public AudioSource audioSource;
         public float playTime = 15.0f;
         public int plusPoint = 20;
         public int minusPoint = 10;
@@ -59,7 +60,7 @@ namespace MiniGame
         // 게임 강제 종료
         public virtual void ForcingGameOver()
         {
-
+            audioSource.Stop();
         }
     }
 }

@@ -35,6 +35,7 @@ public class MiniGame_3 : MiniGameController
         isGameOver = true;
         maxTime = playTime;
         miniGame3_currentTime = playTime; // ✅ 제한 시간 초기화
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void GetReward()
@@ -76,6 +77,7 @@ public class MiniGame_3 : MiniGameController
 
         Debug.Log(":: MiniGame3 Beep ::");
         isError = false;
+        audioSource.Stop();
         errorGameObject.SetActive(false);
         GetPenalty();
     }
@@ -89,6 +91,7 @@ public class MiniGame_3 : MiniGameController
     public override void GameStart()
     {
         base.GameStart();
+        audioSource.Stop();
         miniGame3GameObject.SetActive(true);
 
         //indicatorSpeed = 200f; // ✅ 기본 이동 속도 설정
@@ -237,16 +240,19 @@ public class MiniGame_3 : MiniGameController
         if (indicatorY >= greenMin && indicatorY <= greenMax)
         {
             totalScore += greenBonus;
+            AudioManager.Instance.PlaySFX(9);
             Debug.Log("✅ GreenZone: + " + greenBonus + "점");
         }
         else if (indicatorY >= yellowMin && indicatorY <= yellowMax)
         {
             totalScore += yellowBonus;
+            AudioManager.Instance.PlaySFX(10);
             Debug.Log("⚠️ YellowZone: + " + yellowBonus + "점");
         }
         else
         {
             totalScore += redPenalty;
+            AudioManager.Instance.PlaySFX(11);
             Debug.Log("❌ RedZone: " + redPenalty + "점");
         }
 

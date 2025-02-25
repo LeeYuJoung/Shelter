@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using yjlee.dialog;
 using Manager;
+using UnityEngine.Audio;
 
 namespace yjlee.intro
 {

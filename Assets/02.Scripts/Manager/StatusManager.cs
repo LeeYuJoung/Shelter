@@ -17,6 +17,7 @@ namespace Manager
         public Image corrosionGauge;
         public Image fuelAmountGauge;
         public Image radarOutputAmountGauge;
+        public Sprite[] repairSprites;
         public Sprite[] repairClearSprites;
 
         public GameObject repairButton;
@@ -194,7 +195,11 @@ namespace Manager
         public void RepairClear(int partIndex, Image partImage, bool isClear)
         {
             isRepairClear[partIndex] = isClear;
-            partImage.sprite = repairClearSprites[partIndex];
+
+            if(isClear)
+                partImage.sprite = repairClearSprites[partIndex];
+            else
+                partImage.sprite = repairSprites[partIndex];
         }
     }
 }

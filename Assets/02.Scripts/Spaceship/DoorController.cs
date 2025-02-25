@@ -1,8 +1,11 @@
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
     Animator animator;
+    bool isOpen = false;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -10,8 +13,9 @@ public class DoorController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.gameObject.CompareTag("Collector")))
+        if ((collision.gameObject.CompareTag("Collector") && !isOpen))
         {
+            isOpen = true;
             animator.SetTrigger("Open");
         }
     }
@@ -20,6 +24,7 @@ public class DoorController : MonoBehaviour
     {
         if ((collision.gameObject.CompareTag("Collector")))
         {
+            isOpen = false;
             animator.SetTrigger("Close");
         }
     }

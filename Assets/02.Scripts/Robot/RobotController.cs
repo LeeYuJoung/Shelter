@@ -38,8 +38,8 @@ namespace yjlee.robot
             if (GameManager.Instance.isGameOver)
             {
                 Idel();
-                GameManager.Instance.isCleaning[index] = false;
-                index = 0;
+                //GameManager.Instance.isCleaning[index] = false;
+                //index = 0;
 
                 robotState = RobotState.Idel;
                 robotRigidbody.linearVelocity = Vector3.zero;
@@ -153,7 +153,8 @@ namespace yjlee.robot
                 sweeperPos = GameObject.FindGameObjectsWithTag("PartDestination");
                 int _index = Random.Range(0, sweeperPos.Length);
 
-                if(_index != index && !GameManager.Instance.isCleaning[_index])
+                //!GameManager.Instance.isCleaning[_index]
+                if (_index != index)
                 {
                     index = _index;
                     GameManager.Instance.isCleaning[_index] = true;

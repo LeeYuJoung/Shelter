@@ -60,7 +60,8 @@ public class EndingCardContoller : MonoBehaviour
 
         currentCard--;
 
-        float target = endingCardGroup.rectTransform.localPosition.x + 1500.0f;
+        //float target = endingCardGroup.rectTransform.localPosition.x + 1500.0f;
+        float target = endingCardGroup.rectTransform.localPosition.x + 2214.0f;
 
         endingCardGroup.rectTransform.DOAnchorPosX(target, endingCardGroup.tweenDuration).SetEase(endingCardGroup.ease);
     }
@@ -80,7 +81,8 @@ public class EndingCardContoller : MonoBehaviour
 
         currentCard++;
 
-        float target = endingCardGroup.rectTransform.localPosition.x - 1500.0f;
+        //float target = endingCardGroup.rectTransform.localPosition.x - 1500.0f;
+        float target = endingCardGroup.rectTransform.localPosition.x - 2214.0f;
 
         endingCardGroup.rectTransform.DOAnchorPosX(target, endingCardGroup.tweenDuration).SetEase(endingCardGroup.ease);
 

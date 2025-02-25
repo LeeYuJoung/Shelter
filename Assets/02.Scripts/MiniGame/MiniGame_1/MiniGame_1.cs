@@ -72,6 +72,7 @@ public class MiniGame_1 : MiniGameController
         rightWireObjects = new List<GameObject>();
 
         maxTime = playTime;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -118,6 +119,7 @@ public class MiniGame_1 : MiniGameController
 
         Debug.Log(":: MiniGame1 Beep ::");
         isError = false;
+        audioSource.Stop();
         errorGameObject.SetActive(false);
         GetPenalty();
     }
@@ -152,6 +154,7 @@ public class MiniGame_1 : MiniGameController
             errorGameObject.SetActive(false);
             resultImage.gameObject.SetActive(true);
             uiAnimation.Close();
+            audioSource.Stop();
 
             isError = false;
             isPlaying = false;
@@ -172,6 +175,7 @@ public class MiniGame_1 : MiniGameController
         resultImage.gameObject.SetActive(false);
 
         beginGame = true;
+        audioSource.Stop();
         currentTIme = playTime;
         AddLeftWire(leftWireObjects, leftWireGroup);
         AddRightWire(leftWireObjects, rightWireObjects, rightWireGroup);
