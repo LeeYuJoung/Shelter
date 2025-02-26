@@ -80,9 +80,9 @@ public class Ending : MonoBehaviour
         //    type = EndingType.Dead;
         //}
 
-        if (statusData.FuelAmount <= 30 && statusData.HullRestorationRate <= 30
-    && statusData.MotorRestorationRate <= 30 && statusData.EngineRestorationRate <= 30 && statusData.RadarRestorationRate <= 30
-    && statusData.RadarOutputAmount <= 30)
+        if (statusData.FuelAmount <= 50 && statusData.HullRestorationRate <= 50
+    && statusData.MotorRestorationRate <= 50 && statusData.EngineRestorationRate <= 50 && statusData.RadarRestorationRate <= 50
+    && statusData.RadarOutputAmount <= 50)
         {
             // Ending 01
             type = EndingType.Dead;
