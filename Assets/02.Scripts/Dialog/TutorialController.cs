@@ -100,7 +100,8 @@ namespace yjlee.dialog
         {
             foreach (string context in talkData[index].contexts)
             {
-                contextText.DOText(context, 2.5f);
+                //contextText.DOText(context, 2.5f);
+                contextText.text = context;
             }
         }
     }

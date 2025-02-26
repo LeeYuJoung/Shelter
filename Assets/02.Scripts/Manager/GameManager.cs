@@ -1,7 +1,10 @@
+using DG.Tweening;
 using MiniGame;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using yjlee.dialog;
 using yjlee.robot;
 
@@ -31,6 +34,8 @@ namespace Manager
         public int collectorRobotLevel;
         public int sweeperRobotLevel;
 
+        public Button startImage;
+
         private int day = 0;
         private int dayRange = 1;
         private float dayTime = 100.0f;              // 하루 시간
@@ -42,6 +47,7 @@ namespace Manager
         public bool[] isCleaning = new bool[4] { false, false, false, false };
         public bool isRadeRoomUnLock = false;
         public bool isGameOver = true;
+        public bool isTakeOff = false;
 
         private void Awake()
         {
@@ -215,7 +221,20 @@ namespace Manager
         // 게임 종료
         public void GameOver()
         {
-            ending.ExcuteEnding(StatusManager.Instance.status.statusData);
+            StartCoroutine(IGameOver());
+        }
+
+        IEnumerator IGameOver()
+        {
+            if (!isTakeOff)
+            {
+                isTakeOff = true;
+                AudioManager.Instance.PlaySFX(12);
+                startImage.GetComponent<RectTransform>().DOAnchorPosY(-208, 0.5f).OnComplete(delegate { startImage.GetComponent<RectTransform>().DOAnchorPosY(-190, 0.5f); });
+
+                yield return new WaitForSeconds(4f);
+                ending.ExcuteEnding(StatusManager.Instance.status.statusData);
+            }
         }
 
         // 씬 관리

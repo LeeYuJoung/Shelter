@@ -1171,6 +1171,7 @@ GameObject:
   - component: {fileID: 360717276}
   - component: {fileID: 360717278}
   - component: {fileID: 360717277}
+  - component: {fileID: 360717279}
   m_Layer: 5
   m_Name: Glitter
   m_TagString: Untagged
@@ -1192,10 +1193,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 929981756}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1792, y: 829}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &360717277
 MonoBehaviour:
@@ -1235,6 +1236,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360717275}
   m_CullTransparentMesh: 1
+--- !u!114 &360717279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360717275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40802e85b7d46e546ad56ba49d387820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiInfo:
+    rectTransform: {fileID: 0}
+    start: {x: 40, y: 30, z: 0}
+    end: {x: -40, y: -30, z: 0}
+    tweenDuration: 3
+    ease: 1
 --- !u!1 &363787533
 GameObject:
   m_ObjectHideFlags: 0
@@ -5202,6 +5221,7 @@ MonoBehaviour:
   sweeperRobots: []
   collectorRobotLevel: 0
   sweeperRobotLevel: 0
+  startImage: {fileID: 0}
   currentTime: 0
   gold: 0
   isCleaning: 00000000
@@ -5307,7 +5327,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7cc7ebb4e33ccb642ad6be13a79f4ff0, type: 3}
   - {fileID: 8300000, guid: 7a509279de4518d408ced5ef2a2c6e3b, type: 3}
   - {fileID: 8300000, guid: d2c0f4492d78c6844aeb22a5522f8c51, type: 3}
-  - {fileID: 8300000, guid: 7d9d4f5357cedad418bb57b58f16c230, type: 3}
+  - {fileID: 8300000, guid: 452a8b6963e130b4780c0acf8ca4963a, type: 3}
   bgmPlayer: {fileID: 1629808030}
   sfxPlayer: []
   bgmSlider: {fileID: 0}

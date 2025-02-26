@@ -987,7 +987,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 8ce261aac2edbf5459281cf54adc7d73, type: 3}
+    m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -1069,7 +1069,9 @@ MonoBehaviour:
   durationTime: 0.1
   ease: 1
   buttonImage: {fileID: 0}
-  onButtonSprite: []
+  onButtonSprite:
+  - {fileID: 21300000, guid: 0caa067ade372ba4682480368727319e, type: 3}
+  - {fileID: 21300000, guid: 8ce261aac2edbf5459281cf54adc7d73, type: 3}
 --- !u!1 &1909136065
 GameObject:
   m_ObjectHideFlags: 0

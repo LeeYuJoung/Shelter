@@ -199,7 +199,7 @@ namespace Manager
 
             AudioManager.Instance.resolutionIndex = resolutionIndex;
             Resolution resolution = GameManager.Instance.resolutions[resolutionIndex];
-            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+            //Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
 
         public void DescriptionClear()
