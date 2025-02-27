@@ -32,7 +32,7 @@ public class Ending : MonoBehaviour
     void Awake()
     {
         Type = EndingType.None;
-        path = Path.Combine(Application.dataPath, "10.Files", "EndingData.json");
+        path = Path.Combine(Application.persistentDataPath, "EndingData.json");
         JsonLoad();
     }
 

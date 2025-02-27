@@ -73,7 +73,7 @@ namespace Manager
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Application.Quit();
+                SceneChange(0);
             }
 
             if (isGameOver)
@@ -97,7 +97,7 @@ namespace Manager
         // 시간 관리
         private void Timmer()
         {
-            currentTime += Time.deltaTime * 20.0f;
+            currentTime += Time.deltaTime;
 
             if (day >= 5)
             {

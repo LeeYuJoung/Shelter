@@ -89,7 +89,7 @@ namespace yjlee.robot
             pathFinding = GetComponent<PathFinding>();
 
             robotState = RobotState.Idel;
-            getGold = 5;
+            getGold = 10;
             workTime = robot.workTime;
             breakTime = robot.breakTime;
             range = robot.range;
