@@ -30,7 +30,7 @@ public class MiniGame_1 : MiniGameController
     private List<GameObject> leftWireObjects;
     private List<GameObject> rightWireObjects;
     private int wireLength;
-    private float currentTIme;
+    private float currentPlayTime;
     private bool beginGame;
     private int correctAnswerValue;
     private int currentAnswerValue;
@@ -39,6 +39,11 @@ public class MiniGame_1 : MiniGameController
     public Image resultImage;
     public Sprite[] resultSprites;
 
+    public Sprite[] wireHeadSprites;
+    public Sprite[] wireBodySprites;
+    public Sprite[] wireTailSprites;
+
+    public GameObject descriptionImage;
     public UIAnimation uiAnimation;
     public GameObject errorGameObject;
     private bool isClear = false;
@@ -68,11 +73,30 @@ public class MiniGame_1 : MiniGameController
         rightWireObjects = new List<GameObject>();
 
         maxTime = playTime;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        if(beginGame)
+        if (!isError || GameManager.Instance.isGameOver)
+        {
+            currentTime = 0;
+            return;
+        }
+
+        currentTime += Time.deltaTime;
+
+        if (currentTime >= beepTime)
+        {
+            currentTime = 0;
+
+            if (!isPlaying)
+            {
+                OnBeep();
+            }
+        }
+
+        if (beginGame)
         {
             TimeUpdate();
         }
@@ -82,26 +106,38 @@ public class MiniGame_1 : MiniGameController
     {
         base.GetReward();
         if (StatusManager.Instance.status.statusData.EngineRestorationRate + reward <= 100)
+        {
+            StatusManager.Instance.partPrices[2] += 5;
             StatusManager.Instance.status.SetEngineRestorationRate(true);
+        }
         else
             StatusManager.Instance.status.statusData.EngineRestorationRate = 100;
+
+        if (StatusManager.Instance.status.statusData.EngineRestorationRate >= 100)
+            StatusManager.Instance.RepairClear(2, StatusManager.Instance.engineImage, true);
     }
 
     public override void GetPenalty()
     {
         base.GetPenalty();
         if (StatusManager.Instance.status.statusData.EngineRestorationRate - penalty >= 0)
+        {
+            StatusManager.Instance.partPrices[2] -= 5;
             StatusManager.Instance.status.SetEngineRestorationRate(false);
+        }
         else
             StatusManager.Instance.status.statusData.EngineRestorationRate = 0;
+
+        if (StatusManager.Instance.status.statusData.EngineRestorationRate < 100)
+            StatusManager.Instance.RepairClear(2, StatusManager.Instance.engineImage, false);
     }
 
     public override void OnBeep()
     {
         base.OnBeep();
 
-        Debug.Log(":: MiniGame1 Beep ::");
         isError = false;
+        audioSource.Stop();
         errorGameObject.SetActive(false);
         GetPenalty();
     }
@@ -136,6 +172,7 @@ public class MiniGame_1 : MiniGameController
             errorGameObject.SetActive(false);
             resultImage.gameObject.SetActive(true);
             uiAnimation.Close();
+            audioSource.Stop();
 
             isError = false;
             isPlaying = false;
@@ -151,17 +188,22 @@ public class MiniGame_1 : MiniGameController
     public override void GameStart()
     {
         base.GameStart();
-        
+
+        if (isFirst)
+        {
+            Time.timeScale = 0;
+            descriptionImage.SetActive(true);
+        }
+
         miniGamePanel.SetActive(true);
         resultImage.gameObject.SetActive(false);
 
         beginGame = true;
-        currentTIme = playTime;
+        audioSource.Stop();
+        currentPlayTime = playTime;
         AddLeftWire(leftWireObjects, leftWireGroup);
         AddRightWire(leftWireObjects, rightWireObjects, rightWireGroup);
         correctAnswerValue += leftWireObjects.Count;
-
-        Debug.Log("정답 개수 : " + correctAnswerValue);
     }
 
     //게임 종료시 실행
@@ -197,13 +239,13 @@ public class MiniGame_1 : MiniGameController
             return;
         }
 
-        if (currentTIme > 0)
+        if (currentPlayTime > 0)
         {
-            currentTIme -= Time.deltaTime;
+            currentPlayTime -= Time.deltaTime;
         }
         else
         {
-            currentTIme = playTime;
+            currentPlayTime = playTime;
             beginGame = false;
             isClear = false;
             //ClearGame(false);
@@ -211,7 +253,7 @@ public class MiniGame_1 : MiniGameController
             return;
         }
         //Timer.fillAmount = currentTIme / maxTime;
-        timerSlider.value = currentTIme / playTime;
+        timerSlider.value = currentPlayTime / playTime;
     }
 
     //셔플(제네릭)
@@ -233,7 +275,7 @@ public class MiniGame_1 : MiniGameController
         for (int i = 0; i < maxWireLength; i++)
         {
             GameObject wire = Instantiate(wirePrefab, wireGroup.transform);
-            ChangeWireColor(types[i], wire);
+            ChangeWireColor(types[i], wire, true);
             wire.GetComponent<LineStretch>().SetMiniGame(this);
             wireObjects.Add(wire);
         }
@@ -250,7 +292,7 @@ public class MiniGame_1 : MiniGameController
         foreach (WireType type in types)
         {
             GameObject wire = Instantiate(wireTargetPrefab, wireGroup.transform);
-            ChangeWireColor(type, wire);
+            ChangeWireColor(type, wire, false);
             list.Add(wire);
         }
 
@@ -262,7 +304,7 @@ public class MiniGame_1 : MiniGameController
             //전선 프리팹 중 랜덤
             //int random = UnityEngine.Random.Range(0, wireLength);
             int random = Random.Range(0, wireLength);
-            ChangeWireColor((WireType)random, wire);
+            ChangeWireColor((WireType)random, wire, false);
             list.Add(wire);
         }
 
@@ -282,40 +324,64 @@ public class MiniGame_1 : MiniGameController
         //Debug.Log("정답 개수 증가 : " + currentAnswerValue);
     }
 
-
     //선 색 변경 및 타입 지정
-    private void ChangeWireColor(WireType type, GameObject wire)
+    private void ChangeWireColor(WireType type, GameObject wire, bool ishead)
     {
         Image[] wireImages = wire.GetComponentsInChildren<Image>();
 
         Color color;
         wire.GetComponent<Wire>().WireType = type;
+        int index = 0;
 
         switch (type)
         {
             case WireType.Red:
                 color = Color.red;
+                index = 0;
                 break;
             case WireType.Blue:
                 color = Color.blue;
+                index = 1;
                 break;
             case WireType.White:
                 color = Color.white;
+                index = 2;
                 break;
             case WireType.Green:
                 color = Color.green;
+                index = 3;
                 break;
             case WireType.Yellow:
                 color = Color.yellow;
+                index = 4;
                 break;
             default:
                 color = Color.red;
+                index = 0;
                 break;
         }
 
-        foreach(Image image in wireImages)
+        //foreach(Image image in wireImages)
+        //{
+        //    image.color = color;
+        //}
+
+        for(int i = 0; i  < wireImages.Length; i++)
         {
-            image.color = color;
+            if (ishead)
+            {
+                if (i == 0)
+                    wireImages[i].sprite = wireBodySprites[index];
+                else
+                    wireImages[i].sprite = wireHeadSprites[index];
+            }
+            else
+            {
+                if (i == 0)
+                    wireImages[i].sprite = wireTailSprites[index];
+                else
+                    wireImages[i].sprite = wireHeadSprites[index];
+            }
         }
     }
 
@@ -328,5 +394,12 @@ public class MiniGame_1 : MiniGameController
         }
 
         wireObjects.Clear();
+    }
+
+    public void FirstStart()
+    {
+        Time.timeScale = 1.0f;
+        descriptionImage.SetActive(false);
+        isFirst = false;
     }
 }

@@ -14,7 +14,6 @@ public class MiniGame_2 : MiniGameController
     public Slider powerSlider;    // 전력 게이지 슬라이더
     public Image resultImage;     // 결과 Image 표시
     public Sprite[] resultSprites;
-    public AudioSource wrongInputSound;  // 틀린 입력 시 재생되는 소리
 
     public Transform arrowParent;      // 화살표 부모 오브젝트
     public GameObject arrowPrefab;     // 화살표 프리팹
@@ -30,23 +29,38 @@ public class MiniGame_2 : MiniGameController
     private string[] currentArrowKeys = new string[4]; // 현재 표시된 방향키 배열
     private int[] currentArrowIntKeys = new int[4];
     private int currentInputIndex = 0; // 플레이어가 입력 중인 방향키 인덱스
+    public GameObject descriptionImage;
 
     public override void GetReward()
     {
         base.GetReward();
+
         if (StatusManager.Instance.status.statusData.MotorRestorationRate + reward <= 100)
+        {
+            StatusManager.Instance.partPrices[1] += 5;
             StatusManager.Instance.status.SetMotorRestorationRate(true);
+        }
         else
             StatusManager.Instance.status.statusData.MotorRestorationRate = 100;
+
+        if (StatusManager.Instance.status.statusData.MotorRestorationRate >= 100)
+            StatusManager.Instance.RepairClear(1, StatusManager.Instance.moterImage, true);
     }
 
     public override void GetPenalty()
     {
         base.GetPenalty();
+
         if (StatusManager.Instance.status.statusData.MotorRestorationRate - penalty >= 0)
+        {
+            StatusManager.Instance.partPrices[1] -= 5;
             StatusManager.Instance.status.SetMotorRestorationRate(false);
+        }
         else
             StatusManager.Instance.status.statusData.MotorRestorationRate = 0;
+
+        if (StatusManager.Instance.status.statusData.MotorRestorationRate < 100)
+            StatusManager.Instance.RepairClear(1, StatusManager.Instance.moterImage, false);
     }
 
     public override void OnBeep()
@@ -55,6 +69,7 @@ public class MiniGame_2 : MiniGameController
 
         Debug.Log(":: MiniGame2 Beep ::");
         isError = false;
+        audioSource.Stop();
         errorGameObject.SetActive(false);
         GetPenalty();
     }
@@ -67,6 +82,14 @@ public class MiniGame_2 : MiniGameController
     public override void GameStart()
     {
         base.GameStart();
+
+        if (isFirst)
+        {
+            Time.timeScale = 0;
+            descriptionImage.SetActive(true);
+        }
+
+        audioSource.Stop();
         miniGame2GameObject.SetActive(true);
         GenerateRandomArrowKeys(); // ✅ 랜덤 방향키 생성
 
@@ -109,6 +132,7 @@ public class MiniGame_2 : MiniGameController
             resultImage.gameObject.SetActive(true);
             resultImage.sprite = resultSprites[1];
 
+            isError = false;
             isPlaying = false;
             errorGameObject.SetActive(false);
             uiAnimation.Close();
@@ -116,13 +140,19 @@ public class MiniGame_2 : MiniGameController
         }
         else
         {
+            audioSource.Stop();
             uiAnimation.Close();
         }
     }
 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
-        if (!isError)
+        if (!isError || GameManager.Instance.isGameOver)
         {
             currentTime = 0;
             return;
@@ -185,6 +215,7 @@ public class MiniGame_2 : MiniGameController
             Input.GetKeyDown(KeyCode.RightArrow) && currentArrowKeys[currentInputIndex] == "→")
         {
             // 현재 방향키가 올바른 경우
+            AudioManager.Instance.PlaySFX(7);
             Transform currentArrow = arrowParent.GetChild(currentInputIndex);
             currentArrow.GetComponent<PushAnimation>().OnSuccess();
             currentArrow.GetComponentInChildren<Image>().sprite = arrowClearSprites[currentArrowIntKeys[currentInputIndex]];
@@ -205,7 +236,7 @@ public class MiniGame_2 : MiniGameController
             Input.GetKeyDown(KeyCode.LeftArrow) && currentArrowKeys[currentInputIndex] != "←" ||
             Input.GetKeyDown(KeyCode.RightArrow) && currentArrowKeys[currentInputIndex] != "→") // 잘못된 키 입력 시
         {
-            PlayWrongInputSound(); // 틀린 입력 소리 재생
+            AudioManager.Instance.PlaySFX(8);
             StartCoroutine(WrongInputFeedback()); // 잘못된 입력 시 피드백 연출
             currentPower = Mathf.Max(currentPower - minusPoint, 0); // 전력 게이지 감소
         }
@@ -270,9 +301,16 @@ public class MiniGame_2 : MiniGameController
 
     void PlayWrongInputSound()
     {
-        if (wrongInputSound != null)
-        {
-            wrongInputSound.Play();
-        }
+        //if (wrongInputSound != null)
+        //{
+        //    wrongInputSound.Play();
+        //}
+    }
+
+    public void FirstStart()
+    {
+        Time.timeScale = 1.0f;
+        descriptionImage.SetActive(false);
+        isFirst = false;
     }
 }

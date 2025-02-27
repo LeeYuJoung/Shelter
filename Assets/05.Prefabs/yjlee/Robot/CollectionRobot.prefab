@@ -243,7 +243,7 @@ MonoBehaviour:
   sweeperPos: []
   index: 0
   robotState: 0
-  moveSpeed: 40
+  moveSpeed: 30
   workTime: 0
   breakTime: 0
   getGold: 0

@@ -14,6 +14,7 @@ TagManager:
   - Sweeper
   - PartDestination
   - SFX
+  - BGM
   layers:
   - Default
   - TransparentFX

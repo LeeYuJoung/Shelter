@@ -10,6 +10,7 @@ public class MiniGame_3 : MiniGameController
     public GameObject errorGameObject;
     public Image resultImage; 
     public Sprite[] resultSprites;
+    public GameObject descriptionImage;
 
     public Image spaceGauge;   // ✅ SpaceGauge 내부에서만 이동해야 함
     public Image greenZone;
@@ -35,24 +36,40 @@ public class MiniGame_3 : MiniGameController
         isGameOver = true;
         maxTime = playTime;
         miniGame3_currentTime = playTime; // ✅ 제한 시간 초기화
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void GetReward()
     {
         base.GetReward();
+
         if (StatusManager.Instance.status.statusData.RadarRestorationRate + reward <= 100)
+        {
+            StatusManager.Instance.partPrices[3] += 5;
             StatusManager.Instance.status.SetRadarRestorationRate(true);
+        }
         else
             StatusManager.Instance.status.statusData.RadarRestorationRate = 100;
+
+        if (StatusManager.Instance.status.statusData.RadarRestorationRate >= 100)
+            StatusManager.Instance.RepairClear(3, StatusManager.Instance.radarImage, true);
     }
 
     public override void GetPenalty()
     {
         base.GetPenalty();
+
         if (StatusManager.Instance.status.statusData.RadarRestorationRate - penalty >= 0)
+        {
+            StatusManager.Instance.partPrices[3] -= 5;
             StatusManager.Instance.status.SetRadarRestorationRate(false);
+            StatusManager.Instance.RadarOutputAmountGaugeChange(false);
+        }
         else
             StatusManager.Instance.status.statusData.RadarRestorationRate = 0;
+
+        if (StatusManager.Instance.status.statusData.RadarRestorationRate < 100)
+            StatusManager.Instance.RepairClear(3, StatusManager.Instance.radarImage, false);
     }
 
     public override void OnBeep()
@@ -61,6 +78,7 @@ public class MiniGame_3 : MiniGameController
 
         Debug.Log(":: MiniGame3 Beep ::");
         isError = false;
+        audioSource.Stop();
         errorGameObject.SetActive(false);
         GetPenalty();
     }
@@ -74,6 +92,14 @@ public class MiniGame_3 : MiniGameController
     public override void GameStart()
     {
         base.GameStart();
+
+        if (isFirst)
+        {
+            Time.timeScale = 0;
+            descriptionImage.SetActive(true);
+        }
+
+        audioSource.Stop();
         miniGame3GameObject.SetActive(true);
 
         //indicatorSpeed = 200f; // ✅ 기본 이동 속도 설정
@@ -114,6 +140,7 @@ public class MiniGame_3 : MiniGameController
             resultImage.gameObject.SetActive(true);
             resultImage.sprite = resultSprites[1];
 
+            isError = false;
             isPlaying = false;
             errorGameObject.SetActive(false);
             uiAnimation.Close();
@@ -127,7 +154,7 @@ public class MiniGame_3 : MiniGameController
 
     void Update()
     {
-        if (!isError)
+        if (!isError || GameManager.Instance.isGameOver)
         {
             currentTime = 0;
             return;
@@ -222,16 +249,19 @@ public class MiniGame_3 : MiniGameController
         if (indicatorY >= greenMin && indicatorY <= greenMax)
         {
             totalScore += greenBonus;
+            AudioManager.Instance.PlaySFX(9);
             Debug.Log("✅ GreenZone: + " + greenBonus + "점");
         }
         else if (indicatorY >= yellowMin && indicatorY <= yellowMax)
         {
             totalScore += yellowBonus;
+            AudioManager.Instance.PlaySFX(10);
             Debug.Log("⚠️ YellowZone: + " + yellowBonus + "점");
         }
         else
         {
             totalScore += redPenalty;
+            AudioManager.Instance.PlaySFX(11);
             Debug.Log("❌ RedZone: " + redPenalty + "점");
         }
 
@@ -288,5 +318,12 @@ public class MiniGame_3 : MiniGameController
         }
 
         errorGameObject.SetActive(false);
+    }
+
+    public void FirstStart()
+    {
+        Time.timeScale = 1.0f;
+        descriptionImage.SetActive(false);
+        isFirst = false;
     }
 }

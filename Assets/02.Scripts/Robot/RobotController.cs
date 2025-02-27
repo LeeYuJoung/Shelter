@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using EnumTypes;
 using Manager;
-using UnityEngine.Audio;
 
 namespace yjlee.robot
 {
@@ -38,11 +37,24 @@ namespace yjlee.robot
         {
             if (GameManager.Instance.isGameOver)
             {
+                Idel();
+                //GameManager.Instance.isCleaning[index] = false;
+                //index = 0;
+
+                robotState = RobotState.Idel;
+                robotRigidbody.linearVelocity = Vector3.zero;
+                robotRigidbody.angularVelocity = 0.0f;
+
+                pathFinding.walkable = false;
                 pathFinding.moveSpeed = 0.0f;
+                pathFinding.target = null;
+
                 return;
             }
             else
+            {
                 pathFinding.moveSpeed = moveSpeed;
+            }
 
             switch (robotState)
             {
@@ -77,7 +89,6 @@ namespace yjlee.robot
             pathFinding = GetComponent<PathFinding>();
 
             robotState = RobotState.Idel;
-            //moveSpeed = 60.0f;
             getGold = 5;
             workTime = robot.workTime;
             breakTime = robot.breakTime;
@@ -90,6 +101,23 @@ namespace yjlee.robot
         public void SpeedInit()
         {
             pathFinding.moveSpeed = moveSpeed;
+        }
+
+        public void Idel()
+        {
+            if(robot.robotType == RobotType.Collector)
+            {
+                robotAnimator.SetBool("Move", false);
+                robotAnimator.SetBool("IsPickUp", true);
+                currentTime = 0;
+            }
+            else
+            {
+                robotAnimator.SetBool("Clean", false);
+                robotAnimator.SetBool("Move", false);
+                currentTime = 0;
+                audioSource.Stop();
+            }
         }
 
         #region 목적지 설정
@@ -125,7 +153,8 @@ namespace yjlee.robot
                 sweeperPos = GameObject.FindGameObjectsWithTag("PartDestination");
                 int _index = Random.Range(0, sweeperPos.Length);
 
-                if(_index != index && !GameManager.Instance.isCleaning[_index])
+                //!GameManager.Instance.isCleaning[_index]
+                if (_index != index)
                 {
                     index = _index;
                     GameManager.Instance.isCleaning[_index] = true;

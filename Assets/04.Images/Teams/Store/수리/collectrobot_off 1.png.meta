@@ -1,0 +1,1222 @@
+fileFormatVersion: 2
+guid: f1275321688aad641bd6756ac0304bba
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8144866737359339479
+    second: collectrobot_off 1_0
+  - first:
+      213: -2224307992486260057
+    second: collectrobot_off 1_1
+  - first:
+      213: -3643622081359459469
+    second: collectrobot_off 1_2
+  - first:
+      213: -1408936552816232050
+    second: collectrobot_off 1_3
+  - first:
+      213: -6299717089387861218
+    second: collectrobot_off 1_4
+  - first:
+      213: 7231944697240547547
+    second: collectrobot_off 1_5
+  - first:
+      213: -7161273511858028550
+    second: collectrobot_off 1_6
+  - first:
+      213: 3929933764610215275
+    second: collectrobot_off 1_7
+  - first:
+      213: 6707085334832141976
+    second: collectrobot_off 1_8
+  - first:
+      213: -8783623759537805427
+    second: collectrobot_off 1_9
+  - first:
+      213: 5355158004677344659
+    second: collectrobot_off 1_10
+  - first:
+      213: -2055033970555280663
+    second: collectrobot_off 1_11
+  - first:
+      213: -2237452554579850415
+    second: collectrobot_off 1_12
+  - first:
+      213: 514160964718457216
+    second: collectrobot_off 1_13
+  - first:
+      213: 4223237712599273651
+    second: collectrobot_off 1_14
+  - first:
+      213: 7676344134796844542
+    second: collectrobot_off 1_15
+  - first:
+      213: 3709704385867663902
+    second: collectrobot_off 1_16
+  - first:
+      213: 2447226372981113103
+    second: collectrobot_off 1_17
+  - first:
+      213: 2155057230400295254
+    second: collectrobot_off 1_18
+  - first:
+      213: 8371524906296922110
+    second: collectrobot_off 1_19
+  - first:
+      213: -3054042465909565665
+    second: collectrobot_off 1_20
+  - first:
+      213: -3326792587281577936
+    second: collectrobot_off 1_21
+  - first:
+      213: -8148981941215427862
+    second: collectrobot_off 1_22
+  - first:
+      213: 5816189205124364032
+    second: collectrobot_off 1_23
+  - first:
+      213: 7016833227505517922
+    second: collectrobot_off 1_24
+  - first:
+      213: -3804789145473697838
+    second: collectrobot_off 1_25
+  - first:
+      213: 610595848649053776
+    second: collectrobot_off 1_26
+  - first:
+      213: 1338864055484090790
+    second: collectrobot_off 1_27
+  - first:
+      213: 6179188576292958970
+    second: collectrobot_off 1_28
+  - first:
+      213: -8070515880366096016
+    second: collectrobot_off 1_29
+  - first:
+      213: -6686653166436411025
+    second: collectrobot_off 1_30
+  - first:
+      213: 5072932670913289195
+    second: collectrobot_off 1_31
+  - first:
+      213: -117819597588666242
+    second: collectrobot_off 1_32
+  - first:
+      213: -3426922035651566064
+    second: collectrobot_off 1_33
+  - first:
+      213: 8635003235650083159
+    second: collectrobot_off 1_34
+  - first:
+      213: -8400719017583810792
+    second: collectrobot_off 1_35
+  - first:
+      213: -6948209408742284140
+    second: collectrobot_off 1_36
+  - first:
+      213: 9186643074932849036
+    second: collectrobot_off 1_37
+  - first:
+      213: -9174089923829740574
+    second: collectrobot_off 1_38
+  - first:
+      213: 8703458450478553719
+    second: collectrobot_off 1_39
+  - first:
+      213: 7446533972169089473
+    second: collectrobot_off 1_40
+  - first:
+      213: -4272235148459423717
+    second: collectrobot_off 1_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: collectrobot_off 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dfb23fe421680170800000000000000
+      internalID: 8144866737359339479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 88
+        width: 40
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a25bcc6aaba121e0800000000000000
+      internalID: -2224307992486260057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_2
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 107
+        width: 35
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37bccc095014f6dc0800000000000000
+      internalID: -3643622081359459469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_3
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 105
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e89335a8ba3727ce0800000000000000
+      internalID: -1408936552816232050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_4
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 88
+        width: 28
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1b249d3fa8e298a0800000000000000
+      internalID: -6299717089387861218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_5
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 106
+        width: 8
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd0fa4ab2670d5460800000000000000
+      internalID: 7231944697240547547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_6
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 92
+        width: 40
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: affb94adeab0e9c90800000000000000
+      internalID: -7161273511858028550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_7
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 103
+        width: 40
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6dc76eefede98630800000000000000
+      internalID: 3929933764610215275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_8
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 88
+        width: 40
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 896d6ec839a541d50800000000000000
+      internalID: 6707085334832141976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_9
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 107
+        width: 35
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8761147abc4a1680800000000000000
+      internalID: -8783623759537805427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_10
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 98
+        width: 25
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39df1e815d7515a40800000000000000
+      internalID: 5355158004677344659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_11
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 88
+        width: 9
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e221b7ed7d0b73e0800000000000000
+      internalID: -2055033970555280663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_12
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 87
+        width: 35
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15b4a7291c8f2f0e0800000000000000
+      internalID: -2237452554579850415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_13
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 61
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0817a6b5caaa22700800000000000000
+      internalID: 514160964718457216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_14
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 49
+        width: 23
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b0538de254fb9a30800000000000000
+      internalID: 4223237712599273651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_15
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 46
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efd1830d15ad78a60800000000000000
+      internalID: 7676344134796844542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_16
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 60
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1ac95deb748b7330800000000000000
+      internalID: 3709704385867663902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_17
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 55
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f01c1869b6b46f120800000000000000
+      internalID: 2447226372981113103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_18
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 46
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65195a0122d48ed10800000000000000
+      internalID: 2155057230400295254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_19
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 50
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: effc92c4c81ad2470800000000000000
+      internalID: 8371524906296922110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_20
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 43
+        width: 8
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f17908aee8cdd95d0800000000000000
+      internalID: -3054042465909565665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_21
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 46
+        width: 40
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 038cda994cbd4d1d0800000000000000
+      internalID: -3326792587281577936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_22
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 55
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae208c0891009ee80800000000000000
+      internalID: -8148981941215427862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_23
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 43
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00736ed344147b050800000000000000
+      internalID: 5816189205124364032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_24
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 43
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 265cf95c4acc06160800000000000000
+      internalID: 7016833227505517922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_25
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 46
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d737ca4e6ca23bc0800000000000000
+      internalID: -3804789145473697838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_26
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 52
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0561e0470b5497800800000000000000
+      internalID: 610595848649053776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_27
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 43
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a90badc3c9949210800000000000000
+      internalID: 1338864055484090790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_28
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 43
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af2f71a7543e0c550800000000000000
+      internalID: 6179188576292958970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_29
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 43
+        width: 22
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07141a4f094cfff80800000000000000
+      internalID: -8070515880366096016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_30
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 43
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f69115e5f5c3433a0800000000000000
+      internalID: -6686653166436411025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_31
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 43
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beb924bf26da66640800000000000000
+      internalID: 5072932670913289195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_32
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 2
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e78e52243bb6d5ef0800000000000000
+      internalID: -117819597588666242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_33
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 5
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 016a700b0902170d0800000000000000
+      internalID: -3426922035651566064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_34
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 0
+        width: 9
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 759954f41b1b5d770800000000000000
+      internalID: 8635003235650083159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_35
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 9
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8176c0bff86aa6b80800000000000000
+      internalID: -8400719017583810792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_36
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 494a3ee1b50039f90800000000000000
+      internalID: -6948209408742284140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_37
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 4
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c89bca724338d7f70800000000000000
+      internalID: 9186643074932849036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_38
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 0
+        width: 27
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eb43a812d51fa080800000000000000
+      internalID: -9174089923829740574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_39
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 0
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77a552a0955e8c870800000000000000
+      internalID: 8703458450478553719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_40
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 6
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c1640bb137675760800000000000000
+      internalID: 7446533972169089473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collectrobot_off 1_41
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 0
+        width: 8
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b18432b84c8f5b4c0800000000000000
+      internalID: -4272235148459423717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      collectrobot_off 1_0: 8144866737359339479
+      collectrobot_off 1_1: -2224307992486260057
+      collectrobot_off 1_10: 5355158004677344659
+      collectrobot_off 1_11: -2055033970555280663
+      collectrobot_off 1_12: -2237452554579850415
+      collectrobot_off 1_13: 514160964718457216
+      collectrobot_off 1_14: 4223237712599273651
+      collectrobot_off 1_15: 7676344134796844542
+      collectrobot_off 1_16: 3709704385867663902
+      collectrobot_off 1_17: 2447226372981113103
+      collectrobot_off 1_18: 2155057230400295254
+      collectrobot_off 1_19: 8371524906296922110
+      collectrobot_off 1_2: -3643622081359459469
+      collectrobot_off 1_20: -3054042465909565665
+      collectrobot_off 1_21: -3326792587281577936
+      collectrobot_off 1_22: -8148981941215427862
+      collectrobot_off 1_23: 5816189205124364032
+      collectrobot_off 1_24: 7016833227505517922
+      collectrobot_off 1_25: -3804789145473697838
+      collectrobot_off 1_26: 610595848649053776
+      collectrobot_off 1_27: 1338864055484090790
+      collectrobot_off 1_28: 6179188576292958970
+      collectrobot_off 1_29: -8070515880366096016
+      collectrobot_off 1_3: -1408936552816232050
+      collectrobot_off 1_30: -6686653166436411025
+      collectrobot_off 1_31: 5072932670913289195
+      collectrobot_off 1_32: -117819597588666242
+      collectrobot_off 1_33: -3426922035651566064
+      collectrobot_off 1_34: 8635003235650083159
+      collectrobot_off 1_35: -8400719017583810792
+      collectrobot_off 1_36: -6948209408742284140
+      collectrobot_off 1_37: 9186643074932849036
+      collectrobot_off 1_38: -9174089923829740574
+      collectrobot_off 1_39: 8703458450478553719
+      collectrobot_off 1_4: -6299717089387861218
+      collectrobot_off 1_40: 7446533972169089473
+      collectrobot_off 1_41: -4272235148459423717
+      collectrobot_off 1_5: 7231944697240547547
+      collectrobot_off 1_6: -7161273511858028550
+      collectrobot_off 1_7: 3929933764610215275
+      collectrobot_off 1_8: 6707085334832141976
+      collectrobot_off 1_9: -8783623759537805427
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

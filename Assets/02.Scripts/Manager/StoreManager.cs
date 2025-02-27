@@ -15,10 +15,10 @@ namespace Manager
         public GameObject[] upgradeButtons;
         public GameObject raderRoomButton;
 
-        private int[] robotPrices = new int[2] { 10, 10 };
-        private int[] robotUpgradePrices = new int[2] { 15, 15 };
+        private int[] robotPrices = new int[2] { 15, 15 };
+        private int[] robotUpgradePrices = new int[2] { 50, 30 };
 
-        private int[] robotMxPieces = new int[2] { 2, 3 };
+        private int[] robotMxPieces = new int[2] { 2, 2 };
         private int robotMaxUpgrade = 3;
 
         const int raderRoomUnLockPrice = 30;
@@ -40,6 +40,11 @@ namespace Manager
         // 구매 or 불가 버튼 변경
         public void SetRepairButton()
         {
+            if (GameManager.Instance.collectorRobots.Count <= 0)
+                isClear[3] = true;
+            else if (GameManager.Instance.collectorRobots.Count > 0 && GameManager.Instance.collectorRobotLevel < robotMaxUpgrade)
+                isClear[3] = false;
+
             // 구매 버튼
             for (int i = 0; i < repairButtons.Length; i++)
             {
@@ -85,7 +90,7 @@ namespace Manager
                     GameManager.Instance.RobotPiece(robotType);
                     GameManager.Instance.UseGold(robotPrices[0]);
 
-                    robotPrices[0] += 15;
+                    robotPrices[0] += 10;
                     UIManager.Instance.UpdateRobotBuyPriceText(0, robotPrices[0]);
 
                     if (GameManager.Instance.sweeperRobots.Count == robotMxPieces[0])

@@ -17,13 +17,14 @@ namespace Manager
         public Image corrosionGauge;
         public Image fuelAmountGauge;
         public Image radarOutputAmountGauge;
+        public Sprite[] repairSprites;
         public Sprite[] repairClearSprites;
 
         public GameObject repairButton;
 
         public GameObject radarOutputAmountGameObject;
         public Image hullRestorationRateImage;
-        public Image motorImage;
+        public Image moterImage;
         public Image engineImage;
         public Image radarImage;
 
@@ -32,8 +33,8 @@ namespace Manager
         public Sprite[] radarOutputAmountGaugeSprites; // 레이더 출력량 게이지 이미지
 
         public Sprite[] partSprites;   // 부품 이미지
-        private int[] partPrices;      // 부품 수리 비용
-        private bool[] isRepairClear;  // 부품 수리 완료 상태
+        public int[] partPrices;      // 부품 수리 비용
+        public bool[] isRepairClear;  // 부품 수리 완료 상태
 
         private int currentPartIndex = 0;
         private float currentTime = 0;
@@ -64,7 +65,7 @@ namespace Manager
                 if (currentTime >= radarOutputAmountGaugeUpTime)
                 {
                     currentTime = 0;
-                    RadarOutputAmountGaugeChange();
+                    RadarOutputAmountGaugeChange(true);
                 }
             }
         }
@@ -129,7 +130,7 @@ namespace Manager
             {
                 AudioManager.Instance.PlaySFX(4);
                 GameManager.Instance.UseGold(partPrices[currentPartIndex]);
-                partPrices[currentPartIndex] += 1;
+                partPrices[currentPartIndex] += 5;
 
                 switch (currentPartIndex)
                 {
@@ -138,7 +139,7 @@ namespace Manager
                         PartSelect(currentPartIndex);
 
                         if (status.statusData.HullRestorationRate >= 100)
-                            RepairClear(hullRestorationRateImage);
+                            RepairClear(0, hullRestorationRateImage, true);
 
                         break;
                     case 1:
@@ -146,7 +147,7 @@ namespace Manager
                         PartSelect(currentPartIndex);
 
                         if (status.statusData.MotorRestorationRate >= 100)
-                            RepairClear(motorImage);
+                            RepairClear(1, moterImage, true);
 
                         break;
                     case 2:
@@ -154,7 +155,7 @@ namespace Manager
                         PartSelect(currentPartIndex);
 
                         if (status.statusData.EngineRestorationRate >= 100)
-                            RepairClear(engineImage);
+                            RepairClear(2, engineImage, true);
 
                         break;
                     case 3:
@@ -163,7 +164,7 @@ namespace Manager
                         radarOutputAmountGaugeUpTime -= 2.0f;
 
                         if (status.statusData.RadarRestorationRate >= 100)
-                            RepairClear(radarImage);
+                            RepairClear(3, radarImage, true);
 
                         break;
                 }
@@ -181,20 +182,27 @@ namespace Manager
         }
 
         // 레이더출력량 스테이터스 변경
-        public void RadarOutputAmountGaugeChange()
+        public void RadarOutputAmountGaugeChange(bool isUp)
         {
-            if (status.statusData.RadarOutputAmount + 5 > 100)
+            if (isUp && status.statusData.RadarOutputAmount + 5 > 100)
+                return;
+            if (!isUp && status.statusData.RadarOutputAmount - 5 < 0)
                 return;
 
-            status.SetRadarOutputAmount(true);
+            Debug.Log(":: Status up ::");
+            status.SetRadarOutputAmount(isUp);
             radarOutputAmountGauge.sprite = radarOutputAmountGaugeSprites[Mathf.FloorToInt(status.statusData.RadarOutputAmount / 10)];
         }
 
         // 수리 완료
-        public void RepairClear(Image partImage)
+        public void RepairClear(int partIndex, Image partImage, bool isClear)
         {
-            isRepairClear[currentPartIndex] = true;
-            partImage.sprite = repairClearSprites[currentPartIndex];
+            isRepairClear[partIndex] = isClear;
+
+            if(isClear)
+                partImage.sprite = repairClearSprites[partIndex];
+            else
+                partImage.sprite = repairSprites[partIndex];
         }
     }
 }

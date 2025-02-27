@@ -40,6 +40,10 @@ namespace Manager
 
         public Button[] buttons;
 
+        public int descriptionIndex = 0;
+        public GameObject description;
+        public Sprite[] descriptionSprites;
+
         public ScrollAnimation storeScrollAnimation;
         public ScrollAnimation statusScrollAnimation;
         public UIAnimation uiAnimation;
@@ -194,12 +198,41 @@ namespace Manager
 
             AudioManager.Instance.resolutionIndex = resolutionIndex;
             Resolution resolution = GameManager.Instance.resolutions[resolutionIndex];
-            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+            //Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        }
+
+        public void DescriptionClear()
+        {
+            descriptionIndex = 0;
+            description.transform.GetChild(0).GetComponent<Image>().sprite = descriptionSprites[descriptionIndex];
+        }
+
+        public void DescriptionImageChange(int arrow)
+        {
+            if(arrow == 0)
+            {
+                if(descriptionIndex >= 2)
+                    descriptionIndex = 0;
+                else
+                    descriptionIndex++;
+
+                description.transform.GetChild(0).GetComponent<Image>().sprite = descriptionSprites[descriptionIndex];
+            }
+            else
+            {
+                if (descriptionIndex <= 0)
+                    descriptionIndex = 2;
+                else
+                    descriptionIndex--;
+
+                description.transform.GetChild(0).GetComponent<Image>().sprite = descriptionSprites[descriptionIndex];
+            }
         }
 
         // UI창 전부 닫기
         public void AllCLose()
         {
+            description.SetActive(false);
             storeScrollAnimation.Close();
             statusScrollAnimation.Close();
             uiAnimation.Close();

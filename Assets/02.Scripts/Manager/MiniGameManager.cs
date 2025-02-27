@@ -14,8 +14,8 @@ namespace Manager
 
         [SerializeField] private float currentTime = 0;
         [SerializeField] private float errorTime = 0;
-        const float errorMinTime = 10.0f;
-        const float errorMaxTime = 15.0f;
+        const float errorMinTime = 25.0f;
+        const float errorMaxTime = 30.0f;
 
         private void Awake()
         {
@@ -68,6 +68,7 @@ namespace Manager
                     if (!miniGame.isError && !miniGame.isPlaying)
                     {
                         miniGame.isError = true;
+                        miniGame.audioSource.Play();
                         errorGameObjects[errorIndex].SetActive(true);
                         return;
                     }

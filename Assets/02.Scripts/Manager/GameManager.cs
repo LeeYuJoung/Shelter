@@ -1,7 +1,10 @@
+using DG.Tweening;
 using MiniGame;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using yjlee.dialog;
 using yjlee.robot;
 
@@ -31,6 +34,8 @@ namespace Manager
         public int collectorRobotLevel;
         public int sweeperRobotLevel;
 
+        public Button startImage;
+
         private int day = 0;
         private int dayRange = 1;
         private float dayTime = 100.0f;              // 하루 시간
@@ -42,6 +47,7 @@ namespace Manager
         public bool[] isCleaning = new bool[4] { false, false, false, false };
         public bool isRadeRoomUnLock = false;
         public bool isGameOver = true;
+        public bool isTakeOff = false;
 
         private void Awake()
         {
@@ -93,7 +99,12 @@ namespace Manager
         {
             currentTime += Time.deltaTime * 20.0f;
 
-            if(currentTime >= dayTime)
+            if (day >= 5)
+            {
+                isGameOver = true;
+            }
+
+            if (currentTime >= dayTime)
             {
                 day++;
                 dayRange = 1;
@@ -111,11 +122,6 @@ namespace Manager
                 for (int i = 0; i < machines.Length; i++)
                 {
                     machines[i].GetComponent<MiniGameController>().GameLevelUp();
-                }
-
-                if (day >= 5)
-                {
-                    isGameOver = true;
                 }
             }
             else
@@ -176,9 +182,8 @@ namespace Manager
 
                     if (robotController != null)
                     {
-                        robotController.moveSpeed += 10;
-                        robotController.workTime -= 0.5f;
-                        robotController.breakTime -= 0.5f;
+                        robotController.moveSpeed += 5;
+                        robotController.workTime -= 2.0f;
                         robotController.SpeedInit();
                     }
                 }
@@ -191,10 +196,10 @@ namespace Manager
 
                     if (robotController != null)
                     {
-                        robotController.moveSpeed += 10;
+                        robotController.moveSpeed += 5;
                         robotController.getGold += 5;
-                        robotController.workTime -= 0.5f;
-                        robotController.breakTime -= 0.5f;
+                        robotController.workTime -= 2.0f;
+                        robotController.breakTime -= 2.0f;
                         robotController.SpeedInit();
                     }
                 }
@@ -216,7 +221,20 @@ namespace Manager
         // 게임 종료
         public void GameOver()
         {
-            ending.ExcuteEnding(StatusManager.Instance.status.statusData);
+            StartCoroutine(IGameOver());
+        }
+
+        IEnumerator IGameOver()
+        {
+            if (!isTakeOff)
+            {
+                isTakeOff = true;
+                AudioManager.Instance.PlaySFX(12);
+                startImage.GetComponent<RectTransform>().DOAnchorPosY(-130, 0.5f).OnComplete(delegate { startImage.GetComponent<RectTransform>().DOAnchorPosY(-104, 0.5f); });
+
+                yield return new WaitForSeconds(4f);
+                ending.ExcuteEnding(StatusManager.Instance.status.statusData);
+            }
         }
 
         // 씬 관리

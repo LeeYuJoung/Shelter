@@ -13,9 +13,13 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private RectTransform rect;
     private Vector3 defaultSize;
 
+    public Image buttonImage;
+    public Sprite[] onButtonSprite;
+
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
+        buttonImage = GetComponent<Image>();
         defaultSize = rect.localScale;
     }
 
@@ -23,12 +27,18 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
     //마우스 올릴때
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if(onButtonSprite.Length >= 2)
+            buttonImage.sprite = onButtonSprite[1];
+
         rect.DOScale(defaultSize * hoverSize, durationTime).SetEase(ease);
     }
 
     //마우스 내릴때
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (onButtonSprite.Length >= 2)
+            buttonImage.sprite = onButtonSprite[0];
+
         rect.DOScale(defaultSize, durationTime).SetEase(ease);
     }
 

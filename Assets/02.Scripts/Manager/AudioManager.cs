@@ -25,8 +25,10 @@ namespace Manager
         [SerializeField] AudioClip[] sfxs;
 
         private GameObject[] sfxGameObjects;
+        private GameObject[] audioGameObjects;
         [SerializeField] AudioSource bgmPlayer;
         [SerializeField] AudioSource[] sfxPlayer;
+        [SerializeField] AudioSource[] audioPlayer;
 
         public Slider bgmSlider;
         public Slider sfxSlider;
@@ -54,16 +56,23 @@ namespace Manager
         public void Init()
         {
             sfxGameObjects = GameObject.FindGameObjectsWithTag("SFX");
+            audioGameObjects = GameObject.FindGameObjectsWithTag("BGM");
             bgmSlider = GameObject.Find("Settings")?.transform.GetChild(0).transform.GetChild(1).GetComponentInChildren<Slider>();
             sfxSlider = GameObject.Find("Settings")?.transform.GetChild(0).transform.GetChild(1).transform.GetChild(1).GetComponentInChildren<Slider>();
 
             sfxPlayer = new AudioSource[sfxGameObjects.Length];
-            for (int i = 0; i < sfxGameObjects.Length; i++)
+            for (int i = 0; i  < sfxGameObjects.Length; i++)
             {
                 sfxPlayer[i] = sfxGameObjects[i].GetComponent<AudioSource>();
             }
 
-            if(bgmSlider != null && sfxSlider != null)
+            audioPlayer = new AudioSource[audioGameObjects.Length];
+            for(int i = 0; i < audioGameObjects.Length; i++)
+            {
+                audioPlayer[i] = audioGameObjects[i].GetComponent<AudioSource>();
+            }
+
+            if (bgmSlider != null && sfxSlider != null)
             {
                 bgmSlider.onValueChanged.AddListener(delegate { ChangeBGMVolume(); });
                 bgmSlider.onValueChanged.AddListener(delegate { SaveBGMVolume(); });
@@ -105,6 +114,21 @@ namespace Manager
             for(int i = 0; i < sfxPlayer.Length; i++)
             {
                 sfxPlayer[i].volume = sfxVolume;
+            }
+
+            for(int i = 0; i < audioPlayer.Length; i++)
+            {
+                audioPlayer[i].volume = sfxVolume;
+            }
+
+            for(int i = 0; i < GameManager.Instance.collectorRobots.Count; i++)
+            {
+                GameManager.Instance.collectorRobots[i].GetComponent<AudioSource>().volume = sfxVolume;
+            }
+
+            for (int i = 0; i < GameManager.Instance.sweeperRobots.Count; i++)
+            {
+                GameManager.Instance.sweeperRobots[i].GetComponent<AudioSource>().volume = sfxVolume;
             }
         }
 
