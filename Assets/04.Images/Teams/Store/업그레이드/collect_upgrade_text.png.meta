@@ -1,0 +1,1092 @@
+fileFormatVersion: 2
+guid: 0ad978630ff5b6e4f80ab4a768038682
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2452006725542590280
+    second: collect_upgrade_text_0
+  - first:
+      213: -9085474352504468307
+    second: collect_upgrade_text_1
+  - first:
+      213: 6628790313468945012
+    second: collect_upgrade_text_2
+  - first:
+      213: -7198937549009796015
+    second: collect_upgrade_text_3
+  - first:
+      213: -2988378668393764863
+    second: collect_upgrade_text_4
+  - first:
+      213: 6167761522757209589
+    second: collect_upgrade_text_5
+  - first:
+      213: -385513953345312959
+    second: collect_upgrade_text_6
+  - first:
+      213: -4679426288738724857
+    second: collect_upgrade_text_7
+  - first:
+      213: -2606688687567749805
+    second: collect_upgrade_text_8
+  - first:
+      213: 4369439514501974919
+    second: collect_upgrade_text_9
+  - first:
+      213: 2829245861604536830
+    second: collect_upgrade_text_10
+  - first:
+      213: -3502014511489916424
+    second: collect_upgrade_text_11
+  - first:
+      213: 6367872941720356356
+    second: collect_upgrade_text_12
+  - first:
+      213: 1776696682547488256
+    second: collect_upgrade_text_13
+  - first:
+      213: -7919662516579619610
+    second: collect_upgrade_text_14
+  - first:
+      213: -3498452683251693606
+    second: collect_upgrade_text_15
+  - first:
+      213: -6588860788074677601
+    second: collect_upgrade_text_16
+  - first:
+      213: 257538908686838923
+    second: collect_upgrade_text_17
+  - first:
+      213: 2191781335186423481
+    second: collect_upgrade_text_18
+  - first:
+      213: 8344916708405199273
+    second: collect_upgrade_text_19
+  - first:
+      213: -2696161896164712440
+    second: collect_upgrade_text_20
+  - first:
+      213: -2789540816447235766
+    second: collect_upgrade_text_21
+  - first:
+      213: -7941784361595621284
+    second: collect_upgrade_text_22
+  - first:
+      213: -6426710616290885075
+    second: collect_upgrade_text_23
+  - first:
+      213: -6230178069531638696
+    second: collect_upgrade_text_24
+  - first:
+      213: 2965699223030729908
+    second: collect_upgrade_text_25
+  - first:
+      213: -3711980148665296212
+    second: collect_upgrade_text_26
+  - first:
+      213: 8190559712870290245
+    second: collect_upgrade_text_27
+  - first:
+      213: -4599981568115094017
+    second: collect_upgrade_text_28
+  - first:
+      213: -8795748459080480636
+    second: collect_upgrade_text_29
+  - first:
+      213: -8329382984542156799
+    second: collect_upgrade_text_30
+  - first:
+      213: -7425624769573955249
+    second: collect_upgrade_text_31
+  - first:
+      213: -6083488565499024911
+    second: collect_upgrade_text_32
+  - first:
+      213: 3031773342578350132
+    second: collect_upgrade_text_33
+  - first:
+      213: -5022353130919090270
+    second: collect_upgrade_text_34
+  - first:
+      213: 3581913488850651427
+    second: collect_upgrade_text_35
+  - first:
+      213: 6496236684338522079
+    second: collect_upgrade_text_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: collect_upgrade_text_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 113
+        width: 39
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 847b5d62027470220800000000000000
+      internalID: 2452006725542590280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 132
+        width: 35
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dac8c0b9639e9e180800000000000000
+      internalID: -9085474352504468307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 130
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 472edd45ba13efb50800000000000000
+      internalID: 6628790313468945012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_3
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 113
+        width: 28
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 154cc07d07c381c90800000000000000
+      internalID: -7198937549009796015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 131
+        width: 8
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 108e8082f652786d0800000000000000
+      internalID: -2988378668393764863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_5
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 117
+        width: 40
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fd044f3d6a489550800000000000000
+      internalID: 6167761522757209589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_6
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 128
+        width: 40
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14765ea1a1166aaf0800000000000000
+      internalID: -385513953345312959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_7
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 112
+        width: 35
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7049a1345965f0fb0800000000000000
+      internalID: -4679426288738724857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 82
+        width: 35
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35dbe71137e23dbd0800000000000000
+      internalID: -2606688687567749805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_9
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 65
+        width: 28
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78b0271961e53ac30800000000000000
+      internalID: 4369439514501974919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_10
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 69
+        width: 40
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef1be230f10834720800000000000000
+      internalID: 2829245861604536830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_11
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 66
+        width: 29
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f161643b58566fc0800000000000000
+      internalID: -3502014511489916424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_12
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 65
+        width: 9
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 406401ab3ba3f5850800000000000000
+      internalID: 6367872941720356356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_13
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 78
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 006abdc283818a810800000000000000
+      internalID: 1776696682547488256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_14
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 65
+        width: 9
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ecab4eb6e4b71290800000000000000
+      internalID: -7919662516579619610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_15
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 82
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad74547f1dff27fc0800000000000000
+      internalID: -3498452683251693606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_16
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 69
+        width: 40
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9afe44c50aaf84a0800000000000000
+      internalID: -6588860788074677601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 23
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8cee10e546f29300800000000000000
+      internalID: 257538908686838923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_18
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 23
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9be3e150385ca6e10800000000000000
+      internalID: 2191781335186423481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_19
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 26
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a1c6b478891fc370800000000000000
+      internalID: 8344916708405199273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_20
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 23
+        width: 38
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 800a8225a0f459ad0800000000000000
+      internalID: -2696161896164712440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_21
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 29
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a499535386f8949d0800000000000000
+      internalID: -2789540816447235766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_22
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 23
+        width: 12
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c503754533d19c190800000000000000
+      internalID: -7941784361595621284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_23
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 23
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2200c1aebcbfc6a0800000000000000
+      internalID: -6426710616290885075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_24
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 28
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 854432efd06f989a0800000000000000
+      internalID: -6230178069531638696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_25
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 23
+        width: 6
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bc066bfab7482920800000000000000
+      internalID: 2965699223030729908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_26
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 29
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caad081c8b56c7cc0800000000000000
+      internalID: -3711980148665296212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_27
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 23
+        width: 57
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5435245d9a6baa170800000000000000
+      internalID: 8190559712870290245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_28
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 35
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffdc723b2259920c0800000000000000
+      internalID: -4599981568115094017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_29
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 23
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48881dad0693fe580800000000000000
+      internalID: -8795748459080480636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_30
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 23
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1088e287e46186c80800000000000000
+      internalID: -8329382984542156799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f49d33e5d91e2f890800000000000000
+      internalID: -7425624769573955249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_32
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 6
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f9a742a16b139ba0800000000000000
+      internalID: -6083488565499024911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_33
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43891e3cac5031a20800000000000000
+      internalID: 3031773342578350132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_34
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 0
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a72ffedf640d4ab0800000000000000
+      internalID: -5022353130919090270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_35
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 5
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3298f1f175385b130800000000000000
+      internalID: 3581913488850651427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect_upgrade_text_36
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 0
+        width: 12
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd7ebda88d4472a50800000000000000
+      internalID: 6496236684338522079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      collect_upgrade_text_0: 2452006725542590280
+      collect_upgrade_text_1: -9085474352504468307
+      collect_upgrade_text_10: 2829245861604536830
+      collect_upgrade_text_11: -3502014511489916424
+      collect_upgrade_text_12: 6367872941720356356
+      collect_upgrade_text_13: 1776696682547488256
+      collect_upgrade_text_14: -7919662516579619610
+      collect_upgrade_text_15: -3498452683251693606
+      collect_upgrade_text_16: -6588860788074677601
+      collect_upgrade_text_17: 257538908686838923
+      collect_upgrade_text_18: 2191781335186423481
+      collect_upgrade_text_19: 8344916708405199273
+      collect_upgrade_text_2: 6628790313468945012
+      collect_upgrade_text_20: -2696161896164712440
+      collect_upgrade_text_21: -2789540816447235766
+      collect_upgrade_text_22: -7941784361595621284
+      collect_upgrade_text_23: -6426710616290885075
+      collect_upgrade_text_24: -6230178069531638696
+      collect_upgrade_text_25: 2965699223030729908
+      collect_upgrade_text_26: -3711980148665296212
+      collect_upgrade_text_27: 8190559712870290245
+      collect_upgrade_text_28: -4599981568115094017
+      collect_upgrade_text_29: -8795748459080480636
+      collect_upgrade_text_3: -7198937549009796015
+      collect_upgrade_text_30: -8329382984542156799
+      collect_upgrade_text_31: -7425624769573955249
+      collect_upgrade_text_32: -6083488565499024911
+      collect_upgrade_text_33: 3031773342578350132
+      collect_upgrade_text_34: -5022353130919090270
+      collect_upgrade_text_35: 3581913488850651427
+      collect_upgrade_text_36: 6496236684338522079
+      collect_upgrade_text_4: -2988378668393764863
+      collect_upgrade_text_5: 6167761522757209589
+      collect_upgrade_text_6: -385513953345312959
+      collect_upgrade_text_7: -4679426288738724857
+      collect_upgrade_text_8: -2606688687567749805
+      collect_upgrade_text_9: 4369439514501974919
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

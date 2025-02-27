@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -184,9 +185,12 @@ namespace Manager
         // 레이더출력량 스테이터스 변경
         public void RadarOutputAmountGaugeChange(bool isUp)
         {
-            if (status.statusData.RadarOutputAmount + 5 > 100 || status.statusData.RadarOutputAmount - 5 < 0)
+            if (isUp && status.statusData.RadarOutputAmount + 5 > 100)
+                return;
+            if (!isUp && status.statusData.RadarOutputAmount - 5 < 0)
                 return;
 
+            Debug.Log(":: Status up ::");
             status.SetRadarOutputAmount(isUp);
             radarOutputAmountGauge.sprite = radarOutputAmountGaugeSprites[Mathf.FloorToInt(status.statusData.RadarOutputAmount / 10)];
         }

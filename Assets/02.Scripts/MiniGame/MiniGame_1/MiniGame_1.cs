@@ -30,7 +30,7 @@ public class MiniGame_1 : MiniGameController
     private List<GameObject> leftWireObjects;
     private List<GameObject> rightWireObjects;
     private int wireLength;
-    private float currentTIme;
+    private float currentPlayTime;
     private bool beginGame;
     private int correctAnswerValue;
     private int currentAnswerValue;
@@ -77,7 +77,25 @@ public class MiniGame_1 : MiniGameController
 
     private void Update()
     {
-        if(beginGame)
+        if (!isError || GameManager.Instance.isGameOver)
+        {
+            currentTime = 0;
+            return;
+        }
+
+        currentTime += Time.deltaTime;
+
+        if (currentTime >= beepTime)
+        {
+            currentTime = 0;
+
+            if (!isPlaying)
+            {
+                OnBeep();
+            }
+        }
+
+        if (beginGame)
         {
             TimeUpdate();
         }
@@ -117,7 +135,6 @@ public class MiniGame_1 : MiniGameController
     {
         base.OnBeep();
 
-        Debug.Log(":: MiniGame1 Beep ::");
         isError = false;
         audioSource.Stop();
         errorGameObject.SetActive(false);
@@ -176,12 +193,10 @@ public class MiniGame_1 : MiniGameController
 
         beginGame = true;
         audioSource.Stop();
-        currentTIme = playTime;
+        currentPlayTime = playTime;
         AddLeftWire(leftWireObjects, leftWireGroup);
         AddRightWire(leftWireObjects, rightWireObjects, rightWireGroup);
         correctAnswerValue += leftWireObjects.Count;
-
-        Debug.Log("정답 개수 : " + correctAnswerValue);
     }
 
     //게임 종료시 실행
@@ -217,13 +232,13 @@ public class MiniGame_1 : MiniGameController
             return;
         }
 
-        if (currentTIme > 0)
+        if (currentPlayTime > 0)
         {
-            currentTIme -= Time.deltaTime;
+            currentPlayTime -= Time.deltaTime;
         }
         else
         {
-            currentTIme = playTime;
+            currentPlayTime = playTime;
             beginGame = false;
             isClear = false;
             //ClearGame(false);
@@ -231,7 +246,7 @@ public class MiniGame_1 : MiniGameController
             return;
         }
         //Timer.fillAmount = currentTIme / maxTime;
-        timerSlider.value = currentTIme / playTime;
+        timerSlider.value = currentPlayTime / playTime;
     }
 
     //셔플(제네릭)

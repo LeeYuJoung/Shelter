@@ -145,7 +145,7 @@ public class MiniGame_3 : MiniGameController
 
     void Update()
     {
-        if (!isError)
+        if (!isError || GameManager.Instance.isGameOver)
         {
             currentTime = 0;
             return;

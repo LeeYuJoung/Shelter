@@ -442,7 +442,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: e0b91196afad97147a3638dbfffbfcd0, type: 3}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -5227,6 +5227,7 @@ MonoBehaviour:
   isCleaning: 00000000
   isRadeRoomUnLock: 0
   isGameOver: 1
+  isTakeOff: 0
 --- !u!4 &1578169031
 Transform:
   m_ObjectHideFlags: 0
