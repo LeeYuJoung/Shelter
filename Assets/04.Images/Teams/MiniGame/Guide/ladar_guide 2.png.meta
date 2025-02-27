@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 347d83e3d39e1034e9c6096a68285768
+guid: 1d1d915ba21b7dc458803a89f9228f42
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2913319336861083543
-    second: motor_guide_0
+      213: 109096426784256435
+    second: ladar_guide 2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: motor_guide_0
+      name: ladar_guide 2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9685e11af7fc197d0800000000000000
-      internalID: -2913319336861083543
+      spriteID: 3b17db44f96938100800000000000000
+      internalID: 109096426784256435
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      motor_guide_0: -2913319336861083543
+      ladar_guide 2_0: 109096426784256435
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

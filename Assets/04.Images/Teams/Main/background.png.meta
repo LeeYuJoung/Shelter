@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6ac09c22d9a1feb4c858fe7dedf88b59
+guid: 2cacfa747efd30c4995f57c452d833ef
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2118989827542000701
-    second: ladar_guide_0
+      213: -7443756053782179069
+    second: background_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ladar_guide_0
+      name: background_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1927
-        height: 1081
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3cb51be8af5d792e0800000000000000
-      internalID: -2118989827542000701
+      spriteID: 30356abce4772b890800000000000000
+      internalID: -7443756053782179069
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ladar_guide_0: -2118989827542000701
+      background_0: -7443756053782179069
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -97,7 +97,7 @@ namespace Manager
         // 시간 관리
         private void Timmer()
         {
-            currentTime += Time.deltaTime;
+            currentTime += Time.deltaTime * 20.0f;
 
             if (day >= 5)
             {
@@ -230,7 +230,7 @@ namespace Manager
             {
                 isTakeOff = true;
                 AudioManager.Instance.PlaySFX(12);
-                startImage.GetComponent<RectTransform>().DOAnchorPosY(-208, 0.5f).OnComplete(delegate { startImage.GetComponent<RectTransform>().DOAnchorPosY(-190, 0.5f); });
+                startImage.GetComponent<RectTransform>().DOAnchorPosY(-130, 0.5f).OnComplete(delegate { startImage.GetComponent<RectTransform>().DOAnchorPosY(-104, 0.5f); });
 
                 yield return new WaitForSeconds(4f);
                 ending.ExcuteEnding(StatusManager.Instance.status.statusData);

@@ -2,6 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Manager;
+using Unity.VisualScripting;
 
 namespace yjlee.dialog
 {
@@ -17,6 +18,8 @@ namespace yjlee.dialog
         public GameObject[] news;
         public Text contextText;
 
+        public GameObject startBG;
+        public GameObject readyImage;
         public GameObject startButton;
 
         public string eventName;
@@ -85,7 +88,8 @@ namespace yjlee.dialog
                     }
                     else
                     {
-                        startButton.GetComponent<RectTransform>().DOAnchorPosY(0, 4.0f);
+                        startBG.SetActive(true);
+                        startButton.GetComponent<RectTransform>().DOAnchorPosY(275, 6.0f).OnComplete(delegate { readyImage.SetActive(true); });
                         return;
                     }
                 }

@@ -42,7 +42,7 @@ namespace Manager
         {
             if (GameManager.Instance.collectorRobots.Count <= 0)
                 isClear[3] = true;
-            else if (GameManager.Instance.collectorRobots.Count > 0 && GameManager.Instance.sweeperRobotLevel < robotMaxUpgrade)
+            else if (GameManager.Instance.collectorRobots.Count > 0 && GameManager.Instance.collectorRobotLevel < robotMaxUpgrade)
                 isClear[3] = false;
 
             // 구매 버튼

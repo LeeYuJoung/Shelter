@@ -5331,6 +5331,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 452a8b6963e130b4780c0acf8ca4963a, type: 3}
   bgmPlayer: {fileID: 1629808030}
   sfxPlayer: []
+  audioPlayer: []
   bgmSlider: {fileID: 0}
   sfxSlider: {fileID: 0}
   bgmVolume: 0

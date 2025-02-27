@@ -10,10 +10,7 @@ namespace yjlee.ui
         private News news;
 
         public RectTransform ins_traTitle = null;
-        [Header("이동 속도")]
-        [SerializeField]
-        private int ins_nMoveSpeed = 125;
-        [Header("이동 방향")]
+        private float ins_nMoveSpeed = 180.0f;
         [SerializeField]
         private bool ins_bRight = true;
 
@@ -43,8 +40,6 @@ namespace yjlee.ui
             }
             _vStartPos = new Vector2(-_fEndPosX, ins_traTitle.anchoredPosition.y);
             ins_traTitle.anchoredPosition = _vStartPos;
-
-            StartCoroutine(CorMoveText());
         }
 
         private void OnEnable()
@@ -56,7 +51,7 @@ namespace yjlee.ui
         {
             while (true)
             {
-                ins_traTitle.Translate(_vDirection * ins_nMoveSpeed * Time.unscaledDeltaTime);
+                ins_traTitle.Translate(_vDirection * ins_nMoveSpeed * Time.deltaTime);
                 if (IsEndPos())
                 {
                     ins_traTitle.anchoredPosition = _vStartPos;

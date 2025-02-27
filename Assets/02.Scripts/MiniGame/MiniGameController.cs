@@ -15,6 +15,7 @@ namespace MiniGame
         protected float currentTime = 0;
         protected float beepTime = 10.0f;
 
+        public bool isFirst = true;
         public bool isError = false;
         public bool isPlaying = false;
 

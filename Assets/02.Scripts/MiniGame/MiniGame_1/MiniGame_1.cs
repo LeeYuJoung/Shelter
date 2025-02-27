@@ -43,6 +43,7 @@ public class MiniGame_1 : MiniGameController
     public Sprite[] wireBodySprites;
     public Sprite[] wireTailSprites;
 
+    public GameObject descriptionImage;
     public UIAnimation uiAnimation;
     public GameObject errorGameObject;
     private bool isClear = false;
@@ -187,7 +188,13 @@ public class MiniGame_1 : MiniGameController
     public override void GameStart()
     {
         base.GameStart();
-        
+
+        if (isFirst)
+        {
+            Time.timeScale = 0;
+            descriptionImage.SetActive(true);
+        }
+
         miniGamePanel.SetActive(true);
         resultImage.gameObject.SetActive(false);
 
@@ -387,5 +394,12 @@ public class MiniGame_1 : MiniGameController
         }
 
         wireObjects.Clear();
+    }
+
+    public void FirstStart()
+    {
+        Time.timeScale = 1.0f;
+        descriptionImage.SetActive(false);
+        isFirst = false;
     }
 }

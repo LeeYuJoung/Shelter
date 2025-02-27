@@ -29,6 +29,7 @@ public class MiniGame_2 : MiniGameController
     private string[] currentArrowKeys = new string[4]; // 현재 표시된 방향키 배열
     private int[] currentArrowIntKeys = new int[4];
     private int currentInputIndex = 0; // 플레이어가 입력 중인 방향키 인덱스
+    public GameObject descriptionImage;
 
     public override void GetReward()
     {
@@ -81,6 +82,13 @@ public class MiniGame_2 : MiniGameController
     public override void GameStart()
     {
         base.GameStart();
+
+        if (isFirst)
+        {
+            Time.timeScale = 0;
+            descriptionImage.SetActive(true);
+        }
+
         audioSource.Stop();
         miniGame2GameObject.SetActive(true);
         GenerateRandomArrowKeys(); // ✅ 랜덤 방향키 생성
@@ -124,6 +132,7 @@ public class MiniGame_2 : MiniGameController
             resultImage.gameObject.SetActive(true);
             resultImage.sprite = resultSprites[1];
 
+            isError = false;
             isPlaying = false;
             errorGameObject.SetActive(false);
             uiAnimation.Close();
@@ -296,5 +305,12 @@ public class MiniGame_2 : MiniGameController
         //{
         //    wrongInputSound.Play();
         //}
+    }
+
+    public void FirstStart()
+    {
+        Time.timeScale = 1.0f;
+        descriptionImage.SetActive(false);
+        isFirst = false;
     }
 }

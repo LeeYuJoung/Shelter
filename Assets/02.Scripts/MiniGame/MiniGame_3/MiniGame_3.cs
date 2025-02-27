@@ -10,6 +10,7 @@ public class MiniGame_3 : MiniGameController
     public GameObject errorGameObject;
     public Image resultImage; 
     public Sprite[] resultSprites;
+    public GameObject descriptionImage;
 
     public Image spaceGauge;   // ✅ SpaceGauge 내부에서만 이동해야 함
     public Image greenZone;
@@ -91,6 +92,13 @@ public class MiniGame_3 : MiniGameController
     public override void GameStart()
     {
         base.GameStart();
+
+        if (isFirst)
+        {
+            Time.timeScale = 0;
+            descriptionImage.SetActive(true);
+        }
+
         audioSource.Stop();
         miniGame3GameObject.SetActive(true);
 
@@ -132,6 +140,7 @@ public class MiniGame_3 : MiniGameController
             resultImage.gameObject.SetActive(true);
             resultImage.sprite = resultSprites[1];
 
+            isError = false;
             isPlaying = false;
             errorGameObject.SetActive(false);
             uiAnimation.Close();
@@ -309,5 +318,12 @@ public class MiniGame_3 : MiniGameController
         }
 
         errorGameObject.SetActive(false);
+    }
+
+    public void FirstStart()
+    {
+        Time.timeScale = 1.0f;
+        descriptionImage.SetActive(false);
+        isFirst = false;
     }
 }
