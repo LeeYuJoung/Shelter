@@ -5569,7 +5569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9019608}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6831,9 +6831,9 @@ MonoBehaviour:
   rightButton: {fileID: 1753905562}
   clearSprites:
   - {fileID: 21300000, guid: 1237e7c21934ca8438df4038a1bace25, type: 3}
-  - {fileID: 21300000, guid: ff1ec6442d7248d46bddd8823243e8a8, type: 3}
-  - {fileID: 21300000, guid: 3a6a6f5702123104ebd55a3f78796344, type: 3}
   - {fileID: 21300000, guid: ed6253e1ef9378b4eb8915bbd77d2d5b, type: 3}
+  - {fileID: 21300000, guid: 3a6a6f5702123104ebd55a3f78796344, type: 3}
+  - {fileID: 21300000, guid: ff1ec6442d7248d46bddd8823243e8a8, type: 3}
   - {fileID: 21300000, guid: 5861a77d98bdde84aa9b16106255b520, type: 3}
   - {fileID: 21300000, guid: 154ed7a86c092104b9eecf0276a48423, type: 3}
   - {fileID: 21300000, guid: b1e3e718f3d9c244ab187409ca3eb29d, type: 3}

@@ -66,6 +66,7 @@ namespace Manager
 
         private void Start()
         {
+            StatusClear();
             Screen.SetResolution(resolutions[AudioManager.Instance.resolutionIndex].width, resolutions[AudioManager.Instance.resolutionIndex].height, Screen.fullScreen);
         }
 
@@ -73,7 +74,7 @@ namespace Manager
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Application.Quit();
+                SceneChange(0);
             }
 
             if (isGameOver)
@@ -97,7 +98,7 @@ namespace Manager
         // 시간 관리
         private void Timmer()
         {
-            currentTime += Time.deltaTime * 20.0f;
+            currentTime += Time.deltaTime;
 
             if (day >= 5)
             {
