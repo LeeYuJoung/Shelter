@@ -66,6 +66,7 @@ namespace Manager
 
         private void Start()
         {
+            StatusClear();
             Screen.SetResolution(resolutions[AudioManager.Instance.resolutionIndex].width, resolutions[AudioManager.Instance.resolutionIndex].height, Screen.fullScreen);
         }
 
