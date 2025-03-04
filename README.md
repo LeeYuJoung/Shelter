@@ -1,7 +1,7 @@
 # 🚀 Shelter : 우주로 가는 길
 <div>
- <img width="49%" src="https://github.com/LeeYuJoung/RoyalDefense/blob/main/Intro_Image.png">
- <img width="49%" src="https://github.com/LeeYuJoung/RoyalDefense/blob/main/InGame_Image.png">
+ <img width="49%" src="https://github.com/LeeYuJoung/Shelter/blob/main/Intro.png">
+ <img width="49%" src="https://github.com/LeeYuJoung/Shelter/blob/main/Main.png">
 </div>
 
 *** 
