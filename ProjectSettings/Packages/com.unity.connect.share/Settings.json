@@ -19,7 +19,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"D:/UnityBuilds/Shelter_webGL/Build;C:/Users/uesr/Desktop/Unity/Shelter/WebGL Builds/assetscss;C:/Users/uesr/Desktop/Unity/_Builds/Shelter_webGL;;;;;;;\"}"
+                "value": "{\"m_Value\":\"D:/GitHubRepo/ShelterWeb;D:/UnityBuilds/Shelter_webGL/Build;C:/Users/uesr/Desktop/Unity/Shelter/WebGL Builds/assetscss;C:/Users/uesr/Desktop/Unity/_Builds/Shelter_webGL;;;;;;\"}"
             }
         ]
     }

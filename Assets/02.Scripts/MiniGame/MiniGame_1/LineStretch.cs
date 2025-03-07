@@ -42,6 +42,7 @@ public class LineStretch : Wire
     public void OnDrag(PointerEventData eventData) //마우스 드래그 시 호출
     {
         defaultWorldPosition = rectTransform.parent.TransformPoint(defaultPosition);
+
         StretchBetweenPoints(defaultWorldPosition, Input.mousePosition);
     }
     public void OnEndDrag(PointerEventData eventData) //마우스 드래그 끝날 때 호출
@@ -64,7 +65,10 @@ public class LineStretch : Wire
 
     void StretchBetweenPoints(Vector2 start, Vector2 end)
     {
-        float distance = Vector2.Distance(start, end);
+        float distance = Vector2.Distance(ConvertToFixedResolution(start), ConvertToFixedResolution(end));
+
+        Debug.Log(string.Format("distance {0}", distance));
+
         if (distance < 25.0f || end.x < start.x) return;
         rectTransform.sizeDelta = new Vector2(distance, rectTransform.sizeDelta.y);
 
@@ -77,5 +81,16 @@ public class LineStretch : Wire
 
         // 회전 적용
         rectTransform.localRotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    Vector2 ConvertToFixedResolution(Vector2 originalPosition)
+    {
+        float widthRatio = (Screen.width / 1920f) > 1.0f ? (Screen.width / 1920f) : (1920f / Screen.width);
+        float heightRatio = (Screen.height / 1080f) > 1.0f ? (Screen.height / 1080f) : (1080f / Screen.height);
+
+        Debug.Log(string.Format("width {0}",Screen.width));
+        Debug.Log(string.Format("height {0}", Screen.height));
+
+        return new Vector2(originalPosition.x * widthRatio, originalPosition.y * heightRatio);
     }
 }

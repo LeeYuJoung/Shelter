@@ -14145,6 +14145,7 @@ GameObject:
   - component: {fileID: 1866456746}
   - component: {fileID: 1866456745}
   - component: {fileID: 1866456747}
+  - component: {fileID: 1866456748}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -14165,7 +14166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ending: {fileID: 1866456747}
-  status: {fileID: 0}
+  status: {fileID: 1866456748}
   optimalResolutionIndex: 0
   backgrounds:
   - {fileID: -7987882981495480638, guid: 1bc9119502c41dd4ca71283dca281c40, type: 3}
@@ -14218,6 +14219,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb0488117c54b144a0ded1f180b5e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1866456748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866456744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786e1f670e700084abc371ef9b9d494b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusData: {fileID: 11400000, guid: d3484da0c5dbb974fa8bd157b476642e, type: 2}
+  statusUpData: {fileID: 11400000, guid: 43acc19d0c0c85543bb7cdabfb116d29, type: 2}
 --- !u!1 &1878214985
 GameObject:
   m_ObjectHideFlags: 0
