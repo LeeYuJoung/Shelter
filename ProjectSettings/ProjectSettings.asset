@@ -402,9 +402,9 @@ PlayerSettings:
   m_TemplateCustomTags:
     BACKGROUND: 
     HIDE_FULL_SCREEN_BUTTON: 1
-    OPTIMIZE_FOR_PIXEL_ART: true
+    OPTIMIZE_FOR_PIXEL_ART: 
     PRODUCT_DESCRIPTION: 1
-    SCALE_TO_FIT: true
+    SCALE_TO_FIT: 
     TOTAL_MEMORY: 1
   mobileMTRendering:
     Android: 1
@@ -663,10 +663,10 @@ PlayerSettings:
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: APPLICATION:Default
+  webGLTemplate: APPLICATION:Minimal
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 1
+  webGLCompressionFormat: 2
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
