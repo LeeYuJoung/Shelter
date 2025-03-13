@@ -24,4 +24,4 @@
 
  📋 [Shelter 게임기획서](https://drive.google.com/file/d/1qCnCC9O9PeWdJuPR6heJL8iqhyDLHNNa/view)
 
- 🎮 [Game Play](https://mandlemandle.com/project/a5cd3a)
+ 🎮 [Game Play](https://store.onstove.com/ko/games/5032)
